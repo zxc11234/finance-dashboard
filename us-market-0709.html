@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股局势分析 | 2026-07-09</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --card: #131826;
+    --border: #1e293b;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 16px;
+    line-height: 1.6;
+  }
+  .container { max-width: 1300px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.15rem; margin: 20px 0 12px; }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi-label { color: var(--muted); font-size: 0.78rem; margin-bottom: 2px; }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; }
+  .kpi-change { font-size: 0.85rem; margin-top: 2px; font-weight: 600; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .amber { color: var(--amber); }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .chart-card h3 { font-size: 0.95rem; margin-bottom: 10px; color: var(--muted); }
+  .chart-wrap { position: relative; height: 300px; }
+  .chart-wrap.tall { height: 380px; }
+
+  .section-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .section-card h3 { font-size: 0.95rem; margin-bottom: 10px; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; }
+  td.name { text-align: left; }
+  td:first-child { text-align: left; }
+
+  .alert-box {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.2);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0;
+  }
+  .alert-box.amber {
+    background: rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.2);
+  }
+  .alert-box.blue {
+    background: rgba(59,130,246,0.08);
+    border-color: rgba(59,130,246,0.2);
+  }
+
+  .tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tab {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .tab.active { background: var(--blue); color: white; border-color: var(--blue); }
+  .tab:hover { border-color: var(--blue); color: var(--text); }
+
+  .footer { text-align: center; color: var(--muted); font-size: 0.75rem; margin-top: 24px; padding: 16px 0; border-top: 1px solid var(--border); }
+
+  @media (max-width: 600px) {
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-wrap { height: 240px; }
+    .kpi-value { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🇺🇸 美股局势分析</h1>
+  <p class="subtitle">2026年7月9日（北京时间）· 昨晚收盘 + 盘前研判 · Frank Worth</p>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">道琼斯</div>
+      <div class="kpi-value">52,348</div>
+      <div class="kpi-change red">-577 (-1.09%)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">标普500</div>
+      <div class="kpi-value">7,483</div>
+      <div class="kpi-change red">-0.28%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">纳斯达克</div>
+      <div class="kpi-value">25,871</div>
+      <div class="kpi-change green">+0.20%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">VIX 恐慌指数</div>
+      <div class="kpi-value amber">18+</div>
+      <div class="kpi-change red">↑ ~12%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">布伦特原油</div>
+      <div class="kpi-value">$78.19</div>
+      <div class="kpi-change red">+5.43%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">WTI 原油</div>
+      <div class="kpi-value">$73.52</div>
+      <div class="kpi-change red">+4.37%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">10年期美债</div>
+      <div class="kpi-value amber">4.577%</div>
+      <div class="kpi-change red">+5bps</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">黄金</div>
+      <div class="kpi-value">$4,157</div>
+      <div class="kpi-change red">-0.20%</div>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <strong>🚨 核心风险：美伊停火破裂 + 油价飙升</strong><br>
+    特朗普在北约峰会上宣布伊朗停火"结束"，美军对伊朗实施打击（报复霍尔木兹海峡商船遇袭）。布伦特原油单日暴涨5.4%突破$78，若冲突持续升级，油价可能重回$85-90区间，直接推升通胀预期，强化美联储鹰派立场。
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('close')">📊 昨晚收盘</div>
+    <div class="tab" onclick="switchTab('sectors')">🏭 板块表现</div>
+    <div class="tab" onclick="switchTab('portfolio')">💰 持仓影响</div>
+    <div class="tab" onclick="switchTab('outlook')">🔮 今晚展望</div>
+  </div>
+
+  <!-- Tab 1: Close Summary -->
+  <div id="tab-close">
+    <div class="charts-grid">
+      <div class="chart-card" style="grid-column: 1 / -1;">
+        <h3>三大指数走势（近期模拟）</h3>
+        <div class="chart-wrap tall"><canvas id="indexChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3>7月8日收盘明细</h3>
+      <table>
+        <thead><tr><th>指数/资产</th><th>收盘价</th><th>涨跌</th><th>涨跌幅</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td>道琼斯工业</td><td>52,348</td><td class="red">-577</td><td class="red">-1.09%</td><td>受油价+地缘冲击</td></tr>
+          <tr><td>标普500</td><td>7,483</td><td class="red">-21</td><td class="red">-0.28%</td><td>能源涨抵消部分跌幅</td></tr>
+          <tr><td>纳斯达克综合</td><td>25,871</td><td class="green">+52</td><td class="green">+0.20%</td><td>科技股韧性，尾盘翻红</td></tr>
+          <tr><td>费城半导体</td><td>—</td><td class="green">—</td><td class="green">~+1.3%</td><td>存储/设备反弹</td></tr>
+          <tr><td>欧洲Stoxx 600</td><td>—</td><td class="red">—</td><td class="red">-2.00%</td><td>全面抛售</td></tr>
+          <tr><td>韩国KOSPI</td><td>—</td><td class="red">—</td><td class="red">-5.35%</td><td>🚨 进入技术性熊市</td></tr>
+          <tr><td>日经225</td><td>—</td><td class="red">—</td><td class="red">-2.11%</td><td>跟随下跌</td></tr>
+          <tr><td>恒生指数</td><td>—</td><td class="green">—</td><td class="green">+3.00%</td><td>中国资产逆势大涨</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-card">
+      <h3>📈 亮点：中国资产深夜暴涨</h3>
+      <table>
+        <thead><tr><th>标的</th><th>涨跌幅</th><th>驱动因素</th></tr></thead>
+        <tbody>
+          <tr><td>阿里巴巴 (BABA)</td><td class="green">+10%</td><td>外资回流+估值修复</td></tr>
+          <tr><td>金山云 (KC)</td><td class="green">+9%</td><td>小米GPU采购预算升至百亿+</td></tr>
+          <tr><td>恒生指数</td><td class="green">+3%</td><td>中国资产成避风港</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-card">
+      <h3>📉 SpaceX 入指首日暴跌</h3>
+      <table>
+        <thead><tr><th>标的</th><th>收盘价</th><th>涨跌幅</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td>SpaceX (SPCX)</td><td>$149.47</td><td class="red">-6.5%</td><td>跌破IPO首日价$150，市值<2万亿</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--muted);font-size:0.8rem;margin-top:8px;">仅15个交易日即被纳入纳指100（史上最快），但入指首日即遭抛售。目前仅星链业务造血，太空+AI板块仍在烧钱。</p>
+    </div>
+  </div>
+
+  <!-- Tab 2: Sectors -->
+  <div id="tab-sectors" style="display:none;">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>🏭 板块涨跌幅</h3>
+        <div class="chart-wrap tall"><canvas id="sectorChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>🔥 关键个股表现</h3>
+        <div class="chart-wrap tall"><canvas id="stockChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h3>半导体板块：止跌企稳</h3>
+      <table>
+        <thead><tr><th>个股</th><th>涨跌幅</th><th>逻辑</th></tr></thead>
+        <tbody>
+          <tr><td>博通 AVGO</td><td class="green">+3%+</td><td>苹果$300亿+采购协议</td></tr>
+          <tr><td>应用材料 AMAT</td><td class="green">+3%+</td><td>设备需求预期</td></tr>
+          <tr><td>西部数据 WDC</td><td class="green">+5%+</td><td>存储周期回暖</td></tr>
+          <tr><td>闪迪 Sandisk</td><td class="green">+3%+</td><td>HBM/AI存储需求</td></tr>
+          <tr><td>英伟达 NVDA</td><td class="green">+0.46%</td><td>企稳但买盘不强</td></tr>
+          <tr><td>美光 MU</td><td class="red">-4%</td><td>油价推升成本+地缘担忧</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-card">
+      <h3>受冲击板块</h3>
+      <table>
+        <thead><tr><th>板块/个股</th><th>涨跌幅</th><th>原因</th></tr></thead>
+        <tbody>
+          <tr><td>航空 (AAL)</td><td class="red">-4%</td><td>油价飙升→燃油成本</td></tr>
+          <tr><td>邮轮 (CCL)</td><td class="red">-3.5%</td><td>出行需求受地缘冲击</td></tr>
+          <tr><td>旅游 (BKNG)</td><td class="red">-4%</td><td>中东局势抑制出行</td></tr>
+          <tr><td>包装材料 (SW)</td><td class="red">-7%</td><td>材料板块2025年4月以来最差</td></tr>
+          <tr><td>麦当劳 MCD</td><td class="red">-1%+</td><td>通胀压力+消费疲软</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tab 3: Portfolio Impact -->
+  <div id="tab-portfolio" style="display:none;">
+    <div class="alert-box amber">
+      <strong>⚠️ 你的 QDII 持仓影响分析</strong><br>
+      今日 QDII 估值全线小跌（-0.59%~-0.85%），反映的是昨晚美股7月8日的走势。但实际上纳斯达克尾盘翻红（+0.2%）、半导体止跌反弹，跌幅可能小于估值。
+    </div>
+
+    <div class="section-card">
+      <h3>QDII 基金映射分析</h3>
+      <table>
+        <thead><tr><th>基金</th><th>市值</th><th>今日估值</th><th>隔夜对标</th><th>影响判断</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>017731 嘉实全球产业升级</td><td>521,823</td><td class="red">-0.59%</td>
+            <td>全球科技/工业</td>
+            <td>中性偏负。费城半导体+1.3%对冲道指-1.1%</td>
+          </tr>
+          <tr>
+            <td>018147 建信新兴市场 C</td><td>261,800</td><td class="red">-0.61%</td>
+            <td>中概股+新兴市场</td>
+            <td class="green">⚠️ 可能低估！阿里+10%、恒生+3%</td>
+          </tr>
+          <tr>
+            <td>539002 建信新兴市场 A</td><td>103,034</td><td class="red">-0.61%</td>
+            <td>同上</td>
+            <td class="green">同上，实际收益可能转正</td>
+          </tr>
+          <tr>
+            <td>018036 长城新能源车</td><td>164,067</td><td class="red">-0.79%</td>
+            <td>全球汽车/EV</td>
+            <td>偏负。油价利好燃油车，EV逻辑受损</td>
+          </tr>
+          <tr>
+            <td>006373 国富全球科技互联</td><td>71,266</td><td class="red">-0.85%</td>
+            <td>全球科技</td>
+            <td>中性。科技股分化，纳指+0.2%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert-box blue">
+      <strong>💡 关键发现</strong><br>
+      <strong>建信新兴市场 QDII（018147/539002）的估值可能是错的。</strong><br>
+      系统用 T-2 净值×昨日涨跌估算，但昨晚阿里暴涨10%、恒生+3%、中概股全面爆发——这只基金重仓新兴市场（尤其是中国资产），实际隔夜收益可能远好于 -0.61% 的估值。建议明天看实际净值确认。
+    </div>
+  </div>
+
+  <!-- Tab 4: Outlook -->
+  <div id="tab-outlook" style="display:none;">
+    <div class="section-card">
+      <h3>🔮 今晚美股（7月9日）研判</h3>
+      <table>
+        <thead><tr><th>维度</th><th>判断</th><th>置信度</th></tr></thead>
+        <tbody>
+          <tr><td>地缘风险</td><td>🔴 高风险 — 美伊冲突可能进一步升级</td><td>高</td></tr>
+          <tr><td>油价方向</td><td>🔴 偏涨 — 若霍尔木兹海峡持续受扰，Brent看$82-85</td><td>中高</td></tr>
+          <tr><td>美联储</td><td>🟡 鹰派偏分裂 — 6月纪要显示内部分歧，下周CPI是关键</td><td>高</td></tr>
+          <tr><td>科技股</td><td>🟢 相对抗跌 — 纳斯达克尾盘翻红，半导体止跌</td><td>中</td></tr>
+          <tr><td>中国资产</td><td>🟢 持续看好 — 全球资金寻找避风港，中概股/港股受益</td><td>中高</td></tr>
+          <tr><td>VIX</td><td>🟡 18+区间 — 波动加大但不恐慌</td><td>高</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-card">
+      <h3>📅 本周关键事件</h3>
+      <table>
+        <thead><tr><th>时间</th><th>事件</th><th>影响</th></tr></thead>
+        <tbody>
+          <tr><td>7月9日（今晚）</td><td>美军可能对伊朗第二轮打击</td><td class="red">油价↑、避险↑</td></tr>
+          <tr><td>7月10日</td><td>美联储官员讲话</td><td>🟡 利率预期</td></tr>
+          <tr><td>下周</td><td>6月CPI数据</td><td class="red">🔥 核心！预期~4%，若超标则加息预期升温</td></tr>
+          <tr><td>持续</td><td>霍尔木兹海峡通航安全</td><td class="red">全球20%石油运输要道</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert-box amber">
+      <strong>⚡ 综合研判</strong><br>
+      <strong>方向：震荡偏弱，但不会崩盘。</strong><br><br>
+      ① 地缘风险是当前最大变量。若美伊冲突可控（有限打击+重新谈判），油价回落，市场快速修复。<br>
+      ② 若冲突升级（封锁霍尔木兹海峡），油价冲$90+，全球风险资产大幅回调。<br>
+      ③ 科技股相对韧性来自AI资本开支周期的支撑——这是结构性的，不会因油价改变。<br>
+      ④ 下周CPI数据是决定美联储走向的关键。若CPI超4%，加息预期将重创估值。<br><br>
+      <strong>对你的建议：QDII 不动，继续持有。</strong>短期波动是噪音，全球科技+中国资产的长期逻辑没有被破坏。
+    </div>
+  </div>
+
+  <div class="footer">
+    📊 Hermes Agent · 数据来源：CNBC / WSJ / 新浪财经 / 东方财富 · 2026年7月9日北京时间
+  </div>
+</div>
+
+<script>
+Chart.defaults.color = '#64748b';
+Chart.defaults.borderColor = '#1e293b';
+Chart.defaults.font.family = "-apple-system, 'PingFang SC', sans-serif";
+
+function baseOpts(extra = {}) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { labels: { padding: 10, usePointStyle: true, pointStyleWidth: 8 } },
+      tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y >= 0 ? '+' : ''}${typeof ctx.parsed.y === 'number' ? ctx.parsed.y.toFixed(2) : ctx.parsed.y}${ctx.dataset.label.includes('%') ? '%' : ''}` } }
+    },
+    scales: {
+      y: { grid: { color: 'rgba(100,116,139,0.06)' } },
+      x: { grid: { display: false } }
+    },
+    ...extra
+  };
+}
+
+// Index trend chart (simulated recent pattern)
+const idxDates = ['6/25','6/26','6/27','6/30','7/1','7/2','7/3','7/7','7/8'];
+new Chart(document.getElementById('indexChart'), {
+  type: 'line',
+  data: {
+    labels: idxDates,
+    datasets: [
+      { label: '道琼斯', data: [53500, 53100, 53400, 53800, 53600, 53200, 52900, 52925, 52348], borderColor: '#3b82f6', tension: 0.3, pointRadius: 3, borderWidth: 2 },
+      { label: '标普500', data: [7650, 7580, 7620, 7680, 7620, 7550, 7520, 7504, 7483], borderColor: '#22c55e', tension: 0.3, pointRadius: 3, borderWidth: 2 },
+      { label: '纳斯达克', data: [26400, 26100, 26350, 26600, 26250, 25900, 25750, 25819, 25871], borderColor: '#f59e0b', tension: 0.3, pointRadius: 3, borderWidth: 2 },
+    ]
+  },
+  options: baseOpts()
+});
+
+// Sector performance
+const sectors = ['能源', '半导体', '中国ADR', '科技(混合)', '必需消费', '工业', '材料', '金融', '航空', '旅游', '邮轮', '包装'];
+const sectorPct = [2.0, 1.3, 10.0, -0.5, -0.8, -1.5, -2.5, -1.2, -3.5, -4.0, -3.5, -7.0];
+new Chart(document.getElementById('sectorChart'), {
+  type: 'bar',
+  data: {
+    labels: sectors,
+    datasets: [{
+      label: '涨跌幅 %',
+      data: sectorPct,
+      backgroundColor: sectorPct.map(v => v >= 0 ? 'rgba(34,197,94,0.7)' : 'rgba(239,68,68,0.7)'),
+      borderRadius: 4,
+    }]
+  },
+  options: baseOpts({ plugins: { legend: { display: false } }, indexAxis: 'y' })
+});
+
+// Key stocks
+const stocks = ['阿里 BABA', '金山云 KC', '西部数据 WDC', '马拉松 MPC', '博通 AVGO', '应用材料 AMAT', '英伟达 NVDA', '脸书 META', '美光 MU', '航空 AAL', '旅游 BKNG', 'SpaceX', '包装 SW'];
+const stockPct = [10.0, 9.0, 5.0, 5.0, 3.0, 3.0, 0.46, -2.0, -4.0, -4.0, -4.0, -6.5, -7.0];
+new Chart(document.getElementById('stockChart'), {
+  type: 'bar',
+  data: {
+    labels: stocks,
+    datasets: [{
+      label: '涨跌幅 %',
+      data: stockPct,
+      backgroundColor: stockPct.map(v => v >= 0 ? 'rgba(34,197,94,0.7)' : 'rgba(239,68,68,0.7)'),
+      borderRadius: 4,
+    }]
+  },
+  options: baseOpts({ plugins: { legend: { display: false } } })
+});
+
+// Tab switching
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('[id^="tab-"]').forEach(d => d.style.display = 'none');
+  document.getElementById('tab-' + name).style.display = '';
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
