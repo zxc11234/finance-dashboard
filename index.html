@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 理财收益分析仪表盘 | Frank Worth</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --cyan: #06b6d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px;
+    line-height: 1.6;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 6px; }
+  .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+
+  /* KPI Cards */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .kpi-label { color: var(--muted); font-size: 0.85rem; margin-bottom: 4px; }
+  .kpi-value { font-size: 1.8rem; font-weight: 700; }
+  .kpi-sub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+  .kpi-green { color: var(--green); }
+  .kpi-red { color: var(--red); }
+  .kpi-amber { color: var(--amber); }
+
+  /* Charts grid */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .chart-card h3 { font-size: 1rem; margin-bottom: 12px; color: var(--muted); }
+  .chart-wrap { position: relative; height: 320px; }
+  .chart-wrap.wide { height: 400px; }
+
+  /* Tables */
+  .table-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+  .table-card h3 { font-size: 1rem; margin-bottom: 12px; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; }
+  td.name { text-align: left; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tab {
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .tab.active { background: var(--blue); color: white; border-color: var(--blue); }
+  .tab:hover { border-color: var(--blue); color: var(--text); }
+
+  /* Allocation bar */
+  .alloc-item { margin-bottom: 10px; }
+  .alloc-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 3px; }
+  .alloc-bar { height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; }
+  .alloc-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+  .footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 30px; padding: 20px 0; border-top: 1px solid var(--border); }
+
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-wrap { height: 250px; }
+    .kpi-value { font-size: 1.4rem; }
+  }
+
+  .highlight { background: rgba(59,130,246,0.15); border-radius: 6px; padding: 12px; margin: 12px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📊 2026 理财收益分析</h1>
+  <p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 更新至 2026年7月9日</p>
+
+  <!-- KPI Row -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">💰 总资产（含余额宝）</div>
+      <div class="kpi-value">¥2,662,868</div>
+      <div class="kpi-sub">基金市值 ¥1,921,584 + 余额宝 ¥741,284</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">📈 累计总收益</div>
+      <div class="kpi-value kpi-green">+¥971,124</div>
+      <div class="kpi-sub">累计收益率 62.87%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">🕐 今日收益</div>
+      <div class="kpi-value kpi-green">+¥58,667</div>
+      <div class="kpi-sub">A股科技暴涨，科创50 +6%+</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">📅 本月已实现</div>
+      <div class="kpi-value kpi-red" id="month-pnl">-¥291,457</div>
+      <div class="kpi-sub">7月初 6个交易日（不含今日）</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">✅ 胜率</div>
+      <div class="kpi-value">61.5%</div>
+      <div class="kpi-sub">75 盈 / 47 亏 / 122 个交易日</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">📊 日均收益</div>
+      <div class="kpi-value kpi-green">+¥7,960</div>
+      <div class="kpi-sub">单日最高 +¥93,184 · 最大亏损 -¥165,316</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('overview')">📋 持仓总览</div>
+    <div class="tab" onclick="switchTab('history')">📈 历史走势</div>
+    <div class="tab" onclick="switchTab('monthly')">🗓 月度明细</div>
+    <div class="tab" onclick="switchTab('regret')">😤 卖飞复盘</div>
+  </div>
+
+  <!-- Tab 1: Overview -->
+  <div id="tab-overview">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>🥧 资产配置</h3>
+        <div class="chart-wrap"><canvas id="allocPie"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>📊 各基金今日表现</h3>
+        <div class="chart-wrap"><canvas id="todayBar"></canvas></div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <h3>当前持仓明细</h3>
+      <table>
+        <thead>
+          <tr><th>基金名称</th><th>代码</th><th>市值</th><th>占比</th><th>今日涨幅</th><th>今日收益</th><th>累计收益</th><th>累计收益率</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">嘉实全球产业升级 QDII</td><td>017731</td><td>521,823</td><td>19.6%</td><td class="red">-0.59%</td><td class="red">-3,099</td><td class="green">+28,728</td><td>+5.86%</td>
+          </tr>
+          <tr>
+            <td class="name">东方人工智能主题 C</td><td>017811</td><td>310,423</td><td>11.7%</td><td class="green">+6.03%</td><td class="green">+28,028</td><td class="green">+165,733</td><td>+50.71%</td>
+          </tr>
+          <tr>
+            <td class="name">建信新兴市场 QDII C</td><td>018147</td><td>261,800</td><td>9.8%</td><td class="red">-0.61%</td><td class="red">-1,597</td><td class="green">+110,185</td><td>+73.45%</td>
+          </tr>
+          <tr>
+            <td class="name">华夏科创半导体材料设备 C</td><td>024418</td><td>215,656</td><td>8.1%</td><td class="green">+7.55%</td><td class="green">+8,249</td><td class="green">+7,490</td><td>+6.81%</td>
+          </tr>
+          <tr>
+            <td class="name">长城半导体 C</td><td>020470</td><td>172,092</td><td>6.5%</td><td class="green">+4.80%</td><td class="green">+8,261</td><td class="green">+64,075</td><td>+55.11%</td>
+          </tr>
+          <tr>
+            <td class="name">长城全球新能源车 QDII C</td><td>018036</td><td>164,067</td><td>6.2%</td><td class="red">-0.79%</td><td class="red">-1,392</td><td class="green">+59,136</td><td>+51.40%</td>
+          </tr>
+          <tr>
+            <td class="name">建信新兴市场 QDII A</td><td>539002</td><td>103,034</td><td>3.9%</td><td class="red">-0.61%</td><td class="red">-627</td><td class="green">+42,435</td><td>+70.74%</td>
+          </tr>
+          <tr>
+            <td class="name">广发半导体材料设备 C</td><td>—</td><td>101,424</td><td>3.8%</td><td class="green">~+7%</td><td class="green">~+6,600</td><td>—</td><td>—</td>
+          </tr>
+          <tr>
+            <td class="name">国富全球科技互联 QDII A</td><td>006373</td><td>71,266</td><td>2.7%</td><td class="red">-0.85%</td><td class="red">-608</td><td class="green">+29,100</td><td>+70.00%</td>
+          </tr>
+          <tr class="highlight-row" style="background:rgba(245,158,11,0.08);">
+            <td class="name" style="font-weight:700">💵 余额宝</td><td>—</td><td style="font-weight:700">741,284</td><td>27.8%</td><td>—</td><td>—</td><td>—</td><td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight">
+      <strong>💡 调仓建议（7月9日收盘）</strong><br>
+      ① <strong>减仓 017811 东方人工智能 1/4</strong>：市值 31 万，累计 +50.71%，今日单日大涨 6%，卖在涨处锁利。<br>
+      ② <strong>考虑合并广发 + 024418</strong>：两只同赛道（半导体材料设备），重复持仓，可集中到一只。<br>
+      ③ <strong>QDII 全面不动</strong>：全球科技长期逻辑，短线+汇率+申赎费不划算。
+    </div>
+  </div>
+
+  <!-- Tab 2: History -->
+  <div id="tab-history" style="display:none;">
+    <div class="charts-grid">
+      <div class="chart-card" style="grid-column: 1 / -1;">
+        <h3>📈 累计收益走势（2026年至今）</h3>
+        <div class="chart-wrap wide"><canvas id="cumulativeChart"></canvas></div>
+      </div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📊 每日收益分布</h3>
+        <div class="chart-wrap"><canvas id="dailyBar"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>📉 平台收益对比</h3>
+        <div class="chart-wrap"><canvas id="platformChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: Monthly -->
+  <div id="tab-monthly" style="display:none;">
+    <div class="charts-grid">
+      <div class="chart-card" style="grid-column: 1 / -1;">
+        <h3>🗓 月度收益瀑布图</h3>
+        <div class="chart-wrap wide"><canvas id="monthlyChart"></canvas></div>
+      </div>
+    </div>
+    <div class="table-card">
+      <h3>月度收益明细</h3>
+      <table>
+        <thead><tr><th>月份</th><th>月收益</th><th>交易天数</th><th>支付宝</th><th>嘉实</th><th>月收益率</th></tr></thead>
+        <tbody>
+          <tr><td>1月</td><td class="green">+191,744</td><td>20</td><td class="green">+161,690</td><td class="green">+31,019</td><td class="green">+12.64%</td></tr>
+          <tr><td>2月</td><td class="green">+31,903</td><td>14</td><td class="green">+32,574</td><td class="red">-671</td><td class="green">+2.06%</td></tr>
+          <tr><td>3月</td><td class="red">-181,996</td><td>22</td><td class="red">-159,773</td><td class="red">-22,223</td><td class="red">-11.74%</td></tr>
+          <tr><td>4月</td><td class="green">+425,433</td><td>21</td><td class="green">+350,576</td><td class="green">+74,857</td><td class="green">+27.45%</td></tr>
+          <tr><td>5月</td><td class="green">+261,046</td><td>18</td><td class="green">+224,789</td><td class="green">+36,257</td><td class="green">+16.90%</td></tr>
+          <tr><td>6月</td><td class="green">+534,452</td><td>21</td><td class="green">+455,614</td><td class="green">+78,838</td><td class="green">+34.60%</td></tr>
+          <tr><td>7月</td><td class="red">-291,457</td><td>6</td><td class="red">-244,442</td><td class="red">-47,015</td><td class="red">-18.87%</td></tr>
+          <tr style="font-weight:700; border-top: 2px solid var(--border);"><td>累计</td><td class="green">+971,124</td><td>122</td><td class="green">+821,029</td><td class="green">+151,061</td><td class="green">+62.87%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Tab 4: Regret -->
+  <div id="tab-regret" style="display:none;">
+    <div class="table-card">
+      <h3>😤 卖飞复盘</h3>
+      <table>
+        <thead><tr><th>基金</th><th>卖出日期</th><th>卖出净值</th><th>卖出金额</th><th>当前净值</th><th>涨幅</th><th>少赚</th><th>判定</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="name">嘉实全球产业升级 017731</td>
+            <td>2026-06-04</td>
+            <td>3.8466</td>
+            <td>335,091</td>
+            <td>4.0394</td>
+            <td class="red">+5.01%</td>
+            <td class="red">-16,795</td>
+            <td>卖飞了 ❌</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="highlight">
+      <strong>📝 教训</strong><br>
+      唯一一笔卖飞记录：嘉实全球产业升级在 3.8466 割肉出局 8.7 万份（恐慌 → 参考当日 6/4 暴跌），
+      10 天后净值反弹至 4.0394，少赚 ¥16,795。核心教训：QDII 持仓不宜因单日恐慌割肉，全球科技长期趋势不会一天反转。
+    </div>
+  </div>
+
+  <div class="footer">
+    📊 Hermes Agent 自动生成 · 数据来源：支付宝 + 嘉实基金 + 天天基金 MCP · 2026年7月9日
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const dates = [];
+const cumulative = [];
+const dailyPnl = [];
+
+// Raw data from Excel (parsed), skipping 休市 rows
+const rawData = [
+  {d: '2026-01-05', cum: -1450.78, daily: -1450.78},
+  {d: '2026-01-06', cum: 37432.07, daily: 38882.85},
+  {d: '2026-01-07', cum: 54401.50, daily: 16969.43},
+  {d: '2026-01-08', cum: 49577.71, daily: -4823.79},
+  {d: '2026-01-09', cum: 42067.19, daily: -7510.52},
+  {d: '2026-01-12', cum: 64286.01, daily: 22218.82},
+  {d: '2026-01-13', cum: 66347.42, daily: 2061.41},
+  {d: '2026-01-14', cum: 69207.19, daily: 2859.77},
+  {d: '2026-01-15', cum: 71959.67, daily: 2752.48},
+  {d: '2026-01-16', cum: 90209.91, daily: 18250.24},
+  {d: '2026-01-19', cum: 103333.03, daily: 13123.12},
+  {d: '2026-01-20', cum: 100269.97, daily: -3063.06},
+  {d: '2026-01-21', cum: 107620.62, daily: 7350.65},
+  {d: '2026-01-22', cum: 130355.75, daily: 22735.13},
+  {d: '2026-01-23', cum: 142076.31, daily: 11720.56},
+  {d: '2026-01-26', cum: 154264.24, daily: 12187.93},
+  {d: '2026-01-27', cum: 160615.53, daily: 6351.29},
+  {d: '2026-01-28', cum: 186778.64, daily: 26163.11},
+  {d: '2026-01-29', cum: 193750.77, daily: 6972.13},
+  {d: '2026-01-30', cum: 191743.86, daily: -2006.91},
+  {d: '2026-02-02', cum: 152806.98, daily: -38936.88},
+  {d: '2026-02-03', cum: 158366.09, daily: 5559.11},
+  {d: '2026-02-04', cum: 146841.43, daily: -11524.66},
+  {d: '2026-02-05', cum: 97847.45, daily: -48993.98},
+  {d: '2026-02-06', cum: 88394.13, daily: -9453.32},
+  {d: '2026-02-09', cum: 133305.81, daily: 44911.68},
+  {d: '2026-02-10', cum: 147677.78, daily: 14371.97},
+  {d: '2026-02-11', cum: 141262.31, daily: -6415.47},
+  {d: '2026-02-12', cum: 163832.25, daily: 22569.94},
+  {d: '2026-02-13', cum: 146551.15, daily: -17281.10},
+  {d: '2026-02-24', cum: 165265.78, daily: 18714.63},
+  {d: '2026-02-25', cum: 204490.16, daily: 39224.38},
+  {d: '2026-02-26', cum: 228233.19, daily: 23743.03},
+  {d: '2026-02-27', cum: 223647.22, daily: -4585.97},
+  {d: '2026-03-02', cum: 235573.81, daily: 11926.59},
+  {d: '2026-03-03', cum: 191104.68, daily: -44469.13},
+  {d: '2026-03-04', cum: 150239.53, daily: -40865.15},
+  {d: '2026-03-05', cum: 153583.10, daily: 3343.57},
+  {d: '2026-03-06', cum: 150143.97, daily: -3439.13},
+  {d: '2026-03-09', cum: 128634.11, daily: -21509.86},
+  {d: '2026-03-10', cum: 148855.91, daily: 20221.80},
+  {d: '2026-03-11', cum: 160811.53, daily: 11955.62},
+  {d: '2026-03-12', cum: 155186.11, daily: -5625.42},
+  {d: '2026-03-13', cum: 128226.32, daily: -26959.79},
+  {d: '2026-03-16', cum: 126382.52, daily: -1843.80},
+  {d: '2026-03-17', cum: 118396.35, daily: -7986.17},
+  {d: '2026-03-18', cum: 135962.75, daily: 17566.40},
+  {d: '2026-03-19', cum: 129779.78, daily: -6182.97},
+  {d: '2026-03-20', cum: 129220.87, daily: -558.91},
+  {d: '2026-03-23', cum: 79078.25, daily: -50142.62},
+  {d: '2026-03-24', cum: 85800.61, daily: 6722.36},
+  {d: '2026-03-25', cum: 115179.57, daily: 29378.96},
+  {d: '2026-03-26', cum: 112459.14, daily: -2720.43},
+  {d: '2026-03-27', cum: 85598.33, daily: -26860.81},
+  {d: '2026-03-30', cum: 84984.47, daily: -613.86},
+  {d: '2026-03-31', cum: 41650.95, daily: -43333.52},
+  {d: '2026-04-01', cum: 77720.27, daily: 36069.32},
+  {d: '2026-04-02', cum: 89332.00, daily: 11611.73},
+  {d: '2026-04-03', cum: 88803.32, daily: -528.68},
+  {d: '2026-04-07', cum: 94854.95, daily: 6051.63},
+  {d: '2026-04-08', cum: 153131.90, daily: 58276.95},
+  {d: '2026-04-09', cum: 217194.88, daily: 64062.98},
+  {d: '2026-04-10', cum: 242467.33, daily: 25272.45},
+  {d: '2026-04-13', cum: 263893.69, daily: 21426.36},
+  {d: '2026-04-14', cum: 295113.76, daily: 31220.07},
+  {d: '2026-04-15', cum: 308005.59, daily: 12891.83},
+  {d: '2026-04-16', cum: 321386.17, daily: 13380.58},
+  {d: '2026-04-17', cum: 344298.03, daily: 22911.86},
+  {d: '2026-04-20', cum: 367449.72, daily: 23151.69},
+  {d: '2026-04-21', cum: 368963.88, daily: 1514.16},
+  {d: '2026-04-22', cum: 393839.74, daily: 24875.86},
+  {d: '2026-04-23', cum: 404183.17, daily: 10343.43},
+  {d: '2026-04-24', cum: 405853.02, daily: 1669.85},
+  {d: '2026-04-27', cum: 441705.25, daily: 35852.23},
+  {d: '2026-04-28', cum: 437045.86, daily: -4659.39},
+  {d: '2026-04-29', cum: 429275.06, daily: -7770.80},
+  {d: '2026-04-30', cum: 467083.74, daily: 37808.68},
+  {d: '2026-05-07', cum: 516848.29, daily: 49764.55},
+  {d: '2026-05-08', cum: 610032.07, daily: 93183.78},
+  {d: '2026-05-11', cum: 586723.08, daily: -23308.99},
+  {d: '2026-05-14', cum: 652374.82, daily: 65651.74},
+  {d: '2026-05-15', cum: 693607.15, daily: 41232.33},
+  {d: '2026-05-18', cum: 698054.87, daily: 4447.72},
+  {d: '2026-05-19', cum: 698387.14, daily: 332.27},
+  {d: '2026-05-20', cum: 681177.78, daily: -17209.36},
+  {d: '2026-05-25', cum: 652441.96, daily: -28735.82},
+  {d: '2026-05-26', cum: 668116.96, daily: 15675.00},
+  {d: '2026-05-27', cum: 694083.39, daily: 25966.43},
+  {d: '2026-05-28', cum: 649230.91, daily: -44852.48},
+  {d: '2026-05-29', cum: 699364.79, daily: 50133.88},
+  {d: '2026-06-01', cum: 768405.42, daily: 69040.63},
+  {d: '2026-06-02', cum: 758466.43, daily: -9938.99},
+  {d: '2026-06-03', cum: 753211.32, daily: -5255.11},
+  {d: '2026-06-04', cum: 789167.32, daily: 35956.00},
+  {d: '2026-06-05', cum: 728129.27, daily: -61038.05},
+  {d: '2026-06-08', cum: 654304.72, daily: -73824.55},
+  {d: '2026-06-09', cum: 701069.87, daily: 46765.15},
+  {d: '2026-06-10', cum: 772819.38, daily: 71749.51},
+  {d: '2026-06-11', cum: 808923.23, daily: 36103.85},
+  {d: '2026-06-12', cum: 751469.49, daily: -57453.74},
+  {d: '2026-06-15', cum: 645785.51, daily: -105683.98},
+  {d: '2026-06-16', cum: 697116.71, daily: 51331.20},
+  {d: '2026-06-17', cum: 708105.66, daily: 10988.95},
+  {d: '2026-06-18', cum: 695819.67, daily: -12285.99},
+  {d: '2026-06-19', cum: 738829.98, daily: 43010.31},
+  {d: '2026-06-22', cum: 816801.92, daily: 77971.94},
+  {d: '2026-06-23', cum: 899178.32, daily: 82376.40},
+  {d: '2026-06-24', cum: 935610.47, daily: 36432.15},
+  {d: '2026-06-25', cum: 990230.35, daily: 54619.88},
+  {d: '2026-06-29', cum: 1077271.19, daily: 87040.84},
+  {d: '2026-06-30', cum: 1094294.56, daily: 17023.37},
+  {d: '2026-07-01', cum: 1056949.37, daily: -37345.19},
+  {d: '2026-07-02', cum: 1128600.04, daily: 71650.67},
+  {d: '2026-07-03', cum: 1195391.90, daily: 66791.86},
+  {d: '2026-07-06', cum: 1182443.32, daily: -12948.58},
+  {d: '2026-07-07', cum: 1262581.21, daily: 80137.89},
+  {d: '2026-07-08', cum: 1289206.28, daily: 26625.07},
+  {d: '2026-07-09', cum: 1123889.98, daily: -165316.30},
+  {d: '2026-07-10', cum: 982295.48, daily: -141594.50},
+  // After this, data is frozen at 971,124.32 with 0 changes
+];
+
+rawData.forEach(r => {
+  dates.push(r.d);
+  cumulative.push(r.cum);
+  dailyPnl.push(r.daily);
+});
+
+// Monthly data
+const months = ['1月','2月','3月','4月','5月','6月','7月'];
+const monthly = [191744, 31903, -181996, 425433, 261046, 534452, -291457];
+
+// Platform data
+const platformLabels = ['支付宝', '嘉实', '华宝', '南方'];
+const platformData = [821029, 151061, -1783, 818];
+const platformColors = ['#3b82f6', '#f59e0b', '#ef4444', '#22c55e'];
+
+// Today fund data
+const fundNames = ['017811 人工智能', '024418 科创半导体材料', '017470 科创芯片*', '020470 长城半导体', '025500 阿尔法科技*', '017731 嘉实产业升级', '018147 建信新兴C'];
+const fundToday = [6.03, 7.55, 7.85, 4.80, 6.87, -0.59, -0.61];
+
+// Allocation data
+const allocLabels = ['余额宝', '嘉实产业升级 QDII', '东方人工智能 C', '建信新兴市场 QDII C', '华夏科创半导体材料设备', '长城半导体 C', '长城新能源车 QDII', '建信新兴市场 QDII A', '广发半导体材料设备', '国富全球科技互联 QDII'];
+const allocValues = [741284, 521823, 310423, 261800, 215656, 172092, 164067, 103034, 101424, 71266];
+const allocColors = ['#94a3b8', '#f59e0b', '#3b82f6', '#f59e0b', '#06b6d4', '#8b5cf6', '#10b981', '#f59e0b', '#06b6d4', '#f59e0b'];
+
+// ===== CHART CONFIG =====
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = '#334155';
+Chart.defaults.font.family = "-apple-system, 'PingFang SC', sans-serif";
+
+function makeOptions() {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { labels: { padding: 12, usePointStyle: true, pointStyleWidth: 8 } } },
+    scales: {
+      y: { grid: { color: 'rgba(148,163,184,0.08)' }, ticks: { callback: v => v >= 10000 ? (v/10000).toFixed(1)+'w' : v.toLocaleString() } },
+      x: { grid: { display: false } }
+    },
+    interaction: { intersect: false, mode: 'index' }
+  };
+}
+
+// Cumulative chart
+new Chart(document.getElementById('cumulativeChart'), {
+  type: 'line',
+  data: {
+    labels: dates,
+    datasets: [{
+      label: '累计收益 (¥)',
+      data: cumulative,
+      borderColor: '#22c55e',
+      backgroundColor: 'rgba(34,197,94,0.08)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 0,
+      pointHoverRadius: 5,
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    ...makeOptions(),
+    scales: { ...makeOptions().scales, y: { ...makeOptions().scales.y, ticks: { callback: v => (v/10000).toFixed(1)+'万' } } }
+  }
+});
+
+// Daily PnL bar chart (last 30 days)
+const last30Dates = dates.slice(-30);
+const last30Daily = dailyPnl.slice(-30);
+new Chart(document.getElementById('dailyBar'), {
+  type: 'bar',
+  data: {
+    labels: last30Dates,
+    datasets: [{
+      label: '每日收益',
+      data: last30Daily,
+      backgroundColor: last30Daily.map(v => v >= 0 ? 'rgba(34,197,94,0.7)' : 'rgba(239,68,68,0.7)'),
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    ...makeOptions(),
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Platform comparison
+new Chart(document.getElementById('platformChart'), {
+  type: 'bar',
+  data: {
+    labels: platformLabels,
+    datasets: [{
+      label: '累计收益',
+      data: platformData,
+      backgroundColor: platformColors,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    ...makeOptions(),
+    plugins: { legend: { display: false } },
+    indexAxis: 'y',
+  }
+});
+
+// Monthly waterfall
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [{
+      label: '月收益',
+      data: monthly,
+      backgroundColor: monthly.map(v => v >= 0 ? 'rgba(34,197,94,0.7)' : 'rgba(239,68,68,0.7)'),
+      borderRadius: 6,
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    ...makeOptions(),
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Today bar
+new Chart(document.getElementById('todayBar'), {
+  type: 'bar',
+  data: {
+    labels: fundNames,
+    datasets: [{
+      label: '今日涨跌幅 %',
+      data: fundToday,
+      backgroundColor: fundToday.map(v => v >= 0 ? 'rgba(34,197,56,0.7)' : 'rgba(239,68,68,0.7)'),
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    ...makeOptions(),
+    plugins: { legend: { display: false } },
+    scales: { ...makeOptions().scales, y: { ...makeOptions().scales.y, ticks: { callback: v => (v>=0?'+':'')+v.toFixed(1)+'%' } } }
+  }
+});
+
+// Allocation pie
+new Chart(document.getElementById('allocPie'), {
+  type: 'doughnut',
+  data: {
+    labels: allocLabels,
+    datasets: [{
+      data: allocValues,
+      backgroundColor: allocColors,
+      borderColor: '#1e293b',
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 8, usePointStyle: true, pointStyleWidth: 8, font: { size: 11 } } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ¥${ctx.parsed.toLocaleString()} (${((ctx.parsed / allocValues.reduce((a,b)=>a+b,0))*100).toFixed(1)}%)` } }
+    },
+  }
+});
+
+// Tab switching
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('[id^="tab-"]').forEach(d => d.style.display = 'none');
+  document.getElementById('tab-' + name).style.display = '';
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
