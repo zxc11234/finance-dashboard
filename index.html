@@ -69,14 +69,75 @@
   .hm-cell{width:18px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.55rem;color:rgba(255,255,255,.7);cursor:default}
   .hm-cell:hover{outline:1px solid rgba(255,255,255,.3)}
   @media(max-width:768px){
+    body{padding:10px;line-height:1.5}
+    h1{font-size:1.3rem;margin-bottom:2px}
+    .subtitle{font-size:0.7rem;margin-bottom:10px}
+    /* KPI compact: 3-col grid, smaller cards */
+    .kpi-grid{grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+    .kpi-card{padding:8px 6px;border-radius:7px}
+    .kpi-label{font-size:0.62rem}
+    .kpi-value{font-size:1rem;font-weight:700}
+    .kpi-sub{font-size:0.6rem;margin-top:1px;line-height:1.2}
+    /* Risk cards: 3-col still */
+    #riskCards{margin-top:-4px}
+    /* Tabs: horizontal scroll, no wrap */
+    .tabs{display:flex;overflow-x:auto;gap:5px;margin-bottom:10px;-webkit-overflow-scrolling:touch;flex-wrap:nowrap}
+    .tab{padding:5px 10px;font-size:0.72rem;white-space:nowrap;flex-shrink:0}
+    /* Reorder: hide US panel + calendar + alerts on mobile by default, show after table */
+    .us-panel{order:99;margin-bottom:8px}
+    #ecSection{order:98;margin-bottom:8px}
+    .ec-section{padding:10px}
+    .ec-title{font-size:0.75rem;margin-bottom:6px}
+    .ec-item{min-width:110px;padding:7px 9px}
+    .ec-date{font-size:0.7rem}
+    .ec-event{font-size:0.65rem}
+    #alertCard{order:97;margin-bottom:8px}
+    .alert-card{padding:10px}
+    .alert-name{min-width:90px;font-size:0.68rem}
+    .alert-row{padding:3px 0}
+    .alert-bar{height:4px}
+    .alert-pct{min-width:50px;font-size:0.72rem}
+    /* Charts: smaller height */
+    .charts-grid{grid-template-columns:1fr;gap:8px;margin-bottom:8px}
+    .chart-card{padding:10px}
+    .chart-wrap{height:200px}
+    .chart-wrap.wide{height:280px}
+    .chart-card h3{font-size:0.78rem}
+    /* Table: compact card layout */
+    .table-card{padding:10px;margin-bottom:8px}
+    .table-card h3{font-size:0.78rem;margin-bottom:6px}
     .table-card table thead{display:none}
     .table-card table,.table-card tbody,.table-card tr,.table-card td{display:block}
-    .table-card table tr{margin-bottom:12px;border:1px solid var(--border);border-radius:8px;padding:6px 10px}
-    .table-card table td{display:flex;justify-content:space-between;text-align:right;border-bottom:1px solid rgba(30,41,59,.3);padding:4px 0}
-    .table-card table td[data-label]::before{content:attr(data-label);color:var(--muted);font-size:.72rem;font-weight:600}
-    .cat-row td, .subtotal td{justify-content:center !important;font-weight:700}
+    .table-card table tr{margin-bottom:6px;border:1px solid var(--border);border-radius:6px;padding:4px 8px}
+    .table-card table td{display:flex;justify-content:space-between;text-align:right;border-bottom:1px solid rgba(30,41,59,.3);padding:2.5px 0;font-size:0.72rem}
+    .table-card table td[data-label]::before{content:attr(data-label);color:var(--muted);font-size:.65rem;font-weight:600}
+    .cat-row td,.subtotal td{justify-content:center !important;font-weight:700}
+    /* Compact highlight */
+    .highlight{padding:8px;font-size:0.72rem;margin:6px 0}
+    .footer{font-size:0.6rem;padding:8px 0}
+    /* Enable flex reorder on overview tab */
+    #tab-overview{display:flex;flex-direction:column}
+    /* Mobile order: tabs→KPI are outside tab. Inside tab-overview: chart+table first, US/EC/alerts last */
+    .charts-grid{order:1}
+    .table-card{order:2}
+    .highlight{order:3}
+    .us-panel{order:10}
+    #ecSection{order:11}
+    .alert-card{order:12}
   }
-  @media(max-width:600px){ .charts-grid{grid-template-columns:1fr} .chart-wrap{height:230px} .kpi-value{font-size:1.2rem} table{font-size:0.72rem} }
+  @media(max-width:600px){
+    .charts-grid{grid-template-columns:1fr}
+    .kpi-value{font-size:0.95rem}
+    /* US panel compact on phone */
+    .us-cards{grid-template-columns:repeat(3,1fr)}
+    .us-card{padding:6px 4px}
+    .us-label{font-size:0.6rem}
+    .us-value{font-size:0.85rem}
+    .us-change{font-size:0.7rem}
+    .us-note{font-size:0.62rem;margin-top:4px;padding-top:4px}
+    /* EC compact */
+    .ec-item{min-width:95px;padding:5px 7px}
+  }
   /* News tab styles */
   .news-meta{color:var(--muted);font-size:0.72rem;font-weight:400}
   .news-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
