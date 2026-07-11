@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="理财看板">
+<link rel="manifest" href="manifest.json">
 <title>2026 理财收益分析 v2 | Frank Worth</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -91,6 +96,36 @@
   .cross-hold td{background:rgba(59,130,246,.04)!important}
   .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
   @media(max-width:768px){.news-grid{grid-template-columns:1fr}}
+  /* Feature 1: Economic Calendar */
+  .ec-section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
+  .ec-title{font-size:0.85rem;color:var(--muted);margin-bottom:10px}
+  .ec-timeline{display:flex;gap:0;overflow-x:auto;padding-bottom:4px}
+  .ec-item{min-width:140px;padding:10px 12px;border-right:1px solid var(--border);position:relative}
+  .ec-item:last-child{border-right:none}
+  .ec-date{font-size:0.78rem;font-weight:700;color:var(--text)}
+  .ec-event{font-size:0.72rem;color:var(--muted);margin:2px 0}
+  .ec-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.6rem;font-weight:600}
+  .ec-tag-hot{background:rgba(239,68,68,.15);color:var(--red)}
+  .ec-tag-warn{background:rgba(245,158,11,.15);color:var(--amber)}
+  .ec-tag-info{background:rgba(59,130,246,.15);color:var(--blue)}
+  .ec-countdown{font-size:0.68rem;font-weight:600;margin-top:3px}
+  .ec-past{opacity:.4}
+  /* Feature 2: Position Alert */
+  .alert-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+  .alert-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(30,41,59,.4);font-size:0.78rem}
+  .alert-row:last-child{border-bottom:none}
+  .alert-name{min-width:130px;font-weight:600}
+  .alert-bar{flex:1;height:6px;border-radius:3px;background:var(--border);position:relative;overflow:hidden}
+  .alert-fill{height:100%;border-radius:3px}
+  .alert-pct{min-width:80px;text-align:right;font-weight:600}
+  .alert-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  /* Feature 6: Radar */
+  .radar-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  @media(max-width:768px){.radar-grid{grid-template-columns:1fr}}
+  .fund-select{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .fund-chip{padding:4px 10px;border-radius:6px;font-size:0.72rem;cursor:pointer;border:1px solid var(--border);background:var(--card);transition:all .2s}
+  .fund-chip.active{border-color:var(--blue);background:rgba(59,130,246,.15);color:var(--blue)}
+  .fund-chip:hover{border-color:var(--blue)}
 </style>
 </head>
 <body>
@@ -133,6 +168,18 @@
       <div class="us-card"><div class="us-label">SK海力士首日</div><div class="us-value">$169</div><div class="us-change green">+13%</div></div>
     </div>
     <div class="us-note">💡 Meta宣布自研AI芯片+博通合作，明年底云算力翻倍至14GW。SK海力士美国上市首日+13%，史上最大外资IPO。NVDA连涨3天 $197→$210。周五美股平静，下周焦点：Warsh国会作证（7/14）+ CPI（7/15）。</div>
+  </div>
+
+  <!-- Feature 1: Economic Calendar -->
+  <div class="ec-section" id="ecSection">
+    <div class="ec-title">📅 关键事件日历</div>
+    <div class="ec-timeline" id="ecTimeline"></div>
+  </div>
+
+  <!-- Feature 2: Position Alert -->
+  <div class="alert-card" id="alertCard">
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px">🚦 持仓安全垫监测</div>
+    <div id="alertRows"></div>
   </div>
 
   <div class="charts-grid">
@@ -182,6 +229,8 @@
     <div class="chart-card"><h3>📉 平台收益对比</h3><div class="chart-wrap"><canvas id="platformChart"></canvas></div></div>
   </div>
   <div class="chart-card" style="grid-column:1/-1"><h3>🎯 每日 Alpha 热力图（跑赢/跑输沪深300）</h3><div id="alphaHeatmap"></div></div>
+  <!-- Feature 3: Underwater Plot -->
+  <div class="chart-card" style="grid-column:1/-1"><h3>🌊 水下曲线（从峰值回撤 %）</h3><div class="chart-wrap"><canvas id="underwaterChart"></canvas></div></div>
 </div>
 
 <div id="tab-monthly" style="display:none;">
@@ -207,6 +256,11 @@
   <div class="charts-grid">
     <div class="chart-card"><h3>🥧 当前资产配置</h3><div class="chart-wrap"><canvas id="allocDonut"></canvas></div></div>
     <div class="chart-card"><h3>📊 配置变化趋势</h3><div class="chart-wrap wide"><canvas id="allocTrend"></canvas></div></div>
+  </div>
+  <!-- Feature 6: Fund Radar -->
+  <div class="chart-card" style="margin-bottom:14px"><h3>📊 基金对比雷达图</h3>
+    <div class="fund-select" id="radarChips"></div>
+    <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
   </div>
   <div class="highlight">
     <strong>📌 配置变迁</strong><br>
@@ -415,6 +469,122 @@ function calcRiskMetrics(){
 })();
 
 const chartInit={overview:false,history:false,monthly:false,alloc:false};
+
+// Feature 1: Economic Calendar
+const ecEvents=[
+  {date:'2026-07-11',event:'A股休市(周五)',tag:'info'},
+  {date:'2026-07-14',event:'Warsh国会作证',tag:'warn'},
+  {date:'2026-07-15',event:'美国CPI数据',tag:'hot'},
+  {date:'2026-07-17',event:'期权到期日',tag:'info'},
+  {date:'2026-07-22',event:'017731 Q2季报披露',tag:'info'},
+  {date:'2026-07-30',event:'美联储FOMC利率决议',tag:'hot'},
+  {date:'2026-08-15',event:'017811/024418 Q2季报',tag:'info'},
+  {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
+];
+(function buildCalendar(){
+  const now=new Date('2026-07-11T12:00:00+08:00');
+  const tl=document.getElementById('ecTimeline');
+  if(!tl)return;
+  ecEvents.forEach(ev=>{
+    const ed=new Date(ev.date+'T00:00:00+08:00');
+    const diff=Math.ceil((ed-now)/(1000*60*60*24));
+    const past=diff<0;
+    const cls=ev.tag==='hot'?'ec-tag-hot':ev.tag==='warn'?'ec-tag-warn':'ec-tag-info';
+    const tagLabel=ev.tag==='hot'?'🔴关键':ev.tag==='warn'?'🟡关注':'🔵跟踪';
+    const dd=ev.date.split('-');
+    const item=document.createElement('div');
+    item.className='ec-item'+(past?' ec-past':'');
+    item.innerHTML=`<div class="ec-date">${parseInt(dd[1])}/${parseInt(dd[2])}</div><div class="ec-event">${ev.event}</div><span class="ec-tag ${cls}">${tagLabel}</span><div class="ec-countdown ${diff<0?'':'red'}">${diff>0?'T-'+diff+'天':diff===0?'⏰ 今天':'✓ 已过'}</div>`;
+    tl.appendChild(item);
+  });
+})();
+
+// Feature 2: Position Alert
+const alertData=[
+  {name:'024418 科创半导体',cost:218186.88,mkt:216744.40,pct:-0.66},
+  {name:'020640 广发半导体',cost:100000.00,mkt:103665.84,pct:3.67},
+  {name:'017731 嘉实产业升级',cost:490000.00,mkt:555723.38,pct:13.41},
+  {name:'017811 东方人工智能',cost:238341.55,mkt:311332.95,pct:30.62},
+  {name:'020470 长城半导体',cost:116255.92,mkt:172537.63,pct:48.41},
+  {name:'018147 建信新兴C',cost:150000.00,mkt:272011.22,pct:81.34},
+  {name:'539002 建信新兴A',cost:60000.00,mkt:107074.14,pct:78.46},
+  {name:'006373 国富科技',cost:41566.79,mkt:73751.19,pct:77.43},
+  {name:'018036 新能源车',cost:115000.00,mkt:170242.06,pct:48.04},
+];
+(function buildAlerts(){
+  const c=document.getElementById('alertRows');
+  if(!c)return;
+  alertData.sort((a,b)=>a.pct-b.pct);
+  alertData.forEach(d=>{
+    let color,dot,bg;
+    if(d.pct<0){color='var(--red)';dot='#ef4444';bg='rgba(239,68,68,.6)';}
+    else if(d.pct<5){color='var(--amber)';dot='#f59e0b';bg='rgba(245,158,11,.5)';}
+    else if(d.pct<20){color='var(--green)';dot='#22c55e';bg='rgba(34,197,94,.5)';}
+    else{color='var(--green)';dot='#22c55e';bg='rgba(34,197,94,.7)';}
+    const fillW=Math.max(0,Math.min(100,d.pct*2));
+    const row=document.createElement('div');
+    row.className='alert-row';
+    row.innerHTML=`<div class="alert-dot" style="background:${dot}"></div><div class="alert-name">${d.name}</div><div class="alert-bar"><div class="alert-fill" style="width:${fillW}%;background:${bg}"></div></div><div class="alert-pct ${d.pct<0?'red':d.pct<5?'amber':'green'}">${d.pct>=0?'+':''}${d.pct.toFixed(1)}%</div>`;
+    c.appendChild(row);
+  });
+})();
+
+// Feature 6: Radar Chart
+const radarFunds={
+  '017811':{name:'017811 东方AI',color:'#3b82f6',data:[30.62,72991,-6.39,11.4,30.62]},
+  '024418':{name:'024418 科创半导体',color:'#ef4444',data:[-0.66,-1442,-7.45,7.9,-0.66]},
+  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[13.41,65723,5.43,20.4,13.41]},
+  '018147':{name:'018147 建信C',color:'#a855f7',data:[81.34,122011,3.17,10.0,81.34]},
+  '020470':{name:'020470 长城半导体',color:'#10b981',data:[48.41,56282,-7.05,6.3,48.41]},
+};
+let radarSelected=['017811','024418','017731'];
+function initRadar(){
+  const cv=document.getElementById('radarChart');
+  if(!cv||cv.dataset.init)return;cv.dataset.init='1';
+  // Build chips
+  const chips=document.getElementById('radarChips');
+  Object.keys(radarFunds).forEach(code=>{
+    const f=radarFunds[code];
+    const chip=document.createElement('div');
+    chip.className='fund-chip'+(radarSelected.includes(code)?' active':'');
+    chip.textContent=f.name;
+    chip.onclick=()=>{
+      if(radarSelected.includes(code)){
+        if(radarSelected.length<=1)return;
+        radarSelected=radarSelected.filter(c=>c!==code);
+        chip.classList.remove('active');
+      }else{
+        if(radarSelected.length>=4)return;
+        radarSelected.push(code);
+        chip.classList.add('active');
+      }
+      drawRadar();
+    };
+    chips.appendChild(chip);
+  });
+  drawRadar();
+}
+function drawRadar(){
+  const cv=document.getElementById('radarChart');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  let chart=Chart.getChart('radarChart');
+  if(chart)chart.destroy();
+  // Normalize: [收益率%, 利润¥, 今日%, 占比%, 距成本%]
+  // Max scales: 收益率80, 利润120000, 今日10, 占比25, 距成本80
+  const axes=['收益率','利润额','今日涨跌','占比','安全垫'];
+  const maxes=[80,120000,10,25,80];
+  const datasets=radarSelected.map(code=>{
+    const f=radarFunds[code];
+    const norm=f.data.map((v,i)=>Math.max(0,Math.min(100,v/maxes[i]*100)));
+    return{label:f.name,data:norm,borderColor:f.color,backgroundColor:f.color+'15',borderWidth:2,pointBackgroundColor:f.color,pointRadius:3};
+  });
+  new Chart(ctx,{type:'radar',data:{labels:axes,datasets},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,font:{size:10},padding:6}}},
+      scales:{r:{min:0,max:100,grid:{color:'rgba(100,116,139,.1)'},angleLines:{color:'rgba(100,116,139,.1)'},pointLabels:{color:'#64748b',font:{size:10}},ticks:{display:false}}}
+    }});
+}
 function initOverview(){
   if(chartInit.overview)return;chartInit.overview=true;
   const fn=['017811 人工智能','024418 科创半导体','020470 长城半导体','020640 广发半导体','018147 建信C','539002 建信A','018036 新能源车','006373 国富科技','017731 嘉实产业'];
@@ -503,6 +673,28 @@ function initHistory(){
 
   // Feature C: Build alpha heatmap after charts are created
   buildAlphaHeatmap();
+
+  // Feature 3: Underwater Plot
+  const uwData=[];
+  let peak=cum[0];
+  for(let i=0;i<cum.length;i++){
+    if(cum[i]>peak)peak=cum[i];
+    uwData.push(peak>0?((cum[i]-peak)/peak*100):0);
+  }
+  new Chart(document.getElementById('underwaterChart'),{
+    type:'line',
+    data:{labels:dates,datasets:[{
+      label:'回撤%',data:uwData,
+      borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,.15)',
+      fill:{target:'origin'},tension:.2,pointRadius:0,pointHoverRadius:4,borderWidth:1.5
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(1)+'%'}}},
+      scales:{y:{grid:{color:'rgba(100,116,139,.05)'},ticks:{callback:v=>v+'%'},min:-15,max:1},
+        x:{grid:{display:false}}}
+    }
+  });
 }
 
 function initMonthly(){
@@ -587,7 +779,7 @@ function switchTab(name,el){
   if(name==='overview')initOverview();
   else if(name==='history')initHistory();
   else if(name==='monthly')initMonthly();
-  else if(name==='alloc')initAlloc();
+  else if(name==='alloc'){initAlloc();initRadar();}
 }
 initOverview();
 
@@ -610,6 +802,8 @@ initOverview();
     recoveryEl.className='kpi-value green';
   }
 })();
+// Feature 5: PWA Service Worker
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
