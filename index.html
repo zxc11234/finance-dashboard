@@ -72,6 +72,25 @@
     .cat-row td, .subtotal td{justify-content:center !important;font-weight:700}
   }
   @media(max-width:600px){ .charts-grid{grid-template-columns:1fr} .chart-wrap{height:230px} .kpi-value{font-size:1.2rem} table{font-size:0.72rem} }
+  /* News tab styles */
+  .news-meta{color:var(--muted);font-size:0.72rem;font-weight:400}
+  .news-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .news-time{color:var(--muted);font-size:0.72rem;min-width:38px}
+  .news-title{font-size:0.82rem;color:var(--text);text-decoration:none;flex:1;min-width:200px}
+  .news-title:hover{color:var(--blue);text-decoration:underline}
+  .news-src{font-size:0.68rem;color:var(--muted);background:rgba(100,116,139,.1);padding:1px 6px;border-radius:3px}
+  .report-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .report-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.62rem;font-weight:600;white-space:nowrap}
+  .tag-semi{background:rgba(34,197,94,.15);color:var(--green)}
+  .tag-ai{background:rgba(59,130,246,.15);color:var(--blue)}
+  .tag-auto{background:rgba(245,158,11,.15);color:var(--amber)}
+  .tag-elec{background:rgba(168,85,247,.15);color:#a855f7}
+  .tag-robot{background:rgba(236,72,153,.15);color:#ec4899}
+  .ann-item{padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ann-stock{font-size:0.78rem;font-weight:600;color:var(--blue);min-width:70px}
+  .cross-hold td{background:rgba(59,130,246,.04)!important}
+  .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  @media(max-width:768px){.news-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -101,6 +120,7 @@
   <div class="tab" onclick="switchTab('monthly',this)">🗓 月度明细</div>
   <div class="tab" onclick="switchTab('alloc',this)">📊 资产配置</div>
   <div class="tab" onclick="switchTab('regret',this)">😤 卖飞复盘</div>
+  <div class="tab" onclick="switchTab('news',this)">📰 资讯研报</div>
 </div>
 
 <div id="tab-overview">
@@ -204,7 +224,84 @@
   </tbody></table></div>
 </div>
 
-<div class="footer">📊 Hermes Agent · 数据源：支付宝/嘉实截图 + 天天基金 MCP · 2026年7月10日收盘 · v2 升级版</div>
+<div id="tab-news" style="display:none;">
+  <!-- 持仓穿透 -->
+  <div class="table-card"><h3>🔍 持仓穿透：基金重仓股一览 <span class="news-meta">· 2026Q1季报 (3/31)</span></h3>
+  <table><thead><tr><th>股票</th><th>代码</th><th>市场</th><th>持有基金</th><th>最高占比</th><th>相关动态</th></tr></thead><tbody>
+    <tr class="cross-hold"><td>美光科技</td><td>MU</td><td>🇺🇸</td><td>017731 + 006373</td><td class="green">7.69%</td><td class="red">🔥 昨夜暴涨</td></tr>
+    <tr class="cross-hold"><td>台积电</td><td>TSM</td><td>🇹🇼</td><td>017731 + 006373</td><td class="green">7.03%</td><td style="color:var(--muted)">—</td></tr>
+    <tr class="cross-hold"><td>英伟达</td><td>NVDA</td><td>🇺🇸</td><td>017731 + 006373</td><td class="green">5.86%</td><td class="green">推动纳指三连阳</td></tr>
+    <tr class="cross-hold"><td>中微公司</td><td>688012</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">9.06%</td><td class="amber">⚠️ 股东权益变动</td></tr>
+    <tr class="cross-hold"><td>华海清科</td><td>688120</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">9.22%</td><td style="color:var(--muted)">—</td></tr>
+    <tr class="cross-hold"><td>拓荆科技</td><td>688072</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">8.90%</td><td class="red">📢 下周一复牌</td></tr>
+    <tr class="cross-hold"><td>北方华创</td><td>002371</td><td>🇨🇳</td><td>017811</td><td class="green">9.03%</td><td style="color:var(--muted)">—</td></tr>
+    <tr class="cross-hold"><td>富创精密</td><td>688409</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">9.34%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>博通</td><td>AVGO</td><td>🇺🇸</td><td>017731</td><td>5.37%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>拉姆研究</td><td>LRCX</td><td>🇺🇸</td><td>006373</td><td>7.02%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>寒武纪</td><td>688256</td><td>🇨🇳</td><td>017731</td><td>3.66%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>阿斯麦</td><td>ASML</td><td>🇳🇱</td><td>017731</td><td>3.70%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>AMD</td><td>AMD</td><td>🇺🇸</td><td>017731</td><td>3.33%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>谷歌</td><td>GOOG</td><td>🇺🇸</td><td>006373</td><td>6.49%</td><td style="color:var(--muted)">—</td></tr>
+    <tr><td>英特尔</td><td>INTC</td><td>🇺🇸</td><td>006373</td><td>3.16%</td><td style="color:var(--muted)">—</td></tr>
+  </tbody></table></div>
+
+  <!-- 市场快讯 + 机构研报 双栏 -->
+  <div class="news-grid">
+    <div class="table-card"><h3>📰 市场快讯 <span class="news-meta">· 7/11 晨间</span></h3>
+    <div class="news-item"><span class="news-time">08:43</span><a class="news-title" href="https://www.cls.cn/detail/2422869" target="_blank">算力、模型、数据三箭齐发 Meta要剑指AI"第三极"？</a><span class="news-src">财联社</span></div>
+    <div class="news-item"><span class="news-time">07:55</span><a class="news-title" href="http://field.10jqka.com.cn/20260711/c678111000.shtml" target="_blank">国内首个十万卡AI超集群"曙光8000"落成投用</a><span class="news-src">同花顺</span></div>
+    <div class="news-item"><span class="news-time">07:43</span><a class="news-title" href="https://finance.sina.com.cn/wm/2026-07-11/doc-inihktzm5069073.shtml" target="_blank">拟收购半导体公司！688072拓荆科技下周一复牌</a><span class="news-src">新浪</span></div>
+    <div class="news-item"><span class="news-time">07:33</span><a class="news-title" href="http://field.10jqka.com.cn/20260711/c678110918.shtml" target="_blank">昨夜！存储巨头暴涨！</a><span class="news-src">同花顺</span></div>
+    <div class="news-item"><span class="news-time">07:21</span><a class="news-title" href="http://field.10jqka.com.cn/20260711/c678110831.shtml" target="_blank">四部门：加快推进"人工智能+人社"应用发展</a><span class="news-src">同花顺</span></div>
+    <div class="news-item"><span class="news-time">07:11</span><a class="news-title" href="https://wallstreetcn.com/articles/3776623" target="_blank">科技股续撑纳指三连阳，SK海力士ADR首日大涨13%</a><span class="news-src">华尔街见闻</span></div>
+    <div class="news-item"><span class="news-time">06:41</span><a class="news-title" href="https://www.cls.cn/detail/2423438" target="_blank">美股收盘：Meta、英伟达推动指数小幅收高</a><span class="news-src">财联社</span></div>
+    <div class="news-item"><span class="news-time">06:39</span><a class="news-title" href="https://wallstreetcn.com/articles/3776688" target="_blank">苹果起诉OpenAI窃取商业机密，要求重设计AI硬件</a><span class="news-src">华尔街见闻</span></div>
+    <div class="news-item"><span class="news-time">06:34</span><a class="news-title" href="http://field.10jqka.com.cn/20260711/c678110710.shtml" target="_blank">外资看多中国AI产业链的三重逻辑</a><span class="news-src">同花顺</span></div>
+    <div class="news-item"><span class="news-time">06:16</span><a class="news-title" href="https://wallstreetcn.com/articles/3776689" target="_blank">AI加剧美国通胀？高盛：内存涨价或推高核心PCE 0.5个百分点</a><span class="news-src">华尔街见闻</span></div>
+    </div>
+
+    <div class="table-card"><h3>📊 机构研报精选 <span class="news-meta">· 7/10</span></h3>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826859257_1.pdf" target="_blank">国金证券：半导体设备深度——超级扩产周期开启，设备迎来超级时代</a><span class="news-src">满在朋 · 国金证券</span></div>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826880063_1.pdf" target="_blank">头豹研究院：热芯突围——半导体陶瓷加热器国产替代加速</a><span class="news-src">黄以慧 · 头豹</span></div>
+    <div class="report-item"><span class="report-tag tag-elec">电子</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826868992_1.pdf" target="_blank">华源证券：夯实传统业务根基，半导体客户绑定深化（金宏气体）</a><span class="news-src">李辉 · 华源证券</span></div>
+    <div class="report-item"><span class="report-tag tag-ai">AI</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826875003_1.pdf" target="_blank">华鑫证券：迎2026年WAIC看AI赋能传媒应用</a><span class="news-src">朱珠 · 华鑫证券</span></div>
+    <div class="report-item"><span class="report-tag tag-ai">AI</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826875042_1.pdf" target="_blank">华鑫证券：端侧AI前景广阔，先进封装打造第二增长曲线（亿道信息）</a><span class="news-src">庄宇 · 华鑫证券</span></div>
+    <div class="report-item"><span class="report-tag tag-robot">机器人</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826875039_1.pdf" target="_blank">华鑫证券：从宇树科技看国内整机及供应链投资机会</a><span class="news-src">林子健 · 华鑫证券</span></div>
+    <div class="report-item"><span class="report-tag tag-robot">机器人</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826859258_1.pdf" target="_blank">罗兰贝格：2026年机器人白皮书——产业链变革与全球化路径</a><span class="news-src">罗兰贝格</span></div>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826859348_1.pdf" target="_blank">金元证券：全球半导体显示龙头，LCD稳健与AMOLED成长双轮驱动（京东方A）</a><span class="news-src">贾晓庆 · 金元证券</span></div>
+    <div class="report-item"><span class="report-tag tag-auto">汽车</span><a class="news-title" href="https://pdf.dfcfw.com/pdf/H3_AP202607101826866572_1.pdf" target="_blank">东吴证券：AI PCB扩产带动业绩稳步高增（大族数控）</a><span class="news-src">周尔双 · 东吴证券</span></div>
+    </div>
+  </div>
+
+  <!-- 公告 + 分析 -->
+  <div class="news-grid">
+    <div class="table-card"><h3>📋 持仓股公告速递 <span class="news-meta">· 近5日</span></h3>
+    <div class="ann-item"><span class="ann-stock">中微公司</span><span class="news-meta">7/11</span><span class="news-title">持股5%以上股东权益变动触及1%刻度的提示性公告</span></div>
+    <div class="ann-item"><span class="ann-stock">中微公司</span><span class="news-meta">7/9</span><span class="news-title">2026年第一次临时股东会会议资料</span></div>
+    <div class="ann-item"><span class="ann-stock">比亚迪</span><span class="news-meta">7/9</span><span class="news-title">投资者关系活动记录表</span></div>
+    <div class="ann-item"><span class="ann-stock">科大讯飞</span><span class="news-meta">7/7</span><span class="news-title">2025年年度权益分派实施公告</span></div>
+    </div>
+
+    <div class="table-card"><h3>💡 综合分析</h3>
+    <div style="font-size:0.82rem;line-height:1.8">
+      <strong style="color:var(--red)">🔴 存储芯片暴涨——直接利好</strong><br>
+      美光(MU)是017731+006373的跨基金第一大重仓股(合计占比12.5%)。昨夜存储巨头暴涨+SK海力士IPO首日+13%，反映AI/HBM结构性短缺持续。下周一QDII净值将再次跳涨。<br><br>
+      <strong style="color:var(--blue)">🔵 半导体设备超级周期——研报印证</strong><br>
+      国金证券发布半导体设备深度报告："超级扩产周期开启"。017811前十大重仓全是半导体设备股(北方华创/中微/华海清科/拓荆等)，024418同样高度集中。但7/10半导体板块暴跌-4~5%、全天净流出-185亿，短期与研报长期逻辑背离。<br><br>
+      <strong style="color:var(--amber)">🟡 拓荆科技复牌——风险信号</strong><br>
+      017811重仓拓荆科技(8.9%)，停牌期间半导体板块暴跌，下周一复牌存在补跌风险。同时收购半导体公司是利好，需观察多空博弈。<br><br>
+      <strong style="color:var(--blue)">🔵 AI算力基建加速</strong><br>
+      国内首个十万卡AI集群"曙光8000"投用+Meta剑指AI第三极+四部门推进AI+人社。算力需求持续扩张，利好017731(持有NVDA/AVGO/AMD)和017811(半导体设备链)。<br><br>
+      <strong style="color:var(--amber)">🟡 高盛AI通胀预警——CPI前关键信号</strong><br>
+      高盛预警AI推高内存/电力/软件价格，年底或推高核心PCE 0.5个百分点。7/15 CPI数据若超预期，可能影响降息路径，进而冲击科技股估值。<br><br>
+      <strong style="color:var(--muted)">⚪ 苹果vs OpenAI诉讼</strong><br>
+      苹果起诉OpenAI窃取商业机密，要求重设计AI硬件。短期对NVDA无直接影响，但若波及AI硬件供应链需关注。
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">📊 Hermes Agent · 数据源：支付宝/嘉实截图 + 天天基金 MCP + Tushare · 2026年7月10日收盘 · v2 升级版</div>
 </div>
 
 <script>
