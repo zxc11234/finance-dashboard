@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>半导体产业链 + 美股重仓看板 | Frank Worth</title>
+<style>
+:root{--bg:#0a0e1a;--card:#131826;--border:#1e293b;--text:#e2e8f0;--muted:#64748b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--amber:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);padding:16px;line-height:1.5}
+.container{max-width:1400px;margin:0 auto}
+h1{font-size:1.5rem;margin-bottom:4px}
+.subtitle{color:var(--muted);font-size:.82rem;margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.card h2{font-size:.9rem;color:var(--muted);margin-bottom:12px}
+.footer{text-align:center;color:var(--muted);font-size:.7rem;margin-top:20px;padding:12px 0;border-top:1px solid var(--border)}
+a{color:var(--blue);text-decoration:none}
+.watch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px}
+.watch-card{background:rgba(30,41,59,.4);border-radius:8px;padding:10px 12px;transition:border-color .2s}
+.watch-card.up{border-left:2px solid var(--green)}
+.watch-card.down{border-left:2px solid var(--red)}
+.watch-symbol{font-size:.65rem;color:var(--muted)}
+.watch-name{font-size:.82rem;font-weight:600;margin:2px 0}
+.watch-price{font-size:1.1rem;font-weight:700}
+.watch-change{font-size:.8rem;font-weight:600}
+.watch-funds{font-size:.62rem;color:var(--muted);margin-top:4px}
+.watch-funds span{display:inline-block;background:rgba(59,130,246,.12);color:var(--blue);padding:1px 5px;border-radius:3px;margin:1px 2px}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
+.ai-summary{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);border-radius:8px;padding:12px;font-size:.8rem;line-height:1.6}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.72rem;color:var(--muted);margin-bottom:8px}
+.legend-dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔬 半导体产业链 + 美股重仓看板</h1>
+<p class="subtitle">Frank Worth · 2026年7月13日 · 7/11美股收盘数据</p>
+
+<div class="grid2">
+  <div class="card">
+    <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 7/11 收盘</span></h2>
+    <div class="legend">
+      <span><span class="legend-dot" style="background:var(--green)"></span>涨</span>
+      <span><span class="legend-dot" style="background:var(--red)"></span>跌</span>
+      <span style="color:var(--blue)">蓝色标签=你的持仓基金</span>
+    </div>
+    <div class="watch-grid" id="watchGrid"></div>
+  </div>
+
+  <div class="card">
+    <h2>🏭 半导体产业链 · 你的持仓位置</h2>
+    <p style="font-size:.7rem;color:var(--muted);margin-bottom:8px">蓝色边框=你的持仓重仓环节 | 绿色标签=具体基金及市值</p>
+    <svg viewBox="0 0 600 470" style="width:100%;height:auto" id="chainSvg"></svg>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:14px">
+  <h2>🤖 AI 分析</h2>
+  <div class="ai-summary">
+    <strong style="color:var(--red)">🔴 短期承压，中期产业逻辑不变。</strong>7/11美股半导体分化——NVDA+4%领涨但AVGO/MU/MRVL回落，SK海力士首日+13%标志存储赛道估值重估。周末中国三连发政策（千亿扶持+算力补贴+氦管制）对设备链直接利好，你的024418/020640合计¥32万是最直接受益者。但A股半导体10日净流出1,172亿的结构性撤离警示：政策催化≠即刻反转，CPI（7/15）落地前市场风险偏好持续受压制。<br><br>
+    <strong style="color:var(--blue)">🔵 产业链位置：你重仓设备+制造，防守位在QDII。</strong>设备端（024418/020640/017811）有国产替代刚性+政策催化双重保护；制造端（017731/018147等QDII）依托全球半导体龙头，AI算力需求持续上行。最大敞口风险在美国CPI和美联储——你的QDII占60%，对利率最敏感。<br><br>
+    <strong style="color:var(--amber)">⚠️ 本周关注</strong>：7/14 Warsh国会作证 + 拓荆科技复牌 → 7/15 CPI → 7/17 期权到期。CPI是决定性变量。
+  </div>
+</div>
+
+<div class="footer">📊 Hermes Agent · 数据源：天天基金 MCP · 2026年7月13日 · 美股价格7/11收盘</div>
+</div>
+
+<script>
+/* Stock watch board data — safe static data, no user input */
+var stocks=[
+  {sym:'NVDA',name:'英伟达',price:210.96,chg:4.03,funds:['017731','018147']},
+  {sym:'AVGO',name:'博通',price:399.97,chg:-0.28,funds:['017731','018147']},
+  {sym:'MU',name:'美光科技',price:979.30,chg:-1.24,funds:['017731','006373']},
+  {sym:'TSM',name:'台积电',price:434.11,chg:-0.65,funds:['017731','018147']},
+  {sym:'ASML',name:'阿斯麦',price:1797.32,chg:-0.38,funds:['017731']},
+  {sym:'MRVL',name:'迈威尔',price:235.81,chg:-3.04,funds:['017731']},
+  {sym:'KLAC',name:'科磊',price:231.52,chg:0.87,funds:['017731']},
+  {sym:'AMD',name:'AMD',price:557.89,chg:2.04,funds:['017731']},
+  {sym:'LRCX',name:'拉姆研究',price:350.33,chg:-0.80,funds:['006373']},
+  {sym:'INTC',name:'英特尔',price:109.84,chg:-2.40,funds:['006373']},
+  {sym:'GOOG',name:'谷歌',price:null,chg:null,funds:['006373']},
+];
+
+(function buildWatch(){
+  var grid=document.getElementById('watchGrid');
+  var html='';
+  stocks.forEach(function(s){
+    var up=s.chg>0, sign=up?'+':'', cls=up?'up':(s.chg<0?'down':'');
+    var fundTags=s.funds.map(function(f){return '<span>'+f+'</span>';}).join(' ');
+    var price=s.price?s.price.toFixed(2):'—';
+    var chgStr=s.chg!==null?(sign+s.chg.toFixed(2)+'%'):'—';
+    var chgCls=up?'green':(s.chg<0?'red':'');
+    html+='<div class="watch-card '+cls+'"><div class="watch-symbol">'+s.sym+'</div><div class="watch-name">'+s.name+'</div><div class="watch-price">'+price+'</div><div class="watch-change '+chgCls+'">'+chgStr+'</div><div class="watch-funds">'+fundTags+'</div></div>';
+  });
+  grid.innerHTML=html;
+})();
+
+/* Chain map SVG — static markup, no user input */
+(function buildChain(){
+  var svg=document.getElementById('chainSvg');
+  svg.innerHTML='<defs><marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#64748b"/></marker></defs>'+
+    '<rect x="15" y="55" width="140" height="65" rx="8" fill="rgba(30,41,59,.6)" stroke="#1e293b" stroke-width="1.5"/>'+
+    '<text x="85" y="82" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">🫧 原材料 / 气体</text>'+
+    '<text x="85" y="102" fill="#64748b" font-size="10" text-anchor="middle">硅片 · 光刻胶 · 电子特气</text>'+
+    '<text x="85" y="115" fill="#f59e0b" font-size="9" text-anchor="middle">⬆ 高纯氦出口管制</text>'+
+    '<line x1="155" y1="88" x2="195" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
+    '<rect x="195" y="45" width="165" height="85" rx="8" fill="rgba(59,130,246,.08)" stroke="#3b82f6" stroke-width="2"/>'+
+    '<text x="277" y="72" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">⚙️ 半导体设备</text>'+
+    '<text x="277" y="92" fill="#64748b" font-size="10" text-anchor="middle">光刻 · 刻蚀 · 薄膜沉积 · 检测</text>'+
+    '<text x="277" y="107" fill="#3b82f6" font-size="10" text-anchor="middle">⬅ 你的重仓环节</text>'+
+    '<rect x="210" y="135" width="65" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="242" y="149" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">024418 ¥22万</text>'+
+    '<rect x="280" y="135" width="65" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="312" y="149" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">020640 ¥10万</text>'+
+    '<line x1="360" y1="88" x2="400" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
+    '<rect x="400" y="35" width="185" height="105" rx="8" fill="rgba(59,130,246,.08)" stroke="#3b82f6" stroke-width="2"/>'+
+    '<text x="492" y="62" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">🏗️ 制造 / 代工</text>'+
+    '<text x="492" y="82" fill="#64748b" font-size="10" text-anchor="middle">逻辑芯片 · 存储芯片 · 晶圆代工</text>'+
+    '<text x="492" y="97" fill="#3b82f6" font-size="10" text-anchor="middle">⬅ QDII主战场</text>'+
+    '<rect x="410" y="145" width="80" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="450" y="159" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">017731 ¥56万 🔥</text>'+
+    '<rect x="495" y="145" width="80" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="535" y="159" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">018147 ¥27万</text>'+
+    '<rect x="410" y="168" width="80" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="450" y="182" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">006373 ¥7.4万</text>'+
+    '<rect x="240" y="240" width="120" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="300" y="254" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">017811 ¥31万 跨设备/制造</text>'+
+    '<rect x="240" y="264" width="120" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
+    '<text x="300" y="278" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">020470 ¥17万 制造/设计</text>'+
+    '<rect x="195" y="330" width="145" height="65" rx="8" fill="rgba(30,41,59,.6)" stroke="#1e293b" stroke-width="1.5"/>'+
+    '<text x="267" y="357" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">📦 封装测试</text>'+
+    '<text x="267" y="377" fill="#64748b" font-size="10" text-anchor="middle">先进封装 · Chiplet · 3D堆叠</text>'+
+    '<rect x="405" y="330" width="170" height="65" rx="8" fill="rgba(30,41,59,.6)" stroke="#1e293b" stroke-width="1.5"/>'+
+    '<text x="490" y="357" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">📱 终端应用</text>'+
+    '<text x="490" y="377" fill="#64748b" font-size="10" text-anchor="middle">AI服务器 · 消费电子 · 汽车</text>'+
+    '<text x="490" y="390" fill="#3b82f6" font-size="9" text-anchor="middle">018036 ¥17万 (新能源车)</text>'+
+    '<line x1="460" y1="140" x2="300" y2="330" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
+    '<line x1="520" y1="140" x2="510" y2="330" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
+    '<text x="300" y="455" fill="#64748b" font-size="10" text-anchor="middle">💡 设备(国产替代刚需) + 制造(QDII全球AI算力) = 双轮驱动</text>';
+})();
+</script>
+</body>
+</html>
