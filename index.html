@@ -192,13 +192,13 @@
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;vertical-align:middle">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月12日净值 | 7/13盘中更新 · 含最大回撤/资产配置/风险指标</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月13日盘中 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
   <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,724,388.24</div><div class="kpi-sub">基金 1,983,082.82 + 余额宝 741,305.42</div></div>
   <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+1,032,338.15</div><div class="kpi-sub">含已清仓/赎回 · 累计收益率 66.84%</div></div>
-  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/10)</div><div class="kpi-value red">-12,236.60</div><div class="kpi-sub">支付宝 -40,858.21 / 嘉实 +28,621.61</div></div>
-  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-230,243.06</div><div class="kpi-sub">8 个交易日</div></div>
+  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/13 盘中)</div><div class="kpi-value red">-2,217.76</div><div class="kpi-sub">A股基金 -3,144 / QDII +1,926（估值至7/11）</div></div>
+  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-232,460.82</div><div class="kpi-sub">9 个交易日</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">61.3%</div><div class="kpi-sub">76 盈 / 48 亏 / 124 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">+8,325.31</div><div class="kpi-sub">最高 +93,183.78 · 最大 -165,316.30</div></div>
   <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-165,316.30</div><div class="kpi-sub" id="maxDDSub">3/13 → 3/31</div></div>
@@ -228,7 +228,7 @@
       <div class="us-card"><div class="us-label">美光 MU</div><div class="us-value">$1,019</div><div class="us-change amber">-0.02%</div></div>
       <div class="us-card"><div class="us-label">SK海力士首日</div><div class="us-value">$169</div><div class="us-change green">+13%</div></div>
     </div>
-    <div class="us-note">💡 Meta宣布自研AI芯片+博通合作，明年底云算力翻倍至14GW。SK海力士美国上市首日+13%，史上最大外资IPO。NVDA连涨3天 $197→$210。周五美股平静，下周焦点：Warsh国会作证（7/14）+ CPI（7/15）。</div>
+    <div class="us-note">💡 今日A股延续回调：上证-1.26%（3946），深证-1.99%（14747），半导体板块净流出130亿。A股基金微跌（017811 -0.59% / 024418 -0.64% / 020640 -1.25%），QDII估值滞后。本周焦点：Warsh国会作证（7/14）+ CPI（7/15）。</div>
   </div>
 
   <!-- Feature 1: Economic Calendar -->
@@ -407,7 +407,7 @@
   </div>
 </div>
 
-<div class="footer">📊 Hermes Agent · 数据源：支付宝/嘉实截图 + 天天基金 MCP + Tushare · 2026年7月13日盘中 · v2</div>
+<div class="footer">📊 Hermes Agent · 数据源：支付宝/嘉实截图 + 天天基金 MCP + Tushare · 2026年7月13日盘中 · 资讯刷新 · v2</div>
 </div>
 
 <script>
@@ -532,8 +532,8 @@ const chartInit={overview:false,history:false,monthly:false,alloc:false};
 
 // Feature 1: Economic Calendar
 const ecEvents=[
-  {date:'2026-07-11',event:'A股休市(周五)',tag:'info'},
-  {date:'2026-07-14',event:'Warsh国会作证',tag:'warn'},
+  {date:'2026-07-13',event:'半导体政策三连发+市场回调',tag:'warn'},
+  {date:'2026-07-14',event:'Warsh国会作证 + 拓荆科技复牌',tag:'warn'},
   {date:'2026-07-15',event:'美国CPI数据',tag:'hot'},
   {date:'2026-07-17',event:'期权到期日',tag:'info'},
   {date:'2026-07-22',event:'017731 Q2季报披露',tag:'info'},
@@ -542,7 +542,7 @@ const ecEvents=[
   {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
 ];
 (function buildCalendar(){
-  const now=new Date('2026-07-11T12:00:00+08:00');
+  const now=new Date('2026-07-13T12:00:00+08:00');
   const tl=document.getElementById('ecTimeline');
   if(!tl)return;
   ecEvents.forEach(ev=>{
