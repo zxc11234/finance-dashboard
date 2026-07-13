@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>投资操作日志 + 简报归档 | Frank Worth</title>
+<style>
+:root{--bg:#0a0e1a;--card:#131826;--border:#1e293b;--text:#e2e8f0;--muted:#64748b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--amber:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);padding:16px;line-height:1.5}
+.container{max-width:1200px;margin:0 auto}
+h1{font-size:1.5rem;margin-bottom:4px}
+.subtitle{color:var(--muted);font-size:.82rem;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+.card h2{font-size:.9rem;color:var(--muted);margin-bottom:12px}
+.footer{text-align:center;color:var(--muted);font-size:.7rem;margin-top:20px;padding:12px 0;border-top:1px solid var(--border)}
+.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.blue{color:var(--blue)}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+
+/* Timeline */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:20px;padding-left:24px}
+.tl-dot{position:absolute;left:-18px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid}
+.tl-buy .tl-dot{border-color:var(--green);background:rgba(34,197,94,.2)}
+.tl-sell .tl-dot{border-color:var(--red);background:rgba(239,68,68,.2)}
+.tl-adjust .tl-dot{border-color:var(--amber);background:rgba(245,158,11,.2)}
+.tl-date{font-size:.7rem;color:var(--muted);margin-bottom:2px}
+.tl-action{font-size:.85rem;font-weight:600}
+.tl-detail{font-size:.75rem;color:var(--muted);margin-top:2px}
+.tl-reason{font-size:.72rem;color:var(--amber);margin-top:4px;padding:4px 8px;background:rgba(245,158,11,.06);border-radius:4px;display:inline-block}
+
+/* Stats bar */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:14px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}
+.stat-val{font-size:1.2rem;font-weight:700}
+.stat-label{font-size:.68rem;color:var(--muted)}
+
+/* Archive */
+.archive-item{padding:8px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.archive-date{font-size:.72rem;color:var(--muted);min-width:65px;padding-top:2px}
+.archive-title{font-size:.82rem;flex:1;min-width:200px}
+.archive-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.6rem;font-weight:600;white-space:nowrap}
+.tag-a{background:rgba(34,197,94,.12);color:var(--green)}
+.tag-q{background:rgba(245,158,11,.12);color:var(--amber)}
+.tag-us{background:rgba(59,130,246,.12);color:var(--blue)}
+.tag-macro{background:rgba(168,85,247,.12);color:#a855f7}
+.tag-trade{background:rgba(239,68,68,.12);color:var(--red)}
+
+/* Search */
+.search-bar{display:flex;gap:8px;margin-bottom:12px}
+.search-bar input{flex:1;background:rgba(30,41,59,.6);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:.8rem;outline:none}
+.search-bar input:focus{border-color:var(--blue)}
+.search-bar button{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:.8rem;cursor:pointer}
+
+/* Backtest */
+.bt-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(30,41,59,.4);font-size:.78rem}
+.bt-decision{min-width:55px;font-weight:600}
+.bt-outcome{min-width:70px}
+.bt-grade{min-width:40px;text-align:center;font-weight:700}
+
+@media(max-width:768px){
+  .archive-item{flex-direction:column;gap:2px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📋 投资操作日志 + 简报归档</h1>
+<p class="subtitle">Frank Worth · 2026年1月至今 · 买卖决策 + 每日分析存档</p>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-label">累计交易</div><div class="stat-val green">12 笔</div></div>
+  <div class="stat-card"><div class="stat-label">买入</div><div class="stat-val green">4 笔</div></div>
+  <div class="stat-card"><div class="stat-label">卖出/清仓</div><div class="stat-val red">5 笔</div></div>
+  <div class="stat-card"><div class="stat-label">调仓/加减</div><div class="stat-val amber">3 笔</div></div>
+  <div class="stat-card"><div class="stat-label">已实现收益</div><div class="stat-val green">+¥230K+</div></div>
+  <div class="stat-card"><div class="stat-label">简报存档</div><div class="stat-val blue">7 篇</div></div>
+</div>
+
+<!-- Timeline -->
+<div class="card">
+  <h2>📅 操作时间线</h2>
+  <div class="timeline">
+
+    <div class="tl-item tl-sell">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action red">🔻 减仓：长城全球新能源车 QDII C <span style="color:var(--muted)">018036</span></div>
+      <div class="tl-detail">份额 65,365→61,082，减约 ¥4万</div>
+      <div class="tl-reason">💡 新能源车板块短期乏力，集中火力到半导体设备方向</div>
+    </div>
+
+    <div class="tl-item tl-adjust">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action amber">🔶 减仓：东方人工智能主题 C <span style="color:var(--muted)">017811</span></div>
+      <div class="tl-detail">份额 115,437→77,145，减约 ¥13万</div>
+      <div class="tl-reason">💡 获利了结部分仓位，资金转向更聚焦的设备ETF</div>
+    </div>
+
+    <div class="tl-item tl-buy">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action green">🆕 新买入：广发半导体设备 ETF 联接 C <span style="color:var(--muted)">020640</span></div>
+      <div class="tl-detail">成本 ¥100,000，份额 25,564 · 成本价 3.9118</div>
+      <div class="tl-reason">💡 半导体设备方向集中配置，与024418形成设备双龙头</div>
+    </div>
+
+    <div class="tl-item tl-buy">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action green">🔺 加仓：华夏科创半导体设备 C <span style="color:var(--muted)">024418</span></div>
+      <div class="tl-detail">份额 37,243→73,537（翻倍），成本 ¥218,187</div>
+      <div class="tl-reason">💡 设备超级周期+国产替代逻辑，回调即加仓机会</div>
+    </div>
+
+    <div class="tl-item tl-sell">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action red">❌ 清仓：嘉实科创芯片 ETF 联接 C <span style="color:var(--muted)">017470</span></div>
+      <div class="tl-detail">全仓卖出，实现收益 +¥34,421</div>
+      <div class="tl-reason">💡 科创芯片PE过高(200x+)，叙事驱动风险大，切换至设备</div>
+    </div>
+
+    <div class="tl-item tl-sell">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action red">❌ 清仓：东方阿尔法科技智选 C <span style="color:var(--muted)">025500</span></div>
+      <div class="tl-detail">全仓卖出</div>
+      <div class="tl-reason">💡 7/13单日暴跌-3.97%而同类全涨，选股出问题，果断止损</div>
+    </div>
+
+    <div class="tl-item tl-sell">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年7月上旬</div>
+      <div class="tl-action red">❌ 清仓：天弘全球高端制造 A+C <span style="color:var(--muted)">016664/016665</span></div>
+      <div class="tl-detail">全部赎回，资金到账余额宝</div>
+      <div class="tl-reason">💡 天弘全球制造表现不佳，赎回释放现金待更优机会</div>
+    </div>
+
+    <div class="tl-item tl-buy">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年6月中旬</div>
+      <div class="tl-action green">🆕 建仓：嘉实全球产业升级 QDII C <span style="color:var(--muted)">017731</span></div>
+      <div class="tl-detail">成本 ¥490,000，成本价 4.1584</div>
+      <div class="tl-reason">💡 全球半导体龙头组合（AVGO/NVDA/MU），低相关性分散A股风险</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Briefing Archive -->
+<div class="card">
+  <h2>📚 简报归档 <span style="font-size:.7rem;color:var(--muted)">· 可搜索</span></h2>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="搜索关键词：半导体、CPI、调仓、NVDA..." oninput="filterArchive()">
+  </div>
+  <div id="archiveList"></div>
+</div>
+
+<div class="footer">📊 Hermes Agent · 2026年7月13日 · 持续更新</div>
+</div>
+
+<script>
+/* Archive data — static safe data, no user input */
+var archives=[
+  {date:'2026-07-13',title:'A股盘中分析：半导体全体系失血，政策三连发后利好出尽',tag:'a',summary:'上证-0.75%，半导体10日净流出1,172亿，IT服务逆势获资金流入。持仓半导体基金逆势微涨（设备方向受政策保护），025500确认已清仓。'},
+  {date:'2026-07-13',title:'持仓大更新：清仓3只+新买1只+调仓4只',tag:'trade',summary:'清仓天弘A+C、东方阿尔法、嘉实科创芯片。新买广发半导体设备(020640)。翻倍加仓华夏设备(024418)。减仓东方AI(017811)和长城新能源(018036)。总市值¥198.3万。'},
+  {date:'2026-07-12',title:'TradingAgents评估：A股版+美股原版对比分析',tag:'macro',summary:'A股fork数据源降级(akshare<Tushare)，不支持基金。美股原版92K星但场景错配(个股交易vs基金投资)。仅政策分析框架有价值，已整合入skill。'},
+  {date:'2026-07-11',title:'SK海力士265亿美元IPO首日+13%，存储赛道估值重估',tag:'us',summary:'史上最大外资IPO，017731持有美光(4.85%)直接受益。长鑫科技DRAM上市同步催化。存储≠传统周期，AI/HBM结构性短缺持续。'},
+  {date:'2026-07-10',title:'A股半导体暴跌-5%，QDII大涨对冲',tag:'a',summary:'半导体全天净流出185亿全市场最惨，SOX+4.3%/MU+7.4%。024418转负-0.66%。调仓建议：不建仓不减仓等CPI。现金¥741K待命。'},
+  {date:'2026-07-09',title:'X/Twitter配置完成 + Outlook日历接入',tag:'macro',summary:'xurl OAuth2认证成功，Timeline+Search功能正常。Outlook MCP通过Graph API接入，日历/邮件可用。Dashboard资讯研报刷新。'},
+  {date:'2026-07-08',title:'盘中快报：A股下午逆转，半导体从-90亿收窄',tag:'a',summary:'主力上午净流出600亿，下午收窄。AI软件+119亿但5日-411亿→非主线。存储≠最弱（Frank纠正），美光YTD+201%。'},
+];
+
+(function buildArchive(){
+  var list=document.getElementById('archiveList');
+  var html='';
+  archives.forEach(function(a){
+    var tagCls='tag-'+a.tag;
+    var tagNames={a:'A股',q:'QDII',us:'美股',macro:'宏观',trade:'调仓'};
+    var tagName=tagNames[a.tag]||a.tag;
+    html+='<div class="archive-item" data-search="'+a.title+' '+a.summary+' '+tagName+'">'+
+      '<div class="archive-date">'+a.date+'</div>'+
+      '<div class="archive-title">'+a.title+'</div>'+
+      '<span class="archive-tag '+tagCls+'">'+tagName+'</span>'+
+      '</div>';
+  });
+  list.innerHTML=html;
+})();
+
+function filterArchive(){
+  var q=document.getElementById('searchInput').value.toLowerCase();
+  var items=document.querySelectorAll('.archive-item');
+  items.forEach(function(item){
+    var text=(item.getAttribute('data-search')||'').toLowerCase();
+    item.style.display=text.indexOf(q)>=0?'':'none';
+  });
+}
+</script>
+</body>
+</html>
