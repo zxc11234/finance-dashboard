@@ -216,8 +216,8 @@
   <div class="tab" onclick="switchTab('monthly',this)">🗓 月度明细</div>
   <div class="tab" onclick="switchTab('alloc',this)">📊 资产配置</div>
   <div class="tab" onclick="switchTab('news',this)">📰 资讯研报</div>
-  <a href="semiconductor-watch.html" class="tab" style="text-decoration:none">🔬 半导体产业链</a>
-  <a href="trading-log.html" class="tab" style="text-decoration:none">📋 操作日志</a>
+  <div class="tab" onclick="switchTab('semicon',this)">🔬 半导体产业链</div>
+  <div class="tab" onclick="switchTab('tradelog',this)">📋 操作日志</div>
 </div>
 
 <div id="tab-overview">
@@ -406,6 +406,14 @@
     </div>
     </div>
   </div>
+</div>
+
+<div id="tab-semicon" style="display:none;">
+  <iframe src="semiconductor-watch.html" style="width:100%;height:100vh;border:none;border-radius:10px" onload="this.style.height=this.contentWindow.document.body.scrollHeight+'px'"></iframe>
+</div>
+
+<div id="tab-tradelog" style="display:none;">
+  <iframe src="trading-log.html" style="width:100%;height:100vh;border:none;border-radius:10px" onload="this.style.height=this.contentWindow.document.body.scrollHeight+'px'"></iframe>
 </div>
 
 <div class="footer">📊 Hermes Agent · 数据源：支付宝/嘉实截图 + 天天基金 MCP + Tushare · 2026年7月13日盘中 · 资讯刷新 · v2</div>
