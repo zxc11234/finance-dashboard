@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>光明日报作品集 | 赵嘉伟</title>
+<style>
+:root{--bg:#faf8f5;--card:#fff;--border:#e0d8cc;--text:#2c2416;--muted:#8c7b5e;--accent:#b5342e;--blue:#1a5276;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Noto Serif SC','Source Han Serif SC',Georgia,serif;background:var(--bg);color:var(--text);padding:0;line-height:1.8}
+.container{max-width:900px;margin:0 auto;padding:40px 20px}
+
+/* Masthead */
+.masthead{text-align:center;padding:40px 0 30px;border-bottom:2px solid var(--accent);margin-bottom:40px}
+.masthead h1{font-size:2rem;font-weight:900;letter-spacing:4px;color:var(--text)}
+.masthead .sub{font-size:.9rem;color:var(--muted);margin-top:8px}
+.masthead .pen{font-size:.85rem;color:var(--accent);font-style:italic;margin-top:4px}
+
+/* Section header */
+.section-title{font-size:1rem;font-weight:700;color:var(--accent);border-left:3px solid var(--accent);padding-left:12px;margin:36px 0 16px}
+
+/* Article card */
+.article{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:12px;transition:box-shadow .2s}
+.article:hover{box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.article-meta{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.article-date{font-size:.75rem;color:var(--muted);font-weight:500}
+.article-section{font-size:.7rem;color:var(--accent);background:rgba(181,52,46,.08);padding:1px 8px;border-radius:3px}
+.article-title{font-size:1.05rem;font-weight:700;line-height:1.5;margin-bottom:6px}
+.article-title a{color:var(--text);text-decoration:none}
+.article-title a:hover{color:var(--accent)}
+.article-excerpt{font-size:.82rem;color:var(--muted);line-height:1.7}
+.article-keywords{font-size:.68rem;color:var(--blue);margin-top:8px}
+
+/* Columns */
+.columns-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:30px}
+.col-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px 18px}
+.col-card h4{font-size:.82rem;color:var(--accent);margin-bottom:4px}
+.col-card p{font-size:.75rem;color:var(--muted)}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:30px}
+.stat{text-align:center;padding:12px}
+.stat-num{font-size:1.6rem;font-weight:900;color:var(--accent)}
+.stat-label{font-size:.7rem;color:var(--muted)}
+
+/* Footer */
+.footer{text-align:center;padding:30px 0;border-top:1px solid var(--border);margin-top:40px;font-size:.75rem;color:var(--muted)}
+.footer a{color:var(--blue);text-decoration:none}
+
+/* Mobile */
+@media(max-width:640px){
+  .container{padding:20px 14px}
+  .masthead h1{font-size:1.5rem}
+  .article{padding:14px 16px}
+  .article-title{font-size:.95rem}
+}
+
+/* Print-friendly */
+@media print{
+  body{background:#fff}
+  .article{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Masthead -->
+<div class="masthead">
+  <h1>光明日报 · 作品集</h1>
+  <div class="sub">本报记者</div>
+  <div class="pen">笔名：赵嘉伟</div>
+</div>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">—</div><div class="stat-label">已发稿件</div></div>
+  <div class="stat"><div class="stat-num">文化</div><div class="stat-label">主要领域</div></div>
+  <div class="stat"><div class="stat-num">博物馆</div><div class="stat-label">核心选题</div></div>
+  <div class="stat"><div class="stat-num">晒晒咱的镇馆之宝</div><div class="stat-label">常驻专栏</div></div>
+</div>
+
+<!-- Column introduction -->
+<div class="section-title">📰 常驻专栏</div>
+<div class="columns-grid">
+  <div class="col-card">
+    <h4>晒晒咱的镇馆之宝</h4>
+    <p>光明日报文化专栏，择选各地博物馆代表性文物，解读璀璨群星背后的文化密码与历史记忆，讲述"何以中国"的答案。</p>
+  </div>
+  <div class="col-card">
+    <h4>博物馆文创/活化</h4>
+    <p>追踪博物馆数字化、文创开发、文物活化的前沿实践，记录让文物走进大众生活的创新案例。</p>
+  </div>
+  <div class="col-card">
+    <h4>文化遗产保护</h4>
+    <p>博物馆运营、文物借展、基层文博工作者故事，守护文脉的多重价值。</p>
+  </div>
+</div>
+
+<!-- Articles -->
+<div class="section-title">📝 已发稿件</div>
+
+<div class="article">
+  <div class="article-meta">
+    <span class="article-date">2026年1月7日</span>
+    <span class="article-section">09版 · 文化</span>
+  </div>
+  <div class="article-title">
+    <a href="https://epaper.gmw.cn/gmrb/html/content/202601/07/content_3496.html" target="_blank">"文物+美食"走红：千年汉代味"飘"向大众餐桌</a>
+  </div>
+  <div class="article-excerpt">
+    湖南省博物馆以马王堆汉墓出土文物为灵感，融合现代烹饪技艺开发系列文创美食——从"君幸食"漆器餐具到"知识辣片"，从35道主题宴席到50道汉方烧烤小吃。博物馆馆长段晓明说，这是一场"从历史走向现代、再从现代回望历史的双向奔赴"。
+  </div>
+  <div class="article-keywords">📌 湖南省博物馆 · 马王堆 · 文创美食 · 文物活化 · 段晓明 · 喻燕姣</div>
+</div>
+
+<div class="article">
+  <div class="article-meta">
+    <span class="article-date">2025年10月17日</span>
+    <span class="article-section">04版 · 综合</span>
+  </div>
+  <div class="article-title">
+    <a href="http://www.ptrmt.com/2025/20251017/20251017_L04/20251017_L04_4.htm" target="_blank">湖南怀化市博物馆：文物借展盘活资源</a>
+  </div>
+  <div class="article-excerpt">
+    乘着第五届湖南旅游发展大会的"东风"，怀化市博物馆以"中脯王鼎"等镇馆之宝为核心，通过文物借展模式盘活馆藏资源，探索基层博物馆"小馆办大展"的新路径。
+  </div>
+  <div class="article-keywords">📌 怀化市博物馆 · 中脯王鼎 · 文物借展 · 旅发大会</div>
+</div>
+
+<div class="article">
+  <div class="article-meta">
+    <span class="article-date">2025年9月24日</span>
+    <span class="article-section">新华网 · 合作</span>
+  </div>
+  <div class="article-title">
+    <a href="https://www.news.cn/politics/20250924/d15af509b6ea4535ad489e0618353880/c.html" target="_blank">破解博物馆"一票难求"，有啥妙招？</a>
+  </div>
+  <div class="article-excerpt">
+    与周洪双、李晓东、党文婷、严圣禾等记者合作，多角度报道全国博物馆应对客流高峰的创新实践——从预约系统优化到夜场开放，从分流引导到数字展览。
+  </div>
+  <div class="article-keywords">📌 博物馆 · 一票难求 · 预约制 · 合作报道</div>
+</div>
+
+<!-- Writing style card -->
+<div class="section-title">✍️ 写作风格</div>
+<div class="article" style="background:rgba(181,52,46,.03);border-left:3px solid var(--accent)">
+  <div style="font-size:.82rem;color:var(--muted);line-height:1.9">
+    <strong style="color:var(--accent)">文化通讯体：</strong>现场场景切入 → 自然过渡到主题 → 分块铺陈文物故事 → 产业数据收束 → 呼应开头的抒情收尾。<br>
+    <strong style="color:var(--accent)">引语直给：</strong>删除"语重心长"等状语，博物馆专家/志愿者的直接引语精准发力。<br>
+    <strong style="color:var(--accent)">不喊口号：</strong>结尾落引语或具体事实，用意象而非抽象号召收束。<br>
+    <strong style="color:var(--accent)">数据说话：</strong>具体数字（遣册722支/350+食物记录、35道宴席、50道小吃）支撑叙事。
+  </div>
+</div>
+
+<div class="footer">
+  赵嘉伟 · 光明日报记者 · <a href="https://epaper.gmw.cn" target="_blank">光明日报电子版</a> · 稿件持续更新中<br>
+  <span style="color:var(--muted)">📊 页面由 Hermes Agent 搭建 · 2026年7月13日</span>
+</div>
+
+</div>
+</body>
+</html>
