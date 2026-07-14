@@ -242,13 +242,13 @@
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;vertical-align:middle">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月12日净值 | 7/13盘中 · 含最大回撤/资产配置/风险指标</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月13日净值 | 7/14盘中 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
-  <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,724,412.53</div><div class="kpi-sub">基金 1,983,082.81 + 余额宝 741,329.72</div></div>
-  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+1,032,338.15</div><div class="kpi-sub">含已清仓/赎回 · 累计收益率 66.84%</div></div>
-  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/10)</div><div class="kpi-value red">-12,236.60</div><div class="kpi-sub">支付宝 -40,858.21 / 嘉实 +28,621.61</div></div>
-  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-230,243.06</div><div class="kpi-sub">8 个交易日</div></div>
+  <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,683,406.30</div><div class="kpi-sub">基金 1,942,061.82 + 余额宝 741,344.48</div></div>
+  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+991,331.92</div><div class="kpi-sub">含已清仓/赎回 · 累计收益率 43.75%</div></div>
+  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/13)</div><div class="kpi-value red">-41,006.23</div><div class="kpi-sub">支付宝 -22,329.72 / 嘉实 -18,676.51</div></div>
+  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-271,249.29</div><div class="kpi-sub">9 个交易日</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">61.3%</div><div class="kpi-sub">76 盈 / 48 亏 / 124 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">+8,325.31</div><div class="kpi-sub">最高 +93,183.78 · 最大 -165,316.30</div></div>
   <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-165,316.30</div><div class="kpi-sub" id="maxDDSub">3/13 → 3/31</div></div>
@@ -272,7 +272,7 @@
 
 <div id="tab-overview">
   <div class="us-panel">
-    <div class="us-panel-title">🇺🇸 隔夜美股参考（7/10 收盘 | 7/11周五平静）</div>
+    <div class="us-panel-title">🇺🇸 隔夜美股参考（7/11 收盘 | 7/14周一）</div>
     <div class="us-cards">
       <div class="us-card"><div class="us-label">纳斯达克</div><div class="us-value">26,282</div><div class="us-change green">+0.29%</div></div>
       <div class="us-card"><div class="us-label">费城半导体 SOX</div><div class="us-value">13,128</div><div class="us-change green">+0.05%</div></div>
@@ -280,7 +280,7 @@
       <div class="us-card"><div class="us-label">美光 MU</div><div class="us-value">$1,019</div><div class="us-change amber">-0.02%</div></div>
       <div class="us-card"><div class="us-label">SK海力士首日</div><div class="us-value">$169</div><div class="us-change green">+13%</div></div>
     </div>
-    <div class="us-note">💡 今日A股延续回调：上证-1.26%（3946），深证-1.99%（14747），半导体板块净流出130亿。A股基金微跌（017811 -0.59% / 024418 -0.64% / 020640 -1.25%），QDII估值滞后。本周焦点：Warsh国会作证（7/14）+ CPI（7/15）。</div>
+    <div class="us-note">💡 今日A股：上证+0.28%（3925），深证+1.47%（14737），创业板+2.13%但科创50独跌-1.04%。半导体净流出142亿居首，油气+7.4%领涨。A股半导体遭重挫（017811 -1.15% / 024418 -1.30% / 020470 -1.44%），QDII相对抗跌。本周焦点：Warsh国会作证（7/14）+ CPI（7/15）。</div>
   </div>
 
   <!-- Feature 1: Economic Calendar -->
@@ -302,33 +302,34 @@
 
   <div class="table-card"><h3>当前持仓明细</h3>
   <table><thead><tr><th>基金名称</th><th>代码</th><th>平台</th><th>成本</th><th>市值</th><th>今日收益</th><th>累计收益</th><th>收益率</th></tr></thead><tbody>
-    <tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">736,483.16</td><td data-label="市值" style="font-weight:700">741,329.72</td><td data-label="今日" style="color:var(--muted)">—</td><td data-label="累计" class="green">+4,846.56</td><td data-label="收益率" class="green">+0.65%</td></tr>
+    <tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">736,483.16</td><td data-label="市值" style="font-weight:700">741,344.48</td><td data-label="今日" class="green">+14.76</td><td data-label="累计" class="green">+4,861.90</td><td data-label="收益率" class="green">+0.66%</td></tr>
 
     <tr class="cat-row"><td colspan="8">🇨🇳 国内基金（4 只持仓）</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">东方人工智能主题混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">238,341.55</td><td data-label="市值">311,332.95</td><td data-label="今日" class="red">-21,253.37</td><td data-label="累计" class="green">+72,991.40</td><td data-label="收益率" class="green">+30.62%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">华夏科创半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/024418.html" target="_blank">024418 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">218,186.88</td><td data-label="市值">216,744.40</td><td data-label="今日" class="red">-17,457.80</td><td data-label="累计" class="red">-1,442.48</td><td data-label="收益率" class="red">-0.66%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,255.92</td><td data-label="市值">172,537.63</td><td data-label="今日" class="red">-13,085.96</td><td data-label="累计" class="green">+56,281.71</td><td data-label="收益率" class="green">+48.41%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">广发半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020640.html" target="_blank">020640 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">100,000.00</td><td data-label="市值">103,665.84</td><td data-label="今日" class="red">-7,444.14</td><td data-label="累计" class="green">+3,665.84</td><td data-label="收益率" class="green">+3.67%</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">672,784.35</td><td data-label="市值">804,280.82</td><td data-label="今日" class="red">-59,241.27</td><td data-label="累计" class="green">+131,497.47</td><td data-label="收益率" class="green">+19.54%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">东方人工智能主题混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">238,341.55</td><td data-label="市值">303,271.32</td><td data-label="今日" class="red">-8,061.62</td><td data-label="累计" class="green">+64,929.77</td><td data-label="收益率" class="green">+27.24%</td></tr>
+    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">华夏科创半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/024418.html" target="_blank">024418 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">218,186.88</td><td data-label="市值">209,015.61</td><td data-label="今日" class="red">-7,728.79</td><td data-label="累计" class="red">-4,681.51</td><td data-label="收益率" class="red">-4.20%</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,255.92</td><td data-label="市值">168,517.24</td><td data-label="今日" class="red">-4,020.39</td><td data-label="累计" class="green">+52,261.33</td><td data-label="收益率" class="green">+44.95%</td></tr>
+    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">广发半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020640.html" target="_blank">020640 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">100,000.00</td><td data-label="市值">99,110.39</td><td data-label="今日" class="red">-4,555.45</td><td data-label="累计" class="red">-889.61</td><td data-label="收益率" class="red">-0.89%</td></tr>
+    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">672,784.35</td><td data-label="市值">779,914.56</td><td data-label="今日" class="red">-24,366.25</td><td data-label="累计" class="green">+111,619.98</td><td data-label="收益率" class="green">+16.59%</td></tr>
 
     <tr class="cat-row"><td colspan="8">🌍 QDII 基金（5 只）</td></tr>
-    <tr style="background:rgba(245,158,11,.04)"><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000.00</td><td data-label="市值">555,723.38</td><td data-label="今日" class="green">+28,622.14</td><td data-label="累计" class="green">+65,723.41</td><td data-label="收益率" class="green">+13.41%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,000.00</td><td data-label="市值">272,011.22</td><td data-label="今日" class="green">+8,364.56</td><td data-label="累计" class="green">+122,011.22</td><td data-label="收益率" class="green">+81.34%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,000.00</td><td data-label="市值">170,242.06</td><td data-label="今日" class="green">+4,422.35</td><td data-label="累计" class="green">+55,242.06</td><td data-label="收益率" class="green">+48.04%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000.00</td><td data-label="市值">107,074.14</td><td data-label="今日" class="green">+3,282.93</td><td data-label="累计" class="green">+47,074.14</td><td data-label="收益率" class="green">+78.46%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,566.79</td><td data-label="市值">73,751.19</td><td data-label="今日" class="green">+2,301.03</td><td data-label="累计" class="green">+32,184.40</td><td data-label="收益率" class="green">+77.43%</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">856,566.79</td><td data-label="市值">1,178,802.00</td><td data-label="今日" class="green">+46,993.01</td><td data-label="累计" class="green">+322,235.23</td><td data-label="收益率" class="green">+37.62%</td></tr>
+    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000.00</td><td data-label="市值">537,046.87</td><td data-label="今日" class="red">-18,676.51</td><td data-label="累计" class="green">+47,046.90</td><td data-label="收益率" class="green">+9.60%</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,000.00</td><td data-label="市值">274,075.21</td><td data-label="今日" class="green">+2,063.98</td><td data-label="累计" class="green">+124,075.21</td><td data-label="收益率" class="green">+82.72%</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,000.00</td><td data-label="市值">169,900.00</td><td data-label="今日" class="red">-342.06</td><td data-label="累计" class="green">+54,900.00</td><td data-label="收益率" class="green">+47.74%</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000.00</td><td data-label="市值">107,873.83</td><td data-label="今日" class="green">+799.69</td><td data-label="累计" class="green">+47,873.83</td><td data-label="收益率" class="green">+79.79%</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,566.79</td><td data-label="市值">73,251.35</td><td data-label="今日" class="red">-499.84</td><td data-label="累计" class="green">+31,685.57</td><td data-label="收益率" class="green">+76.23%</td></tr>
+    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">856,566.79</td><td data-label="市值">1,162,147.26</td><td data-label="今日" class="red">-16,654.74</td><td data-label="累计" class="green">+305,581.51</td><td data-label="收益率" class="green">+35.68%</td></tr>
 
-    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">2,265,858.06</td><td data-label="市值" style="font-weight:700">2,724,412.53</td><td data-label="今日" class="red">-12,236.08</td><td data-label="累计" class="green">+458,555.46</td><td data-label="收益率" class="green">+20.24%</td></tr>
+    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">2,265,834.30</td><td data-label="市值" style="font-weight:700">2,683,406.30</td><td data-label="今日" class="red">-41,006.23</td><td data-label="累计" class="green">+422,063.39</td><td data-label="收益率" class="green">+18.63%</td></tr>
   </tbody></table></div>
 
   <div class="highlight">
-    <strong>💡 更新说明（7/13）</strong><br>
-    · 清仓：天弘A+C（已到账余额宝）/ 东方阿尔法科技智选 / 嘉实科创芯片。新买入广发半导体设备ETF联接C(020640)。<br>
-    · 加仓：024418华夏科创半导体设备翻倍加仓至¥21.7万，目前微亏-0.66%。<br>
-    · 减仓：017811东方AI主题减¥13万 / 018036长城新能源减¥4万。结构更聚焦半导体设备方向。<br>
-    · 今日A股全线回调（上证-0.75%），半导体净流出130亿，但你的A股半导体基金逆势微涨。<br>
-    · 调仓建议：不建仓不减仓，等7/15 CPI落地。关注拓荆科技7/14复牌走势。现金 ¥741K 待命。
+    <strong>💡 更新说明（7/14）</strong><br>
+    · 持仓无变动。7/13净值已从蚂蚁财富+嘉实App同步更新。<br>
+    · 7/13 A股分化严重：上证+0.28%，创业板+2.13%，但科创50独跌-1.04%。<br>
+    · A股半导体基金04只合计日亏-24,366（017811 -8,062 / 024418 -7,729 / 020470 -4,020 / 020640 -4,555）。<br>
+    · 017731嘉实全球产业升级因QDII净值延迟，显示的是7/10数据（日亏-18,677），实际已收敛。<br>
+    · QDII端表现分化：建信新兴市场C/A微涨+2,864，长城新能源/国富科技微跌。<br>
+    · 调仓建议：不建仓不减仓，等7/15 CPI落地。现金 ¥741K 待命。关注Warsh国会作证（7/14）对利率预期的影响。
   </div>
 </div>
 
@@ -359,8 +360,8 @@
     <tr><td data-label="月份">4月</td><td data-label="月收益" class="green">+425,432.79</td><td data-label="交易天">21</td><td data-label="支付宝" class="green">+350,576.22</td><td data-label="嘉实" class="green">+74,856.57</td><td data-label="月收益率" class="green">+27.45%</td></tr>
     <tr><td data-label="月份">5月</td><td data-label="月收益" class="green">+261,045.53</td><td data-label="交易天">18</td><td data-label="支付宝" class="green">+224,788.93</td><td data-label="嘉实" class="green">+36,256.60</td><td data-label="月收益率" class="green">+16.90%</td></tr>
     <tr><td data-label="月份">6月</td><td data-label="月收益" class="green">+534,451.94</td><td data-label="交易天">21</td><td data-label="支付宝" class="green">+455,613.77</td><td data-label="嘉实" class="green">+78,838.17</td><td data-label="月收益率" class="green">+34.60%</td></tr>
-    <tr><td data-label="月份">7月</td><td data-label="月收益" class="red">-230,243.06</td><td data-label="交易天">8</td><td data-label="支付宝" class="red">-217,128.27</td><td data-label="嘉实" class="red">-13,114.79</td><td data-label="月收益率" class="red">-14.91%</td></tr>
-    <tr style="font-weight:700;border-top:2px solid var(--border)"><td data-label="月份">累计</td><td data-label="月收益" class="green">+1,032,338.15</td><td data-label="交易天">124</td><td data-label="支付宝" class="green">+848,342.24</td><td data-label="嘉实" class="green">+184,961.40</td><td data-label="月收益率" class="green">+66.84%</td></tr>
+    <tr><td data-label="月份">7月</td><td data-label="月收益" class="red">-271,249.29</td><td data-label="交易天">9</td><td data-label="支付宝" class="red">-239,457.99</td><td data-label="嘉实" class="red">-31,791.30</td><td data-label="月收益率" class="red">-17.56%</td></tr>
+    <tr style="font-weight:700;border-top:2px solid var(--border)"><td data-label="月份">累计</td><td data-label="月收益" class="green">+991,331.92</td><td data-label="交易天">125</td><td data-label="支付宝" class="green">+825,884.25</td><td data-label="嘉实" class="green">+166,285.29</td><td data-label="月收益率" class="green">+43.75%</td></tr>
   </tbody></table></div>
 </div>
 
@@ -378,7 +379,7 @@
     <strong>📌 配置变迁</strong><br>
     · 年初以国内半导体基金为主（80%），逐步加仓 QDII 全球配置。<br>
     · 7月天弘赎回后现金占比升至 27.2%，等待再配置窗口。<br>
-    · 当前 QDII 占比 43.3%，国内基金 29.5%，现金 27.2%。
+    · 当前 QDII 占比 43.3%，国内基金 29.1%，现金 27.6%。
   </div>
 </div>
 
@@ -405,7 +406,7 @@
 
   <!-- 市场快讯 + 机构研报 双栏 -->
   <div class="news-grid">
-    <div class="table-card"><h3>📰 市场快讯 <span class="news-meta">· 7/13-7/11</span></h3>
+    <div class="table-card"><h3>📰 市场快讯 <span class="news-meta">· 7/14-7/10</span></h3>
     <div class="news-item"><span class="news-time">7/13</span><span class="news-title" style="color:var(--red)">🔥 周末政策三连发：千亿半导体扶持+算力采购补贴+高纯氦出口管制，半导体产业政策力度再升级</span><span class="news-src">综合</span></div>
     <div class="news-item"><span class="news-time">7/13</span><a class="news-title" href="https://www.stcn.com/article/detail/4010126.html" target="_blank">📊 东莞证券：半导体短期承压不改景气上行，AI仍是2026下半年核心主线</a><span class="news-src">证券时报</span></div>
     <div class="news-item"><span class="news-time">7/13</span><span class="news-title" style="color:var(--red)">📉 今日A股全线回调：上证-0.75%，半导体板块净流出130亿居首，IT服务逆势获资金流入</span><span class="news-src">实盘</span></div>
@@ -647,7 +648,7 @@ const ecEvents=[
   {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
 ];
 (function buildCalendar(){
-  const now=new Date('2026-07-13T12:00:00+08:00');
+  const now=new Date('2026-07-14T12:00:00+08:00');
   const tl=document.getElementById('ecTimeline');
   if(!tl)return;
   ecEvents.forEach(ev=>{
@@ -666,15 +667,15 @@ const ecEvents=[
 
 // Feature 2: Position Alert
 const alertData=[
-  {name:'024418 科创半导体',cost:218186.88,mkt:216744.40,pct:-0.66},
-  {name:'020640 广发半导体',cost:100000.00,mkt:103665.84,pct:3.67},
-  {name:'017731 嘉实产业升级',cost:490000.00,mkt:555723.38,pct:13.41},
-  {name:'017811 东方人工智能',cost:238341.55,mkt:311332.95,pct:30.62},
-  {name:'020470 长城半导体',cost:116255.92,mkt:172537.63,pct:48.41},
-  {name:'018147 建信新兴C',cost:150000.00,mkt:272011.22,pct:81.34},
-  {name:'539002 建信新兴A',cost:60000.00,mkt:107074.14,pct:78.46},
-  {name:'006373 国富科技',cost:41566.79,mkt:73751.19,pct:77.43},
-  {name:'018036 新能源车',cost:115000.00,mkt:170242.06,pct:48.04},
+  {name:'024418 科创半导体',cost:218186.88,mkt:209015.61,pct:-4.20},
+  {name:'020640 广发半导体',cost:100000.00,mkt:99110.39,pct:-0.89},
+  {name:'017731 嘉实产业升级',cost:490000.00,mkt:537046.87,pct:9.60},
+  {name:'017811 东方人工智能',cost:238341.55,mkt:303271.32,pct:27.24},
+  {name:'020470 长城半导体',cost:116255.92,mkt:168517.24,pct:44.95},
+  {name:'018036 新能源车',cost:115000.00,mkt:169900.00,pct:47.74},
+  {name:'006373 国富科技',cost:41566.79,mkt:73251.35,pct:76.23},
+  {name:'539002 建信新兴A',cost:60000.00,mkt:107873.83,pct:79.79},
+  {name:'018147 建信新兴C',cost:150000.00,mkt:274075.21,pct:82.72},
 ];
 (function buildAlerts(){
   const c=document.getElementById('alertRows');
@@ -696,11 +697,11 @@ const alertData=[
 
 // Feature 6: Radar Chart
 const radarFunds={
-  '017811':{name:'017811 东方AI',color:'#3b82f6',data:[30.62,72991,-6.39,11.4,30.62]},
-  '024418':{name:'024418 科创半导体',color:'#ef4444',data:[-0.66,-1442,-7.45,7.9,-0.66]},
-  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[13.41,65723,5.43,20.4,13.41]},
-  '018147':{name:'018147 建信C',color:'#a855f7',data:[81.34,122011,3.17,10.0,81.34]},
-  '020470':{name:'020470 长城半导体',color:'#10b981',data:[48.41,56282,-7.05,6.3,48.41]},
+  '017811':{name:'017811 东方AI',color:'#3b82f6',data:[27.24,64930,-2.59,11.3,27.24]},
+  '024418':{name:'024418 科创半导体',color:'#ef4444',data:[-4.20,-4682,-3.57,7.8,-4.20]},
+  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[9.60,47047,-3.36,20.0,9.60]},
+  '018147':{name:'018147 建信C',color:'#a855f7',data:[82.72,124075,0.76,10.2,82.72]},
+  '020470':{name:'020470 长城半导体',color:'#10b981',data:[44.95,52261,-2.33,6.3,44.95]},
 };
 let radarSelected=['017811','024418','017731'];
 function initRadar(){
@@ -753,9 +754,9 @@ function drawRadar(){
 function initOverview(){
   if(chartInit.overview)return;chartInit.overview=true;
   const fn=['017811 人工智能','024418 科创半导体','020470 长城半导体','020640 广发半导体','018147 建信C','539002 建信A','018036 新能源车','006373 国富科技','017731 嘉实产业'];
-  const fp=[-6.39,-7.45,-7.05,-6.70,3.17,3.16,2.67,3.22,5.43];
+  const fp=[-2.59,-3.57,-2.33,-4.40,0.76,0.75,-0.20,-0.68,-3.36];
   new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(34,197,94,.7)':'rgba(239,68,68,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
-  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','024418 科创半导体材料','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','020640 广发半导体','006373 国富科技互联'],datasets:[{data:[741305.42,555723.38,311332.95,272011.22,216744.40,172537.63,170242.06,107074.14,103665.84,73751.19],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#06b6d4','#8b5cf6','#10b981','#c084fc','#0ea5e9','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
+  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','024418 科创半导体材料','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','020640 广发半导体','006373 国富科技互联'],datasets:[{data:[741344.48,537046.87,303271.32,274075.21,209015.61,168517.24,169900.00,107873.83,99110.39,73251.35],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#06b6d4','#8b5cf6','#10b981','#c084fc','#0ea5e9','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
 }
 
 function initHistory(){
