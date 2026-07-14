@@ -157,7 +157,49 @@
   .cross-hold td{background:rgba(59,130,246,.04)!important}
   .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
   @media(max-width:768px){.news-grid{grid-template-columns:1fr}}
+    /* Stress Test */
+  .stress-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:6px}
+  .stress-card{border-radius:10px;padding:14px;border:1px solid var(--border)}
+  .stress-card.green-s{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2)}
+  .stress-card.amber-s{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2)}
+  .stress-card.red-s{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2)}
+  .stress-card.dark-s{background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.2)}
+  .stress-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
+  .stress-val{font-size:1.3rem;font-weight:700}
+  .stress-detail{font-size:.68rem;color:var(--muted);margin-top:4px;line-height:1.5}
+  /* Cash Roadmap */
+  .roadmap-tree{position:relative;padding-left:20px}
+  .rm-node{position:relative;margin-bottom:14px;padding-left:20px}
+  .rm-node::before{content:'';position:absolute;left:6px;top:0;bottom:-14px;width:2px;background:var(--border)}
+  .rm-node:last-child::before{display:none}
+  .rm-dot{position:absolute;left:-17px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid}
+  .rm-dot.green-d{border-color:var(--green);background:rgba(34,197,94,.2)}
+  .rm-dot.amber-d{border-color:var(--amber);background:rgba(245,158,11,.2)}
+  .rm-dot.red-d{border-color:var(--red);background:rgba(239,68,68,.2)}
+  .rm-title{font-size:.82rem;font-weight:600;margin-bottom:3px}
+  .rm-action{font-size:.72rem;color:var(--text);padding:4px 8px;background:rgba(59,130,246,.06);border-radius:4px;display:inline-block;margin-top:2px}
+  .rm-amount{font-size:.78rem;font-weight:700;color:var(--blue)}
+  /* QDII Lag Board */
+  .lag-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(30,41,59,.3);font-size:.75rem}
+  .lag-row:last-child{border-bottom:none}
+  .lag-name{min-width:160px;font-weight:600}
+  .lag-bar{flex:1;height:16px;border-radius:4px;background:rgba(30,41,59,.3);position:relative;overflow:hidden}
+  .lag-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:rgba(255,255,255,.8)}
+  .lag-status{min-width:70px;text-align:right;font-weight:600}
+  /* Thermometer */
+  .thermo-wrap{display:flex;align-items:center;gap:20px;padding:16px 0}
+  .thermo-bar{flex:1;height:32px;border-radius:16px;background:linear-gradient(90deg,#3b82f6 0%,#3b82f6 20%,#22c55e 20%,#22c55e 40%,#f59e0b 40%,#f59e0b 60%,#ef4444 60%,#ef4444 80%,#a855f7 80%,#a855f7 100%);position:relative}
+  .thermo-needle{position:absolute;top:-6px;width:4px;height:44px;background:#fff;border-radius:2px;box-shadow:0 0 6px rgba(255,255,255,.8)}
+  .thermo-needle::after{content:'▼';position:absolute;top:-16px;left:-7px;font-size:14px;color:#fff;text-shadow:0 0 4px rgba(0,0,0,.5)}
+  .thermo-score{font-size:2rem;font-weight:700;min-width:80px;text-align:center}
+  .thermo-info{font-size:.72rem;color:var(--muted);text-align:center;min-width:80px}
+  .thermo-factors{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:12px}
+  .thermo-factor{background:rgba(30,41,59,.4);border-radius:6px;padding:8px;text-align:center}
+  .tf-label{font-size:.65rem;color:var(--muted)}
+  .tf-val{font-size:.85rem;font-weight:700;margin:2px 0}
+  @media(max-width:768px){.stress-grid{grid-template-columns:1fr 1fr}.thermo-wrap{flex-direction:column}.thermo-bar{width:100%}.lag-name{min-width:110px}}
   /* === Semiconductor Chain Tab === */
+/* === Semiconductor Chain Tab === */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
   @media(max-width:900px){.grid2{grid-template-columns:1fr}}
   .sc-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
@@ -271,6 +313,34 @@
 </div>
 
 <div id="tab-overview">
+  <!-- Stress Test -->
+  <div class="table-card" style="margin-bottom:14px">
+  <h3>🔥 情景压力测试 <span class="news-meta">· CPI 7/15 落地后预估</span></h3>
+  <div class="stress-grid">
+    <div class="stress-card green-s">
+      <div class="stress-label">🟢 CPI 低于预期</div>
+      <div class="stress-val green">+39,116</div>
+      <div class="stress-detail">降息预期升温→QDII +2.5%(+¥29K)<br>A股半导体企稳 +1.5%(+¥10K)<br>现金不受影响</div>
+    </div>
+    <div class="stress-card amber-s">
+      <div class="stress-label">🟡 CPI 符合预期</div>
+      <div class="stress-val amber">-3,369</div>
+      <div class="stress-detail">QDII 持平(0%)<br>A股情绪余震 -0.5%(-¥3K)<br>长鑫IPO抽血延续</div>
+    </div>
+    <div class="stress-card red-s">
+      <div class="stress-label">🔴 CPI 高于预期</div>
+      <div class="stress-val red">-42,484</div>
+      <div class="stress-detail">降息预期回落→QDII -2.5%(-¥29K)<br>A股科技同步承压 -2%(-¥13K)<br>现金仍是护盾</div>
+    </div>
+    <div class="stress-card dark-s">
+      <div class="stress-label">🟣 极端情景</div>
+      <div class="stress-val red">-66,628</div>
+      <div class="stress-detail">CPI大超预期+地缘升级<br>QDII -4%(-¥46K) A股 -3%(-¥20K)<br>历史最大回撤 -¥165K</div>
+    </div>
+  </div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 基于当前持仓(QDII ¥116万/A股 ¥67万/现金 ¥84万)静态测算，不考虑盘中操作。现金¥844K在任何情景下均不受损。</div>
+  </div>
+
   <div class="us-panel">
     <div class="us-panel-title">🇺🇸 隔夜美股参考（7/11 收盘 | 7/14周一）</div>
     <div class="us-cards">
@@ -293,6 +363,17 @@
   <div class="alert-card" id="alertCard">
     <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px">🚦 持仓安全垫监测</div>
     <div id="alertRows"></div>
+  </div>
+
+  <!-- QDII NAV Lag Board -->
+  <div class="table-card" style="margin-bottom:14px">
+  <h3>🕐 QDII 净值延迟看板</h3>
+  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:100%;background:rgba(239,68,68,.5)">7/10 → 延迟4天</div></div><div class="lag-status red">⚠️ 最严重</div></div>
+  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。017731嘉实直销延迟更久(可能T+3)。当前显示的收益可能是数天前的数据，不代表最新持仓盈亏。</div>
   </div>
 
   <div class="charts-grid">
@@ -374,6 +455,29 @@
   <div class="chart-card" style="margin-bottom:14px"><h3>📊 基金对比雷达图</h3>
     <div class="fund-select" id="radarChips"></div>
     <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
+  </div>
+
+  <!-- 💵 Cash Deployment Roadmap -->
+  <div class="table-card" style="margin-bottom:14px">
+  <h3>💵 现金部署路线图 <span class="news-meta">· ¥843,667 待命</span></h3>
+  <div class="roadmap-tree">
+    <div class="rm-node"><div class="rm-dot green-d"></div><div class="rm-title">🟢 CPI 低于预期（概率 ~30%）</div>
+      <div class="rm-action">→ 确认长鑫IPO配售结束（本周末）→ 分批加仓</div><br>
+      <div class="rm-amount">部署 ¥20-30万</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">目标：024418（当前-5.5%，设备方向有安全边际）或020640（-1.2%，成本接近现价）。分2-3批，每批间隔1-2个交易日。保留¥50万+现金底线。</div>
+    </div>
+    <div class="rm-node"><div class="rm-dot amber-d"></div><div class="rm-title">🟡 CPI 符合预期（概率 ~45%）</div>
+      <div class="rm-action">→ 观望，不急于部署。关注半导体板块资金流是否连续2日企稳</div><br>
+      <div class="rm-amount">部署 ¥0-10万</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">信号：半导体5日资金流收窄至-200亿以内+科创50止跌。若信号出现，小批量试探020640。否则继续等。</div>
+    </div>
+    <div class="rm-node"><div class="rm-dot red-d"></div><div class="rm-title">🔴 CPI 高于预期（概率 ~25%）</div>
+      <div class="rm-action">→ 全面防守，不动现金。如果QDII跌超3%，可考虑小额加仓QDII（海外半导体跌比A股少）</div><br>
+      <div class="rm-amount">部署 ¥0（防守）</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">现金¥844K是最大优势。极端回撤反而是更大加仓窗口——等024418跌至-10%以下再出手，空间更大。</div>
+    </div>
+  </div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律：无论哪个情景，现金底线不低于¥500K（总资产19%）。半导体集中度已62%，不再增加集中度。</div>
   </div>
 
   <!-- 💰 Capital Structure -->
@@ -522,6 +626,30 @@
 </div>
 
 <div id="tab-semicon" style="display:none;">
+<!-- Thermometer -->
+<div class="sc-card">
+  <h2>🌡️ 半导体情绪温度计 <span style="font-size:.7rem;color:var(--muted)">· 7/14 盘中</span></h2>
+  <div class="thermo-wrap">
+    <div class="thermo-bar"><div class="thermo-needle" style="left:25%"></div></div>
+    <div>
+      <div class="thermo-score red">25</div>
+      <div class="thermo-info">🧊 冰冷区</div>
+    </div>
+  </div>
+  <div style="font-size:.78rem;color:var(--text);padding:8px;background:rgba(239,68,68,.06);border-radius:8px;margin-bottom:10px">
+    <strong style="color:var(--red)">资金大幅流出但非恐慌。</strong>板块5日净流出615亿、10日超1700亿，是2026年以来最猛的持续失血。但半导体内部出现"高低切"（兆易创新+澜起科技逆势获22亿主力买入），说明机构在换仓而非撤退。当前定位：<strong>短期超卖，等CPI+IPO落地</strong>。
+  </div>
+  <div class="thermo-factors">
+    <div class="thermo-factor"><div class="tf-label">📊 5日资金流</div><div class="tf-val red">-615亿</div></div>
+    <div class="thermo-factor"><div class="tf-label">📊 10日资金流</div><div class="tf-val red">-1,700亿+</div></div>
+    <div class="thermo-factor"><div class="tf-label">🔄 内部轮动</div><div class="tf-val amber">高低切</div></div>
+    <div class="thermo-factor"><div class="tf-label">📐 设备PE分位</div><div class="tf-val amber">80-90x</div></div>
+    <div class="thermo-factor"><div class="tf-label">📈 今日涨跌比</div><div class="tf-val red">45涨/136跌</div></div>
+    <div class="thermo-factor"><div class="tf-label">💡 温度判断</div><div class="tf-val red">冰冷·待底</div></div>
+  </div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:8px">0=冰点恐慌 20=超卖 40=偏低 50=中性 60=偏热 80=过热 100=狂热。温度计综合板块资金流(40%)、内部轮动(20%)、PE分位(20%)、涨跌比(20%)计算。</div>
+</div>
+
 <div class="sc-card">
   <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 7/11 收盘</span></h2>
   <div class="legend">
