@@ -375,11 +375,71 @@
     <div class="fund-select" id="radarChips"></div>
     <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
   </div>
+
+  <!-- 💰 Capital Structure -->
+  <div class="table-card" style="margin-bottom:14px">
+  <h3>💰 资金结构总览 <span class="news-meta">· 7/14 收盘 · 总资产 ¥2,677,788</span></h3>
+  <table><thead><tr><th>资产类别</th><th>方向</th><th>市值</th><th>占比</th></tr></thead><tbody>
+    <tr class="cat-row"><td colspan="4">🌍 QDII 海外基金（5 只）— 占比 43.3%</td></tr>
+    <tr><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">536,305</td><td data-label="占比">20.0%</td></tr>
+    <tr><td data-label="基金">建信新兴市场优选混合 C</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">273,684</td><td data-label="占比">10.2%</td></tr>
+    <tr><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="方向">🚗 新能源车</td><td data-label="市值" class="green">169,582</td><td data-label="占比">6.3%</td></tr>
+    <tr><td data-label="基金">建信新兴市场优选混合 A</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">107,722</td><td data-label="占比">4.0%</td></tr>
+    <tr><td data-label="基金">国富全球科技互联 QDII A</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">73,105</td><td data-label="占比">2.7%</td></tr>
+    <tr class="subtotal"><td>QDII 小计</td><td data-label="方向">—</td><td data-label="市值">1,160,399</td><td data-label="占比">43.3%</td></tr>
+
+    <tr class="cat-row"><td colspan="4">🇨🇳 A股基金（4 只）— 占比 25.2%</td></tr>
+    <tr><td data-label="基金">东方人工智能主题 C</td><td data-label="方向">🔬 半导体设备/AI</td><td data-label="市值" class="green">301,636</td><td data-label="占比">11.3%</td></tr>
+    <tr><td data-label="基金">长城半导体产业 C</td><td data-label="方向">🔬 半导体综合</td><td data-label="市值" class="green">167,228</td><td data-label="占比">6.2%</td></tr>
+    <tr><td data-label="基金">华夏科创半导体设备 ETF C</td><td data-label="方向">🔬 半导体设备</td><td data-label="市值" class="red">106,025</td><td data-label="占比">4.0%</td></tr>
+    <tr><td data-label="基金">广发半导体设备 ETF C</td><td data-label="方向">🔬 半导体设备</td><td data-label="市值" class="red">98,832</td><td data-label="占比">3.7%</td></tr>
+    <tr class="subtotal"><td>A股小计</td><td data-label="方向">—</td><td data-label="市值">673,721</td><td data-label="占比">25.2%</td></tr>
+
+    <tr class="cat-row"><td colspan="4">💵 现金 — 占比 31.5%</td></tr>
+    <tr><td data-label="基金">余额宝</td><td data-label="方向">💵 灵活取用</td><td data-label="市值">843,667</td><td data-label="占比">31.5%</td></tr>
+    <tr class="subtotal"><td>现金小计</td><td data-label="方向">—</td><td data-label="市值">843,667</td><td data-label="占比">31.5%</td></tr>
+
+    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>总计</td><td data-label="方向">—</td><td data-label="市值" style="font-weight:700">2,677,788</td><td data-label="占比">100%</td></tr>
+  </tbody></table>
+  </div>
+
+  <!-- 🎯 Theme Exposure -->
+  <div class="table-card" style="margin-bottom:14px">
+  <h3>🎯 主题暴露 — 揭示真实集中度</h3>
+  <table><thead><tr><th>主题方向</th><th>涉及基金</th><th>合计市值</th><th>占比</th><th>说明</th></tr></thead><tbody>
+    <tr style="background:rgba(59,130,246,.06)"><td data-label="主题"><strong>🌍 全球半导体/科技</strong></td><td data-label="基金">017731+018147+539002+006373</td><td data-label="市值" class="green">990,816</td><td data-label="占比"><strong>37.0%</strong></td><td data-label="说明">美光/台积电/英伟达等全球龙头</td></tr>
+    <tr style="background:rgba(59,130,246,.04)"><td data-label="主题"><strong>🔬 A股半导体设备</strong></td><td data-label="基金">017811+024418+020640</td><td data-label="市值">506,493</td><td data-label="占比"><strong>18.9%</strong></td><td data-label="说明">北方华创/中微/华海清科等国产替代</td></tr>
+    <tr style="background:rgba(59,130,246,.03)"><td data-label="主题"><strong>🔬 A股半导体（非设备）</strong></td><td data-label="基金">020470</td><td data-label="市值">167,228</td><td data-label="占比">6.2%</td><td data-label="说明">跨设计/封测/材料方向</td></tr>
+    <tr style="background:rgba(59,130,246,.02)"><td data-label="主题"><strong>🚗 全球新能源车</strong></td><td data-label="基金">018036</td><td data-label="市值">169,582</td><td data-label="占比">6.3%</td><td data-label="说明">比亚迪/特斯拉等</td></tr>
+    <tr style="background:rgba(148,163,184,.06)"><td data-label="主题"><strong>💵 现金（防御）</strong></td><td data-label="基金">余额宝</td><td data-label="市值">843,667</td><td data-label="占比"><strong>31.5%</strong></td><td data-label="说明">CPI后择机部署</td></tr>
+    <tr class="subtotal" style="background:rgba(239,68,68,.04)"><td colspan="2">⚠️ 半导体总集中度（全球+A股）</td><td data-label="市值" class="red">1,664,537</td><td data-label="占比" class="red"><strong>62.2%</strong></td><td data-label="说明">超六成押注半导体产业链</td></tr>
+  </tbody></table>
+  </div>
+
+  <!-- 📈 P&L Structure -->
+  <div class="table-card" style="margin-bottom:14px">
+  <h3>📈 盈亏结构 — 安全垫厚度</h3>
+  <table><thead><tr><th>基金</th><th>市值</th><th>成本</th><th>浮盈/浮亏</th><th>收益率</th><th>状态</th></tr></thead><tbody>
+    <tr><td data-label="基金">018147 建信新兴市场 C</td><td data-label="市值">273,684</td><td data-label="成本">150,000</td><td data-label="盈亏" class="green">+123,687</td><td data-label="收益率" class="green">+82.5%</td><td data-label="状态">✅ 深度安全垫</td></tr>
+    <tr><td data-label="基金">017811 东方人工智能</td><td data-label="市值">301,636</td><td data-label="成本">238,342</td><td data-label="盈亏" class="green">+63,297</td><td data-label="收益率" class="green">+26.6%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">020470 长城半导体</td><td data-label="市值">167,228</td><td data-label="成本">116,256</td><td data-label="盈亏" class="green">+50,972</td><td data-label="收益率" class="green">+43.8%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">539002 建信新兴市场 A</td><td data-label="市值">107,722</td><td data-label="成本">60,000</td><td data-label="盈亏" class="green">+47,720</td><td data-label="收益率" class="green">+79.5%</td><td data-label="状态">✅ 深度安全垫</td></tr>
+    <tr><td data-label="基金">017731 嘉实全球产业升级</td><td data-label="市值">536,305</td><td data-label="成本">490,000</td><td data-label="盈亏" class="green">+46,308</td><td data-label="收益率" class="green">+9.5%</td><td data-label="状态">⚠️ 薄垫</td></tr>
+    <tr><td data-label="基金">018036 长城全球新能源车</td><td data-label="市值">169,582</td><td data-label="成本">115,000</td><td data-label="盈亏" class="green">+54,583</td><td data-label="收益率" class="green">+47.5%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">006373 国富全球科技</td><td data-label="市值">73,105</td><td data-label="成本">41,567</td><td data-label="盈亏" class="green">+31,540</td><td data-label="收益率" class="green">+75.9%</td><td data-label="状态">✅ 深度安全垫</td></tr>
+    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">024418 华夏科创半导体</td><td data-label="市值">106,025</td><td data-label="成本">111,375</td><td data-label="盈亏" class="red">-5,349</td><td data-label="收益率" class="red">-4.8%</td><td data-label="status">🔴 浮亏</td></tr>
+    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">020640 广发半导体设备</td><td data-label="市值">98,832</td><td data-label="成本">100,000</td><td data-label="盈亏" class="red">-1,168</td><td data-label="收益率" class="red">-1.2%</td><td data-label="状态">🔴 浮亏</td></tr>
+    <tr class="subtotal"><td>基金合计（9只）</td><td data-label="市值">1,834,119</td><td data-label="成本">1,422,529</td><td data-label="盈亏" class="green">+411,591</td><td data-label="收益率" class="green">+28.9%</td><td data-label="状态">7盈2亏</td></tr>
+    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>含现金总计</td><td data-label="市值">2,677,788</td><td data-label="成本">2,266,196</td><td data-label="盈亏" class="green">+411,591</td><td data-label="收益率" class="green">+18.2%</td><td data-label="状态">—</td></tr>
+  </tbody></table>
+  </div>
+
   <div class="highlight">
     <strong>📌 配置变迁</strong><br>
     · 年初以国内半导体基金为主（80%），逐步加仓 QDII 全球配置。<br>
-    · 7月天弘赎回后现金占比升至 27.2%，等待再配置窗口。<br>
-    · 当前 QDII 占比 43.3%，国内基金 25.2%，现金 31.5%。
+    · 7月天弘赎回+024418减仓后现金占比升至 31.5%，等待再配置窗口。<br>
+    · 当前 QDII 占比 43.3%，国内基金 25.2%，现金 31.5%。<br>
+    · ⚠️ 半导体总集中度 62.2%（全球37%+A股25%），是组合的核心风险敞口。
   </div>
 </div>
 
