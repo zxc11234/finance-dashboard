@@ -288,9 +288,9 @@
 
 <div class="kpi-grid">
   <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,628,451.71</div><div class="kpi-sub">基金 1,784,784.43 + 余额宝 843,667.28</div></div>
-  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+956,659.64</div><div class="kpi-sub">含已清仓/赎回 · 累计收益率 42.21%</div></div>
+  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+951,647.52</div><div class="kpi-sub">支付宝 +787,519 · 嘉实 +164,129 · 收益率 41.99%</div></div>
   <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/14 实际)</div><div class="kpi-value red">-54,976.48</div><div class="kpi-sub">支付宝 -33,472 / 嘉实 017731 -21,505</div></div>
-  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-271,249.29</div><div class="kpi-sub">9 个交易日</div></div>
+  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-294,041.86</div><div class="kpi-sub">10 个交易日</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">61.3%</div><div class="kpi-sub">76 盈 / 48 亏 / 124 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">+8,325.31</div><div class="kpi-sub">最高 +93,183.78 · 最大 -165,316.30</div></div>
   <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-165,316.30</div><div class="kpi-sub" id="maxDDSub">3/13 → 3/31</div></div>
@@ -442,8 +442,8 @@
     <tr><td data-label="月份">4月</td><td data-label="月收益" class="green">+425,432.79</td><td data-label="交易天">21</td><td data-label="支付宝" class="green">+350,576.22</td><td data-label="嘉实" class="green">+74,856.57</td><td data-label="月收益率" class="green">+27.45%</td></tr>
     <tr><td data-label="月份">5月</td><td data-label="月收益" class="green">+261,045.53</td><td data-label="交易天">18</td><td data-label="支付宝" class="green">+224,788.93</td><td data-label="嘉实" class="green">+36,256.60</td><td data-label="月收益率" class="green">+16.90%</td></tr>
     <tr><td data-label="月份">6月</td><td data-label="月收益" class="green">+534,451.94</td><td data-label="交易天">21</td><td data-label="支付宝" class="green">+455,613.77</td><td data-label="嘉实" class="green">+78,838.17</td><td data-label="月收益率" class="green">+34.60%</td></tr>
-    <tr><td data-label="月份">7月</td><td data-label="月收益" class="red">-336,218.85</td><td data-label="交易天">10</td><td data-label="支付宝" class="red">-273,208.98</td><td data-label="嘉实" class="red">-63,009.88</td><td data-label="月收益率" class="red">-21.77%</td></tr>
-    <tr style="font-weight:700;border-top:2px solid var(--border)"><td data-label="月份">累计</td><td data-label="月收益" class="green">+928,322.22</td><td data-label="交易天">126</td><td data-label="支付宝" class="green">+787,519.00</td><td data-label="嘉实" class="green">+140,803.22</td><td data-label="月收益率" class="green">+40.96%</td></tr>
+    <tr><td data-label="月份">7月</td><td data-label="月收益" class="red">-294,041.86</td><td data-label="交易天">10</td><td data-label="支付宝" class="red">-273,208.98</td><td data-label="嘉实" class="red">-20,832.88</td><td data-label="月收益率" class="red">-19.03%</td></tr>
+    <tr style="font-weight:700;border-top:2px solid var(--border)"><td data-label="月份">累计</td><td data-label="月收益" class="green">+951,647.52</td><td data-label="交易天">126</td><td data-label="支付宝" class="green">+787,519.00</td><td data-label="嘉实" class="green">+164,128.52</td><td data-label="月收益率" class="green">+41.99%</td></tr>
   </tbody></table></div>
 </div>
 
@@ -1121,7 +1121,7 @@ function exportCSV(){
     ['5月',261045.53,18,224788.93,36256.60,'+16.90%'],
     ['6月',534451.94,21,455613.77,78838.17,'+34.60%'],
     ['7月',-230243.06,8,-217128.27,-13114.79,'-14.91%'],
-    ['累计',1032338.15,124,848342.24,184961.40,'+66.84%']
+    ['累计',951647.52,126,787519.00,164128.52,'+41.99%']
   ];
   data.forEach(r=>rows.push(r));
   const csv=rows.map(r=>r.join(',')).join('\n');
