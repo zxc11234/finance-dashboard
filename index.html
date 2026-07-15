@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
-  :root { --bg:#0a0e1a; --card:#131826; --border:#1e293b; --text:#e2e8f0; --muted:#64748b; --green:#22c55e; --red:#ef4444; --blue:#3b82f6; --amber:#f59e0b; }
+  :root { --bg:#0a0e1a; --card:#131826; --border:#1e293b; --text:#e2e8f0; --muted:#64748b; --green:#ef4444; --red:#22c55e; --blue:#3b82f6; --amber:#f59e0b; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; background:var(--bg); color:var(--text); padding:16px; line-height:1.6; }
   .container { max-width:1300px; margin:0 auto; }
@@ -147,7 +147,7 @@
   .news-src{font-size:0.68rem;color:var(--muted);background:rgba(100,116,139,.1);padding:1px 6px;border-radius:3px}
   .report-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
   .report-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.62rem;font-weight:600;white-space:nowrap}
-  .tag-semi{background:rgba(34,197,94,.15);color:var(--green)}
+  .tag-semi{background:rgba(239,68,68,.15);color:var(--green)}
   .tag-ai{background:rgba(59,130,246,.15);color:var(--blue)}
   .tag-auto{background:rgba(245,158,11,.15);color:var(--amber)}
   .tag-elec{background:rgba(168,85,247,.15);color:#a855f7}
@@ -160,9 +160,9 @@
     /* Stress Test */
   .stress-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:6px}
   .stress-card{border-radius:10px;padding:14px;border:1px solid var(--border)}
-  .stress-card.green-s{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2)}
+  .stress-card.green-s{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2)}
   .stress-card.amber-s{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2)}
-  .stress-card.red-s{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2)}
+  .stress-card.red-s{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2)}
   .stress-card.dark-s{background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.2)}
   .stress-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
   .stress-val{font-size:1.3rem;font-weight:700}
@@ -173,9 +173,9 @@
   .rm-node::before{content:'';position:absolute;left:6px;top:0;bottom:-14px;width:2px;background:var(--border)}
   .rm-node:last-child::before{display:none}
   .rm-dot{position:absolute;left:-17px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid}
-  .rm-dot.green-d{border-color:var(--green);background:rgba(34,197,94,.2)}
+  .rm-dot.green-d{border-color:var(--green);background:rgba(239,68,68,.2)}
   .rm-dot.amber-d{border-color:var(--amber);background:rgba(245,158,11,.2)}
-  .rm-dot.red-d{border-color:var(--red);background:rgba(239,68,68,.2)}
+  .rm-dot.red-d{border-color:var(--red);background:rgba(34,197,94,.2)}
   .rm-title{font-size:.82rem;font-weight:600;margin-bottom:3px}
   .rm-action{font-size:.72rem;color:var(--text);padding:4px 8px;background:rgba(59,130,246,.06);border-radius:4px;display:inline-block;margin-top:2px}
   .rm-amount{font-size:.78rem;font-weight:700;color:var(--blue)}
@@ -224,8 +224,8 @@
   .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
   .tl-item{position:relative;margin-bottom:20px;padding-left:24px}
   .tl-dot{position:absolute;left:-18px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid}
-  .tl-buy .tl-dot{border-color:var(--green);background:rgba(34,197,94,.2)}
-  .tl-sell .tl-dot{border-color:var(--red);background:rgba(239,68,68,.2)}
+  .tl-buy .tl-dot{border-color:var(--green);background:rgba(239,68,68,.2)}
+  .tl-sell .tl-dot{border-color:var(--red);background:rgba(34,197,94,.2)}
   .tl-adjust .tl-dot{border-color:var(--amber);background:rgba(245,158,11,.2)}
   .tl-date{font-size:.7rem;color:var(--muted);margin-bottom:2px}
   .tl-action{font-size:.85rem;font-weight:600}
@@ -239,11 +239,11 @@
   .archive-date{font-size:.72rem;color:var(--muted);min-width:65px;padding-top:2px}
   .archive-title{font-size:.82rem;flex:1;min-width:200px}
   .archive-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.6rem;font-weight:600;white-space:nowrap}
-  .tag-a{background:rgba(34,197,94,.12);color:var(--green)}
+  .tag-a{background:rgba(239,68,68,.12);color:var(--green)}
   .tag-q{background:rgba(245,158,11,.12);color:var(--amber)}
   .tag-us{background:rgba(59,130,246,.12);color:var(--blue)}
   .tag-macro{background:rgba(168,85,247,.12);color:#a855f7}
-  .tag-trade{background:rgba(239,68,68,.12);color:var(--red)}
+  .tag-trade{background:rgba(34,197,94,.12);color:var(--red)}
   .search-bar{display:flex;gap:8px;margin-bottom:12px}
   .search-bar input{flex:1;background:rgba(30,41,59,.6);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-size:.8rem;outline:none}
   .search-bar input:focus{border-color:var(--blue)}
@@ -258,7 +258,7 @@
   .ec-date{font-size:0.78rem;font-weight:700;color:var(--text)}
   .ec-event{font-size:0.72rem;color:var(--muted);margin:2px 0}
   .ec-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.6rem;font-weight:600}
-  .ec-tag-hot{background:rgba(239,68,68,.15);color:var(--red)}
+  .ec-tag-hot{background:rgba(34,197,94,.15);color:var(--red)}
   .ec-tag-warn{background:rgba(245,158,11,.15);color:var(--amber)}
   .ec-tag-info{background:rgba(59,130,246,.15);color:var(--blue)}
   .ec-countdown{font-size:0.68rem;font-weight:600;margin-top:3px}
@@ -386,18 +386,18 @@
     <tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">843,667.28</td><td data-label="市值" style="font-weight:700">843,667.28</td><td data-label="今日" class="green">+14.76</td><td data-label="累计" class="green">+4,861.90</td><td data-label="收益率" class="green">+0.58%</td></tr>
 
     <tr class="cat-row"><td colspan="8">🇨🇳 国内基金（4 只持仓）</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">东方人工智能主题混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">238,341.55</td><td data-label="市值">302,245.30</td><td data-label="今日" class="red">-1,026.02</td><td data-label="累计" class="green">+63,903.75</td><td data-label="收益率" class="green">+26.81%</td></tr>
-    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">华夏科创半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/024418.html" target="_blank">024418 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">111,374.88</td><td data-label="市值">105,975.21</td><td data-label="今日" class="red">-739.49</td><td data-label="累计" class="red">-5,399.67</td><td data-label="收益率" class="red">-4.84%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,255.92</td><td data-label="市值">168,698.55</td><td data-label="今日" class="green">+181.31</td><td data-label="累计" class="green">+52,442.63</td><td data-label="收益率" class="green">+45.11%</td></tr>
-    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">广发半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020640.html" target="_blank">020640 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">100,000.00</td><td data-label="市值">98,721.82</td><td data-label="今日" class="red">-388.57</td><td data-label="累计" class="red">-1,278.18</td><td data-label="收益率" class="red">-1.28%</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">东方人工智能主题混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">238,341.55</td><td data-label="市值">302,245.30</td><td data-label="今日" class="red">-1,026.02</td><td data-label="累计" class="green">+63,903.75</td><td data-label="收益率" class="green">+26.81%</td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">华夏科创半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/024418.html" target="_blank">024418 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">111,374.88</td><td data-label="市值">105,975.21</td><td data-label="今日" class="red">-739.49</td><td data-label="累计" class="red">-5,399.67</td><td data-label="收益率" class="red">-4.84%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,255.92</td><td data-label="市值">168,698.55</td><td data-label="今日" class="green">+181.31</td><td data-label="累计" class="green">+52,442.63</td><td data-label="收益率" class="green">+45.11%</td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">广发半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020640.html" target="_blank">020640 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">100,000.00</td><td data-label="市值">98,721.82</td><td data-label="今日" class="red">-388.57</td><td data-label="累计" class="red">-1,278.18</td><td data-label="收益率" class="red">-1.28%</td></tr>
     <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">565,972.35</td><td data-label="市值">675,640.88</td><td data-label="今日" class="red">-1,972.77</td><td data-label="累计" class="green">+109,668.53</td><td data-label="收益率" class="green">+19.38%</td></tr>
 
     <tr class="cat-row"><td colspan="8">🌍 QDII 基金（5 只）</td></tr>
-    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000.00</td><td data-label="市值">515,542.37</td><td data-label="今日" class="red">-21,504.50</td><td data-label="累计" class="green">+25,542.40</td><td data-label="收益率" class="green">+5.21%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,000.00</td><td data-label="市值">257,671.98</td><td data-label="今日" class="red">-16,403.23</td><td data-label="累计" class="green">+107,671.98</td><td data-label="收益率" class="green">+71.78%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,000.00</td><td data-label="市值">163,895.62</td><td data-label="今日" class="red">-6,004.38</td><td data-label="累计" class="green">+48,895.62</td><td data-label="收益率" class="green">+42.52%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000.00</td><td data-label="市值">101,434.23</td><td data-label="今日" class="red">-6,439.60</td><td data-label="累计" class="green">+41,434.23</td><td data-label="收益率" class="green">+69.06%</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,566.79</td><td data-label="市值">70,599.35</td><td data-label="今日" class="red">-2,652.00</td><td data-label="累计" class="green">+29,032.56</td><td data-label="收益率" class="green">+69.85%</td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000.00</td><td data-label="市值">515,542.37</td><td data-label="今日" class="red">-21,504.50</td><td data-label="累计" class="green">+25,542.40</td><td data-label="收益率" class="green">+5.21%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,000.00</td><td data-label="市值">257,671.98</td><td data-label="今日" class="red">-16,403.23</td><td data-label="累计" class="green">+107,671.98</td><td data-label="收益率" class="green">+71.78%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,000.00</td><td data-label="市值">163,895.62</td><td data-label="今日" class="red">-6,004.38</td><td data-label="累计" class="green">+48,895.62</td><td data-label="收益率" class="green">+42.52%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000.00</td><td data-label="市值">101,434.23</td><td data-label="今日" class="red">-6,439.60</td><td data-label="累计" class="green">+41,434.23</td><td data-label="收益率" class="green">+69.06%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,566.79</td><td data-label="市值">70,599.35</td><td data-label="今日" class="red">-2,652.00</td><td data-label="累计" class="green">+29,032.56</td><td data-label="收益率" class="green">+69.85%</td></tr>
     <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">856,566.79</td><td data-label="市值">1,109,143.55</td><td data-label="今日" class="red">-53,003.71</td><td data-label="累计" class="green">+252,576.79</td><td data-label="收益率" class="green">+29.49%</td></tr>
 
     <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">2,266,206.42</td><td data-label="市值" style="font-weight:700">2,628,451.71</td><td data-label="今日" class="red">-54,976.48</td><td data-label="累计" class="green">+362,245.32</td><td data-label="收益率" class="green">+15.98%</td></tr>
@@ -517,7 +517,7 @@
     <tr style="background:rgba(59,130,246,.03)"><td data-label="主题"><strong>🔬 A股半导体（非设备）</strong></td><td data-label="基金">020470</td><td data-label="市值">168,699</td><td data-label="占比">6.4%</td><td data-label="说明">跨设计/封测/材料方向</td></tr>
     <tr style="background:rgba(59,130,246,.02)"><td data-label="主题"><strong>🚗 全球新能源车</strong></td><td data-label="基金">018036</td><td data-label="市值">163,896</td><td data-label="占比">6.3%</td><td data-label="说明">比亚迪/特斯拉等</td></tr>
     <tr style="background:rgba(148,163,184,.06)"><td data-label="主题"><strong>💵 现金（防御）</strong></td><td data-label="基金">余额宝</td><td data-label="市值">843,667</td><td data-label="占比"><strong>31.5%</strong></td><td data-label="说明">CPI后择机部署</td></tr>
-    <tr class="subtotal" style="background:rgba(239,68,68,.04)"><td colspan="2">⚠️ 半导体总集中度（全球+A股）</td><td data-label="市值" class="red">1,621,420</td><td data-label="占比" class="red"><strong>61.9%</strong></td><td data-label="说明">超六成押注半导体产业链</td></tr>
+    <tr class="subtotal" style="background:rgba(34,197,94,.04)"><td colspan="2">⚠️ 半导体总集中度（全球+A股）</td><td data-label="市值" class="red">1,621,420</td><td data-label="占比" class="red"><strong>61.9%</strong></td><td data-label="说明">超六成押注半导体产业链</td></tr>
   </tbody></table>
   </div>
 
@@ -532,8 +532,8 @@
     <tr><td data-label="基金">017731 嘉实全球产业升级</td><td data-label="市值">515,542</td><td data-label="成本">490,000</td><td data-label="盈亏" class="green">+25,542</td><td data-label="收益率" class="green">+5.2%</td><td data-label="状态">⚠️ 薄垫</td></tr>
     <tr><td data-label="基金">018036 长城全球新能源车</td><td data-label="市值">163,896</td><td data-label="成本">115,000</td><td data-label="盈亏" class="green">+48,896</td><td data-label="收益率" class="green">+42.5%</td><td data-label="状态">✅ 安全</td></tr>
     <tr><td data-label="基金">006373 国富全球科技</td><td data-label="市值">70,599</td><td data-label="成本">41,567</td><td data-label="盈亏" class="green">+29,033</td><td data-label="收益率" class="green">+69.9%</td><td data-label="状态">✅ 深度安全垫</td></tr>
-    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">024418 华夏科创半导体</td><td data-label="市值">105,975</td><td data-label="成本">111,375</td><td data-label="盈亏" class="red">-5,400</td><td data-label="收益率" class="red">-4.8%</td><td data-label="status">🔴 浮亏</td></tr>
-    <tr style="background:rgba(239,68,68,.04)"><td data-label="基金">020640 广发半导体设备</td><td data-label="市值">98,722</td><td data-label="成本">100,000</td><td data-label="盈亏" class="red">-1,278</td><td data-label="收益率" class="red">-1.3%</td><td data-label="状态">🔴 浮亏</td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">024418 华夏科创半导体</td><td data-label="市值">105,975</td><td data-label="成本">111,375</td><td data-label="盈亏" class="red">-5,400</td><td data-label="收益率" class="red">-4.8%</td><td data-label="status">🔴 浮亏</td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">020640 广发半导体设备</td><td data-label="市值">98,722</td><td data-label="成本">100,000</td><td data-label="盈亏" class="red">-1,278</td><td data-label="收益率" class="red">-1.3%</td><td data-label="状态">🔴 浮亏</td></tr>
     <tr class="subtotal"><td>基金合计（9只）</td><td data-label="市值">1,784,784</td><td data-label="成本">1,422,529</td><td data-label="盈亏" class="green">+362,245</td><td data-label="收益率" class="green">+25.5%</td><td data-label="状态">7盈2亏</td></tr>
     <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>含现金总计</td><td data-label="市值">2,628,452</td><td data-label="成本">2,266,196</td><td data-label="盈亏" class="green">+362,245</td><td data-label="收益率" class="green">+16.0%</td><td data-label="状态">—</td></tr>
   </tbody></table>
@@ -648,7 +648,7 @@
       <div class="thermo-info">🔄 反弹启动</div>
     </div>
   </div>
-  <div style="font-size:.78rem;color:var(--text);padding:8px;background:rgba(239,68,68,.06);border-radius:8px;margin-bottom:10px">
+  <div style="font-size:.78rem;color:var(--text);padding:8px;background:rgba(34,197,94,.06);border-radius:8px;margin-bottom:10px">
     <strong style="color:var(--green)">CPI超级利好+A股V型反转，反弹启动。</strong>盘中-142亿午后收窄至-124亿，科创50从-1%翻红至+0.77%。隔夜美股SOX-4.78%暴跌，A股走出独立行情——1.27万亿放量上攻。5日累计-615亿仍在高位，但元件(+141亿)/通信设备(+92亿)成全市场最强吸金方向。当前定位：<strong>CPI已确认利好，反弹窗口打开。等今晚美股验证。</strong>
   </div>
   <div class="thermo-factors">
@@ -785,10 +785,10 @@ function buildAlphaHeatmap(){
     let bg;
     if(a>=0){
       const alpha=intensity*0.7+0.15;
-      bg=`rgba(34,197,94,${alpha.toFixed(2)})`;
+      bg=`rgba(239,68,68,${alpha.toFixed(2)})`;
     }else{
       const alpha=intensity*0.7+0.15;
-      bg=`rgba(239,68,68,${alpha.toFixed(2)})`;
+      bg=`rgba(34,197,94,${alpha.toFixed(2)})`;
     }
     const sign=a>=0?'+':'';
     rowHtml+=`<div class="hm-cell" style="background:${bg}" title="${alphas[i].date} | 组合收益:${alphas[i].daily>=0?'+':''}${alphas[i].daily.toFixed(0)} | 沪深300:${sign}${a.toFixed(2)}% alpha">${parts[1]}</div>`;
@@ -886,10 +886,10 @@ const alertData=[
   alertData.sort((a,b)=>a.pct-b.pct);
   alertData.forEach(d=>{
     let color,dot,bg;
-    if(d.pct<0){color='var(--red)';dot='#ef4444';bg='rgba(239,68,68,.6)';}
+    if(d.pct<0){color='var(--red)';dot='#22c55e';bg='rgba(34,197,94,.6)';}
     else if(d.pct<5){color='var(--amber)';dot='#f59e0b';bg='rgba(245,158,11,.5)';}
-    else if(d.pct<20){color='var(--green)';dot='#22c55e';bg='rgba(34,197,94,.5)';}
-    else{color='var(--green)';dot='#22c55e';bg='rgba(34,197,94,.7)';}
+    else if(d.pct<20){color='var(--green)';dot='#ef4444';bg='rgba(239,68,68,.5)';}
+    else{color='var(--green)';dot='#ef4444';bg='rgba(239,68,68,.7)';}
     const fillW=Math.max(0,Math.min(100,d.pct*2));
     const row=document.createElement('div');
     row.className='alert-row';
@@ -901,7 +901,7 @@ const alertData=[
 // Feature 6: Radar Chart
 const radarFunds={
   '017811':{name:'017811 东方AI',color:'#3b82f6',data:[26.81,63904,-0.34,11.5,26.81]},
-  '024418':{name:'024418 科创半导体',color:'#ef4444',data:[-4.84,-5400,-0.68,4.0,-4.84]},
+  '024418':{name:'024418 科创半导体',color:'#22c55e',data:[-4.84,-5400,-0.68,4.0,-4.84]},
   '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[5.21,25542,-4.00,19.6,5.21]},
   '018147':{name:'018147 建信C',color:'#a855f7',data:[71.78,107672,-6.00,9.8,71.78]},
   '020470':{name:'020470 长城半导体',color:'#10b981',data:[45.11,52443,0.11,6.4,45.11]},
@@ -958,7 +958,7 @@ function initOverview(){
   if(chartInit.overview)return;chartInit.overview=true;
   const fn=['017811 人工智能','024418 科创半导体','020470 长城半导体','020640 广发半导体','018147 建信C','539002 建信A','018036 新能源车','006373 国富科技','017731 嘉实产业'];
   const fp=[-0.34,-0.68,0.11,-0.39,-6.00,-5.97,-3.53,-3.62,-5.50];
-  new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(34,197,94,.7)':'rgba(239,68,68,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
+  new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
   new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','024418 科创半导体材料','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','020640 广发半导体','006373 国富科技互联'],datasets:[{data:[843667.28,515542.37,302245.30,257671.98,105975.21,168698.55,163895.62,101434.23,98721.82,70599.35],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#06b6d4','#8b5cf6','#10b981','#c084fc','#0ea5e9','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
 }
 
@@ -981,17 +981,17 @@ function initHistory(){
       const yBot=yScale.getPixelForValue(dd.troughVal);
       const ctx=chart.ctx;
       ctx.save();
-      ctx.fillStyle='rgba(239,68,68,0.08)';
+      ctx.fillStyle='rgba(34,197,94,0.08)';
       ctx.fillRect(x1,yTop,x2-x1,yBot-yTop);
       // border lines
-      ctx.strokeStyle='rgba(239,68,68,0.3)';
+      ctx.strokeStyle='rgba(34,197,94,0.3)';
       ctx.lineWidth=1;
       ctx.setLineDash([3,3]);
       ctx.beginPath();ctx.moveTo(x1,yTop);ctx.lineTo(x2,yTop);ctx.stroke();
       ctx.beginPath();ctx.moveTo(x2,yBot);ctx.lineTo(x1,yBot);ctx.stroke();
       ctx.setLineDash([]);
       // text
-      ctx.fillStyle='rgba(239,68,68,0.8)';
+      ctx.fillStyle='rgba(34,197,94,0.8)';
       ctx.font='11px -apple-system,sans-serif';
       ctx.textAlign='center';
       const midX=(x1+x2)/2;
@@ -1008,7 +1008,7 @@ function initHistory(){
     data:{
       labels:dates,
       datasets:[
-        {label:'累计收益',data:cum,borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,.05)',fill:true,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,yAxisID:'y'},
+        {label:'累计收益',data:cum,borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,.05)',fill:true,tension:.3,pointRadius:0,pointHoverRadius:4,borderWidth:2,yAxisID:'y'},
         {label:'事件',data:eventData,type:'scatter',backgroundColor:'#fbbf24',borderColor:'#f59e0b',pointStyle:'rectRot',pointRadius:6,pointHoverRadius:8,yAxisID:'y',showLine:false}
       ]
     },
@@ -1037,7 +1037,7 @@ function initHistory(){
   });
 
   const l30=daily.slice(-30),d30=dates.slice(-30);
-  new Chart(document.getElementById('dailyBar'),{type:'bar',data:{labels:d30,datasets:[{data:l30,backgroundColor:l30.map(v=>v>=0?'rgba(34,197,94,.7)':'rgba(239,68,68,.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(100,116,139,.05)'}},x:{grid:{display:false}}}}});
+  new Chart(document.getElementById('dailyBar'),{type:'bar',data:{labels:d30,datasets:[{data:l30,backgroundColor:l30.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(100,116,139,.05)'}},x:{grid:{display:false}}}}});
   new Chart(document.getElementById('platformChart'),{type:'bar',data:{labels:['支付宝','嘉实'],datasets:[{data:[848342.24,184961.40],backgroundColor:['#3b82f6','#f59e0b'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},indexAxis:'y'}});
 
   // Feature C: Build alpha heatmap after charts are created
@@ -1054,7 +1054,7 @@ function initHistory(){
     type:'line',
     data:{labels:dates,datasets:[{
       label:'回撤%',data:uwData,
-      borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,.15)',
+      borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,.15)',
       fill:{target:'origin'},tension:.2,pointRadius:0,pointHoverRadius:4,borderWidth:1.5
     }]},
     options:{responsive:true,maintainAspectRatio:false,
@@ -1068,7 +1068,7 @@ function initHistory(){
 
 function initMonthly(){
   if(chartInit.monthly)return;chartInit.monthly=true;
-  new Chart(document.getElementById('monthlyChart'),{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月','7月'],datasets:[{data:[191743.86,31903.36,-181996.27,425432.79,261045.53,534451.94,-326225.77],backgroundColor:['rgba(34,197,94,.7)','rgba(34,197,94,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)','rgba(34,197,94,.7)','rgba(34,197,94,.7)','rgba(239,68,68,.7)'],borderRadius:6,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  new Chart(document.getElementById('monthlyChart'),{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月','7月'],datasets:[{data:[191743.86,31903.36,-181996.27,425432.79,261045.53,534451.94,-326225.77],backgroundColor:['rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)'],borderRadius:6,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
 }
 
 function initAlloc(){
@@ -1212,27 +1212,27 @@ function initSemicon(){
     '<text x="277" y="72" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">⚙️ 半导体设备</text>'+
     '<text x="277" y="92" fill="#64748b" font-size="10" text-anchor="middle">光刻 · 刻蚀 · 薄膜沉积 · 检测</text>'+
     '<text x="277" y="107" fill="#3b82f6" font-size="10" text-anchor="middle">⬅ 你的重仓环节</text>'+
-    '<rect x="210" y="135" width="65" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="242" y="149" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">024418 ¥22万</text>'+
-    '<rect x="280" y="135" width="65" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="312" y="149" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">020640 ¥10万</text>'+
+    '<rect x="210" y="135" width="65" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="242" y="149" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">024418 ¥22万</text>'+
+    '<rect x="280" y="135" width="65" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="312" y="149" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">020640 ¥10万</text>'+
     '<line x1="360" y1="88" x2="400" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
     '<rect x="400" y="35" width="185" height="105" rx="8" fill="rgba(59,130,246,.08)" stroke="#3b82f6" stroke-width="2"/>'+
     '<text x="492" y="62" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">🏗️ 制造 / 代工</text>'+
     '<text x="492" y="82" fill="#64748b" font-size="10" text-anchor="middle">逻辑芯片 · 存储芯片 · 晶圆代工</text>'+
     '<text x="492" y="97" fill="#3b82f6" font-size="10" text-anchor="middle">⬅ QDII主战场</text>'+
-    '<rect x="410" y="145" width="80" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="450" y="159" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">017731 ¥56万 🔥</text>'+
-    '<rect x="495" y="145" width="80" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="535" y="159" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">018147 ¥27万</text>'+
-    '<rect x="410" y="168" width="80" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="450" y="182" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">006373 ¥7.4万</text>'+
+    '<rect x="410" y="145" width="80" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="450" y="159" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">017731 ¥56万 🔥</text>'+
+    '<rect x="495" y="145" width="80" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="535" y="159" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">018147 ¥27万</text>'+
+    '<rect x="410" y="168" width="80" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="450" y="182" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">006373 ¥7.4万</text>'+
     '<line x1="460" y1="140" x2="300" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
     '<line x1="520" y1="140" x2="510" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>'+
-    '<rect x="240" y="210" width="120" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="300" y="224" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">017811 ¥31万 跨设备/制造</text>'+
-    '<rect x="240" y="234" width="120" height="20" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>'+
-    '<text x="300" y="248" fill="#22c55e" font-size="9" font-weight="500" text-anchor="middle">020470 ¥17万 制造/设计</text>'+
+    '<rect x="240" y="210" width="120" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="300" y="224" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">017811 ¥31万 跨设备/制造</text>'+
+    '<rect x="240" y="234" width="120" height="20" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
+    '<text x="300" y="248" fill="#ef4444" font-size="9" font-weight="500" text-anchor="middle">020470 ¥17万 制造/设计</text>'+
     '<rect x="195" y="280" width="145" height="65" rx="8" fill="rgba(30,41,59,.6)" stroke="#1e293b" stroke-width="1.5"/>'+
     '<text x="267" y="307" fill="#e2e8f0" font-size="13" font-weight="600" text-anchor="middle">📦 封装测试</text>'+
     '<text x="267" y="327" fill="#64748b" font-size="10" text-anchor="middle">先进封装 · Chiplet · 3D堆叠</text>'+
