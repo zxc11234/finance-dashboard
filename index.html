@@ -540,7 +540,7 @@
     <strong>📌 配置变迁</strong><br>
     · 年初以国内半导体基金为主（80%），逐步加仓 QDII 全球配置。<br>
     · 7/15清仓024418+020640后现金占比升至约40%，等待长鑫IPO+台积电法说会后明确信号。<br>
-    · 当前 QDII 占比约63%，国内基金约26%，现金约40%。（到账后更新精确值）<br>
+    · 当前 QDII 占比约43%，国内基金约25%，现金约32%（赎回到账后现金升至~40%）。（到账后更新精确值）<br>
     · ⚠️ 半导体总集中度 61.9%（全球37%+A股25%），是组合的核心风险敞口。
   </div>
 </div>
@@ -1080,10 +1080,10 @@ function drawRadar(){
 }
 function initOverview(){
   if(chartInit.overview)return;chartInit.overview=true;
-  const fn=['017811 人工智能','024418 科创半导体','020470 长城半导体','020640 广发半导体','018147 建信C','539002 建信A','018036 新能源车','006373 国富科技','017731 嘉实产业'];
-  const fp=[-0.34,-0.68,0.11,-0.39,-6.00,-5.97,-3.53,-3.62,-5.50];
+  const fn=['017731 嘉实产业','018147 建信C','539002 建信A','006373 国富科技','018036 新能源车','020470 长城半导体','024418 科创半导体🔄','020640 广发半导体🔄','017811 人工智能'];
+  const fp=[2.60,2.65,2.66,2.71,2.13,-4.48,-6.44,-6.29,-5.20];
   new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
-  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','024418 科创半导体材料','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','020640 广发半导体','006373 国富科技互联'],datasets:[{data:[843667.28,515542.37,302245.30,257671.98,105975.21,168698.55,163895.62,101434.23,98721.82,70599.35],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#06b6d4','#8b5cf6','#10b981','#c084fc','#0ea5e9','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
+  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','024418 科创半导体材料','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','020640 广发半导体','006373 国富科技互联'],datasets:[{data:[843667.28,528963.53,289138.41,264446.06,105975.21,154691.15,167499.46,104178.92,98721.82,72563.91],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#06b6d4','#8b5cf6','#10b981','#c084fc','#0ea5e9','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
 }
 
 function initHistory(){
@@ -1202,7 +1202,7 @@ function initAlloc(){
     type:'doughnut',
     data:{
       labels:['国内基金','QDII','现金'],
-      datasets:[{data:[29.5,43.3,27.2],backgroundColor:['#3b82f6','#f59e0b','#94a3b8'],borderColor:'#131826',borderWidth:2}]
+      datasets:[{data:[24.7,43.3,32.0],backgroundColor:['#3b82f6','#f59e0b','#94a3b8'],borderColor:'#131826',borderWidth:2}]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
