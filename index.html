@@ -284,13 +284,13 @@
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;vertical-align:middle">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月15日净值 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标 · 含最大回撤/资产配置/风险指标</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月16日净值 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
-  <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,634,535</div><div class="kpi-sub">基金 ~1,778,545 + 余额宝 843,667（含赎回中）</div></div>
-  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+930,115.56</div><div class="kpi-sub">支付宝 +772,880 · 嘉实 +158,202 · 收益率 60.22%</div></div>
-  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/15 实际)</div><div class="kpi-value red">-6,239.88</div><div class="kpi-sub">QDII +28,374 / A股 -34,614</div></div>
-  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-332,465.65</div><div class="kpi-sub">11 个交易日</div></div>
+  <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,601,020</div><div class="kpi-sub">基金 ~1,565,000 + 余额宝 1,036,020（含7/15赎回回款约19.2万）</div></div>
+  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+930,116</div><div class="kpi-sub">支付宝 +772,880 · 嘉实 +158,202 · 收益率 60.22%</div></div>
+  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/16 盘中)</div><div class="kpi-value red">-22,800</div><div class="kpi-sub">017811 -18,870 + 020470 -3,985 / QDII基本持平</div></div>
+  <div class="kpi-card"><div class="kpi-label">📅 7月已实现</div><div class="kpi-value red">-332,465.65</div><div class="kpi-sub">12 个交易日</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">59.8%</div><div class="kpi-sub">76 盈 / 51 亏 / 06 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">7,323.74</div><div class="kpi-sub">最高 +93,183.78 · 最大 -165,316.30</div></div>
   <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-165,316.30</div><div class="kpi-sub" id="maxDDSub">3/13 → 3/31</div></div>
@@ -315,22 +315,22 @@
 <div id="tab-overview">
   <!-- Stress Test -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>🔥 情景压力测试 <span class="news-meta">· ✅ CPI已公布：四项全beat，利好兑现</span></h3>
+  <h3>🔥 情景压力测试 <span class="news-meta">· 📉 7/16收盘：A股半导体暴跌，TSMC Q2超预期</span></h3>
   <div class="stress-grid">
     <div class="stress-card green-s">
-      <div class="stress-label">✅ CPI 远超预期（已兑现！）</div>
+      <div class="stress-label">✅ TSMC Q2超预期（已兑现！）</div>
       <div class="stress-val green">+39,116</div>
-      <div class="stress-detail">CPI已兑现利好→SOX+2.54%反弹<br>ASML Q2超预期→全球产业链确认强劲<br>今晚关注台积电法说会前美股走势</div>
+      <div class="stress-detail">TSMC Q2净利T$706.6亿(+77%)创纪录<br>AI需求持续爆发→全球产业链确认强劲<br>但A股流动性踩踏独立于基本面</div>
     </div>
     <div class="stress-card amber-s">
       <div class="stress-label">🟡 CPI 符合预期</div>
       <div class="stress-val amber">-3,369</div>
-      <div class="stress-detail">QDII 持平(0%)<br>A股情绪余震 -0.5%(-¥3K)<br>长鑫IPO抽血延续</div>
+      <div class="stress-detail">QDII 持平(0%)<br>A股情绪余震 -0.5%(-¥3K)<br>半导体单日流出218亿</div>
     </div>
     <div class="stress-card red-s">
       <div class="stress-label">🔴 CPI 高于预期</div>
       <div class="stress-val red">-42,484</div>
-      <div class="stress-detail">降息预期回落→QDII -2.5%(-¥29K)<br>A股科技同步承压 -2%(-¥13K)<br>现金仍是护盾</div>
+      <div class="stress-detail">降息预期回落→QDII -2.5%(-¥29K)<br>A股科技同步承压 -2%(-¥9K)<br>现金仍是护盾</div>
     </div>
     <div class="stress-card dark-s">
       <div class="stress-label">🟣 极端情景</div>
@@ -338,19 +338,19 @@
       <div class="stress-detail">CPI大超预期+地缘升级<br>QDII -4%(-¥46K) A股 -3%(-¥20K)<br>历史最大回撤 -¥165K</div>
     </div>
   </div>
-  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 基于当前持仓(QDII ¥116万/A股 ¥67万/现金 ¥84万)静态测算，不考虑盘中操作。现金¥844K在任何情景下均不受损。</div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 基于当前持仓(QDII ¥114万/A股 ¥43万/现金 ¥104万)静态测算，不考虑盘中操作。现金¥104万在任何情景下均不受损。</div>
   </div>
 
   <div class="us-panel">
-    <div class="us-panel-title">🇺🇸 7/14收盘 · ASML Q2超预期 半导体反弹</div>
+    <div class="us-panel-title">🇺🇸 7/15收盘 · TSMC Q2创纪录 盘后+0.97%</div>
     <div class="us-cards">
-      <div class="us-card"><div class="us-label">纳斯达克</div><div class="us-value">26,107</div><div class="us-change green">+0.90%</div></div>
-      <div class="us-card"><div class="us-label">费城半导体 SOX</div><div class="us-value">12,662</div><div class="us-change green">+2.54%</div></div>
-      <div class="us-card"><div class="us-label">英伟达 NVDA</div><div class="us-value">$211.80</div><div class="us-change green">+4.06%</div></div>
-      <div class="us-card"><div class="us-label">美光 MU</div><div class="us-value">$983</div><div class="us-change green">+4.92%</div></div>
-      <div class="us-card"><div class="us-label">高盛 GS</div><div class="us-value">$1,140</div><div class="us-change green">+9.00%</div></div>
+      <div class="us-card"><div class="us-label">纳斯达克</div><div class="us-value">26,268</div><div class="us-change green">+0.62%</div></div>
+      <div class="us-card"><div class="us-label">费城半导体 SOX</div><div class="us-value">12,690</div><div class="us-change green">+0.22%</div></div>
+      <div class="us-card"><div class="us-label">英伟达 NVDA</div><div class="us-value">$208.34</div><div class="us-change red">-1.63%</div></div>
+      <div class="us-card"><div class="us-label">台积电 TSM</div><div class="us-value">$423.50</div><div class="us-change green">盘后+0.97%</div></div>
+      <div class="us-card"><div class="us-label">美光 MU</div><div class="us-value">$904</div><div class="us-change red">-8.02%</div></div>
     </div>
-    <div class="us-note">💡 美股7/15收盘：纳指+0.62%，但MU暴跌-8%（长鑫竞争恐惧），ASML"beat but sell"（+2.23%）。A股7/15：科创50-4.25%，半导体流出305亿。今日(7/16)：台积电法说会+长鑫申购。017731明日净值预估-0.8%~-1.2%。</div>
+    <div class="us-note">💡 美股7/15收盘：纳指+0.62%三连涨，但MU-8%（长鑫竞争恐惧）。TSMC盘后公布Q2净利T$706.6亿(+77%)创纪录，大超预期，ADR盘后+0.97%报$423.50。A股7/16收盘：上证-1.83%深成-2.07%，半导体主力流出218亿。</div>
   </div>
 
   <!-- Feature 1: Economic Calendar -->
@@ -368,11 +368,11 @@
   <!-- QDII NAV Lag Board -->
   <div class="table-card" style="margin-bottom:14px">
   <h3>🕐 QDII 净值延迟看板</h3>
-  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/13 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/14 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/14 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/14 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/14 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
+  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/14 → 延迟1天</div></div><div class="lag-status amber">正常</div></div>
   <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。017731嘉实直销延迟更久(可能T+3)。当前显示的收益可能是数天前的数据，不代表最新持仓盈亏。</div>
   </div>
 
@@ -383,32 +383,30 @@
 
   <div class="table-card"><h3>当前持仓明细</h3>
   <table><thead><tr><th>基金名称</th><th>代码</th><th>平台</th><th>成本</th><th>市值</th><th>今日收益</th><th>累计收益</th><th>收益率</th></tr></thead><tbody>
-    <tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">843,667.28</td><td data-label="市值" style="font-weight:700">843,667.28</td><td data-label="今日" class="muted">0.00</td><td data-label="累计" class="green">+4,861.90</td><td data-label="收益率" class="green">+0.58%</td></tr>
+    <tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">1,036,020.28</td><td data-label="市值" style="font-weight:700">1,036,020.28</td><td data-label="今日" class="muted">0.00</td><td data-label="累计" class="green">+4,861.90</td><td data-label="收益率" class="green">+0.58%</td></tr>
 
-    <tr class="cat-row"><td colspan="8">🇨🇳 国内基金（4 只持仓）</td></tr>
-    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">东方人工智能主题混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">238,341.55</td><td data-label="市值">287,210</td><td data-label="今日" class="red">-15,035.51</td><td data-label="累计" class="green">+63,903.75</td><td data-label="收益率" class="green">+20.5%</td></tr>
-    <tr style="background:rgba(148,163,184,.08);opacity:0.7"><td data-label="基金">🔄 华夏科创半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/024418.html" target="_blank">024418 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">111,374.88</td><td data-label="市值">105,975.21</td><td data-label="今日" class="amber" style="font-size:.75rem">赎回中</td><td data-label="累计" class="red">-5,399.67</td><td data-label="收益率" class="red">-4.84%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,255.92</td><td data-label="市值">161,442</td><td data-label="今日" class="red">-7,256.40</td><td data-label="累计" class="green">+52,442.63</td><td data-label="收益率" class="green">+38.9%</td></tr>
-    <tr style="background:rgba(148,163,184,.08);opacity:0.7"><td data-label="基金">🔄 广发半导体材料设备 ETF 联接 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020640.html" target="_blank">020640 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">100,000.00</td><td data-label="市值">98,721.82</td><td data-label="今日" class="amber" style="font-size:.75rem">赎回中</td><td data-label="累计" class="red">-1,278.18</td><td data-label="收益率" class="red">-1.28%</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">565,972.35</td><td data-label="市值">653,349.88</td><td data-label="今日" class="red">-34,614.02</td><td data-label="累计" class="green">+109,668.53</td><td data-label="收益率" class="green">+15.4%</td></tr>
+    <tr class="cat-row"><td colspan="8">🇨🇳 国内基金（2 只持仓）</td></tr>
+    <tr style="background:rgba(34,197,94,.02)"><td data-label="基金">东方人工智能主题混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">238,341.55</td><td data-label="市值">268,000</td><td data-label="今日" class="red">-18,870</td><td data-label="累计" class="green">+48,869</td><td data-label="收益率" class="green">+12.6%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,255.92</td><td data-label="市值">157,000</td><td data-label="今日" class="red">-3,985</td><td data-label="累计" class="green">+48,458</td><td data-label="收益率" class="green">+35.4%</td></tr>
+    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">354,597.47</td><td data-label="市值">425,000</td><td data-label="今日" class="red">-22,855</td><td data-label="累计" class="green">+97,327</td><td data-label="收益率" class="green">+19.8%</td></tr>
 
     <tr class="cat-row"><td colspan="8">🌍 QDII 基金（5 只）</td></tr>
-    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000.00</td><td data-label="市值">528,963.53</td><td data-label="今日" class="green">+13,421.16</td><td data-label="累计" class="green">+38,963.56</td><td data-label="收益率" class="green">+7.95%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,000.00</td><td data-label="市值">264,516</td><td data-label="今日" class="red">+6,843.73</td><td data-label="累计" class="green">+107,671.98</td><td data-label="收益率" class="green">+76.3%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,000.00</td><td data-label="市值">167,396</td><td data-label="今日" class="red">+3,500.01</td><td data-label="累计" class="green">+48,895.62</td><td data-label="收益率" class="green">+45.6%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000.00</td><td data-label="市值">104,128</td><td data-label="今日" class="red">+2,693.69</td><td data-label="累计" class="green">+41,434.23</td><td data-label="收益率" class="green">+73.5%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,566.79</td><td data-label="市值">72,515</td><td data-label="今日" class="red">+1,915.55</td><td data-label="累计" class="green">+29,032.56</td><td data-label="收益率" class="green">+74.4%</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">856,566.79</td><td data-label="市值">1,109,143.55</td><td data-label="今日" class="green">+28,374.14</td><td data-label="累计" class="green">+252,576.79</td><td data-label="收益率" class="green">+29.49%</td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000.00</td><td data-label="市值">530,000</td><td data-label="今日" class="green">+690</td><td data-label="累计" class="green">+39,654</td><td data-label="收益率" class="green">+8.09%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,000.00</td><td data-label="市值">265,000</td><td data-label="今日" class="green">+345</td><td data-label="累计" class="green">+108,017</td><td data-label="收益率" class="green">+76.6%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,000.00</td><td data-label="市值">168,000</td><td data-label="今日" class="green">+300</td><td data-label="累计" class="green">+49,196</td><td data-label="收益率" class="green">+45.8%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000.00</td><td data-label="市值">104,000</td><td data-label="今日" class="green">+135</td><td data-label="累计" class="green">+41,569</td><td data-label="收益率" class="green">+73.8%</td></tr>
+    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,566.79</td><td data-label="市值">73,000</td><td data-label="今日" class="green">+139</td><td data-label="累计" class="green">+29,172</td><td data-label="收益率" class="green">+74.8%</td></tr>
+    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">856,566.79</td><td data-label="市值">1,140,000</td><td data-label="今日" class="green">+1,609</td><td data-label="累计" class="green">+267,608</td><td data-label="收益率" class="green">+31.2%</td></tr>
 
-    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">2,266,206.42</td><td data-label="市值" style="font-weight:700">2,634,535</td><td data-label="今日" class="red">-6,239.88</td><td data-label="累计" class="green">+368,339.32</td><td data-label="收益率" class="green">+25.9%</td></tr>
+    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">2,247,184.54</td><td data-label="市值" style="font-weight:700">2,601,020</td><td data-label="今日" class="red">-21,246</td><td data-label="累计" class="green">+372,796</td><td data-label="收益率" class="green">+26.6%</td></tr>
   </tbody></table></div>
 
   <div class="highlight">
-    <strong>💡 更新说明（7/15 22:00 · 收盘+截图确认）</strong><br>
-    · 📊 <strong>今日收益 -6,240</strong>：QDII 5只回血 +28,374（CPI利好+ASML超预期），A股 4只亏损 -34,614（半导体暴跌）。对冲效率82%。<br>
-    · ❌ <strong>已赎回</strong>：024418(-6,453) + 020640(-5,869) 锁定今日净值结算，预计7/16到账。<br>
-    · 🔥 <strong>017731嘉实全球</strong>：07-14净值4.4891(+2.60%)，单日回血+13,421，持有收益升至+38,964(7.95%)。<br>
-    · 🟢 QDII端验证了全球半导体产业链逻辑——A股拥挤交易清算不影响海外端定价。等明天017731 07-15净值确认后更新精确总资产。
+    <strong>💡 更新说明（7/16 15:00 · 收盘更新）</strong><br>
+    · 📊 <strong>今日收益 -22,800</strong>：017811 -18,870（-6.57%）+ 020470 -3,985（-2.47%），QDII 5只基本持平。<br>
+    · ✅ <strong>7/15已赎回</strong>：024418 + 020640 回款约¥192,353已到余额宝，现金升至¥104万。<br>
+    · 🔥 <strong>TSMC Q2</strong>：净利润T$706.6亿(+77%)创纪录，大超预期。AI需求持续爆发，但A股半导体独立于基本面暴跌。<br>
+    · ⚠️ A股半导体主力流出218亿（全市场-633亿），资金切向IT服务(+17.2亿)和软件开发(+10.2亿)。
   </div>
 </div>
 
@@ -457,12 +455,12 @@
 
   <!-- 💵 Cash Deployment Roadmap -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>💵 现金部署路线图 <span class="news-meta">· ¥843,667 待命</span></h3>
+  <h3>💵 现金部署路线图 <span class="news-meta">· ¥1,036,020 待命</span></h3>
   <div class="roadmap-tree">
     <div class="rm-node"><div class="rm-dot green-d"></div><div class="rm-title">✅ CPI 远超预期（已兑现！）</div>
-      <div class="rm-action">→ CPI四项全beat！等今晚美股收盘确认反弹 → 分批加仓</div><br>
+      <div class="rm-action">→ TSMC Q2超预期(+77%)！等A股半导体企稳信号 → 分批加仓</div><br>
       <div class="rm-amount">部署 ¥20-30万</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">目标：关注017811/020470回调加仓机会，或QDII方向。分2-3批，每批间隔1-2个交易日。保留¥500K+现金底线。</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">目标：关注017811/020470回调加仓机会，或QDII方向。分2-3批，每批间隔1-2个交易日。现金底线≥¥500K。</div>
     </div>
     <div class="rm-node"><div class="rm-dot amber-d"></div><div class="rm-title">🟡 CPI 符合预期（概率 ~45%）</div>
       <div class="rm-action">→ 观望，不急于部署。关注半导体板块资金流是否连续2日企稳</div><br>
@@ -472,36 +470,34 @@
     <div class="rm-node"><div class="rm-dot red-d"></div><div class="rm-title">🔴 CPI 高于预期（概率 ~25%）</div>
       <div class="rm-action">→ 全面防守，不动现金。如果QDII跌超3%，可考虑小额加仓QDII（海外半导体跌比A股少）</div><br>
       <div class="rm-amount">部署 ¥0（防守）</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">现金¥1,037K是最大优势。等长鑫上市后板块企稳+台积电法说会验证AI需求，再择机部署。</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">现金¥1,036K是最大优势。半导体已减仓到位，等资金流出企稳+确定性信号再部署。</div>
     </div>
   </div>
-  <div style="font-size:.68rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律：无论哪个情景，现金底线不低于¥500K（总资产19%）。半导体集中度已62%，不再增加集中度。</div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律：无论哪个情景，现金底线不低于¥500K（总资产19%）。半导体集中度已降至53.7%，不急于增加敞口。</div>
   </div>
 
   <!-- 💰 Capital Structure -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>💰 资金结构总览 <span class="news-meta">· 7/15 收盘 · 总资产 ~¥2,634,535</span></h3>
+  <h3>💰 资金结构总览 <span class="news-meta">· 7/16 收盘 · 总资产 ~¥2,601,020</span></h3>
   <table><thead><tr><th>资产类别</th><th>方向</th><th>市值</th><th>占比</th></tr></thead><tbody>
-    <tr class="cat-row"><td colspan="4">🌍 QDII 海外基金（5 只）— 占比 42.2%</td></tr>
-    <tr><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">528,964</td><td data-label="占比">20.2%</td></tr>
-    <tr><td data-label="基金">建信新兴市场优选混合 C</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">264,516</td><td data-label="占比">9.8%</td></tr>
-    <tr><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="方向">🚗 新能源车</td><td data-label="市值" class="green">167,396</td><td data-label="占比">6.3%</td></tr>
-    <tr><td data-label="基金">建信新兴市场优选混合 A</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">104,128</td><td data-label="占比">3.9%</td></tr>
-    <tr><td data-label="基金">国富全球科技互联 QDII A</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">72,515</td><td data-label="占比">2.7%</td></tr>
-    <tr class="subtotal"><td>QDII 小计</td><td data-label="方向">—</td><td data-label="市值">1,109,144</td><td data-label="占比">42.2%</td></tr>
+    <tr class="cat-row"><td colspan="4">🌍 QDII 海外基金（5 只）— 占比 43.8%</td></tr>
+    <tr><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">530,000</td><td data-label="占比">20.4%</td></tr>
+    <tr><td data-label="基金">建信新兴市场优选混合 C</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">265,000</td><td data-label="占比">10.2%</td></tr>
+    <tr><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="方向">🚗 新能源车</td><td data-label="市值" class="green">168,000</td><td data-label="占比">6.5%</td></tr>
+    <tr><td data-label="基金">建信新兴市场优选混合 A</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">104,000</td><td data-label="占比">4.0%</td></tr>
+    <tr><td data-label="基金">国富全球科技互联 QDII A</td><td data-label="方向">全球半导体/科技</td><td data-label="市值" class="green">73,000</td><td data-label="占比">2.8%</td></tr>
+    <tr class="subtotal"><td>QDII 小计</td><td data-label="方向">—</td><td data-label="市值">1,140,000</td><td data-label="占比">43.8%</td></tr>
 
-    <tr class="cat-row"><td colspan="4">🇨🇳 A股基金（4 只）— 占比 25.2%</td></tr>
-    <tr><td data-label="基金">东方人工智能主题 C</td><td data-label="方向">🔬 半导体设备/AI</td><td data-label="市值" class="green">287,210</td><td data-label="占比">11.5%</td></tr>
-    <tr><td data-label="基金">长城半导体产业 C</td><td data-label="方向">🔬 半导体综合</td><td data-label="市值" class="green">161,443</td><td data-label="占比">6.4%</td></tr>
-    <tr><td data-label="基金">华夏科创半导体设备 ETF C</td><td data-label="方向">🔬 半导体设备</td><td data-label="市值" class="red">105,975</td><td data-label="占比">4.0%</td></tr>
-    <tr><td data-label="基金">广发半导体设备 ETF C</td><td data-label="方向">🔬 半导体设备</td><td data-label="市值" class="red">98,722</td><td data-label="占比">3.8%</td></tr>
-    <tr class="subtotal"><td>A股小计</td><td data-label="方向">—</td><td data-label="市值">675,641</td><td data-label="占比">25.8%</td></tr>
+    <tr class="cat-row"><td colspan="4">🇨🇳 A股基金（2 只）— 占比 16.3%</td></tr>
+    <tr><td data-label="基金">东方人工智能主题 C</td><td data-label="方向">🔬 半导体设备/AI</td><td data-label="市值" class="green">268,000</td><td data-label="占比">10.3%</td></tr>
+    <tr><td data-label="基金">长城半导体产业 C</td><td data-label="方向">🔬 半导体综合</td><td data-label="市值" class="green">157,000</td><td data-label="占比">6.0%</td></tr>
+    <tr class="subtotal"><td>A股小计</td><td data-label="方向">—</td><td data-label="市值">425,000</td><td data-label="占比">16.3%</td></tr>
 
-    <tr class="cat-row"><td colspan="4">💵 现金 — 占比 31.5%</td></tr>
-    <tr><td data-label="基金">余额宝</td><td data-label="方向">💵 灵活取用</td><td data-label="市值">843,667</td><td data-label="占比">31.5%</td></tr>
-    <tr class="subtotal"><td>现金小计</td><td data-label="方向">—</td><td data-label="市值">843,667</td><td data-label="占比">31.5%</td></tr>
+    <tr class="cat-row"><td colspan="4">💵 现金 — 占比 39.8%</td></tr>
+    <tr><td data-label="基金">余额宝</td><td data-label="方向">💵 灵活取用</td><td data-label="市值">1,036,020</td><td data-label="占比">39.8%</td></tr>
+    <tr class="subtotal"><td>现金小计</td><td data-label="方向">—</td><td data-label="市值">1,036,020</td><td data-label="占比">39.8%</td></tr>
 
-    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>总计</td><td data-label="方向">—</td><td data-label="市值" style="font-weight:700">2,628,452</td><td data-label="占比">100%</td></tr>
+    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>总计</td><td data-label="方向">—</td><td data-label="市值" style="font-weight:700">2,601,020</td><td data-label="占比">100%</td></tr>
   </tbody></table>
   </div>
 
@@ -509,12 +505,12 @@
   <div class="table-card" style="margin-bottom:14px">
   <h3>🎯 主题暴露 — 揭示真实集中度</h3>
   <table><thead><tr><th>主题方向</th><th>涉及基金</th><th>合计市值</th><th>占比</th><th>说明</th></tr></thead><tbody>
-    <tr style="background:rgba(59,130,246,.06)"><td data-label="主题"><strong>🌍 全球半导体/科技</strong></td><td data-label="基金">017731+018147+539002+006373</td><td data-label="市值" class="green">945,248</td><td data-label="占比"><strong>36.0%</strong></td><td data-label="说明">美光/台积电/英伟达等全球龙头</td></tr>
-    <tr style="background:rgba(59,130,246,.04)"><td data-label="主题"><strong>🔬 A股半导体设备</strong></td><td data-label="基金">017811+024418+020640</td><td data-label="市值">506,942</td><td data-label="占比"><strong>19.3%</strong></td><td data-label="说明">北方华创/中微/华海清科等国产替代</td></tr>
-    <tr style="background:rgba(59,130,246,.03)"><td data-label="主题"><strong>🔬 A股半导体（非设备）</strong></td><td data-label="基金">020470</td><td data-label="市值">161,443</td><td data-label="占比">6.4%</td><td data-label="说明">跨设计/封测/材料方向</td></tr>
-    <tr style="background:rgba(59,130,246,.02)"><td data-label="主题"><strong>🚗 全球新能源车</strong></td><td data-label="基金">018036</td><td data-label="市值">167,396</td><td data-label="占比">6.3%</td><td data-label="说明">比亚迪/特斯拉等</td></tr>
-    <tr style="background:rgba(148,163,184,.06)"><td data-label="主题"><strong>💵 现金（防御）</strong></td><td data-label="基金">余额宝</td><td data-label="市值">843,667</td><td data-label="占比"><strong>31.5%</strong></td><td data-label="说明">CPI后择机部署</td></tr>
-    <tr class="subtotal" style="background:rgba(34,197,94,.04)"><td colspan="2">⚠️ 半导体总集中度（全球+A股）</td><td data-label="市值" class="red">1,621,420</td><td data-label="占比" class="red"><strong>61.9%</strong></td><td data-label="说明">超六成押注半导体产业链</td></tr>
+    <tr style="background:rgba(59,130,246,.06)"><td data-label="主题"><strong>🌍 全球半导体/科技</strong></td><td data-label="基金">017731+018147+539002+006373</td><td data-label="市值" class="green">972,000</td><td data-label="占比"><strong>37.4%</strong></td><td data-label="说明">美光/台积电/英伟达等全球龙头</td></tr>
+    <tr style="background:rgba(59,130,246,.04)"><td data-label="主题"><strong>🔬 A股半导体设备</strong></td><td data-label="基金">017811</td><td data-label="市值">268,000</td><td data-label="占比"><strong>10.3%</strong></td><td data-label="说明">北方华创/中微/华海清科等国产替代</td></tr>
+    <tr style="background:rgba(59,130,246,.03)"><td data-label="主题"><strong>🔬 A股半导体（非设备）</strong></td><td data-label="基金">020470</td><td data-label="市值">157,000</td><td data-label="占比">6.0%</td><td data-label="说明">跨设计/封测/材料方向</td></tr>
+    <tr style="background:rgba(59,130,246,.02)"><td data-label="主题"><strong>🚗 全球新能源车</strong></td><td data-label="基金">018036</td><td data-label="市值">168,000</td><td data-label="占比">6.3%</td><td data-label="说明">比亚迪/特斯拉等</td></tr>
+    <tr style="background:rgba(148,163,184,.06)"><td data-label="主题"><strong>💵 现金（防御）</strong></td><td data-label="基金">余额宝</td><td data-label="市值">1,036,020</td><td data-label="占比"><strong>39.8%</strong></td><td data-label="说明">CPI后择机部署</td></tr>
+    <tr class="subtotal" style="background:rgba(34,197,94,.04)"><td colspan="2">⚠️ 半导体总集中度（全球+A股）</td><td data-label="市值" class="red">1,397,000</td><td data-label="占比" class="red"><strong>53.7%</strong></td><td data-label="说明">超六成押注半导体产业链</td></tr>
   </tbody></table>
   </div>
 
@@ -522,26 +518,24 @@
   <div class="table-card" style="margin-bottom:14px">
   <h3>📈 盈亏结构 — 安全垫厚度</h3>
   <table><thead><tr><th>基金</th><th>市值</th><th>成本</th><th>浮盈/浮亏</th><th>收益率</th><th>状态</th></tr></thead><tbody>
-    <tr><td data-label="基金">018147 建信新兴市场 C</td><td data-label="市值">264,516</td><td data-label="成本">150,000</td><td data-label="盈亏" class="green">+107,672</td><td data-label="收益率" class="green">+71.8%</td><td data-label="状态">✅ 深度安全垫</td></tr>
-    <tr><td data-label="基金">017811 东方人工智能</td><td data-label="市值">287,210</td><td data-label="成本">238,342</td><td data-label="盈亏" class="green">+63,904</td><td data-label="收益率" class="green">+20.5%</td><td data-label="状态">✅ 安全</td></tr>
-    <tr><td data-label="基金">020470 长城半导体</td><td data-label="市值">161,443</td><td data-label="成本">116,256</td><td data-label="盈亏" class="green">+52,443</td><td data-label="收益率" class="green">+38.9%</td><td data-label="状态">✅ 安全</td></tr>
-    <tr><td data-label="基金">539002 建信新兴市场 A</td><td data-label="市值">104,128</td><td data-label="成本">60,000</td><td data-label="盈亏" class="green">+41,434</td><td data-label="收益率" class="green">+69.1%</td><td data-label="状态">✅ 深度安全垫</td></tr>
-    <tr><td data-label="基金">017731 嘉实全球产业升级</td><td data-label="市值">528,964</td><td data-label="成本">490,000</td><td data-label="盈亏" class="green">+38,964</td><td data-label="收益率" class="green">+7.95%</td><td data-label="状态">✅ 安全</td></tr>
-    <tr><td data-label="基金">018036 长城全球新能源车</td><td data-label="市值">167,396</td><td data-label="成本">115,000</td><td data-label="盈亏" class="green">+48,896</td><td data-label="收益率" class="green">+42.5%</td><td data-label="状态">✅ 安全</td></tr>
-    <tr><td data-label="基金">006373 国富全球科技</td><td data-label="市值">72,515</td><td data-label="成本">41,567</td><td data-label="盈亏" class="green">+29,033</td><td data-label="收益率" class="green">+69.9%</td><td data-label="状态">✅ 深度安全垫</td></tr>
-    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">024418 华夏科创半导体 🔄</td><td data-label="市值">105,975</td><td data-label="成本">111,375</td><td data-label="盈亏" class="red">-5,400</td><td data-label="收益率" class="red">-4.8%</td><td data-label="status">🔴 浮亏</td></tr>
-    <tr style="background:rgba(34,197,94,.04)"><td data-label="基金">020640 广发半导体设备 🔄</td><td data-label="市值">98,722</td><td data-label="成本">100,000</td><td data-label="盈亏" class="red">-1,278</td><td data-label="收益率" class="red">-1.3%</td><td data-label="状态">🔴 浮亏</td></tr>
-    <tr class="subtotal"><td>基金合计（9只）</td><td data-label="市值">1,790,868</td><td data-label="成本">1,422,529</td><td data-label="盈亏" class="green">+368,339</td><td data-label="收益率" class="green">+25.5%</td><td data-label="状态">7盈2亏</td></tr>
-    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>含现金总计</td><td data-label="市值">2,628,452</td><td data-label="成本">2,266,196</td><td data-label="盈亏" class="green">+368,339</td><td data-label="收益率" class="green">+16.0%</td><td data-label="状态">—</td></tr>
+    <tr><td data-label="基金">018147 建信新兴市场 C</td><td data-label="市值">265,000</td><td data-label="成本">150,000</td><td data-label="盈亏" class="green">+115,000</td><td data-label="收益率" class="green">+76.7%</td><td data-label="状态">✅ 深度安全垫</td></tr>
+    <tr><td data-label="基金">017811 东方人工智能</td><td data-label="市值">268,000</td><td data-label="成本">238,342</td><td data-label="盈亏" class="green">+29,658</td><td data-label="收益率" class="green">+12.4%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">020470 长城半导体</td><td data-label="市值">157,000</td><td data-label="成本">116,256</td><td data-label="盈亏" class="green">+40,744</td><td data-label="收益率" class="green">+35.0%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">539002 建信新兴市场 A</td><td data-label="市值">104,000</td><td data-label="成本">60,000</td><td data-label="盈亏" class="green">+44,000</td><td data-label="收益率" class="green">+73.3%</td><td data-label="状态">✅ 深度安全垫</td></tr>
+    <tr><td data-label="基金">017731 嘉实全球产业升级</td><td data-label="市值">530,000</td><td data-label="成本">490,000</td><td data-label="盈亏" class="green">+40,000</td><td data-label="收益率" class="green">+8.16%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">018036 长城全球新能源车</td><td data-label="市值">168,000</td><td data-label="成本">115,000</td><td data-label="盈亏" class="green">+53,000</td><td data-label="收益率" class="green">+46.1%</td><td data-label="状态">✅ 安全</td></tr>
+    <tr><td data-label="基金">006373 国富全球科技</td><td data-label="市值">73,000</td><td data-label="成本">41,567</td><td data-label="盈亏" class="green">+31,433</td><td data-label="收益率" class="green">+75.6%</td><td data-label="状态">✅ 深度安全垫</td></tr>
+    <tr class="subtotal"><td>基金合计（7只）</td><td data-label="市值">1,565,000</td><td data-label="成本">1,211,154</td><td data-label="盈亏" class="green">+353,839</td><td data-label="收益率" class="green">+29.2%</td><td data-label="状态">7盈0亏</td></tr>
+    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>含现金总计</td><td data-label="市值">2,601,020</td><td data-label="成本">2,247,174</td><td data-label="盈亏" class="green">+353,839</td><td data-label="收益率" class="green">+15.7%</td><td data-label="状态">—</td></tr>
   </tbody></table>
   </div>
 
   <div class="highlight">
     <strong>📌 配置变迁</strong><br>
     · 年初以国内半导体基金为主（80%），逐步加仓 QDII 全球配置。<br>
-    · 7/15清仓024418+020640后现金占比升至约40%，等待长鑫IPO+台积电法说会后明确信号。<br>
-    · 当前 QDII 占比约43%，国内基金约25%，现金约32%（赎回到账后现金升至~40%）。（到账后更新精确值）<br>
-    · ⚠️ 半导体总集中度 61.9%（全球37%+A股25%），是组合的核心风险敞口。
+    · 7/15清仓024418+020640（回款¥192,353），现金升至¥104万(39.8%)。<br>
+    · 当前 QDII 占比约43.8%，国内基金约16.3%，现金约39.8%。<br>
+    · ⚠️ 半导体总集中度 53.7%（全球37.4%+A股16.3%），已完成减仓降集中度。
   </div>
 </div>
 
@@ -552,11 +546,11 @@
     <tr class="cross-hold"><td>美光科技</td><td>MU</td><td>🇺🇸</td><td>017731 + 006373</td><td class="green">7.69%</td><td class="red">🔥 长鑫IPO+存储紧缺</td></tr>
     <tr class="cross-hold"><td>台积电</td><td>TSM</td><td>🇹🇼</td><td>017731 + 006373</td><td class="green">7.03%</td><td style="color:var(--muted)">—</td></tr>
     <tr class="cross-hold"><td>英伟达</td><td>NVDA</td><td>🇺🇸</td><td>017731 + 006373</td><td class="green">5.86%</td><td class="red">回撤 $210→$204</td></tr>
-    <tr class="cross-hold"><td>中微公司</td><td>688012</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">9.06%</td><td class="amber">⚠️ 股东权益变动</td></tr>
-    <tr class="cross-hold"><td>华海清科</td><td>688120</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">9.22%</td><td style="color:var(--muted)">—</td></tr>
-    <tr class="cross-hold"><td>拓荆科技</td><td>688072</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">8.90%</td><td class="red">📢 7/14复牌</td></tr>
+    <tr class="cross-hold"><td>中微公司</td><td>688012</td><td>🇨🇳</td><td>017811</td><td class="green">9.06%</td><td class="amber">⚠️ 股东权益变动</td></tr>
+    <tr class="cross-hold"><td>华海清科</td><td>688120</td><td>🇨🇳</td><td>017811</td><td class="green">9.22%</td><td style="color:var(--muted)">—</td></tr>
+    <tr class="cross-hold"><td>拓荆科技</td><td>688072</td><td>🇨🇳</td><td>017811</td><td class="green">8.90%</td><td class="red">📢 7/14复牌</td></tr>
     <tr class="cross-hold"><td>北方华创</td><td>002371</td><td>🇨🇳</td><td>017811</td><td class="green">9.03%</td><td style="color:var(--muted)">—</td></tr>
-    <tr class="cross-hold"><td>富创精密</td><td>688409</td><td>🇨🇳</td><td>017811 + 024418</td><td class="green">9.34%</td><td style="color:var(--muted)">—</td></tr>
+    <tr class="cross-hold"><td>富创精密</td><td>688409</td><td>🇨🇳</td><td>017811</td><td class="green">9.34%</td><td style="color:var(--muted)">—</td></tr>
     <tr><td>博通</td><td>AVGO</td><td>🇺🇸</td><td>017731</td><td>5.37%</td><td style="color:var(--muted)">—</td></tr>
     <tr><td>拉姆研究</td><td>LRCX</td><td>🇺🇸</td><td>006373</td><td>7.02%</td><td style="color:var(--muted)">—</td></tr>
     <tr><td>寒武纪</td><td>688256</td><td>🇨🇳</td><td>017731</td><td>3.66%</td><td style="color:var(--muted)">—</td></tr>
@@ -568,65 +562,49 @@
 
   <!-- 市场快讯 + 机构研报 双栏 -->
   <div class="news-grid">
-    <div class="table-card"><h3>📰 市场快讯 <span class="news-meta">· 7/15 美股收盘</span></h3>
-    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--red)">🔻【美股收盘】MU暴跌-8.02%！长鑫IPO竞争恐惧直接打美光，MRVL-7.27%/INTC-4.43%/AMAT-2.73%。ASML超预期但"beat but sell"盘前+3.89%→收盘仅+2.23%</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--green)">📈 纳斯达克+0.62%/标普+0.38%，大盘三连涨。科技XLK+0.75%领涨（ASML/AVGO支撑），金融XLF+0.28%（贝莱德超预期）。医疗XLV-0.58%唯一收跌</span><span class="news-src">AP</span></div>
-    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--amber)">⚠️ MU暴跌原因：长鑫存储明日申购→全球DRAM竞争格局生变。Forbes："Can Micron Survive China's Memory Playbook?" 美光毛利率84%面临国产替代侵蚀</span><span class="news-src">Barrons</span></div>
-    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--blue)">🗓️ 台积电今日(7/16)Q2法说会：预期营收$400亿(+32%)，EPS$3.83，毛利率70%。6月营收+68%。这是半导体"beat but sell"循环的最后裁决</span><span class="news-src">综合</span></div>
-    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--red)">🔻【A股收盘】科创50-4.25%/创业板-1.21%。半导体全天净流出305亿，两市成交2.57万亿</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--green)">💊 医药板块集体爆发：创新药/CXO领涨，博瑞医药/迪哲医药/睿智医药20CM涨停，哈药股份4连板。资金系统性切向防御</span><span class="news-src">财联社</span></div>
-    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--green)">🔥 ASML Q2全面超预期：营收€93.3亿(预期€88.5亿)，净利€29.2亿，毛利率54%。全年指引上调至€430-450亿。EUV产能2027年扩30%</span><span class="news-src">IT之家</span></div>
-    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--green)">🇰🇷 SK海力士暴涨12%：ASML财报提振+超跌反弹，韩国半导体率先企稳。港股南方两倍做多海力士大涨24%</span><span class="news-src">网易</span></div>
-    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--blue)">🚢 长鑫科技明日申购：代码688825，发行价8.66元，募资295亿，市值5792亿。科创板史上第二大IPO，半导体设备ETF被动调仓压力巨大</span><span class="news-src">综合</span></div>
-    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--blue)">🗓️ 台积电明日Q2法说会：EPS预期$3.81，毛利率挑战70%，CoWoS扩产+AI需求验证是焦点。ASML超预期已为台积电铺路</span><span class="news-src">非凡</span></div>
-    <div class="news-item"><span class="news-time">7/14</span><span class="news-title" style="color:var(--green)">🔥 CPI环比-0.4%/核心0.0%/同比3.5%/核心2.6%——四项全部碾压预期，六年最大单月跌幅。美股SOX+2.54%/NVDA+4.06%/MU+4.92%强力反弹</span><span class="news-src">BLS</span></div>
-    <div class="news-item"><span class="news-time">7/14</span><span class="news-title" style="color:var(--green)">🟢 A股7/14收盘V型反转：上证+1.36%/创业板+3.43%/科创50翻红+0.77%，成交1.27万亿。隔夜美股暴跌但A股走独立行情</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/14</span><span class="news-title" style="color:var(--amber)">⚠️ 长鑫IPO抽血分析：被动+主动配置资金需500亿+，全部取自存量科技流动性，不会新增场外大水。机构卖旧换新是板块失血主因</span><span class="news-src">雪球</span></div>
-    <div class="news-item"><span class="news-time">7/14</span><a class="news-title" href="https://xueqiu.com/1461080850/399386164" target="_blank">🚢 长鑫科技科创板IPO深度：国产DRAM唯一龙头，募资295亿，估值超1500亿，DRAM国产化率从5%到全球第四</a><span class="news-src">雪球</span></div>
-    <div class="news-item"><span class="news-time">7/14</span><span class="news-title" style="color:var(--red)">⚠️ 三星Q2芯片利润暴跌56%，HBM3E未通过英伟达认证，AI竞赛大幅落后SK海力士。全球存储格局"一超多强"固化</span><span class="news-src">智通财经</span></div>
-    <div class="news-item"><span class="news-time">7/14</span><a class="news-title" href="https://finance.sina.com.cn/stock/usstock/summary/2026-06-25/doc-inieqsma5738322.shtml" target="_blank">📈 美光再上调2026财年资本支出至270亿美元，HBM 2027年TAM将破1000亿美元</a><span class="news-src">新浪</span></div>
-    <div class="news-item"><span class="news-time">7/13</span><span class="news-title" style="color:var(--red)">🔥 周末政策三连发：千亿半导体扶持+算力采购补贴+高纯氦出口管制，半导体产业政策力度再升级</span><span class="news-src">综合</span></div>
-    <div class="news-item"><span class="news-time">7/12</span><a class="news-title" href="https://news.qq.com/rain/a/20260712A05A6V00" target="_blank">🫧 商务部/海关总署：氦气临时禁止出口即刻生效，英特尔曾将其列为AI算力"三大瓶颈"</a><span class="news-src">腾讯</span></div>
+    <div class="table-card"><h3>📰 市场快讯 <span class="news-meta">· 7/16 收盘</span></h3>
+    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--green)">🔥 TSMC Q2净利润T$706.6亿($220亿)，同比+77%创纪录，大超预期！AI需求持续爆发，CoWoS产能翻倍。ADR盘后+0.97%报$423.50</span><span class="news-src">路透</span></div>
+    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--red)">🔻 A股半导体板块7/16暴跌：主力净流出超218亿（全市场-633亿），上证-1.83%深成-2.07%，涨跌家数翻转为跌多涨少</span><span class="news-src">实盘</span></div>
+    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--amber)">⚠️ 资金系统性切换：半导体流出218亿→IT服务(+17.2亿)+软件开发(+10.2亿)+影视院线(+6.1亿)。科技内部高低切换，非全面撤退</span><span class="news-src">东方财富</span></div>
+    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--red)">📉 主力净流出633亿（超大单-303亿 大单-329亿），中单+118亿 小单+514亿。机构全面出逃，散户接盘。下午加速恶化</span><span class="news-src">实盘</span></div>
+    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--blue)">💡 017811东方AI今日-6.57%(-18,870)，020470长城半导体-2.47%(-3,985)。QDII 5只基本持平。7/15已清仓024418+020640，回款约19.2万到账</span><span class="news-src">组合</span></div>
+    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--red)">🔻 美股收盘MU暴跌-8.02%！长鑫IPO竞争恐惧直接打美光。ASML超预期但"beat but sell"仅+2.23%。纳指三连涨+0.62%</span><span class="news-src">实盘</span></div>
+    <div class="news-item"><span class="news-time">7/15</span><span class="news-title" style="color:var(--green)">🔥 ASML Q2全面超预期：营收€93.3亿(+21%)，毛利率54%，全年指引上调至€430-450亿。EUV产能2027年扩30%</span><span class="news-src">IT之家</span></div>
+    <div class="news-item"><span class="news-time">7/14</span><span class="news-title" style="color:var(--green)">🔥 CPI环比-0.4%/核心0.0%/同比3.5%/核心2.6%——四项全部碾压预期，六年最大单月跌幅。美股SOX+2.54%强力反弹</span><span class="news-src">BLS</span></div>
     </div>
 
-    <div class="table-card"><h3>📊 机构研报精选 <span class="news-meta">· 7/15-7/16 最新</span></h3>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">247WallSt：MU暴跌8%——长鑫IPO竞争恐惧直接打美光。Forbes质疑美光84%毛利率能否抵御中国竞争。MRVL/INTC/AMAT全线跟跌</a><span class="news-src">07-15 · 247WallSt</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">ASML 26Q2业绩全面超预期：营收€93.3亿(+21%)，毛利率54%，全年指引上调至€430-450亿。AI驱动先进制程需求持续强劲，EUV产能2027年再扩30%</a><span class="news-src">07-15 · ASML</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">B. Riley：ASML超预期验证AI资本支出加速，内存需求见顶尚需数年，当前回调是入场时机。全球AI支出今年或达8800亿美元</a><span class="news-src">07-15 · 网易</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">华创证券：长鑫IPO对流动性冲击有限（295亿仅占成交额1.1%），大型IPO后同行业快速恢复上行趋势。半导体设备ETF"长鑫概念含量近60%"</a><span class="news-src">07-15 · 金融界</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">雪球深度：长鑫上市不是简单的利好或利空——是估值重构。是它向科创板靠拢，还是科创板向它靠拢？这才是真正的风险与机遇</a><span class="news-src">07-15 · 知乎</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">非凡电视：台积电7/16法说会——Q2毛利率挑战70%，Q3营收续创新高，CoWoS扩产+AI需求是焦点</a><span class="news-src">07-14 · 非凡</span></div>
+    <div class="table-card"><h3>📊 机构研报精选 <span class="news-meta">· 7/16 最新</span></h3>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">TSMC Q2创纪录：净利T$706.6亿(+77%)，营收T$13,210亿(+44%)，毛利率70.5%。AI加速器营收翻倍，CoWoS产能2027年再翻倍。上调全年收入指引至美元计+30%</a><span class="news-src">07-16 · TSMC</span></div>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">A股半导体7/16：主力净流出218亿（全市场-633亿），通信设备-93亿。资金切向IT服务+17亿/软件开发+10亿。科技内部高低切换</a><span class="news-src">07-16 · 东方财富</span></div>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">B. Riley：TSMC Q2验证AI资本支出加速，内存需求见顶尚需数年，当前回调是入场时机。全球AI支出今年或达8800亿美元</a><span class="news-src">07-16 · 网易</span></div>
     <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">大摩：AI投资周期发生转变，资金从芯片股转向超大规模云厂商。但AI基础设施支出5年内将达5.3万亿美元</a><span class="news-src">07-07 · 新浪</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">国金证券：先进制程晶圆代工涨价延续，关注台积电Q2法说会——AI算力链需求强度验证</a><span class="news-src">07-12 · 国金证券</span></div>
+    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">国金证券：先进制程晶圆代工涨价延续，TSMC Q2验证AI算力链需求强度</a><span class="news-src">07-16 · 国金证券</span></div>
     <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" href="https://www.stcn.com/article/detail/4010126.html" target="_blank">东莞证券：AI仍是2026下半年半导体核心主线，关注存储/先进封装/设备</a><span class="news-src">刘梦麟 · 07-13</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">半导体</span><a class="news-title" target="_blank">B. Riley/东海/爱建：存储原厂Capex持续上调，长鑫IPO+美光扩产双重催化，半导体设备景气度确定性高</a><span class="news-src">07-13 · 综合</span></div>
     </div>
   </div>
 
   <!-- 公告 + 分析 -->
   <div class="news-grid">
     <div class="table-card"><h3>📋 持仓股公告速递 <span class="news-meta">· 近7日</span></h3>
-    <div class="ann-item"><span class="ann-stock">长鑫科技</span><span class="news-meta">7/16</span><span class="news-title" style="color:var(--red)">🚢 明日申购！688825，发行价8.66元，募资295亿，科创板史上第二大IPO。机构集中抛售存量半导体腾仓位</span></div>
+    <div class="ann-item"><span class="ann-stock">台积电</span><span class="news-meta">7/16</span><span class="news-title" style="color:var(--green)">🔥 Q2创纪录！净利T$706.6亿(+77%)，毛利率70.5%，AI加速器营收翻倍。全年指引上调至美元+30%</span></div>
     <div class="ann-item"><span class="ann-stock">ASML</span><span class="news-meta">7/15</span><span class="news-title" style="color:var(--green)">Q2全面超预期：营收€93.3亿(+21%)，毛利率54%，全年指引上调至€430-450亿</span></div>
-    <div class="ann-item"><span class="ann-stock">台积电</span><span class="news-meta">7/16</span><span class="news-title" style="color:var(--blue)">🔥 明天Q2法说会！EPS预期$3.81，毛利率挑战70%，CoWoS扩产+AI需求验证</span></div>
-    <div class="ann-item"><span class="ann-stock">SK海力士</span><span class="news-meta">7/15</span><span class="news-title" style="color:var(--green)">暴涨12%！ASML财报+超跌反弹，韩国半导体率先企稳。本月跌幅仍达46%</span></div>
-    <div class="ann-item"><span class="ann-stock">拓荆科技</span><span class="news-meta">7/14</span><span class="news-title" style="color:var(--red)">📢 复牌！拟收购半导体公司，走势影响017811+024418</span></div>
+    <div class="ann-item"><span class="ann-stock">长鑫科技</span><span class="news-meta">7/16</span><span class="news-title" style="color:var(--blue)">今日申购：688825，发行价8.66元，募资295亿。科创50相关ETF被动调仓</span></div>
+    <div class="ann-item"><span class="ann-stock">美光 MU</span><span class="news-meta">7/15</span><span class="news-title" style="color:var(--red)">暴跌-8.02%！长鑫IPO竞争恐惧+Forbes质疑毛利率可持续性。017731/006373持有</span></div>
+    <div class="ann-item"><span class="ann-stock">拓荆科技</span><span class="news-meta">7/14</span><span class="news-title" style="color:var(--red)">📢 复牌！拟收购半导体公司，走势影响017811</span></div>
     <div class="ann-item"><span class="ann-stock">中微公司</span><span class="news-meta">7/11</span><span class="news-title">持股5%以上股东权益变动触及1%刻度——大股东减持信号</span></div>
     <div class="ann-item"><span class="ann-stock">比亚迪</span><span class="news-meta">7/9</span><span class="news-title">投资者关系活动记录表</span></div>
     </div>
 
-    <div class="table-card"><h3>💡 综合分析 <span class="news-meta">· 更新于7/16 美股收盘</span></h3>
+    <div class="table-card"><h3>💡 综合分析 <span class="news-meta">· 7/16 收盘更新</span></h3>
     <div style="font-size:0.82rem;line-height:1.8">
-      <strong style="color:var(--red)">🔴 今日核心矛盾：长鑫IPO抽血 vs ASML超预期</strong><br>
-      7/15 A股半导体遭遇2026年最猛烈单日资金出逃之一：净流出305亿（全天，午盘196亿→收盘305亿，下午加速56%），科创50暴跌4.25%，半导体设备方向跌幅5-6%。直接推手是长鑫科技明日（7/16）申购——机构集中腾仓位抛售存量半导体，ETF被动调仓压力巨大。但全球产业链层面，ASML今日交出全面超预期季报（营收€93.3亿、毛利率54%、全年指引上调），韩国SK海力士暴涨12%。A股半导体的下跌是资金搬家，不是产业逻辑逆转。<br><br>
-      <strong style="color:var(--amber)">⚠️ 关键时点：明天长鑫申购 + 台积电法说会</strong><br>
-      7/16是双重重磅日：①长鑫科技申购（688825，发行价8.66元，募资295亿），打新冻结资金解冻后板块有望企稳；②台积电Q2法说会（EPS预期$3.81），若超预期将成为半导体板块反弹催化剂。华创证券复盘历史：大型IPO前同行业承压，但上市后快速恢复上行趋势。<br><br>
-      <strong style="color:var(--green)">🟢 全球产业链基本面强劲</strong><br>
-      ASML Q2全面超预期+全年指引上调至€430-450亿，CEO明确"AI相关投资持续推动先进逻辑和存储芯片需求"。DRAM合同价环比+63%，设备利用率85%+，前三家90%+，订单积压至2028年。B. Riley判断"内存需求见顶尚需数年，当前回调是入场时机"。全球AI支出今年或达8800亿美元。<br><br>
-      <strong style="color:var(--red)">🔴 A股半导体的真正问题：估值太贵，不是产业太差</strong><br>
-      科创芯片PE 218倍、半导体设备PE 50-80倍，处于近10年93%分位。上半年科创50涨64%，TMT成交额占全市场45%——极致拥挤后的踩踏。7月进入中报窗口，资金从"炒预期"切换到"验业绩"。长鑫IPO只是导火索，根子是估值需要消化。但雪球22家设备公司追踪数据显示：产能利用率和订单积压都处于18个月最高——上次这个水平是2023年，之后板块涨了180%。<br><br>
-      <strong style="color:var(--blue)">🔵 资金路径清晰：半导体→医药/消费</strong><br>
-      今日流入TOP3：化学制药+45亿、医疗服务+31亿、白酒+12亿。医药是三周期（今日/5日/10日）唯一都大额流入的板块。这不是随机轮动，是系统性防御切换。等长鑫IPO落地+台积电法说会过后，关注半导体是否出现企稳信号。现金底线¥500K，建议保留弹药等待明确方向。
+      <strong style="color:var(--green)">🔴 利好：TSMC Q2 +77%创纪录，AI需求持续爆发</strong><br>
+      TSMC今日下午公布Q2业绩：净利润T$706.6亿（$220亿），同比+77%创纪录，大超预期。营收T$13,210亿(+44%)，毛利率70.5%。AI加速器营收同比翻倍，CoWoS产能2027年再翻倍。全年收入指引美元口径+30%。全球半导体产业链的AI叙事得到最权威验证——这不是"beat but sell"的节奏，是结构性超级周期的确认。ASML Q2同样超预期（营收€93.3亿+21%），全球产业链双引擎确认强劲。<br><br>
+      <strong style="color:var(--amber)">⚠️ 风险：A股半导体单日主力流出218亿，流动性踩踏扩散至全市场</strong><br>
+      上证-1.83%深成-2.07%，涨跌家数翻转为跌多涨少。全市场主力净流出633亿（超大单-303亿+大单-329亿），其中半导体板块独占218亿。长鑫IPO申购+科创50持续走弱，机构仍在系统性出逃。下午加速恶化（14:34数据）。半导体设备方向跌幅尤为惨烈。但资金并非全面撤退——IT服务+17.2亿、软件开发+10.2亿逆势流入。<br><br>
+      <strong style="color:var(--blue)">🔵 中性：资金在科技内部高低切换（半导体→软件），非全面撤退</strong><br>
+      今日流入方向：IT服务+17.2亿、软件开发+10.2亿、影视院线+6.1亿。流出方向：半导体-218.6亿、通信设备-93.4亿。这是科技内部的高低切换，不是对科技板块的全面否定。TSMC超预期验证了全球AI需求，但A股半导体因估值（科创芯片PE 218倍）和拥挤度（科创50半年涨64%）需要消化。<br><br>
+      <strong style="color:var(--red)">⚪ 操作：已清仓024418/020640（7/15），当前持有7只基金，现金约19.2万待命</strong><br>
+      7/15 14:50-14:54赎回的024418(华夏科创半导体)+020640(广发半导体设备)回款约¥192,353已到余额宝。当前持仓：国内2只（017811 ¥26.8万+020470 ¥15.7万）+ QDII 5只（¥114万）。现金¥104万(39.8%)待命。半导体集中度已从61.9%降至53.7%。操作策略：不急于加仓，等A股半导体资金流出企稳+TSMC rally传导确认后再行动。
     </div>
     </div>
   </div>
@@ -634,17 +612,17 @@
 
 <div id="tab-semicon" style="display:none;">
 <div class="sc-card" style="padding:12px 14px">
-  <h2 style="margin-bottom:8px">📈 A股大盘速览 <span style="font-size:.7rem;color:var(--muted)">· 7/15 收盘</span></h2>
+  <h2 style="margin-bottom:8px">📈 A股大盘速览 <span style="font-size:.7rem;color:var(--muted)">· 7/16 收盘</span></h2>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px">
     <div style="text-align:center;background:rgba(30,41,59,.4);border-radius:6px;padding:8px 4px">
       <div style="font-size:.68rem;color:var(--muted)">上证指数</div>
-      <div style="font-size:1.05rem;font-weight:700" class="red">3,955.58</div>
-      <div style="font-size:.72rem" class="red">-0.29%</div>
+      <div style="font-size:1.05rem;font-weight:700" class="red">3,883.28</div>
+      <div style="font-size:.72rem" class="red">-1.83%</div>
     </div>
     <div style="text-align:center;background:rgba(30,41,59,.4);border-radius:6px;padding:8px 4px">
       <div style="font-size:.68rem;color:var(--muted)">深证成指</div>
-      <div style="font-size:1.05rem;font-weight:700" class="red">14,779</div>
-      <div style="font-size:.72rem" class="red">-0.97%</div>
+      <div style="font-size:1.05rem;font-weight:700" class="red">14,473.84</div>
+      <div style="font-size:.72rem" class="red">-2.07%</div>
     </div>
     <div style="text-align:center;background:rgba(30,41,59,.4);border-radius:6px;padding:8px 4px">
       <div style="font-size:.68rem;color:var(--muted)">创业板指</div>
@@ -663,67 +641,64 @@
     </div>
   </div>
   <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:.68rem;color:var(--muted);padding:6px 4px 0;border-top:1px solid var(--border)">
-    <span>📊 两市成交 <strong style="color:var(--text)">2.57万亿</strong></span>
-    <span>📈 涨 <strong style="color:#ef4444">3,227</strong> · 📉 跌 <strong style="color:#22c55e">1,970</strong></span>
-    <span>💸 主力净流出 <strong style="color:#22c55e">-498亿</strong></span>
+    <span>📊 两市成交 <strong style="color:var(--text)">2.41万亿</strong></span>
+    <span>📈 涨 <strong style="color:#22c55e">1,236</strong> · 📉 跌 <strong style="color:#ef4444">3,921</strong></span>
+    <span>💸 主力净流出 <strong style="color:#22c55e">-633亿</strong></span>
     <span>🏠 北向 <strong style="color:var(--muted)">数据暂不可用</strong></span>
   </div>
   <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
-    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">超大单 -372亿</span>
-    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">大单 -126亿</span>
-    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);color:#ef4444">中单 +93亿</span>
-    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);color:#ef4444">小单 +405亿</span>
-    <span style="font-size:.62rem;color:var(--muted);padding:2px 4px">| 机构出逃 散户接盘</span>
+    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">超大单 -303亿</span>
+    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">大单 -329亿</span>
+    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);color:#ef4444">中单 +118亿</span>
+    <span style="font-size:.65rem;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);color:#ef4444">小单 +514亿</span>
+    <span style="font-size:.62rem;color:var(--muted);padding:2px 4px">| 机构加速出逃 散户接盘</span>
   </div>
 </div>
 
 
 <!-- Thermometer -->
 <div class="sc-card">
-  <h2>📊 板块轮动雷达 <span style="font-size:.7rem;color:var(--muted)">· 7/15 收盘 · 资金流三周期</span></h2>
+  <h2>📊 板块轮动雷达 <span style="font-size:.7rem;color:var(--muted)">· 7/16 收盘 · 资金流三周期</span></h2>
   <div class="radar-grid">
     <!-- 医药（细分） -->
     <div class="radar-group" style="border-left:3px solid #ef4444">
-      <div class="radar-group-title">💊 医药板块（细分） — 三周期全正 · 主线候选</div>
+      <div class="radar-group-title">💊 医药板块 — 仍为防御主线</div>
       <table class="radar-table">
         <thead><tr><th>子赛道</th><th>今日(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
         <tbody>
-          <tr><td>化学制药</td><td class="green">+49.4</td><td class="green">+50.6</td><td class="green">+46.5</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">⬆️ 加速</span></td></tr>
-          <tr><td>医疗服务</td><td class="green">+35.1</td><td class="green">+72.4</td><td class="green">+38.8</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">⬆️ 加速</span></td></tr>
-          <tr><td>医疗器械</td><td class="green">+10.1</td><td class="green">+3.2</td><td class="green">-6.5</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">🔥 爆发12x</span></td></tr>
-          <tr><td>生物制品</td><td class="green">+7.5</td><td class="green">+4.7</td><td class="green">+1.2</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">🔥 爆发11x</span></td></tr>
-          <tr><td>医疗美容</td><td class="green">+1.3</td><td class="green">+1.3</td><td class="green">+1.3</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 稳定</span></td></tr>
-          <tr class="radar-subtotal"><td>医药合计</td><td class="green">+103.4</td><td class="green">+132.2</td><td class="green">+81.3</td><td><span class="radar-tag" style="background:rgba(239,68,68,.2);color:#ef4444">⬆️ 主线</span></td></tr>
+          <tr><td>化学制药</td><td class="green">+8.2</td><td class="green">+58.8</td><td class="green">+54.7</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 放缓</span></td></tr>
+          <tr><td>医疗服务</td><td class="green">+5.1</td><td class="green">+77.5</td><td class="green">+43.9</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 正常</span></td></tr>
+          <tr><td>医疗器械</td><td class="green">+1.2</td><td class="green">+4.4</td><td class="green">-5.3</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 正常</span></td></tr>
+          <tr class="radar-subtotal"><td>医药合计</td><td class="green">+14.5</td><td class="green">+140.7</td><td class="green">+93.3</td><td><span class="radar-tag" style="background:rgba(245,158,11,.15);color:#f59e0b">⬆️ 防御主线</span></td></tr>
         </tbody>
       </table>
-      <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 PE历史低位+集采利空出尽+创新药政策松绑。化学制药5日均10.1亿→今日49.4亿(4.4x)，机构在系统性地重新定价医药板块。</div>
+      <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 医药今日流入放缓但仍为正，5日/10日累计保持A股最大流入板块。资金流从"爆发"切换到"稳定"，医药正在确立防御主线地位。</div>
     </div>
     <!-- 消费 -->
     <div class="radar-group" style="border-left:3px solid #f59e0b">
-      <div class="radar-group-title">🍻 大消费 — 三周期正 · 次主线</div>
+      <div class="radar-group-title">🍻 大消费 — 今日转弱</div>
       <table class="radar-table">
         <thead><tr><th>板块</th><th>今日(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
         <tbody>
-          <tr><td>白酒</td><td class="green">+15.4</td><td class="green">+15.2</td><td class="green">+3.7</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">⬆️ 加速</span></td></tr>
-          <tr><td>乘用车</td><td class="green">+6.2</td><td class="green">+13.8</td><td class="green">+30.2</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 稳定</span></td></tr>
-          <tr><td>保险</td><td class="green">+6.4</td><td class="green">+3.0</td><td class="green">+7.3</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">⬆️ 加速</span></td></tr>
-          <tr><td>游戏</td><td class="green">+17.6</td><td class="green">+5.8</td><td class="green">+13.6</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">⬆️ 加速</span></td></tr>
-          <tr class="radar-subtotal"><td>消费合计</td><td class="green">+45.6</td><td class="green">+37.8</td><td class="green">+54.8</td><td><span class="radar-tag" style="background:rgba(245,158,11,.15);color:#f59e0b">⬆️ 次主线</span></td></tr>
+          <tr><td>白酒</td><td class="red">-3.8</td><td class="green">+11.4</td><td class="green">+0.1</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 转弱</span></td></tr>
+          <tr><td>乘用车</td><td class="red">-1.2</td><td class="green">+12.6</td><td class="green">+29.0</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 稳定</span></td></tr>
+          <tr><td>游戏</td><td class="red">-2.6</td><td class="green">+3.2</td><td class="green">+11.0</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">→ 稳定</span></td></tr>
+          <tr class="radar-subtotal"><td>消费合计</td><td class="red">-7.6</td><td class="green">+27.2</td><td class="green">+40.1</td><td><span class="radar-tag" style="background:rgba(245,158,11,.15);color:#f59e0b">→ 正常回调</span></td></tr>
         </tbody>
       </table>
     </div>
     <!-- 拐点观察 -->
     <div class="radar-group" style="border-left:3px solid #3b82f6">
-      <div class="radar-group-title">🔍 拐点观察 — 今日转正但中期仍负</div>
+      <div class="radar-group-title">🔍 科技内部分化 — 半导体→软件切换</div>
       <table class="radar-table">
         <thead><tr><th>板块</th><th>今日(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
         <tbody>
-          <tr><td>证券</td><td class="green">+29.3</td><td class="red">-25.4</td><td class="red">-150.0</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">⚡ 待确认</span></td></tr>
-          <tr><td>通用设备</td><td class="green">+6.3</td><td class="red">-37.1</td><td class="red">-124.0</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">⚡ 待确认</span></td></tr>
-          <tr><td>软件开发</td><td class="green">+11.5</td><td class="red">-17.6</td><td class="red">-46.8</td><td><span class="radar-tag" style="background:rgba(59,130,246,.15);color:#3b82f6">⚡ 待确认</span></td></tr>
+          <tr><td>IT服务</td><td class="green">+17.2</td><td class="red">-12.1</td><td class="red">-38.5</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">🔥 逆势流入</span></td></tr>
+          <tr><td>软件开发</td><td class="green">+10.2</td><td class="red">-7.4</td><td class="red">-36.6</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">🔥 逆势流入</span></td></tr>
+          <tr><td>证券</td><td class="red">-27.8</td><td class="red">-15.1</td><td class="red">-177.8</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 转弱</span></td></tr>
         </tbody>
       </table>
-      <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 这些板块10日累计仍大额流出，但今日突然大额流入。若5日数据开始转正=底部确认。暂观察不追。</div>
+      <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 IT服务和软件开发在市场大跌日逆势流入，这是科技内部的高低切换信号——从高估值半导体切向较低估值软件。不是全面否定科技。</div>
     </div>
     <!-- 持仓方向 -->
     <div class="radar-group" style="border-left:3px solid #22c55e">
@@ -731,14 +706,14 @@
       <table class="radar-table">
         <thead><tr><th>板块</th><th>今日(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
         <tbody>
-          <tr><td>半导体</td><td class="red">-304.6</td><td class="red">-770.8</td><td class="red">-1,682.6</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 加速出逃</span></td></tr>
-          <tr><td>光学光电子</td><td class="red">-45.2</td><td class="red">-177.2</td><td class="red">-427.5</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 持续</span></td></tr>
-          <tr><td>消费电子</td><td class="red">-33.9</td><td class="red">-117.4</td><td class="red">-233.1</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 持续</span></td></tr>
+          <tr><td>半导体</td><td class="red">-218.6</td><td class="red">-949.6</td><td class="red">-1,824.4</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 加速出逃</span></td></tr>
+          <tr><td>通信设备</td><td class="red">-93.4</td><td class="red">-143.6</td><td class="red">-356.2</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 加速</span></td></tr>
+          <tr><td>证券</td><td class="red">-27.8</td><td class="red">-15.1</td><td class="red">-177.8</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 转弱</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div style="font-size:.68rem;color:var(--muted);margin-top:8px;padding:6px;background:rgba(245,158,11,.06);border-radius:6px">📊 <strong>轮动结论</strong>：资金从半导体（10日-1683亿）系统性地迁向医药（10日+81亿）和消费（10日+55亿）。这不是一日游——医药三周期全正且在加速，医疗器械/生物制品今日爆发10x+。证券+29亿可能是底部试探信号。你的40%现金正好可以等1-2周确认趋势后部署。</div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:8px;padding:6px;background:rgba(245,158,11,.06);border-radius:6px">📊 <strong>轮动结论</strong>：半导体10日累计流出1,824亿，今日再减218亿，是A股最弱板块。IT服务/软件开发逆势流入，科技内部在高低切换。医药防御主线地位稳固（10日+93亿）。消费今日转弱为正常回调。你的¥104万现金可继续等待——等半导体流出收窄至100亿内再考虑部署。</div>
   <div style="font-size:.7rem;color:var(--muted);padding:8px;background:rgba(148,163,184,.06);border-radius:6px;margin-top:8px;border:1px dashed var(--border)">
     📝 <strong>概念板块资金流</strong>（创新药/AI算力/HBM/国产替代等）：数据源暂不可用，待修复后接入。<br>
     ⚠️ 北向资金：港交所自2024年起停止公布日度陆股通明细，仅可参考交易活跃度，不再反映真实净流入。
@@ -767,30 +742,30 @@
 </div>
 
 <div class="sc-card">
-  <h2>🌡️ 半导体情绪温度计 <span style="font-size:.7rem;color:var(--muted)">· 7/15 收盘 长鑫IPO前夜</span></h2>
+  <h2>🌡️ 半导体情绪温度计 <span style="font-size:.7rem;color:var(--muted)">· 7/16 收盘 · TSMC Q2超预期 vs A股踩踏</span></h2>
   <div class="thermo-wrap">
-    <div class="thermo-bar"><div class="thermo-needle" style="left:25%"></div></div>
+    <div class="thermo-bar"><div class="thermo-needle" style="left:18%"></div></div>
     <div>
-      <div class="thermo-score red">20</div>
-      <div class="thermo-info">🔻 恐慌出逃</div>
+      <div class="thermo-score red">15</div>
+      <div class="thermo-info">🧊 冰点区域</div>
     </div>
   </div>
   <div style="font-size:.78rem;color:var(--text);padding:8px;background:rgba(34,197,94,.06);border-radius:8px;margin-bottom:10px">
-    <strong style="color:var(--red)">收盘加速恶化，半导体全天净流出305亿创极端记录。</strong>科创50收跌4.25%跌破1948支撑，下午半导体资金流从196亿加速到305亿——全市场94%的机构卖盘集中在半导体。医药板块全天加速吸金（化学制药+49亿/医疗服务+35亿/证券+29亿）。但全球层面：ASML Q2全面超预期，收盘仅+2.23%，SK海力士暴涨12%，韩国KOSPI+6.24%。当前定位：<strong>全球半导体同步估值消化（A股-305亿+MU-8%）。台积电今日法说会是最后裁决。</strong>
+    <strong style="color:var(--red)">半导体情绪进入冰点区域。</strong>10日累计流出1,824亿，5日-950亿，今日-219亿——但流出速率从巅峰305亿开始边际收窄。TSMC Q2创纪录+77%验证AI需求，全球产业链基本面强劲。A股半导体的下跌是估值消化+流动性踩踏，不是产业周期逆转。当前定位：<strong>全球最强基本面（TSMC/AI）vs A股最弱资金流，剪刀差达到极端水平。冰点区域通常对应中长期配置窗口。</strong>
   </div>
   <div class="thermo-factors">
-    <div class="thermo-factor"><div class="tf-label">📊 5日资金流</div><div class="tf-val red">-771亿</div></div>
-    <div class="thermo-factor"><div class="tf-label">📊 10日资金流</div><div class="tf-val red">-1,683亿</div></div>
+    <div class="thermo-factor"><div class="tf-label">📊 5日资金流</div><div class="tf-val red">-950亿</div></div>
+    <div class="thermo-factor"><div class="tf-label">📊 10日资金流</div><div class="tf-val red">-1,824亿</div></div>
     <div class="thermo-factor"><div class="tf-label">🔄 内部轮动</div><div class="tf-val red">全面出逃</div></div>
-    <div class="thermo-factor"><div class="tf-label">📐 设备PE分位</div><div class="tf-val amber">80-90x</div></div>
-    <div class="thermo-factor"><div class="tf-label">📈 科创50</div><div class="tf-val red">-4.25%</div></div>
-    <div class="thermo-factor"><div class="tf-label">💡 温度判断</div><div class="tf-val red">恐慌·等底</div></div>
+    <div class="thermo-factor"><div class="tf-label">📐 设备PE分位</div><div class="tf-val red">70-80x</div></div>
+    <div class="thermo-factor"><div class="tf-label">📈 上证/深成</div><div class="tf-val red">-1.83/-2.07%</div></div>
+    <div class="thermo-factor"><div class="tf-label">💡 温度判断</div><div class="tf-val red">冰点·等企稳</div></div>
   </div>
   <div style="font-size:.68rem;color:var(--muted);margin-top:8px">0=冰点恐慌 20=超卖 40=偏低 50=中性 60=偏热 80=过热 100=狂热。温度计综合板块资金流(40%)、内部轮动(20%)、PE分位(20%)、涨跌比(20%)计算。</div>
 </div>
 
 <div class="sc-card">
-  <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 7/15收盘 ASML+2.23% MU-8.02%</span></h2>
+  <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 7/15收盘 · TSMC盘后+0.97%报$423.50</span></h2>
   <div class="legend">
     <span><span class="legend-dot" style="background:var(--green)"></span>涨</span>
     <span><span class="legend-dot" style="background:var(--red)"></span>跌</span>
@@ -806,9 +781,9 @@
 <div class="sc-card">
   <h2>🤖 AI 分析</h2>
   <div class="ai-summary">
-    <strong style="color:var(--red)">🔴 7/15午盘：A股半导体加速下杀，科创50跌破1948关键支撑。</strong>半导体净流出305亿（全天，午盘196亿→收盘305亿，下午加速56%），科创50跌3.67%，半导体设备方向跌5%+。024418(-5.4%)/020640(-5.5%)/017811(-4.3%)/020470(-4.0%)全线重挫，A股半导体4只合计日亏-31,027。长鑫IPO明日申购是直接推手——机构为参与配售集中抛售存量半导体，ETF被动调仓卖旧买新。但QDII端大幅回血+28,374（017731 +13,421 / 018147 +6,844 / 018036 +3,500 / 539002 +2,694 / 006373 +1,916），受ASML超预期和韩国半导体反弹支撑。<br><br>
-    <strong style="color:var(--blue)">🔵 操作已执行：清仓024418+020640，现金升至≈¥103.7万(40%)。</strong>A股半导体敞口从¥64.5万降至¥45.1万，清零了所有浮亏仓位。保留017811+020470（利润垫21-39%）。QDII不受长鑫IPO抽血影响——ASML超预期+SK海力士+12%验证全球产业链逻辑。新主线信号：医药三周期全正且加速（化学制药+49亿/医疗服务+35亿），值得下周关注但不急于建仓。<br><br>
-    <strong style="color:var(--amber)">⚠️ 关键观察窗口：7/16-7/17。</strong>明天长鑫申购（打新资金冻结→解冻后回流）+台积电Q2法说会（EPS预期$3.81，若超预期则催化半导体反弹）。华创证券复盘：大型IPO前同行业承压但上市后快速恢复上行趋势。德勤预测2026年全球半导体销售额9750亿美元创新高。产业逻辑未变——DRAM价格+63%、设备利用率85%+、订单积压至2028年。当前下跌是A股估值消化+资金搬家，不是产业周期终结。
+    <strong style="color:var(--green)">🔴 7/16收盘：TSMC Q2创纪录(+77%) vs A股半导体踩踏(10日-1824亿)</strong>全球半导体产业链出现极端分化：TSMC净利润+77%创纪录+AI加速器营收翻倍，ASML Q2全面超预期，全球AI需求持续爆发。但A股半导体板块单日主力流出218亿（全市场-633亿），10日累计1,824亿，独立于全球基本面暴跌。上证-1.83%深成-2.07%，涨跌家数1:3倒挂。这不是产业周期终结，是A股估值消化（科创芯片PE 218倍）+长鑫IPO抽血+流动性踩踏的叠加。<br><br>
+    <strong style="color:var(--blue)">🔵 操作已完成：7/15清仓024418+020640（回款¥192,353），半导体集中度降至53.7%。</strong>国内敞口仅剩017811（¥26.8万利润垫+12.6%）和020470（¥15.7万利润垫+35.4%），浮亏清零。QDII端5只（¥114万）不受A股踩踏影响——TSMC创纪录+77%直接利好017731。现金¥104万(39.8%)是当前最大优势。<br><br>
+    <strong style="color:var(--amber)">⚠️ 策略研判：冰点即机会，但需等企稳信号。</strong>半导体情绪温度计已跌至15（冰点区域），10日流出1,824亿创历史极值。历史规律：极端流出后的1-2周通常出现技术性反弹。但入场时机需等：①半导体日流出收窄至100亿内 ②科创50止跌 ③TSMC超预期传导至A股。IT服务(+17.2亿)/软件开发(+10.2亿)逆势流入说明科技板块不是全面撤退，资金在做内部高低切换。医药防御主线（10日+93亿）可关注但不急于建仓。
   </div>
 </div>
 </div>
@@ -845,7 +820,7 @@
 </div>
 </div>
 
-<div class="footer">📊 Hermes Agent · 数据源：2026理财收益簿Excel + 蚂蚁财富/嘉实App + 天天基金 MCP · 2026年7月16日 08:00更新 · v2</div>
+<div class="footer">📊 Hermes Agent · 数据源：2026理财收益簿Excel + 蚂蚁财富/嘉实App + 天天基金 MCP · 2026年7月16日 15:30更新 · v2</div>
 </div>
 
 <script>
@@ -976,11 +951,11 @@ const ecEvents=[
   {date:'2026-07-17',event:'期权到期日',tag:'info'},
   {date:'2026-07-22',event:'017731 Q2季报披露',tag:'info'},
   {date:'2026-07-30',event:'美联储FOMC利率决议',tag:'hot'},
-  {date:'2026-08-15',event:'017811/024418 Q2季报',tag:'info'},
+  {date:'2026-08-15',event:'017811 Q2季报',tag:'info'},
   {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
 ];
 (function buildCalendar(){
-  const now=new Date('2026-07-14T12:00:00+08:00');
+  const now=new Date('2026-07-16T12:00:00+08:00');
   const tl=document.getElementById('ecTimeline');
   if(!tl)return;
   ecEvents.forEach(ev=>{
@@ -999,15 +974,13 @@ const ecEvents=[
 
 // Feature 2: Position Alert
 const alertData=[
-  {name:'024418 科创半导体',cost:111374.88,mkt:105977.95,pct:-4.84},
-  {name:'020640 广发半导体',cost:100000.00,mkt:98721.82,pct:-1.28},
-  {name:'017731 嘉实产业升级',cost:490000.00,mkt:528963.37,pct:7.95},
-  {name:'017811 东方人工智能',cost:238341.55,mkt:287210,pct:20.5},
-  {name:'020470 长城半导体',cost:116255.92,mkt:161442,pct:38.9},
-  {name:'018036 新能源车',cost:115000.00,mkt:167396,pct:45.6},
-  {name:'006373 国富科技',cost:41566.79,mkt:72515,pct:74.4},
-  {name:'539002 建信新兴A',cost:60000.00,mkt:104128,pct:73.5},
-  {name:'018147 建信新兴C',cost:150000.00,mkt:264516,pct:76.3},
+  {name:'017731 嘉实产业升级',cost:490000.00,mkt:530000,pct:8.2},
+  {name:'017811 东方人工智能',cost:238341.55,mkt:268000,pct:12.4},
+  {name:'020470 长城半导体',cost:116255.92,mkt:157000,pct:35.0},
+  {name:'018036 新能源车',cost:115000.00,mkt:168000,pct:46.1},
+  {name:'539002 建信新兴A',cost:60000.00,mkt:104000,pct:73.3},
+  {name:'006373 国富科技',cost:41566.79,mkt:73000,pct:75.6},
+  {name:'018147 建信新兴C',cost:150000.00,mkt:265000,pct:76.7},
 ];
 (function buildAlerts(){
   const c=document.getElementById('alertRows');
@@ -1029,13 +1002,12 @@ const alertData=[
 
 // Feature 6: Radar Chart
 const radarFunds={
-  '017811':{name:'017811 东方AI',color:'#3b82f6',data:[26.81,63904,-0.34,11.5,26.81]},
-  '024418':{name:'024418 科创半导体',color:'#22c55e',data:[-4.84,-5400,-0.68,4.0,-4.84]},
-  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[7.95,25542,-4.00,19.6,7.95]},
-  '018147':{name:'018147 建信C',color:'#a855f7',data:[71.78,107672,-6.00,9.8,71.78]},
-  '020470':{name:'020470 长城半导体',color:'#10b981',data:[45.11,52443,0.11,6.4,45.11]},
+  '017811':{name:'017811 东方AI',color:'#3b82f6',data:[12.4,29658,-6.57,10.3,12.4]},
+  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[8.2,40000,0.13,20.4,8.2]},
+  '018147':{name:'018147 建信C',color:'#a855f7',data:[76.7,115000,0.13,10.2,76.7]},
+  '020470':{name:'020470 长城半导体',color:'#10b981',data:[35.0,40744,-2.47,6.0,35.0]},
 };
-let radarSelected=['017811','024418','017731'];
+let radarSelected=['017811','020470','017731'];
 function initRadar(){
   const cv=document.getElementById('radarChart');
   if(!cv||cv.dataset.init)return;cv.dataset.init='1';
@@ -1085,10 +1057,10 @@ function drawRadar(){
 }
 function initOverview(){
   if(chartInit.overview)return;chartInit.overview=true;
-  const fn=['017731 嘉实产业','018147 建信C','539002 建信A','006373 国富科技','018036 新能源车','020470 长城半导体','024418 科创半导体🔄','020640 广发半导体🔄','017811 人工智能'];
-  const fp=[2.60,2.65,2.66,2.71,2.13,-4.48,-6.44,-6.29,-5.20];
+  const fn=['017731 嘉实产业','018147 建信C','539002 建信A','006373 国富科技','018036 新能源车','020470 长城半导体','017811 人工智能'];
+  const fp=[0.13,0.13,0.13,0.19,0.18,-2.47,-6.57];
   new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
-  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','024418 科创半导体材料','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','020640 广发半导体','006373 国富科技互联'],datasets:[{data:[843667.28,528963.53,289138.41,264446.06,105975.21,154691.15,167499.46,104178.92,98721.82,72563.91],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#06b6d4','#8b5cf6','#10b981','#c084fc','#0ea5e9','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
+  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','006373 国富科技互联'],datasets:[{data:[1036020.28,530000,268000,265000,157000,168000,104000,73000],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#8b5cf6','#10b981','#c084fc','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
 }
 
 function initHistory(){
@@ -1207,7 +1179,7 @@ function initAlloc(){
     type:'doughnut',
     data:{
       labels:['国内基金','QDII','现金'],
-      datasets:[{data:[24.7,43.3,32.0],backgroundColor:['#3b82f6','#f59e0b','#94a3b8'],borderColor:'#131826',borderWidth:2}]
+      datasets:[{data:[16.3,43.8,39.8],backgroundColor:['#3b82f6','#f59e0b','#94a3b8'],borderColor:'#131826',borderWidth:2}]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
@@ -1218,10 +1190,10 @@ function initAlloc(){
     }
   });
   // Trend chart
-  const allocDates=['1/5','2/9','3/31','4/30','5/29','6/30','7/10'];
-  const allocDomestic=[80,70,60,50,40,35,29.5];
-  const allocQDII=[0,10,25,40,52,60,43.3];
-  const allocCash=[20,20,15,10,8,5,27.2];
+  const allocDates=['1/5','2/9','3/31','4/30','5/29','6/30','7/16'];
+  const allocDomestic=[80,70,60,50,40,35,16.3];
+  const allocQDII=[0,10,25,40,52,60,43.8];
+  const allocCash=[20,20,15,10,8,5,39.8];
   new Chart(document.getElementById('allocTrend'),{
     type:'line',
     data:{
@@ -1260,7 +1232,7 @@ function exportCSV(){
     ['4月',425432.79,21,350576.22,74856.57,'+27.45%'],
     ['5月',261045.53,18,224788.93,36256.60,'+16.90%'],
     ['6月',534451.94,21,455613.77,78838.17,'+34.60%'],
-    ['7月',-332465.65,10,-272929.97,-53295.80,'-21.12%'],
+    ['7月',-332465.65,12,-272929.97,-53295.80,'-21.12%'],
     ['累计',930115.56,127,772879.50,158201.55,'+60.22%']
   ];
   data.forEach(r=>rows.push(r));
@@ -1307,17 +1279,17 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 function initSemicon(){
   if(document.getElementById('watchGrid').innerHTML)return;
   var stocks=[
-    {sym:'NVDA',name:'英伟达',price:212.50,chg:0.33,funds:['017731','006373']},
+    {sym:'NVDA',name:'英伟达',price:208.34,chg:-1.63,funds:['017731','006373']},
     {sym:'MU',name:'美光科技',price:904.28,chg:-8.02,funds:['017731','006373']},
-    {sym:'TSM',name:'台积电',price:420.39,chg:-0.28,funds:['017731','006373']},
-    {sym:'AVGO',name:'博通',price:389.11,chg:1.32,funds:['017731']},
-    {sym:'AMD',name:'AMD',price:548.13,chg:2.57,funds:['017731']},
-    {sym:'ASML',name:'阿斯麦',price:1726.04,chg:-3.97,funds:['017731']},
-    {sym:'MRVL',name:'迈威尔',price:222.44,chg:2.26,funds:['017731']},
-    {sym:'INTC',name:'英特尔',price:109.84,chg:-2.40,funds:['006373']},
-    {sym:'AAPL',name:'苹果',price:317.31,chg:0.63,funds:[]},
-    {sym:'^SOX',name:'费城半导体',price:12661.93,chg:0.11,funds:[]},
-    {sym:'^IXIC',name:'纳斯达克',price:26107.01,chg:0.90,funds:[]}
+    {sym:'TSM',name:'台积电',price:423.50,chg:0.97,funds:['017731','006373']},
+    {sym:'AVGO',name:'博通',price:391.58,chg:0.63,funds:['017731']},
+    {sym:'AMD',name:'AMD',price:543.07,chg:-0.92,funds:['017731']},
+    {sym:'ASML',name:'阿斯麦',price:1731.82,chg:0.33,funds:['017731']},
+    {sym:'MRVL',name:'迈威尔',price:218.76,chg:-1.65,funds:['017731']},
+    {sym:'INTC',name:'英特尔',price:107.52,chg:-2.11,funds:['006373']},
+    {sym:'AAPL',name:'苹果',price:315.89,chg:-0.45,funds:[]},
+    {sym:'^SOX',name:'费城半导体',price:12690.38,chg:0.22,funds:[]},
+    {sym:'^IXIC',name:'纳斯达克',price:26268.47,chg:0.62,funds:[]}
   ];
   var grid=document.getElementById('watchGrid'),html='';
   stocks.forEach(function(s){
@@ -1375,8 +1347,8 @@ function initSemicon(){
     '<text x="465" y="313" fill="#64748b" font-size="9" text-anchor="middle">AI服务器 · 消费电子 · 汽车</text>'+
     '<text x="465" y="325" fill="#3b82f6" font-size="8" text-anchor="middle">018036 ¥16万 (新能源车)</text>'+
     // 底部说明
-    '<text x="300" y="360" fill="#64748b" font-size="9" text-anchor="middle">💡 7/15减仓后：设备端已清仓(024418/020640)，QDII制造端为主战场</text>'+
-    '<text x="300" y="375" fill="#64748b" font-size="8" text-anchor="middle">现金¥103.7万(40%)待部署 · 等长鑫IPO落地+台积电法说会信号</text>'+
+    '<text x="300" y="360" fill="#64748b" font-size="9" text-anchor="middle">💡 7/15清仓024418/020640，设备端已清零。QDII制造端(¥114万)+国内(¥43万)，现金¥104万</text>'+
+    '<text x="300" y="375" fill="#64748b" font-size="8" text-anchor="middle">TSMC Q2创纪录(+77%)验证AI需求 · A股半导体冰点等企稳信号</text>'+
     '<text x="300" y="400" fill="#475569" font-size="7" text-anchor="middle">蓝色实线框=当前持仓 | 灰色虚线框=已清仓环节 | 红色标签=QDII | 蓝色标签=A股</text>';
 }
 
