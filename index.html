@@ -1101,6 +1101,12 @@ function initOverview(){
   if(chartInit.overview){
     const c=document.getElementById('allocPie');
     if(c&&c.width>0)return;
+    const old1=Chart.getChart('allocPie');
+    if(old1)old1.destroy();
+    const old2=Chart.getChart('todayBar');
+    if(old2)old2.destroy();
+    const old3=Chart.getChart('weekSparkline');
+    if(old3)old3.destroy();
     chartInit.overview=false;
   }
   chartInit.overview=true;
@@ -1117,9 +1123,17 @@ function initOverview(){
 
 function initHistory(){
   if(chartInit.history){
-    // Reset if canvas has 0 width (was initialized while hidden)
     const c=document.getElementById('cumChart');
     if(c&&c.width>0)return;
+    // Canvas was initialized while hidden - destroy and rebuild
+    const oldChart=Chart.getChart('cumChart');
+    if(oldChart)oldChart.destroy();
+    const oldChart2=Chart.getChart('dailyBar');
+    if(oldChart2)oldChart2.destroy();
+    const oldChart3=Chart.getChart('platformChart');
+    if(oldChart3)oldChart3.destroy();
+    const oldChart4=Chart.getChart('underwaterChart');
+    if(oldChart4)oldChart4.destroy();
     chartInit.history=false;
   }
   chartInit.history=true;
@@ -1245,6 +1259,8 @@ function initMonthly(){
   if(chartInit.monthly){
     const c=document.getElementById('monthlyChart');
     if(c&&c.width>0)return;
+    const old=Chart.getChart('monthlyChart');
+    if(old)old.destroy();
     chartInit.monthly=false;
   }
   chartInit.monthly=true;
@@ -1255,6 +1271,10 @@ function initAlloc(){
   if(chartInit.alloc){
     const c=document.getElementById('allocDonut');
     if(c&&c.width>0)return;
+    const old1=Chart.getChart('allocDonut');
+    if(old1)old1.destroy();
+    const old2=Chart.getChart('allocTrend');
+    if(old2)old2.destroy();
     chartInit.alloc=false;
   }
   chartInit.alloc=true;
