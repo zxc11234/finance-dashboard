@@ -1313,25 +1313,31 @@ function exportCSV(){
 function switchTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('[id^="tab-"]').forEach(d=>d.style.display='none');
-  document.getElementById('tab-'+name).style.display='';
+  const target=document.getElementById('tab-'+name);
+  target.style.display='';
   el.classList.add('active');
-  // 双 rAF 等浏览器完成 layout
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    if(name==='overview')initOverview();
-    else if(name==='history')initHistory();
-    else if(name==='monthly')initMonthly();
-    else if(name==='alloc'){initAlloc();initRadar();}
-    else if(name==='semicon')initSemicon();
-    else if(name==='tradelog')initTradelog();
-    else if(name==='news')initNews();
-    // 关键：等 chart 创建后，强制 resize 让所有 chart 重算尺寸
-    // 解决 iOS Safari 隐藏 tab canvas 0x0 的问题
-    setTimeout(()=>{
-      if(window.Chart && Chart.instances){
-        Object.values(Chart.instances).forEach(c=>{try{c.resize();}catch(e){}});
-      }
-    }, 50);
-  }));
+  // 等浏览器真正完成 reflow（用 ResizeObserver 监听容器宽度，最可靠）
+  let attempts=0;
+  const tryInit=()=>{
+    attempts++;
+    const w=target.offsetWidth;
+    if(w>0||attempts>20){
+      if(name==='overview')initOverview();
+      else if(name==='history')initHistory();
+      else if(name==='monthly')initMonthly();
+      else if(name==='alloc'){initAlloc();initRadar();}
+      else if(name==='semicon')initSemicon();
+      else if(name==='tradelog')initTradelog();
+      else if(name==='news')initNews();
+      // resize 所有 chart 防止 0x0
+      setTimeout(()=>{
+        if(window.Chart&&Chart.instances)Object.values(Chart.instances).forEach(c=>{try{c.resize();}catch(e){}});
+      },50);
+    }else{
+      setTimeout(tryInit,50);
+    }
+  };
+  tryInit();
 }
 initOverview();
 
