@@ -285,7 +285,7 @@
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;vertical-align:middle">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月16日净值 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标 · 含最大回撤/资产配置/风险指标</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月17日净值 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
   <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,371,579</div><div class="kpi-sub">基金 1,365,541 + 余额宝 1,006,038（含赎回待入账约30万）</div></div>
@@ -294,7 +294,7 @@
   <div class="kpi-card"><div class="kpi-label">📅 7月MTD</div><div class="kpi-value red">-461,848</div><div class="kpi-sub">13 个交易日 · 7月最惨</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">58.9%</div><div class="kpi-sub">76 盈 / 53 亏 / 0 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">6,207.23</div><div class="kpi-sub">最高 +93,183.78 · 最大 -461,284.35</div></div>
-  <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-461,284.35</div><div class="kpi-sub" id="maxDDSub">7/12 → 7/17</div></div>
+  <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-461,284.35</div><div class="kpi-sub" id="maxDDSub">7/11 → 7/17</div></div>
 </div>
 
 
@@ -381,6 +381,7 @@
   <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
   <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
   <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。进度条表示延迟程度。下周一将更新7/17净值。</div>
+  </div>
 
   <div class="charts-grid">
     <div class="chart-card"><h3>🥧 资产配置</h3><div class="chart-wrap"><canvas id="allocPie"></canvas></div></div>
@@ -790,7 +791,7 @@
 </div>
 
 <div class="sc-card">
-  <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 7/15收盘 · TSMC盘后+0.97%报$423.50</span></h2>
+  <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 7/17收盘 · TSMC盘后+0.97%报$423.50</span></h2>
   <div class="legend">
     <span><span class="legend-dot" style="background:var(--green)"></span>涨</span>
     <span><span class="legend-dot" style="background:var(--red)"></span>跌</span>
@@ -1335,7 +1336,7 @@ function switchTab(name,el){
       else if(name==='alloc'){initAlloc();initRadar();}
       else if(name==='semicon')initSemicon();
       else if(name==='tradelog')initTradelog();
-      else if(name==='news')initNews();
+      else if(name==='news'){if(typeof initNews==='function')initNews();}
       // resize 所有 chart 防止 0x0
       setTimeout(()=>{
         if(window.Chart&&Chart.instances)Object.values(Chart.instances).forEach(c=>{try{c.resize();}catch(e){}});
@@ -1377,12 +1378,12 @@ if('serviceWorker' in navigator){
 function initSemicon(){
   if(document.getElementById('watchGrid').innerHTML)return;
   var stocks=[
-    {sym:'NVDA',name:'英伟达',price:208.34,chg:-1.63,funds:['017731','006373']},
-    {sym:'MU',name:'美光科技',price:904.28,chg:-8.02,funds:['017731','006373']},
+    {sym:'NVDA',name:'英伟达',price:203.00,chg:-2.21,funds:['017731','006373']},
+    {sym:'MU',name:'美光科技',price:849.00,chg:-0.50,funds:['017731','006373']},
     {sym:'TSM',name:'台积电',price:423.50,chg:0.97,funds:['017731','006373']},
     {sym:'AVGO',name:'博通',price:391.58,chg:0.63,funds:['017731']},
     {sym:'AMD',name:'AMD',price:543.07,chg:-0.92,funds:['017731']},
-    {sym:'ASML',name:'阿斯麦',price:1731.82,chg:0.33,funds:['017731']},
+    {sym:'ASML',name:'阿斯麦',price:1748.00,chg:-2.09,funds:['017731']},
     {sym:'MRVL',name:'迈威尔',price:218.76,chg:-1.65,funds:['017731']},
     {sym:'INTC',name:'英特尔',price:107.52,chg:-2.11,funds:['006373']},
     {sym:'AAPL',name:'苹果',price:315.89,chg:-0.45,funds:[]},
