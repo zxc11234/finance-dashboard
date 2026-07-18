@@ -1031,7 +1031,15 @@ const alertData=[
     row.className='alert-row';
     row.innerHTML=`<div class="alert-dot" style="background:${dot}"></div><div class="alert-name">${d.name}</div><div class="alert-bar"><div class="alert-fill" style="width:${fillW}%;background:${bg}"></div></div><div class="alert-pct ${d.pct<0?'red':d.pct<5?'amber':'green'}">${d.pct>=0?'+':''}${d.pct.toFixed(1)}%</div>`;
     c.appendChild(row);
-  });
+  };
+  normal.forEach(renderRow);
+  if(newBuys.length){
+    const hdr=document.createElement('div');
+    hdr.className='alert-row';
+    hdr.innerHTML=`<div class="alert-name" style="color:var(--muted);font-size:0.7rem">── 🆕 新买入确认中 ──</div>`;
+    c.appendChild(hdr);
+    newBuys.forEach(renderRow);
+  }
 })();
 
 // Feature 6: Radar Chart
