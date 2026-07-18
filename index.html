@@ -1309,12 +1309,12 @@ function switchTab(name,el){
   document.querySelectorAll('[id^="tab-"]').forEach(d=>d.style.display='none');
   document.getElementById('tab-'+name).style.display='';
   el.classList.add('active');
-  if(name==='overview')initOverview();
-  else if(name==='history')initHistory();
-  else if(name==='monthly')initMonthly();
-  else if(name==='alloc'){initAlloc();initRadar();}
-  else if(name==='semicon')initSemicon();
-  else if(name==='tradelog')initTradelog();
+  requestAnimationFrame(()=>{
+    if(name==='overview')initOverview();
+    else if(name==='history')initHistory();
+    else if(name==='monthly')initMonthly();
+    else if(name==='alloc'){initAlloc();initRadar();}
+  });
 }
 initOverview();
 
