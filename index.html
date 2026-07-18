@@ -1344,7 +1344,12 @@ initOverview();
   }
 })();
 // Feature 5: PWA Service Worker
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+// One-time SW cleanup: unregister all service workers and clear caches
+// to purge stale cached pages from the buggy cache-first strategy.
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));
+  if(window.caches) caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+}
 function initSemicon(){
   if(document.getElementById('watchGrid').innerHTML)return;
   var stocks=[
