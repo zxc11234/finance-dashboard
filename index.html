@@ -1098,7 +1098,12 @@ function drawRadar(){
     }});
 }
 function initOverview(){
-  if(chartInit.overview)return;chartInit.overview=true;
+  if(chartInit.overview){
+    const c=document.getElementById('allocPie');
+    if(c&&c.width>0)return;
+    chartInit.overview=false;
+  }
+  chartInit.overview=true;
   const fn=['017731 嘉实产业','018147 建信C','539002 建信A','006373 国富科技','018036 新能源车','020470 长城半导体','017811 人工智能'];
   const fp=[0,-5.85,-5.84,-4.77,-3.75,-8.61,-7.47];
   new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
@@ -1111,7 +1116,13 @@ function initOverview(){
 }
 
 function initHistory(){
-  if(chartInit.history)return;chartInit.history=true;
+  if(chartInit.history){
+    // Reset if canvas has 0 width (was initialized while hidden)
+    const c=document.getElementById('cumChart');
+    if(c&&c.width>0)return;
+    chartInit.history=false;
+  }
+  chartInit.history=true;
   const dd=calcMaxDD(cum);
 
   // Max drawdown plugin
@@ -1231,12 +1242,22 @@ function initHistory(){
 }
 
 function initMonthly(){
-  if(chartInit.monthly)return;chartInit.monthly=true;
+  if(chartInit.monthly){
+    const c=document.getElementById('monthlyChart');
+    if(c&&c.width>0)return;
+    chartInit.monthly=false;
+  }
+  chartInit.monthly=true;
   new Chart(document.getElementById('monthlyChart'),{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月','7月'],datasets:[{data:[191743.86,31903.36,-181996.27,425432.79,261045.53,534451.94,-461848.18],backgroundColor:['rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)'],borderRadius:6,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
 }
 
 function initAlloc(){
-  if(chartInit.alloc)return;chartInit.alloc=true;
+  if(chartInit.alloc){
+    const c=document.getElementById('allocDonut');
+    if(c&&c.width>0)return;
+    chartInit.alloc=false;
+  }
+  chartInit.alloc=true;
   // Donut chart
   new Chart(document.getElementById('allocDonut'),{
     type:'doughnut',
