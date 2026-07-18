@@ -1,4 +1,7 @@
-const CACHE_NAME = 'finance-dashboard-v2';
+// Cache version - increment on each deploy
+const CACHE_VERSION = '20260718-v1';
+
+const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = ['./index.html', './manifest.json'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));

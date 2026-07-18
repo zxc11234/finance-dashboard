@@ -263,6 +263,7 @@
   .ec-tag-info{background:rgba(59,130,246,.15);color:var(--blue)}
   .ec-countdown{font-size:0.68rem;font-weight:600;margin-top:3px}
   .ec-past{opacity:.4}
+  .ec-current{background:rgba(59,130,246,.12);border-radius:8px;box-shadow:inset 0 0 0 1px var(--blue)}
   /* Feature 2: Position Alert */
   .alert-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
   .alert-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(30,41,59,.4);font-size:0.78rem}
@@ -288,12 +289,18 @@
 
 <div class="kpi-grid">
   <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,371,579</div><div class="kpi-sub">基金 1,365,541 + 余额宝 1,006,038（含赎回待入账约30万）</div></div>
-  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+800,733</div><div class="kpi-sub">支付宝 +677,268 · 嘉实 +124,431 · 收益率 51.84%</div></div>
+  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+800,733</div><div class="kpi-sub">支付宝 +677,268 · 嘉实 +124,431 · 收益率 51.84% · 含已清仓/赎回</div></div>
   <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/17)</div><div class="kpi-value red">-84,606</div><div class="kpi-sub">支付宝 -64,327 + 嘉实017731 -20,279 | QDII 5只合计 -51,221</div></div>
   <div class="kpi-card"><div class="kpi-label">📅 7月MTD</div><div class="kpi-value red">-461,848</div><div class="kpi-sub">13 个交易日 · 7月最惨</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">58.9%</div><div class="kpi-sub">76 盈 / 53 亏 / 0 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">6,207.23</div><div class="kpi-sub">最高 +93,183.78 · 最大 -461,284.35</div></div>
   <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-461,284.35</div><div class="kpi-sub" id="maxDDSub">7/12 → 7/17</div></div>
+</div>
+
+
+<div class="chart-card" style="margin-top:10px;margin-bottom:10px;padding:10px 14px">
+  <h3 style="margin-bottom:6px">📈 近7日收益趋势 <span style="font-size:.65rem;color:var(--muted)">· 每日盈亏</span></h3>
+  <div style="height:60px"><canvas id="weekSparkline"></canvas></div>
 </div>
 
 <div class="kpi-grid" id="riskCards" style="margin-top:-6px">
@@ -324,21 +331,21 @@
     </div>
     <div class="stress-card amber-s">
       <div class="stress-label">🟡 CPI 符合预期</div>
-      <div class="stress-val amber">-3,369</div>
-      <div class="stress-detail">QDII全线下跌(-0.8%)<br>A股半导体暴跌 -3%(-¥25K)<br>半导体单日流出218亿</div>
+      <div class="stress-val amber">-16,591</div>
+      <div class="stress-detail">QDII全线下跌 -0.8%(-¥8.5K)<br>A股半导体 -3%(-¥8.1K)<br>半导体10日流出1,530亿</div>
     </div>
     <div class="stress-card red-s">
       <div class="stress-label">🔴 CPI 高于预期</div>
-      <div class="stress-val red">-42,484</div>
-      <div class="stress-detail">降息预期回落→QDII -2.5%(-¥29K)<br>A股科技同步承压 -2%(-¥9K)<br>现金仍是护盾</div>
+      <div class="stress-val red">-32,042</div>
+      <div class="stress-detail">降息预期回落→QDII -2.5%(-¥26.7K)<br>A股科技同步承压 -2%(-¥5.4K)<br>现金仍是护盾</div>
     </div>
     <div class="stress-card dark-s">
       <div class="stress-label">🟣 极端情景</div>
-      <div class="stress-val red">-66,628</div>
-      <div class="stress-detail">CPI大超预期+地缘升级<br>QDII -4%(-¥46K) A股 -3%(-¥20K)<br>历史最大回撤 -¥165K</div>
+      <div class="stress-val red">-50,729</div>
+      <div class="stress-detail">CPI大超预期+地缘升级<br>QDII -4%(-¥42.7K) A股 -3%(-¥8.1K)<br>历史最大回撤 -¥498K</div>
     </div>
   </div>
-  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 基于当前持仓(QDII ¥91万/A股 ¥27万/医药¥3万/现金 ¥101万)静态测算，不考虑盘中操作。现金¥101万+赎回待入账¥30万=¥131万在任何情景下均不受损。</div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 基于当前持仓(QDII ¥107万/A股 ¥27万/医药¥3万/现金 ¥101万)静态测算，不考虑盘中操作。现金¥101万+赎回待入账¥30万=¥131万在任何情景下均不受损。</div>
   </div>
 
   <div class="us-panel">
@@ -368,13 +375,12 @@
   <!-- QDII NAV Lag Board -->
   <div class="table-card" style="margin-bottom:14px">
   <h3>🕐 QDII 净值延迟看板</h3>
-  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">正常</div></div>
-  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">正常</div></div>
-  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。017731嘉实直销延迟更久(可能T+3)。当前显示的收益可能是数天前的数据，不代表最新持仓盈亏。</div>
-  </div>
+  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:33%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
+  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
+  <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
+  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
+  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/16 → 7/17待更新</div></div><div class="lag-status amber">T+1</div></div>
+  <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。进度条表示延迟程度。下周一将更新7/17净值。</div>
 
   <div class="charts-grid">
     <div class="chart-card"><h3>🥧 资产配置</h3><div class="chart-wrap"><canvas id="allocPie"></canvas></div></div>
@@ -424,7 +430,7 @@
     <div class="chart-card"><h3>📊 每日收益分布（近30日）</h3><div class="chart-wrap"><canvas id="dailyBar"></canvas></div></div>
     <div class="chart-card"><h3>📉 平台收益对比</h3><div class="chart-wrap"><canvas id="platformChart"></canvas></div></div>
   </div>
-  <div class="chart-card" style="grid-column:1/-1"><h3>🎯 每日 Alpha 热力图（跑赢/跑输沪深300）</h3><div id="alphaHeatmap"></div></div>
+  <div class="chart-card" style="grid-column:1/-1"><h3>🎯 每日 Alpha 热力图（跑赢/跑输沪深300）</h3><div id="hs300Ref" style="display:flex;gap:2px;flex-wrap:wrap;margin-bottom:8px;font-size:.6rem"></div><div id="alphaHeatmap"></div></div>
   <!-- Feature 3: Underwater Plot -->
   <div class="chart-card" style="grid-column:1/-1"><h3>🌊 水下曲线（从峰值回撤 %）</h3><div class="chart-wrap"><canvas id="underwaterChart"></canvas></div></div>
 </div>
@@ -961,27 +967,37 @@ const ecEvents=[
   {date:'2026-07-14',event:'Warsh国会作证 + 拓荆科技复牌',tag:'warn'},
   {date:'2026-07-15',event:'美国CPI数据',tag:'hot'},
   {date:'2026-07-17',event:'期权到期日',tag:'info'},
-  {date:'2026-07-22',event:'017731 Q2季报披露',tag:'info'},
+  {date:'2026-07-22',event:'017731 Q2季报 + Alphabet+Tesla财报',tag:'hot'},
   {date:'2026-07-30',event:'美联储FOMC利率决议',tag:'hot'},
   {date:'2026-08-15',event:'017811 Q2季报',tag:'info'},
   {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
 ];
 (function buildCalendar(){
-  const now=new Date('2026-07-17T15:00:00+08:00');
+  const now=new Date('2026-07-18T08:00:00+08:00');
   const tl=document.getElementById('ecTimeline');
   if(!tl)return;
+  // Partition: upcoming events first (chronological), past events appended at end
+  const upcoming=[],past=[];
   ecEvents.forEach(ev=>{
     const ed=new Date(ev.date+'T00:00:00+08:00');
     const diff=Math.ceil((ed-now)/(1000*60*60*24));
+    (diff<0?past:upcoming).push({ev,ed,diff});
+  });
+  const sorted=[...upcoming,...past];
+  let firstCurrent=null;
+  sorted.forEach(({ev,diff},idx)=>{
     const past=diff<0;
     const cls=ev.tag==='hot'?'ec-tag-hot':ev.tag==='warn'?'ec-tag-warn':'ec-tag-info';
     const tagLabel=ev.tag==='hot'?'🔴关键':ev.tag==='warn'?'🟡关注':'🔵跟踪';
     const dd=ev.date.split('-');
     const item=document.createElement('div');
     item.className='ec-item'+(past?' ec-past':'');
+    if(!past&&!firstCurrent){item.classList.add('ec-current');firstCurrent=item;}
     item.innerHTML=`<div class="ec-date">${parseInt(dd[1])}/${parseInt(dd[2])}</div><div class="ec-event">${ev.event}</div><span class="ec-tag ${cls}">${tagLabel}</span><div class="ec-countdown ${diff<0?'':'red'}">${diff>0?'T-'+diff+'天':diff===0?'⏰ 今天':'✓ 已过'}</div>`;
     tl.appendChild(item);
   });
+  // Auto-scroll to first non-past event
+  if(firstCurrent){tl.scrollLeft=firstCurrent.offsetLeft-tl.offsetLeft-8;}
 })();
 
 // Feature 2: Position Alert
@@ -993,15 +1009,18 @@ const alertData=[
   {name:'006373 国富科技',cost:41562,mkt:67612,pct:62.6},
   {name:'539002 建信新兴A',cost:60000,mkt:96981,pct:61.6},
   {name:'018147 建信新兴C',cost:150002,mkt:246683,pct:64.5},
-  {name:'019671 港股创新药',cost:20000,mkt:20000,pct:0},
-  {name:'008619 永赢医药',cost:5000,mkt:5000,pct:0},
-  {name:'003231 创金合信医疗',cost:5000,mkt:5000,pct:0},
+  // 🆕 医药3只：7/17新买入，确认中，单独分组显示
+  {name:'019671 港股创新药 🆕',cost:20000,mkt:20000,pct:0,isNew:true},
+  {name:'008619 永赢医药 🆕',cost:5000,mkt:5000,pct:0,isNew:true},
+  {name:'003231 创金合信医疗 🆕',cost:5000,mkt:5000,pct:0,isNew:true},
 ];
 (function buildAlerts(){
   const c=document.getElementById('alertRows');
   if(!c)return;
-  alertData.sort((a,b)=>a.pct-b.pct);
-  alertData.forEach(d=>{
+  // 分组：新买入确认中的医药单独排在最后
+  const normal=alertData.filter(d=>!d.isNew).sort((a,b)=>a.pct-b.pct);
+  const newBuys=alertData.filter(d=>d.isNew);
+  const renderRow=d=>{
     let color,dot,bg;
     if(d.pct<0){color='var(--red)';dot='#22c55e';bg='rgba(34,197,94,.6)';}
     else if(d.pct<5){color='var(--amber)';dot='#f59e0b';bg='rgba(245,158,11,.5)';}
@@ -1075,6 +1094,11 @@ function initOverview(){
   const fn=['017731 嘉实产业','018147 建信C','539002 建信A','006373 国富科技','018036 新能源车','020470 长城半导体','017811 人工智能'];
   const fp=[0,-5.85,-5.84,-4.77,-3.75,-8.61,-7.47];
   new Chart(document.getElementById('todayBar'),{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
+
+  // Weekly sparkline
+  const wkDates=dates.slice(-7),wkDaily=daily.slice(-7);
+  new Chart(document.getElementById('weekSparkline'),{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}}});
+
   new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','017731 嘉实产业升级','017811 东方人工智能','018147 建信新兴 C','020470 长城半导体','018036 新能源车 QDII','539002 建信新兴 A','006373 国富科技互联'],datasets:[{data:[1006038,495193,124731,246683,144559,159782,96981,67612],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#a78bfa','#8b5cf6','#10b981','#c084fc','#6ee7b7'],borderColor:'#131826',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{padding:6,usePointStyle:true,pointStyleWidth:7,font:{size:10}}}}}});
 }
 
@@ -1158,6 +1182,22 @@ function initHistory(){
 
   // Feature C: Build alpha heatmap after charts are created
   buildAlphaHeatmap();
+
+// HS300 daily reference strip
+(function buildHS300Ref(){
+  const ref=document.getElementById('hs300Ref');
+  if(!ref||ref.children.length>0)return;
+  const recent=30;
+  const start=Math.max(1,daily.length-recent);
+  let html='<span style="color:var(--muted);margin-right:4px">沪深300近期：</span>';
+  for(let i=start;i<daily.length;i++){
+    const chg=i>0?hs300[i]-hs300[i-1]:hs300[0];
+    const color=chg>=0?'rgba(239,68,68,.6)':'rgba(34,197,94,.6)';
+    html+=`<span style="padding:1px 3px;border-radius:2px;background:${color};color:#fff;font-size:.55rem">${dates[i]} ${chg>=0?'+':''}${chg.toFixed(1)}%</span>`;
+  }
+  ref.innerHTML=html;
+})();
+
 
   // Feature 3: Underwater Plot
   const uwData=[];
