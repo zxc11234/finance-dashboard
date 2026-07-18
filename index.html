@@ -23,11 +23,11 @@
   .kpi-label { color:var(--muted); font-size:0.75rem; }
   .kpi-value { font-size:1.4rem; font-weight:700; }
   .kpi-sub { font-size:0.75rem; color:var(--muted); margin-top:2px; }
-  .green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
+  .green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.muted{color:var(--muted)}
   .charts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:14px; margin-bottom:14px; }
   .chart-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
   .chart-card h3 { font-size:0.9rem; margin-bottom:8px; color:var(--muted); }
-  .chart-wrap { position:relative; height:280px; width:100%; }
+  .chart-wrap { position:relative; height:280px; width:100%; will-change:transform; }
   .chart-wrap.wide { height:360px; }
   .table-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:14px; overflow-x:auto; }
   .table-card h3 { font-size:0.9rem; margin-bottom:8px; color:var(--muted); }
@@ -199,7 +199,6 @@
   .tf-val{font-size:.85rem;font-weight:700;margin:2px 0}
   @media(max-width:768px){.stress-grid{grid-template-columns:1fr 1fr}.thermo-wrap{flex-direction:column;gap:10px}.thermo-bar{width:100%;height:28px;flex:0 0 28px;min-height:28px}.thermo-needle{height:40px;top:-6px}.thermo-score{font-size:1.6rem}.lag-name{min-width:110px}}
   /* === Semiconductor Chain Tab === */
-/* === Semiconductor Chain Tab === */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
   @media(max-width:900px){.grid2{grid-template-columns:1fr}}
   .sc-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
@@ -249,6 +248,15 @@
   .search-bar input:focus{border-color:var(--blue)}
   .search-bar button{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:.8rem;cursor:pointer}
   @media(max-width:768px){.archive-item{flex-direction:column;gap:2px}}
+  /* Holdings sort & filter */
+  .holdings-toolbar{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
+  .holdings-search{flex:1;min-width:160px;background:rgba(30,41,59,.6);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.8rem;outline:none}
+  .holdings-search:focus{border-color:var(--blue)}
+  .holdings-search::placeholder{color:var(--muted)}
+  th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+  th.sortable:hover{color:var(--text)}
+  th.sort-asc::after{content:' ↑';color:var(--blue);font-size:.8em}
+  th.sort-desc::after{content:' ↓';color:var(--blue);font-size:.8em}
   /* Feature 1: Economic Calendar */
   .ec-section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
   .ec-title{font-size:0.85rem;color:var(--muted);margin-bottom:10px}
@@ -280,12 +288,24 @@
   .fund-chip{padding:4px 10px;border-radius:6px;font-size:0.72rem;cursor:pointer;border:1px solid var(--border);background:var(--card);transition:all .2s}
   .fund-chip.active{border-color:var(--blue);background:rgba(59,130,246,.15);color:var(--blue)}
   .fund-chip:hover{border-color:var(--blue)}
+  /* Board rotation radar table (semicon tab) */
+  .radar-group{background:rgba(30,41,59,.3);border-radius:8px;padding:10px 12px;margin-bottom:10px}
+  .radar-group-title{font-size:.78rem;font-weight:600;margin-bottom:6px;padding-left:6px}
+  .radar-table{width:100%;font-size:.73rem;border-collapse:collapse}
+  .radar-table th{color:var(--muted);font-weight:600;padding:4px 6px;text-align:right;border-bottom:1px solid var(--border)}
+  .radar-table th:first-child{text-align:left}
+  .radar-table td{padding:4px 6px;text-align:right;border-bottom:1px solid rgba(30,41,59,.3)}
+  .radar-table td:first-child{text-align:left}
+  .radar-subtotal td{font-weight:700;border-top:1px solid var(--border);background:rgba(30,41,59,.4)}
+  .radar-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.62rem;font-weight:600}
+  /* Report tag missing class */
+  .tag-tech{background:rgba(59,130,246,.15);color:var(--blue)}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;vertical-align:middle">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月17日净值 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标 · 含最大回撤/资产配置/风险指标</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月17日净值 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
   <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,371,579</div><div class="kpi-sub">基金 1,365,541 + 余额宝 1,006,038（含赎回待入账约30万）</div></div>
@@ -388,31 +408,23 @@
     <div class="chart-card"><h3>📊 今日涨幅</h3><div class="chart-wrap"><canvas id="todayBar"></canvas></div></div>
   </div>
 
-  <div class="table-card"><h3>当前持仓明细</h3>
-  <table><thead><tr><th>基金名称</th><th>代码</th><th>平台</th><th>成本</th><th>市值</th><th>今日收益</th><th>累计收益</th><th>收益率</th></tr></thead><tbody>
-    <tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">1,036,020</td><td data-label="市值" style="font-weight:700">1,006,038</td><td data-label="今日" class="muted">0</td><td data-label="累计" class="green">+4,844</td><td data-label="收益率" class="green">+0.47%</td></tr>
-
-    <tr class="cat-row"><td colspan="8">🇨🇳 国内基金（2 只持仓 + 1 只赎回中）</td></tr>
-    <tr style="background:rgba(245,158,11,.04)"><td data-label="基金">东方人工智能主题混合 C <span style="font-size:.68rem;color:#f59e0b">🔄 半数赎回中</span></td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017811.html" target="_blank">017811 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">119,171</td><td data-label="市值">124,731</td><td data-label="今日" class="red">-20,011</td><td data-label="累计" class="green">+5,560</td><td data-label="收益率" class="green">+4.7%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城半导体产业混合 C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/020470.html" target="_blank">020470 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">116,256</td><td data-label="市值">144,559</td><td data-label="今日" class="red">-13,374</td><td data-label="累计" class="green">+28,303</td><td data-label="收益率" class="green">+24.3%</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">235,427</td><td data-label="市值">269,290</td><td data-label="今日" class="red">-33,385</td><td data-label="累计" class="green">+33,863</td><td data-label="收益率" class="green">+14.4%</td></tr>
-
-    <tr class="cat-row"><td colspan="8">💊 医药基金（3 只 · 新买入确认中）</td></tr>
-    <tr style="background:rgba(59,130,246,.04)"><td data-label="基金">广发港股创新药ETF联接 QDII C <span style="font-size:.68rem;color:var(--blue)">⏳ 确认中</span></td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/019671.html" target="_blank">019671 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">20,000</td><td data-label="市值">20,000</td><td data-label="今日" class="muted">—</td><td data-label="累计" class="muted">—</td><td data-label="收益率" class="muted">—</td></tr>
-    <tr style="background:rgba(59,130,246,.03)"><td data-label="基金">永赢医药健康股票 C <span style="font-size:.68rem;color:var(--blue)">⏳ 确认中</span></td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/008619.html" target="_blank">008619 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">5,000</td><td data-label="市值">5,000</td><td data-label="今日" class="muted">—</td><td data-label="累计" class="muted">—</td><td data-label="收益率" class="muted">—</td></tr>
-    <tr style="background:rgba(59,130,246,.02)"><td data-label="基金">创金合信医疗保健股票 C <span style="font-size:.68rem;color:var(--blue)">⏳ 确认中</span></td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/003231.html" target="_blank">003231 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">5,000</td><td data-label="市值">5,000</td><td data-label="今日" class="muted">—</td><td data-label="累计" class="muted">—</td><td data-label="收益率" class="muted">—</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">30,000</td><td data-label="市值">30,000</td><td data-label="今日">—</td><td data-label="累计">—</td><td data-label="收益率">—</td></tr>
-
-    <tr class="cat-row"><td colspan="8">🌍 QDII 基金（5 只 · 1 只部分赎回中）</td></tr>
-    <tr style="background:rgba(245,158,11,.04)"><td data-label="基金">嘉实全球产业升级 QDII <span style="font-size:.68rem;color:#f59e0b">🔄 33%赎回中</span></td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/017731.html" target="_blank">017731 🔗</a></td><td data-label="平台"><span class="badge badge-q">嘉实</span></td><td data-label="成本">490,000</td><td data-label="市值">495,193<span style="font-size:.6rem;color:var(--muted)"> ⏳7/16</span></td><td data-label="今日" class="red">-20,279</td><td data-label="累计" class="green">+5,193</td><td data-label="收益率" class="amber">+1.1%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018147.html" target="_blank">018147 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">150,002</td><td data-label="市值">246,683<span style="font-size:.6rem;color:var(--muted)"> ⏳7/16</span></td><td data-label="今日" class="red">-15,317</td><td data-label="累计" class="green">+96,681</td><td data-label="收益率" class="green">+64.5%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/018036.html" target="_blank">018036 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">115,003</td><td data-label="市值">159,782<span style="font-size:.6rem;color:var(--muted)"> ⏳7/16</span></td><td data-label="今日" class="red">-6,218</td><td data-label="累计" class="green">+44,779</td><td data-label="收益率" class="green">+38.9%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">建信新兴市场优选混合 QDII A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/539002.html" target="_blank">539002 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">60,000</td><td data-label="市值">96,981<span style="font-size:.6rem;color:var(--muted)"> ⏳7/16</span></td><td data-label="今日" class="red">-6,019</td><td data-label="累计" class="green">+36,981</td><td data-label="收益率" class="green">+61.6%</td></tr>
-    <tr style="background:rgba(239,68,68,.02)"><td data-label="基金">国富全球科技互联混合 QDII 人民币 A</td><td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/006373.html" target="_blank">006373 🔗</a></td><td data-label="平台">📱</td><td data-label="成本">41,562</td><td data-label="市值">67,612<span style="font-size:.6rem;color:var(--muted)"> ⏳7/16</span></td><td data-label="今日" class="red">-3,388</td><td data-label="累计" class="green">+26,050</td><td data-label="收益率" class="green">+62.6%</td></tr>
-    <tr class="subtotal"><td>小计</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">856,567</td><td data-label="市值">1,066,251</td><td data-label="今日" class="red">-51,221</td><td data-label="累计" class="green">+209,684</td><td data-label="收益率" class="green">+24.5%</td></tr>
-
-    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">2,158,014</td><td data-label="市值" style="font-weight:700">2,371,579</td><td data-label="今日" class="red">-84,606</td><td data-label="累计" class="green">+248,391</td><td data-label="收益率" class="green">+11.5%</td></tr>
-  </tbody></table></div>
+  <div class="table-card" id="holdingsCard"><h3>当前持仓明细</h3>
+  <div class="holdings-toolbar">
+    <input class="holdings-search" id="holdingsSearch" type="text" placeholder="🔍 搜索基金名称或代码...">
+  </div>
+  <table id="holdingsTable">
+    <thead><tr>
+      <th style="text-align:left">基金名称</th>
+      <th style="text-align:left">代码</th>
+      <th>平台</th>
+      <th class="sortable" data-col="cost">成本</th>
+      <th class="sortable" data-col="mkt">市值</th>
+      <th class="sortable" data-col="today">今日收益</th>
+      <th class="sortable" data-col="cum">累计收益</th>
+      <th class="sortable" data-col="rate">收益率</th>
+    </tr></thead>
+    <tbody id="holdingsTbody"></tbody>
+  </table></div>
 
   <div class="highlight">
     <strong>💡 更新说明（7/18 07:50 · 美股收盘全量更新）</strong><br>
@@ -421,7 +433,6 @@
     · 🛡️ <strong>今日操作：赎回017811一半+017731三分之一</strong>，减仓回笼约¥299K待入账。新建医药仓位¥30K（019671港股创新药+008619永赢CXO+003231创金合信创新药）。<br>
     · ⚠️ <strong>半导体5日流出1,245亿</strong>，医疗服务和医药商业逆势获5日资金净流入，正在验证资金从半导体切向医药的轮动逻辑。
   </div>
-</div>
 </div>
 
 <div id="tab-history" style="display:none;">
@@ -1484,6 +1495,123 @@ function filterArchive(){
     item.style.display=text.indexOf(q)>=0?'':'none';
   });
 }
+
+// Stub so switchTab('news') guard doesn't throw
+function initNews(){}
+
+// ============================================================
+// Holdings table — sort / filter / dynamic subtotals
+// ============================================================
+(function initHoldingsTable(){
+  var CAT_LABELS={
+    domestic:'🇨🇳 国内基金（2 只持仓 + 1 只赎回中）',
+    medical: '💊 医药基金（3 只 · 新买入确认中）',
+    qdii:    '🌍 QDII 基金（5 只 · 1 只部分赎回中）'
+  };
+  var FUNDS=[
+    {g:'domestic',n:'东方人工智能主题混合 C',    nx:'🔄 半数赎回中',  c:'017811',p:'📱', cost:119171, mkt:124731, today:-20011,cum:5560,  rate:4.7,  bg:'rgba(245,158,11,.04)'},
+    {g:'domestic',n:'长城半导体产业混合 C',       nx:'',              c:'020470',p:'📱', cost:116256, mkt:144559, today:-13374,cum:28303, rate:24.3, bg:'rgba(239,68,68,.02)'},
+    {g:'medical', n:'广发港股创新药ETF联接 QDII C',nx:'⏳ 确认中',    c:'019671',p:'📱', cost:20000,  mkt:20000,  today:null,  cum:null,  rate:null, bg:'rgba(59,130,246,.04)'},
+    {g:'medical', n:'永赢医药健康股票 C',          nx:'⏳ 确认中',    c:'008619',p:'📱', cost:5000,   mkt:5000,   today:null,  cum:null,  rate:null, bg:'rgba(59,130,246,.03)'},
+    {g:'medical', n:'创金合信医疗保健股票 C',      nx:'⏳ 确认中',    c:'003231',p:'📱', cost:5000,   mkt:5000,   today:null,  cum:null,  rate:null, bg:'rgba(59,130,246,.02)'},
+    {g:'qdii',    n:'嘉实全球产业升级 QDII',       nx:'🔄 33%赎回中', c:'017731',p:'嘉实',cost:490000,mkt:495193, today:-20279,cum:5193,  rate:1.1,  bg:'rgba(245,158,11,.04)'},
+    {g:'qdii',    n:'建信新兴市场优选混合 QDII C', nx:'',              c:'018147',p:'📱', cost:150002, mkt:246683, today:-15317,cum:96681, rate:64.5, bg:'rgba(239,68,68,.02)'},
+    {g:'qdii',    n:'长城全球新能源车 QDII C',     nx:'',              c:'018036',p:'📱', cost:115003, mkt:159782, today:-6218, cum:44779, rate:38.9, bg:'rgba(239,68,68,.02)'},
+    {g:'qdii',    n:'建信新兴市场优选混合 QDII A', nx:'',              c:'539002',p:'📱', cost:60000,  mkt:96981,  today:-6019, cum:36981, rate:61.6, bg:'rgba(239,68,68,.02)'},
+    {g:'qdii',    n:'国富全球科技互联混合 QDII 人民币 A',nx:'',        c:'006373',p:'📱', cost:41562,  mkt:67612,  today:-3388, cum:26050, rate:62.6, bg:'rgba(239,68,68,.02)'}
+  ];
+
+  var _sc=null, _sa=true, _fq='';
+
+  function fv(v){if(v==null)return '—';if(v===0)return '0';return(v>0?'+':'')+v.toLocaleString();}
+  function fvr(v){if(v==null)return '—';return(v>0?'+':'')+v.toFixed(1)+'%';}
+  function clz(v){if(v==null||v===0)return '';return v>0?'green':'red';}
+
+  function buildFundRow(f){
+    var codeCell=f.c==='—'?'<td data-label="代码">—</td>':'<td data-label="代码"><a class="fund-link" href="https://fund.eastmoney.com/'+f.c+'.html" target="_blank">'+f.c+' 🔗</a></td>';
+    var platCell=f.p==='嘉实'?'<td data-label="平台"><span class="badge badge-q">嘉实</span></td>':'<td data-label="平台">'+f.p+'</td>';
+    var nameExtra=f.nx?(' <span style="font-size:.68rem;color:'+(f.nx.indexOf('赎回')>=0?'#f59e0b':'var(--blue)')+'">'+f.nx+'</span>'):'';
+    var mktSuffix=f.g==='qdii'?'<span style="font-size:.6rem;color:var(--muted)"> ⏳7/16</span>':'';
+    return '<tr style="background:'+f.bg+'"><td data-label="基金">'+f.n+nameExtra+'</td>'+codeCell+platCell+'<td data-label="成本">'+f.cost.toLocaleString()+'</td><td data-label="市值">'+f.mkt.toLocaleString()+mktSuffix+'</td><td data-label="今日" class="'+clz(f.today)+'">'+fv(f.today)+'</td><td data-label="累计" class="'+clz(f.cum)+'">'+fv(f.cum)+'</td><td data-label="收益率" class="'+clz(f.rate)+'">'+fvr(f.rate)+'</td></tr>';
+  }
+
+  function buildSubtotal(label, funds, extraStyle){
+    var hasCum=funds.some(function(f){return f.cum!=null;});
+    var hasToday=funds.some(function(f){return f.today!=null;});
+    var sc=funds.reduce(function(s,f){return s+f.cost;},0);
+    var sm=funds.reduce(function(s,f){return s+f.mkt;},0);
+    var st=hasToday?funds.reduce(function(s,f){return s+(f.today||0);},0):null;
+    var scu=hasCum?funds.reduce(function(s,f){return s+(f.cum||0);},0):null;
+    var sr=sc>0?(sm-sc)/sc*100:null;
+    var style=extraStyle?' style="'+extraStyle+'"':'';
+    return '<tr class="subtotal"'+style+'><td>'+label+'</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">'+sc.toLocaleString()+'</td><td data-label="市值">'+sm.toLocaleString()+'</td><td data-label="今日" class="'+clz(st)+'">'+fv(st)+'</td><td data-label="累计" class="'+clz(scu)+'">'+fv(scu)+'</td><td data-label="收益率" class="'+clz(sr)+'">'+fvr(sr)+'</td></tr>';
+  }
+
+  function render(){
+    var tbody=document.getElementById('holdingsTbody');
+    if(!tbody)return;
+    var q=_fq.toLowerCase().trim();
+    FUNDS.forEach(function(f){f._vis=!q||f.n.toLowerCase().indexOf(q)>=0||f.c.toLowerCase().indexOf(q)>=0;});
+
+    var html='';
+    // Cash row (always visible)
+    html+='<tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">1,036,020</td><td data-label="市值" style="font-weight:700">1,006,038</td><td data-label="今日" class="muted">0</td><td data-label="累计" class="green">+4,844</td><td data-label="收益率" class="green">+0.47%</td></tr>';
+
+    ['domestic','medical','qdii'].forEach(function(g){
+      var gAll=FUNDS.filter(function(f){return f.g===g;});
+      var gVis=gAll.filter(function(f){return f._vis;});
+      if(gVis.length===0)return;
+
+      var gRows=gVis.slice();
+      if(_sc){
+        gRows.sort(function(a,b){
+          var av=a[_sc]!=null?a[_sc]:(_sa?Infinity:-Infinity);
+          var bv=b[_sc]!=null?b[_sc]:(_sa?Infinity:-Infinity);
+          return _sa?av-bv:bv-av;
+        });
+      }
+
+      html+='<tr class="cat-row"><td colspan="8">'+CAT_LABELS[g]+'</td></tr>';
+      gRows.forEach(function(f){html+=buildFundRow(f);});
+      var lbl=gVis.length<gAll.length?'小计（筛选 '+gVis.length+'/'+gAll.length+' 只）':'小计';
+      html+=buildSubtotal(lbl,gVis,'');
+    });
+
+    // Grand total
+    var allVis=FUNDS.filter(function(f){return f._vis;});
+    var tc=allVis.reduce(function(s,f){return s+f.cost;},0)+1036020;
+    var tm=allVis.reduce(function(s,f){return s+f.mkt;},0)+1006038;
+    var tt=allVis.reduce(function(s,f){return s+(f.today||0);},0)+0;
+    var tcu=allVis.filter(function(f){return f.cum!=null;}).reduce(function(s,f){return s+(f.cum||0);},0)+4844;
+    var tr2=tc>0?(tm-tc)/tc*100:0;
+    html+='<tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">'+tc.toLocaleString()+'</td><td data-label="市值" style="font-weight:700">'+tm.toLocaleString()+'</td><td data-label="今日" class="'+clz(tt)+'">'+fv(tt)+'</td><td data-label="累计" class="green">+'+tcu.toLocaleString()+'</td><td data-label="收益率" class="'+clz(tr2)+'">'+fvr(tr2)+'</td></tr>';
+
+    tbody.innerHTML=html;
+    updateSortTh();
+  }
+
+  function updateSortTh(){
+    document.querySelectorAll('#holdingsTable th.sortable').forEach(function(th){
+      th.classList.remove('sort-asc','sort-desc');
+      if(th.dataset.col===_sc)th.classList.add(_sa?'sort-asc':'sort-desc');
+    });
+  }
+
+  // Wire events
+  var searchEl=document.getElementById('holdingsSearch');
+  if(searchEl){
+    searchEl.addEventListener('input',function(){_fq=this.value;render();});
+  }
+  document.querySelectorAll('#holdingsTable th.sortable').forEach(function(th){
+    th.addEventListener('click',function(){
+      var col=this.dataset.col;
+      if(_sc===col){_sa=!_sa;}else{_sc=col;_sa=true;}
+      render();
+    });
+  });
+
+  render();
+})();
 </script>
 </body>
 </html>
