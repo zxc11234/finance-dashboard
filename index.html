@@ -1315,8 +1315,7 @@ function switchTab(name,el){
   document.querySelectorAll('[id^="tab-"]').forEach(d=>d.style.display='none');
   document.getElementById('tab-'+name).style.display='';
   el.classList.add('active');
-  // 用 requestAnimationFrame 等浏览器完成 layout，再初始化 Chart
-  // 双 rAF 是为了兼容 iOS Safari 的渲染时序
+  // 双 rAF 等浏览器完成 layout
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     if(name==='overview')initOverview();
     else if(name==='history')initHistory();
@@ -1325,6 +1324,13 @@ function switchTab(name,el){
     else if(name==='semicon')initSemicon();
     else if(name==='tradelog')initTradelog();
     else if(name==='news')initNews();
+    // 关键：等 chart 创建后，强制 resize 让所有 chart 重算尺寸
+    // 解决 iOS Safari 隐藏 tab canvas 0x0 的问题
+    setTimeout(()=>{
+      if(window.Chart && Chart.instances){
+        Object.values(Chart.instances).forEach(c=>{try{c.resize();}catch(e){}});
+      }
+    }, 50);
   }));
 }
 initOverview();
