@@ -977,14 +977,14 @@ const ecEvents=[
   const now=new Date('2026-07-18T08:00:00+08:00');
   const tl=document.getElementById('ecTimeline');
   if(!tl)return;
-  // Partition: upcoming events first (chronological), past events appended at end
+  // Partition: upcoming events only (past events hidden)
   const upcoming=[],past=[];
   ecEvents.forEach(ev=>{
     const ed=new Date(ev.date+'T00:00:00+08:00');
     const diff=Math.ceil((ed-now)/(1000*60*60*24));
     (diff<0?past:upcoming).push({ev,ed,diff});
   });
-  const sorted=[...upcoming,...past];
+  const sorted=upcoming; // 只显示未来事件
   let firstCurrent=null;
   sorted.forEach(({ev,diff},idx)=>{
     const past=diff<0;
