@@ -11,6 +11,7 @@
 <title>2026 理财收益分析 v2 | Frank Worth</title>
 <script src="chart.umd.min.js"></script>
 <script src="html2canvas.min.js"></script>
+<script src="echarts.min.js"></script>
 <style>
   :root { --bg:#0a0e1a; --card:#131826; --border:#1e293b; --text:#e2e8f0; --muted:#64748b; --green:#ef4444; --red:#22c55e; --blue:#3b82f6; --amber:#f59e0b; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -336,6 +337,7 @@
   <div class="tab" onclick="switchTab('alloc',this)">📊 资产配置</div>
   <div class="tab" onclick="switchTab('news',this)">📰 资讯研报</div>
   <div class="tab" onclick="switchTab('semicon',this)">📡 市场雷达</div>
+  <div class="tab" onclick="switchTab('techflow',this)">🔬 科技资金流</div>
   <div class="tab" onclick="switchTab('tradelog',this)">📋 操作日志</div>
 </div>
 
@@ -818,6 +820,59 @@
     <strong style="color:var(--blue)">🔵 今日操作：赎回017811一半+017731三分之一，回笼约¥299K待入账。</strong>国内仅剩017811(减半后¥12.5万,+4.7%)和020470(¥14.5万,+0.0%)。新建医药仓¥3万在踩踏中受损但仓位极轻。全平台确认总亏-46,143。⚠️ 017731安全垫跌至+1.1%，再跌-2%破成本线。现金¥88.0万(42.8%)是最大优势。7/20(周一)QDII预估再跌约-¥13.5K（好于此前预估的-¥29K），因SOX跌幅从-4.3%收窄至-1.63%。<br><br>
     <strong style="color:var(--amber)">⚠️ 策略研判：温度计跌至10（深度冰点），恐慌但需等右侧信号。</strong>半导体10日流出1,530亿持续创极值。美股SOX本周-9.97%濒临熊市，但卖压在递减（-4.3%→-1.9%→-1.63%），芯片内部分化（MU/AMD抗跌 vs NVDA/TSM领跌）。下周关键催化剂：7/22 Alphabet+Tesla财报——若AI Capex确认加速则触发技术性反弹。策略：现金¥88.0万继续等待，017731是最大风险敞口（安全垫仅+1.1%），若7/20(周一)再跌2%考虑把剩余2/3再减半。其余QDII利润垫厚（+38%~+65%）暂不需操作。7/22财报前不动。
   </div>
+</div>
+</div>
+
+<div id="tab-techflow" style="display:none;">
+<style>
+.tf-card{background:var(--card);border:1px solid var(--border,#1e2433);border-radius:8px;padding:16px;margin-bottom:16px}
+.tf-card h2{font-size:14px;color:#e8eaed;margin-bottom:12px;font-weight:600}
+.tf-card h2 .badge{font-size:11px;font-weight:400;color:#8b949e;margin-left:8px}
+.tf-chart{width:100%;height:340px}
+.tf-chart-tall{height:400px}
+.tf-chart-mini{height:200px}
+.tf-trend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.tf-trend-card{background:var(--card);border:1px solid #1e2433;border-radius:6px;padding:10px}
+.tf-trend-card h3{font-size:12px;color:#e8eaed;margin-bottom:6px;font-weight:600;padding-left:6px}
+.tf-trend-card h3 .amt{font-size:11px;font-weight:400;margin-left:6px}
+.tf-insight{background:#161b22;border-left:3px solid #ffcc00;padding:10px 14px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#d0d4dc;line-height:1.5}
+.tf-insight strong{color:#ffcc00}
+.tf-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+.tf-table th{background:#161b22;color:#8b949e;font-weight:500;text-align:right;padding:6px 8px;border-bottom:1px solid #21262d}
+.tf-table th:first-child{text-align:left}
+.tf-table td{text-align:right;padding:6px 8px;border-bottom:1px solid #161b22}
+.tf-table td:first-child{text-align:left;color:#e8eaed;font-weight:500}
+.tf-tag{display:inline-block;background:#1c2128;border:1px solid #30363d;border-radius:4px;padding:2px 6px;font-size:10px;color:#58a6ff;margin-right:4px;margin-top:6px}
+@media(max-width:768px){
+  .tf-chart{height:260px}.tf-chart-tall{height:300px}.tf-chart-mini{height:160px}
+  .tf-trend-grid{grid-template-columns:1fr}
+  .tf-table{font-size:10px}.tf-table th,.tf-table td{padding:4px 3px}
+}
+</style>
+<div class="tf-card">
+  <h2>各板块 30 日资金净流入总览 <span class="badge">红色=净流出 | 绿色=净流入</span></h2>
+  <span class="tf-tag">5大板块</span><span class="tf-tag">27只龙头</span><span class="tf-tag">22交易日</span><span class="tf-tag">Tushare Pro</span>
+  <div id="tf-overview" class="tf-chart" style="margin-top:8px"></div>
+  <div class="tf-insight"><strong>核心发现：</strong>通信设备30日主力净流出-509亿居首，光学光电子-388亿。半导体-110亿相对克制，7/21单日回流166亿已修复大半。</div>
+</div>
+<div class="tf-card">
+  <h2>四阶资金分解 <span class="badge">超大单(机构)→大单→中单→小单(散户)</span></h2>
+  <div id="tf-breakdown" class="tf-chart"></div>
+  <div class="tf-insight"><strong>谁在卖？谁在买？</strong>超大单（顶级机构）在所有板块都是净卖出。散户端以小单为主力接盘——光学光电子小单+396亿。</div>
+</div>
+<div class="tf-card">
+  <h2>各板块主力累计净流出趋势 <span class="badge">逐板块独立展示</span></h2>
+  <div class="tf-trend-grid" id="tf-trend-grid"></div>
+  <div class="tf-insight"><strong>节奏解读：</strong>6月下旬温和流出→7月初加速→7/14-7/17恐慌踩踏→7/21半导体率先反弹。通信设备/光学光电子尚未止血。</div>
+</div>
+<div class="tf-card">
+  <h2>半导体板块日级资金流 <span class="badge">主力vs散户 · 8只龙头聚合</span></h2>
+  <div id="tf-semi-daily" class="tf-chart tf-chart-tall"></div>
+  <div class="tf-insight"><strong>半导体节奏：</strong>7/15-7/17连续3天主力流出合计-48亿，7/21主力突然回流——V形反转。但累计30日仍流出110亿。</div>
+</div>
+<div class="tf-card">
+  <h2>30 日资金流向明细表 <span class="badge">单位：亿元</span></h2>
+  <table class="tf-table"><thead><tr><th>板块</th><th>主力净额</th><th>超大单</th><th>大单</th><th>中单</th><th>小单</th><th>散户净额</th></tr></thead><tbody id="tf-tbody"></tbody></table>
 </div>
 </div>
 
@@ -1342,6 +1397,7 @@ function switchTab(name,el){
       else if(name==='semicon')initSemicon();
       else if(name==='tradelog')initTradelog();
       else if(name==='news'){if(typeof initNews==='function')initNews();}
+      else if(name==='techflow')initTechFlow();
       // resize 所有 chart 防止 0x0
       setTimeout(()=>{
         if(window.Chart&&Chart.instances)Object.values(Chart.instances).forEach(c=>{try{c.resize();}catch(e){}});
@@ -1380,6 +1436,108 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));
   if(window.caches) caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
 }
+
+var tfCharts=[];var tfInited=false;
+function initTechFlow(){
+  if(tfInited)return;tfInited=true;
+  if(typeof echarts==='undefined'){console.error('ECharts not loaded');return;}
+  const DATA={"半导体": {"series": [{"date": "06/22", "main": -4.82, "retail": 4.82, "elg": -6.09, "lg": 1.27, "md": 2.67, "sm": 2.16, "cum_main": -4.82, "cum_retail": 4.82}, {"date": "06/23", "main": -21.83, "retail": 21.83, "elg": -19.08, "lg": -2.74, "md": 14.04, "sm": 7.78, "cum_main": -26.65, "cum_retail": 26.65}, {"date": "06/24", "main": 20.78, "retail": -20.78, "elg": 26.65, "lg": -5.87, "md": -12.29, "sm": -8.49, "cum_main": -5.87, "cum_retail": 5.87}, {"date": "06/25", "main": 15.8, "retail": -15.8, "elg": 12.99, "lg": 2.81, "md": -10.38, "sm": -5.42, "cum_main": 9.93, "cum_retail": -9.93}, {"date": "06/26", "main": -33.23, "retail": 33.23, "elg": -38.83, "lg": 5.6, "md": 14.84, "sm": 18.39, "cum_main": -23.3, "cum_retail": 23.3}, {"date": "06/29", "main": 4.34, "retail": -4.34, "elg": -12.12, "lg": 16.46, "md": -9.08, "sm": 4.74, "cum_main": -18.96, "cum_retail": 18.96}, {"date": "06/30", "main": 10.2, "retail": -10.2, "elg": 8.7, "lg": 1.5, "md": -9.79, "sm": -0.41, "cum_main": -8.76, "cum_retail": 8.76}, {"date": "07/01", "main": 1.72, "retail": -1.72, "elg": -6.34, "lg": 8.05, "md": -1.27, "sm": -0.44, "cum_main": -7.04, "cum_retail": 7.04}, {"date": "07/02", "main": -28.62, "retail": 28.62, "elg": -26.52, "lg": -2.1, "md": 19.72, "sm": 8.89, "cum_main": -35.66, "cum_retail": 35.66}, {"date": "07/03", "main": 2.33, "retail": -2.33, "elg": 1.44, "lg": 0.89, "md": -4.9, "sm": 2.57, "cum_main": -33.33, "cum_retail": 33.33}, {"date": "07/06", "main": -16.05, "retail": 16.05, "elg": -5.67, "lg": -10.38, "md": 14.16, "sm": 1.89, "cum_main": -49.38, "cum_retail": 49.38}, {"date": "07/07", "main": -4.91, "retail": 4.91, "elg": -6.79, "lg": 1.88, "md": 2.94, "sm": 1.96, "cum_main": -54.28, "cum_retail": 54.28}, {"date": "07/08", "main": -7.73, "retail": 7.73, "elg": -6.83, "lg": -0.9, "md": 7.15, "sm": 0.58, "cum_main": -62.01, "cum_retail": 62.01}, {"date": "07/09", "main": 39.83, "retail": -39.83, "elg": 31.53, "lg": 8.3, "md": -28.61, "sm": -11.22, "cum_main": -22.19, "cum_retail": 22.19}, {"date": "07/10", "main": -5.58, "retail": 5.58, "elg": -19.43, "lg": 13.84, "md": 3.57, "sm": 2.02, "cum_main": -27.77, "cum_retail": 27.77}, {"date": "07/13", "main": -21.82, "retail": 21.82, "elg": -17.88, "lg": -3.94, "md": 17.84, "sm": 3.99, "cum_main": -49.59, "cum_retail": 49.59}, {"date": "07/14", "main": -10.75, "retail": 10.75, "elg": -1.43, "lg": -9.32, "md": 5.99, "sm": 4.76, "cum_main": -60.34, "cum_retail": 60.34}, {"date": "07/15", "main": -16.46, "retail": 16.46, "elg": -15.63, "lg": -0.84, "md": 4.85, "sm": 11.61, "cum_main": -76.81, "cum_retail": 76.81}, {"date": "07/16", "main": -20.65, "retail": 20.65, "elg": -10.21, "lg": -10.44, "md": 12.18, "sm": 8.47, "cum_main": -97.46, "cum_retail": 97.46}, {"date": "07/17", "main": -17.99, "retail": 17.99, "elg": -12.53, "lg": -5.46, "md": 9.5, "sm": 8.49, "cum_main": -115.45, "cum_retail": 115.45}, {"date": "07/20", "main": -10.5, "retail": 10.5, "elg": -9.36, "lg": -1.13, "md": 1.21, "sm": 9.29, "cum_main": -125.94, "cum_retail": 125.94}, {"date": "07/21", "main": 15.88, "retail": -15.88, "elg": 18.36, "lg": -2.49, "md": -16.1, "sm": 0.23, "cum_main": -110.07, "cum_retail": 110.07}], "total_main": -110.06, "total_retail": 110.06, "total_elg": -115.07, "total_lg": 4.99, "total_md": 38.24, "total_sm": 71.84, "n_stocks": 8, "n_days": 22}, "PCB/元件": {"series": [{"date": "06/22", "main": -30.99, "retail": 30.99, "elg": -21.95, "lg": -9.05, "md": 12.62, "sm": 18.38, "cum_main": -30.99, "cum_retail": 30.99}, {"date": "06/23", "main": -60.28, "retail": 60.28, "elg": -41.45, "lg": -18.82, "md": 25.66, "sm": 34.61, "cum_main": -91.27, "cum_retail": 91.27}, {"date": "06/24", "main": -3.62, "retail": 3.62, "elg": 5.62, "lg": -9.24, "md": 1.6, "sm": 2.02, "cum_main": -94.89, "cum_retail": 94.89}, {"date": "06/25", "main": 18.7, "retail": -18.7, "elg": 14.82, "lg": 3.88, "md": -14.32, "sm": -4.39, "cum_main": -76.19, "cum_retail": 76.19}, {"date": "06/26", "main": -45.83, "retail": 45.83, "elg": -32.83, "lg": -13.0, "md": 17.46, "sm": 28.37, "cum_main": -122.02, "cum_retail": 122.02}, {"date": "06/29", "main": -16.16, "retail": 16.16, "elg": -7.71, "lg": -8.45, "md": 6.74, "sm": 9.42, "cum_main": -138.18, "cum_retail": 138.18}, {"date": "06/30", "main": 44.13, "retail": -44.13, "elg": 40.03, "lg": 4.1, "md": -34.03, "sm": -10.09, "cum_main": -94.05, "cum_retail": 94.05}, {"date": "07/01", "main": -25.91, "retail": 25.91, "elg": -14.33, "lg": -11.59, "md": 7.4, "sm": 18.52, "cum_main": -119.97, "cum_retail": 119.97}, {"date": "07/02", "main": -33.88, "retail": 33.88, "elg": -26.97, "lg": -6.91, "md": 8.73, "sm": 25.15, "cum_main": -153.84, "cum_retail": 153.84}, {"date": "07/03", "main": 11.87, "retail": -11.87, "elg": 8.8, "lg": 3.07, "md": -10.05, "sm": -1.82, "cum_main": -141.97, "cum_retail": 141.97}, {"date": "07/06", "main": -31.5, "retail": 31.5, "elg": -21.79, "lg": -9.71, "md": 7.93, "sm": 23.58, "cum_main": -173.47, "cum_retail": 173.47}, {"date": "07/07", "main": -18.1, "retail": 18.1, "elg": -13.18, "lg": -4.92, "md": 7.77, "sm": 10.33, "cum_main": -191.57, "cum_retail": 191.57}, {"date": "07/08", "main": -1.57, "retail": 1.57, "elg": 1.96, "lg": -3.53, "md": -1.85, "sm": 3.42, "cum_main": -193.14, "cum_retail": 193.14}, {"date": "07/09", "main": 12.25, "retail": -12.25, "elg": 14.29, "lg": -2.03, "md": -6.11, "sm": -6.14, "cum_main": -180.89, "cum_retail": 180.89}, {"date": "07/10", "main": -31.03, "retail": 31.03, "elg": -22.33, "lg": -8.7, "md": 9.41, "sm": 21.62, "cum_main": -211.92, "cum_retail": 211.92}, {"date": "07/13", "main": -8.62, "retail": 8.62, "elg": -0.42, "lg": -8.2, "md": -3.23, "sm": 11.86, "cum_main": -220.54, "cum_retail": 220.54}, {"date": "07/14", "main": 36.36, "retail": -36.36, "elg": 42.42, "lg": -6.06, "md": -20.75, "sm": -15.61, "cum_main": -184.18, "cum_retail": 184.18}, {"date": "07/15", "main": -16.52, "retail": 16.52, "elg": -17.95, "lg": 1.43, "md": 3.28, "sm": 13.24, "cum_main": -200.7, "cum_retail": 200.7}, {"date": "07/16", "main": -4.75, "retail": 4.75, "elg": -0.25, "lg": -4.51, "md": -0.41, "sm": 5.16, "cum_main": -205.45, "cum_retail": 205.45}, {"date": "07/17", "main": -29.41, "retail": 29.41, "elg": -23.01, "lg": -6.41, "md": 9.66, "sm": 19.76, "cum_main": -234.86, "cum_retail": 234.86}, {"date": "07/20", "main": -20.13, "retail": 20.13, "elg": -15.09, "lg": -5.04, "md": 7.48, "sm": 12.65, "cum_main": -255.0, "cum_retail": 255.0}, {"date": "07/21", "main": 0.08, "retail": -0.08, "elg": -0.72, "lg": 0.8, "md": -1.39, "sm": 1.3, "cum_main": -254.91, "cum_retail": 254.91}], "total_main": -254.91, "total_retail": 254.91, "total_elg": -132.04, "total_lg": -122.89, "total_md": 33.6, "total_sm": 221.34, "n_stocks": 6, "n_days": 22}, "通信设备": {"series": [{"date": "06/22", "main": -24.7, "retail": 24.7, "elg": -33.72, "lg": 9.02, "md": 24.33, "sm": 0.37, "cum_main": -24.7, "cum_retail": 24.7}, {"date": "06/23", "main": -107.64, "retail": 107.64, "elg": -84.06, "lg": -23.58, "md": 89.73, "sm": 17.91, "cum_main": -132.34, "cum_retail": 132.34}, {"date": "06/24", "main": -34.95, "retail": 34.95, "elg": -17.1, "lg": -17.85, "md": 23.29, "sm": 11.65, "cum_main": -167.29, "cum_retail": 167.29}, {"date": "06/25", "main": 8.97, "retail": -8.97, "elg": 25.55, "lg": -16.59, "md": -20.02, "sm": 11.06, "cum_main": -158.32, "cum_retail": 158.32}, {"date": "06/26", "main": -145.35, "retail": 145.35, "elg": -109.97, "lg": -35.38, "md": 104.2, "sm": 41.15, "cum_main": -303.67, "cum_retail": 303.67}, {"date": "06/29", "main": -73.06, "retail": 73.06, "elg": -24.16, "lg": -48.9, "md": 60.67, "sm": 12.39, "cum_main": -376.73, "cum_retail": 376.73}, {"date": "06/30", "main": 84.95, "retail": -84.95, "elg": 69.95, "lg": 15.0, "md": -73.52, "sm": -11.42, "cum_main": -291.78, "cum_retail": 291.78}, {"date": "07/01", "main": -43.79, "retail": 43.79, "elg": -44.6, "lg": 0.82, "md": 37.86, "sm": 5.93, "cum_main": -335.57, "cum_retail": 335.57}, {"date": "07/02", "main": -95.01, "retail": 95.01, "elg": -78.7, "lg": -16.31, "md": 75.0, "sm": 20.01, "cum_main": -430.58, "cum_retail": 430.58}, {"date": "07/03", "main": 4.17, "retail": -4.17, "elg": -2.99, "lg": 7.16, "md": 0.68, "sm": -4.85, "cum_main": -426.41, "cum_retail": 426.41}, {"date": "07/06", "main": -52.58, "retail": 52.58, "elg": -12.05, "lg": -40.53, "md": 39.77, "sm": 12.82, "cum_main": -478.99, "cum_retail": 478.99}, {"date": "07/07", "main": 6.81, "retail": -6.81, "elg": -0.27, "lg": 7.08, "md": -4.76, "sm": -2.05, "cum_main": -472.18, "cum_retail": 472.18}, {"date": "07/08", "main": 27.62, "retail": -27.62, "elg": 22.58, "lg": 5.04, "md": -22.05, "sm": -5.57, "cum_main": -444.57, "cum_retail": 444.57}, {"date": "07/09", "main": 93.11, "retail": -93.11, "elg": 78.83, "lg": 14.28, "md": -65.69, "sm": -27.42, "cum_main": -351.46, "cum_retail": 351.46}, {"date": "07/10", "main": -59.13, "retail": 59.13, "elg": -41.45, "lg": -17.68, "md": 45.87, "sm": 13.26, "cum_main": -410.59, "cum_retail": 410.59}, {"date": "07/13", "main": -36.41, "retail": 36.41, "elg": -22.03, "lg": -14.38, "md": 23.52, "sm": 12.89, "cum_main": -447.0, "cum_retail": 447.0}, {"date": "07/14", "main": 78.25, "retail": -78.25, "elg": 65.03, "lg": 13.23, "md": -80.66, "sm": 2.4, "cum_main": -368.75, "cum_retail": 368.75}, {"date": "07/15", "main": -5.42, "retail": 5.42, "elg": -13.62, "lg": 8.2, "md": -3.31, "sm": 8.73, "cum_main": -374.16, "cum_retail": 374.16}, {"date": "07/16", "main": -48.88, "retail": 48.88, "elg": -32.77, "lg": -16.11, "md": 45.45, "sm": 3.43, "cum_main": -423.04, "cum_retail": 423.04}, {"date": "07/17", "main": -120.28, "retail": 120.28, "elg": -119.51, "lg": -0.77, "md": 90.06, "sm": 30.22, "cum_main": -543.32, "cum_retail": 543.32}, {"date": "07/20", "main": -13.75, "retail": 13.75, "elg": -21.07, "lg": 7.33, "md": -1.54, "sm": 15.29, "cum_main": -557.07, "cum_retail": 557.07}, {"date": "07/21", "main": 48.29, "retail": -48.29, "elg": 64.43, "lg": -16.15, "md": -51.93, "sm": 3.64, "cum_main": -508.78, "cum_retail": 508.78}], "total_main": -508.78, "total_retail": 508.78, "total_elg": -331.7, "total_lg": -177.07, "total_md": 336.95, "total_sm": 171.84, "n_stocks": 5, "n_days": 22}, "消费电子": {"series": [{"date": "06/22", "main": -15.66, "retail": 15.66, "elg": -13.74, "lg": -1.92, "md": 4.5, "sm": 11.17, "cum_main": -15.66, "cum_retail": 15.66}, {"date": "06/23", "main": -6.35, "retail": 6.35, "elg": -2.55, "lg": -3.8, "md": 1.56, "sm": 4.79, "cum_main": -22.01, "cum_retail": 22.01}, {"date": "06/24", "main": -0.54, "retail": 0.54, "elg": -1.33, "lg": 0.79, "md": -0.36, "sm": 0.9, "cum_main": -22.55, "cum_retail": 22.55}, {"date": "06/25", "main": 2.1, "retail": -2.1, "elg": -1.07, "lg": 3.18, "md": -1.79, "sm": -0.32, "cum_main": -20.45, "cum_retail": 20.45}, {"date": "06/26", "main": -6.59, "retail": 6.59, "elg": -3.7, "lg": -2.88, "md": 2.22, "sm": 4.37, "cum_main": -27.03, "cum_retail": 27.03}, {"date": "06/29", "main": -12.47, "retail": 12.47, "elg": -7.41, "lg": -5.06, "md": 2.31, "sm": 10.16, "cum_main": -39.5, "cum_retail": 39.5}, {"date": "06/30", "main": 2.25, "retail": -2.25, "elg": 1.19, "lg": 1.06, "md": -2.83, "sm": 0.58, "cum_main": -37.26, "cum_retail": 37.26}, {"date": "07/01", "main": -0.87, "retail": 0.87, "elg": 0.96, "lg": -1.83, "md": 1.15, "sm": -0.28, "cum_main": -38.13, "cum_retail": 38.13}, {"date": "07/02", "main": -6.4, "retail": 6.4, "elg": -3.55, "lg": -2.85, "md": -0.61, "sm": 7.01, "cum_main": -44.53, "cum_retail": 44.53}, {"date": "07/03", "main": 3.92, "retail": -3.92, "elg": 3.61, "lg": 0.3, "md": -0.77, "sm": -3.15, "cum_main": -40.61, "cum_retail": 40.61}, {"date": "07/06", "main": -0.93, "retail": 0.93, "elg": -2.42, "lg": 1.49, "md": 0.46, "sm": 0.47, "cum_main": -41.54, "cum_retail": 41.54}, {"date": "07/07", "main": -4.56, "retail": 4.56, "elg": -4.77, "lg": 0.2, "md": 2.08, "sm": 2.48, "cum_main": -46.11, "cum_retail": 46.11}, {"date": "07/08", "main": -7.67, "retail": 7.67, "elg": -1.34, "lg": -6.33, "md": 0.79, "sm": 6.88, "cum_main": -53.78, "cum_retail": 53.78}, {"date": "07/09", "main": -8.76, "retail": 8.76, "elg": -5.03, "lg": -3.73, "md": 2.33, "sm": 6.43, "cum_main": -62.53, "cum_retail": 62.53}, {"date": "07/10", "main": 1.04, "retail": -1.04, "elg": 3.24, "lg": -2.2, "md": -1.52, "sm": 0.48, "cum_main": -61.49, "cum_retail": 61.49}, {"date": "07/13", "main": -14.21, "retail": 14.21, "elg": -7.47, "lg": -6.75, "md": 3.33, "sm": 10.88, "cum_main": -75.7, "cum_retail": 75.7}, {"date": "07/14", "main": -5.36, "retail": 5.36, "elg": -2.74, "lg": -2.61, "md": 1.48, "sm": 3.87, "cum_main": -81.06, "cum_retail": 81.06}, {"date": "07/15", "main": 0.54, "retail": -0.54, "elg": 1.28, "lg": -0.74, "md": -1.29, "sm": 0.75, "cum_main": -80.52, "cum_retail": 80.52}, {"date": "07/16", "main": 0.54, "retail": -0.54, "elg": 1.67, "lg": -1.13, "md": -0.47, "sm": -0.07, "cum_main": -79.98, "cum_retail": 79.98}, {"date": "07/17", "main": -9.24, "retail": 9.24, "elg": -5.8, "lg": -3.44, "md": 0.2, "sm": 9.04, "cum_main": -89.22, "cum_retail": 89.22}, {"date": "07/20", "main": 0.12, "retail": -0.12, "elg": 0.25, "lg": -0.13, "md": 0.43, "sm": -0.54, "cum_main": -89.1, "cum_retail": 89.1}, {"date": "07/21", "main": 4.7, "retail": -4.7, "elg": 2.79, "lg": 1.92, "md": -0.72, "sm": -3.98, "cum_main": -84.4, "cum_retail": 84.4}], "total_main": -84.4, "total_retail": 84.4, "total_elg": -47.93, "total_lg": -36.46, "total_md": 12.48, "total_sm": 71.92, "n_stocks": 4, "n_days": 22}, "光学光电子": {"series": [{"date": "06/22", "main": -33.82, "retail": 33.82, "elg": -31.01, "lg": -2.8, "md": 12.64, "sm": 21.17, "cum_main": -33.82, "cum_retail": 33.82}, {"date": "06/23", "main": -38.79, "retail": 38.79, "elg": -31.88, "lg": -6.92, "md": 9.33, "sm": 29.46, "cum_main": -72.61, "cum_retail": 72.61}, {"date": "06/24", "main": -3.96, "retail": 3.96, "elg": -3.95, "lg": -0.01, "md": -0.58, "sm": 4.53, "cum_main": -76.56, "cum_retail": 76.56}, {"date": "06/25", "main": 20.81, "retail": -20.81, "elg": 23.35, "lg": -2.54, "md": -14.91, "sm": -5.9, "cum_main": -55.76, "cum_retail": 55.76}, {"date": "06/26", "main": -38.12, "retail": 38.12, "elg": -35.97, "lg": -2.15, "md": 12.61, "sm": 25.52, "cum_main": -93.88, "cum_retail": 93.88}, {"date": "06/29", "main": -48.8, "retail": 48.8, "elg": -41.56, "lg": -7.24, "md": 7.9, "sm": 40.9, "cum_main": -142.68, "cum_retail": 142.68}, {"date": "06/30", "main": 49.23, "retail": -49.23, "elg": 57.08, "lg": -7.85, "md": -32.72, "sm": -16.51, "cum_main": -93.45, "cum_retail": 93.45}, {"date": "07/01", "main": -75.51, "retail": 75.51, "elg": -66.71, "lg": -8.8, "md": 27.83, "sm": 47.69, "cum_main": -168.96, "cum_retail": 168.96}, {"date": "07/02", "main": -23.68, "retail": 23.68, "elg": -7.5, "lg": -16.18, "md": 3.9, "sm": 19.78, "cum_main": -192.64, "cum_retail": 192.64}, {"date": "07/03", "main": -34.54, "retail": 34.54, "elg": -17.13, "lg": -17.41, "md": 6.04, "sm": 28.5, "cum_main": -227.18, "cum_retail": 227.18}, {"date": "07/06", "main": -36.65, "retail": 36.65, "elg": -21.16, "lg": -15.48, "md": 2.74, "sm": 33.9, "cum_main": -263.83, "cum_retail": 263.83}, {"date": "07/07", "main": 4.37, "retail": -4.37, "elg": 1.85, "lg": 2.52, "md": -10.03, "sm": 5.66, "cum_main": -259.46, "cum_retail": 259.46}, {"date": "07/08", "main": 3.18, "retail": -3.18, "elg": 3.86, "lg": -0.68, "md": -5.57, "sm": 2.39, "cum_main": -256.27, "cum_retail": 256.27}, {"date": "07/09", "main": 27.28, "retail": -27.28, "elg": 28.43, "lg": -1.14, "md": -17.96, "sm": -9.33, "cum_main": -228.99, "cum_retail": 228.99}, {"date": "07/10", "main": -72.16, "retail": 72.16, "elg": -51.92, "lg": -20.24, "md": 13.36, "sm": 58.81, "cum_main": -301.15, "cum_retail": 301.15}, {"date": "07/13", "main": -35.1, "retail": 35.1, "elg": -15.7, "lg": -19.4, "md": -2.4, "sm": 37.5, "cum_main": -336.26, "cum_retail": 336.26}, {"date": "07/14", "main": 47.97, "retail": -47.97, "elg": 47.96, "lg": 0.01, "md": -28.84, "sm": -19.13, "cum_main": -288.29, "cum_retail": 288.29}, {"date": "07/15", "main": -29.32, "retail": 29.32, "elg": -19.98, "lg": -9.35, "md": 2.56, "sm": 26.77, "cum_main": -317.61, "cum_retail": 317.61}, {"date": "07/16", "main": -7.38, "retail": 7.38, "elg": 18.04, "lg": -25.42, "md": -5.4, "sm": 12.78, "cum_main": -325.0, "cum_retail": 325.0}, {"date": "07/17", "main": -47.62, "retail": 47.62, "elg": -40.7, "lg": -6.92, "md": 21.37, "sm": 26.25, "cum_main": -372.62, "cum_retail": 372.62}, {"date": "07/20", "main": -32.27, "retail": 32.27, "elg": -20.43, "lg": -11.84, "md": 2.82, "sm": 29.44, "cum_main": -404.88, "cum_retail": 404.88}, {"date": "07/21", "main": 17.14, "retail": -17.14, "elg": 8.09, "lg": 9.05, "md": -12.58, "sm": -4.56, "cum_main": -387.74, "cum_retail": 387.74}], "total_main": -387.74, "total_retail": 387.74, "total_elg": -216.94, "total_lg": -170.79, "total_md": -7.89, "total_sm": 395.62, "n_stocks": 4, "n_days": 22}};
+  const C={bg:'#0d1117',text:'#c0c8d0',axisLine:'#1e2433',splitLine:'#1a1f2e',main:'#ff4d4d',retail:'#00d97e',elg:'#ff2d55',lg:'#ff8c42',md:'#4fc3f7',sm:'#66bb6a'};
+  const sc={半导体:'#ff4d4d','PCB/元件':'#ff8c42',通信设备:'#ffd700',消费电子:'#4fc3f7',光学光电子:'#ab47bc'};
+  const sectors=Object.keys(DATA);
+  const dates=DATA['半导体'].series.map(s=>s.date);
+
+  // Chart 1: Overview
+  const c1=echarts.init(document.getElementById('tf-overview'),'dark');
+  c1.setOption({backgroundColor:'transparent',tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['主力净流入','散户净流入'],textStyle:{color:C.text},top:0},
+    grid:{left:50,right:20,bottom:30,top:35},
+    xAxis:{type:'category',data:sectors,axisLabel:{color:C.text,fontSize:11},axisLine:{lineStyle:{color:C.axisLine}}},
+    yAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#6b7280'},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
+    series:[
+      {name:'主力净流入',type:'bar',data:sectors.map(s=>DATA[s].total_main),itemStyle:{color:C.main,borderRadius:[2,2,0,0]},label:{show:true,position:'bottom',formatter:p=>p.value.toFixed(0),color:C.main,fontSize:10,fontWeight:'bold'}},
+      {name:'散户净流入',type:'bar',data:sectors.map(s=>DATA[s].total_retail),itemStyle:{color:C.retail,borderRadius:[2,2,0,0]},label:{show:true,position:'top',formatter:p=>'+'+p.value.toFixed(0),color:C.retail,fontSize:10,fontWeight:'bold'}},
+    ]});
+  tfCharts.push(c1);
+
+  // Chart 2: Breakdown
+  const c2=echarts.init(document.getElementById('tf-breakdown'),'dark');
+  c2.setOption({backgroundColor:'transparent',tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['超大单(机构)','大单','中单(大户)','小单(散户)'],textStyle:{color:C.text},top:0,itemWidth:10,itemHeight:10},
+    grid:{left:50,right:20,bottom:30,top:45},
+    xAxis:{type:'category',data:sectors,axisLabel:{color:C.text,fontSize:11},axisLine:{lineStyle:{color:C.axisLine}}},
+    yAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#6b7280'},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
+    series:[
+      {name:'超大单(机构)',type:'bar',data:sectors.map(s=>DATA[s].total_elg),itemStyle:{color:C.elg},stack:'a'},
+      {name:'大单',type:'bar',data:sectors.map(s=>DATA[s].total_lg),itemStyle:{color:C.lg},stack:'a'},
+      {name:'中单(大户)',type:'bar',data:sectors.map(s=>DATA[s].total_md),itemStyle:{color:C.md},stack:'b'},
+      {name:'小单(散户)',type:'bar',data:sectors.map(s=>DATA[s].total_sm),itemStyle:{color:C.sm},stack:'b'},
+    ]});
+  tfCharts.push(c2);
+
+  // Chart 3: 5 separate trend charts
+  const grid=document.getElementById('tf-trend-grid');
+  sectors.forEach(function(sec){
+    const wrap=document.createElement('div');
+    wrap.className='tf-trend-card';
+    const tm=DATA[sec].total_main;
+    const cls=tm<0?'neg':'pos';
+    const col=sc[sec]||'#ff4d4d';
+    const safeId='tf-tr-'+sec.replace(/[^a-zA-Z]/g,'');
+    wrap.innerHTML='<h3 style="border-left:3px solid '+col+'">'+sec+' <span class="amt '+cls+'">'+(tm>=0?'+':'')+tm.toFixed(1)+'亿</span></h3><div id="'+safeId+'" class="tf-chart-mini"></div>';
+    grid.appendChild(wrap);
+    const chart=echarts.init(wrap.querySelector('div'),'dark');
+    const series=DATA[sec].series;
+    chart.setOption({backgroundColor:'transparent',
+      tooltip:{trigger:'axis',formatter:function(p){
+        const d=series[p[0].dataIndex];
+        return d.date+'<br/>日主力:'+(d.main>=0?'+':'')+d.main.toFixed(1)+'亿<br/>累计:'+(d.cum_main>=0?'+':'')+d.cum_main.toFixed(1)+'亿';
+      }},
+      grid:{left:35,right:10,bottom:20,top:10},
+      xAxis:{type:'category',data:series.map(d=>d.date),axisLabel:{color:'#6b7280',fontSize:8,interval:4},axisLine:{lineStyle:{color:C.axisLine}}},
+      yAxis:{type:'value',axisLabel:{color:'#6b7280',fontSize:8,formatter:v=>v.toFixed(0)},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
+      series:[{type:'line',data:series.map(d=>d.cum_main),smooth:true,symbol:'none',
+        lineStyle:{width:2,color:col},
+        areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:col+'20'},{offset:1,color:col+'00'}]}},
+        markLine:{silent:true,data:[{yAxis:0,lineStyle:{color:'#3a3f4c',type:'dashed',width:1}}]}
+      }]
+    });
+    tfCharts.push(chart);
+  });
+
+  // Chart 4: Semi Daily
+  const c4=echarts.init(document.getElementById('tf-semi-daily'),'dark');
+  const sd=DATA['半导体'].series;
+  c4.setOption({backgroundColor:'transparent',tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['主力净流入','散户净流入'],textStyle:{color:C.text},top:0},
+    grid:{left:50,right:20,bottom:35,top:35},
+    xAxis:{type:'category',data:sd.map(d=>d.date),axisLabel:{color:'#6b7280',fontSize:9,rotate:45},axisLine:{lineStyle:{color:C.axisLine}}},
+    yAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#6b7280'},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
+    series:[
+      {name:'主力净流入',type:'bar',data:sd.map(d=>d.main),itemStyle:{color:function(p){return p.value>=0?'#ff4d4d':'#ff6b6b'}}},
+      {name:'散户净流入',type:'bar',data:sd.map(d=>d.retail),itemStyle:{color:function(p){return p.value>=0?'#00d97e':'#4caf50'}}},
+    ],
+    markLine:{silent:true,data:[{yAxis:0,lineStyle:{color:'#3a3f4c',type:'dashed'}}]}
+  });
+  tfCharts.push(c4);
+
+  // Table
+  const tbody=document.getElementById('tf-tbody');
+  sectors.forEach(function(s){
+    const d=DATA[s];
+    const fmt=function(v){return(v>=0?'+':'')+v.toFixed(1)};
+    const cls=function(v){return v>=0?'pos':'neg'};
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+s+'</td><td class="'+cls(d.total_main)+'">'+fmt(d.total_main)+'</td><td class="'+cls(d.total_elg)+'">'+fmt(d.total_elg)+'</td><td class="'+cls(d.total_lg)+'">'+fmt(d.total_lg)+'</td><td class="'+cls(d.total_md)+'">'+fmt(d.total_md)+'</td><td class="'+cls(d.total_sm)+'">'+fmt(d.total_sm)+'</td><td class="'+cls(d.total_retail)+'">'+fmt(d.total_retail)+'</td>';
+    tbody.appendChild(tr);
+  });
+
+  // Resize handler
+  setTimeout(function(){tfCharts.forEach(function(c){try{c.resize();}catch(e){}})},100);
+}
+// Resize all techflow charts on window resize
+window.addEventListener('resize',function(){tfCharts.forEach(function(c){try{c.resize();}catch(e){}})});
+
 function initSemicon(){
   if(document.getElementById('watchGrid').innerHTML)return;
   var stocks=[
