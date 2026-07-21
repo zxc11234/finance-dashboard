@@ -311,7 +311,7 @@
 <div class="kpi-grid">
   <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,166,741</div><div class="kpi-sub">基金 1,356,154 + 余额宝 810,041（含赎回待入账约7万）</div></div>
   <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+762,068.92</div><div class="kpi-sub">支付宝 +677,268 · 嘉实 +124,431 · 收益率 51.84% · 含已清仓/赎回</div></div>
-  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/21)</div><div class="kpi-value green">+7,479</div><div class="kpi-sub">7/21 A股V形反弹·医药+QDII回暖</div></div>
+  <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/21)</div><div class="kpi-value green">+7,479</div><div class="kpi-sub">支付宝+14,125 嘉实017731-6,646</div></div>
   <div class="kpi-card"><div class="kpi-label">📅 7月MTD</div><div class="kpi-value red">-500,512</div><div class="kpi-sub">15 个交易日 · 7/21V形反弹</div></div>
   <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">58.8%</div><div class="kpi-sub">76 盈 / 53 亏 / 0 天</div></div>
   <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">5,805.23</div><div class="kpi-sub">最高 +93,183.78 · 最大 -461,284.35</div></div>
@@ -397,7 +397,7 @@
   <!-- QDII NAV Lag Board -->
   <div class="table-card" style="margin-bottom:14px">
   <h3>🕐 QDII 净值延迟看板</h3>
-  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:33%;background:rgba(245,158,11,.5)">7/20 → 7/21待更新</div></div><div class="lag-status amber">T+1</div></div>
+  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:20%;background:rgba(34,197,94,.4)">7/20已更新(3.8945)</div></div><div class="lag-status green">已更新</div></div>
   <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/20 → 7/21待更新</div></div><div class="lag-status amber">T+1</div></div>
   <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/20 → 7/21待更新</div></div><div class="lag-status amber">T+1</div></div>
   <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/20 → 7/21待更新</div></div><div class="lag-status amber">T+1</div></div>
@@ -1069,7 +1069,7 @@ const ecEvents=[
 
 // Feature 2: Position Alert
 const alertData=[
-  {name:'017731 嘉实(减1/3)',cost:490000,mkt:465546,pct:-5.0},
+  {name:'017731 嘉实(减1/3)',cost:328138,mkt:305932,pct:-6.8},
   {name:'017811 东方AI',cost:118686,mkt:117715,pct:-1.2},
   {name:'020470 长城半导体(减半)',cost:141001,mkt:141001,pct:0.0},
   {name:'008619 永赢医药',cost:45000,mkt:45159,pct:3.2},
@@ -1111,7 +1111,7 @@ const alertData=[
 // Feature 6: Radar Chart
 const radarFunds={
   '017811':{name:'017811 东方AI',color:'#3b82f6',data:[-1.2,55605,-6210,74,10.3,12.3]},
-  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[5.2,25472,0,19.8,5.2]},
+  '017731':{name:'017731 嘉实产业',color:'#f59e0b',data:[-6.8,107486,-6646,19.8,-6.8]},
   '018147':{name:'018147 建信C',color:'#a855f7',data:[74.6,111887,-0.99,10.1,74.6]},
   '020470':{name:'020470 长城半导体(减半)',color:'#10b981',data:[33.5,38970,-3.85,6.0,33.5]},
 };
@@ -1660,7 +1660,7 @@ function initNews(){}
     {g:'medical', n:'广发港股创新药ETF联接 QDII C',nx:'',    c:'019671',p:'📱', cost:20000,  mkt:20752,  today:752,   cum:4647,  rate:3.8, bg:'rgba(59,130,246,.04)'},
     {g:'medical', n:'永赢医药健康股票 C',          nx:'',    c:'008619',p:'📱', cost:45000,  mkt:45159,  today:159,   cum:159,   rate:3.2, bg:'rgba(59,130,246,.03)'},
     {g:'medical', n:'创金合信医疗保健股票 C',      nx:'',    c:'003231',p:'📱', cost:5000,   mkt:5215,   today:215,   cum:215,   rate:4.3, bg:'rgba(59,130,246,.02)'},
-    {g:'qdii',    n:'嘉实全球产业升级 QDII',       nx:'🔄 减1/3后', c:'017731',p:'嘉实',cost:490000,mkt:465546, today:-29647,cum:-24454,rate:-5.0,  bg:'rgba(245,158,11,.04)'},
+    {g:'qdii',    n:'嘉实全球产业升级 QDII',       nx:'🔄 减1/3后(赎回到账中)', c:'017731',p:'嘉实',cost:328138,mkt:305932 today:-6646,cum:107486,rate:-6.8,  bg:'rgba(245,158,11,.04)'},
     {g:'qdii',    n:'建信新兴市场优选混合 QDII C', nx:'',              c:'018147',p:'📱', cost:150002, mkt:242246, today:-4345, cum:92246, rate:61.5, bg:'rgba(239,68,68,.02)'},
     {g:'qdii',    n:'长城全球新能源车 QDII C',     nx:'',              c:'018036',p:'📱', cost:115003, mkt:157415, today:-2822, cum:42415, rate:36.9, bg:'rgba(239,68,68,.02)'},
     {g:'qdii',    n:'建信新兴市场优选混合 QDII A', nx:'',              c:'539002',p:'📱', cost:60000,  mkt:95373,  today:-1726, cum:35373, rate:59.0, bg:'rgba(239,68,68,.02)'},
