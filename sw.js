@@ -1,5 +1,5 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20260729-v28-excel-0729';
+const CACHE_VERSION = '20260731-v32-jiashi-0730-nav';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = ['./index.html', './manifest.json', './chart.umd.min.js', './html2canvas.min.js'];
