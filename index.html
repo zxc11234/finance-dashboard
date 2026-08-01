@@ -1120,9 +1120,17 @@ function calcRiskMetrics(){
 
 // Feature 1: Economic Calendar
 const ecEvents=[
-  {date:'2026-07-31',event:'美联储FOMC利率决议',tag:'hot'},
+  {date:'2026-08-07',event:'中芯国际Q2业绩说明会(已公告)',tag:'hot'},
+  {date:'2026-08-07',event:'美国7月非农就业报告',tag:'hot'},
+  {date:'2026-08-10',event:'台积电7月营收(预估)',tag:'info'},
+  {date:'2026-08-12',event:'美国7月CPI(预估)',tag:'hot'},
+  {date:'2026-08-14',event:'美国7月PPI+零售销售(预估)',tag:'warn'},
   {date:'2026-08-15',event:'017811 Q2季报',tag:'info'},
+  {date:'2026-08-20',event:'中国8月LPR报价(预估)',tag:'warn'},
+  {date:'2026-08-21',event:'Jackson Hole央行年会(预估)',tag:'hot'},
   {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
+  {date:'2026-08-31',event:'中国8月官方PMI(预估)',tag:'warn'},
+  {date:'2026-09-17',event:'美联储FOMC利率决议(预估)',tag:'hot'},
 ];
 (function buildCalendar(){
   const now=new Date();
