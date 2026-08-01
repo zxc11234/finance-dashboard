@@ -13,35 +13,47 @@
 <script src="html2canvas.min.js"></script>
 <script src="echarts.min.js"></script>
 <style>
-  :root { --bg:#0a0e1a; --card:#131826; --border:#1e293b; --text:#e2e8f0; --muted:#64748b; --green:#ef4444; --red:#22c55e; --blue:#3b82f6; --amber:#f59e0b; }
+  :root { --bg:#0a0e17; --card:#131826; --border:#1e293b; --text:#e2e8f0; --muted:#64748b; --green:#ef4444; --red:#22c55e; --blue:#3b82f6; --amber:#f59e0b; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; background:var(--bg); color:var(--text); padding:16px; line-height:1.6; }
+  body { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; color:var(--text); padding:20px 16px; line-height:1.6;
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(59,130,246,.07), transparent 60%),
+      radial-gradient(900px 420px at 10% -5%, rgba(139,92,246,.06), transparent 55%),
+      var(--bg); }
   .container { max-width:1300px; margin:0 auto; width:100%; }
-  h1 { font-size:1.6rem; margin-bottom:4px; }
+  h1 { font-size:1.65rem; margin-bottom:4px; letter-spacing:.5px; }
   .subtitle { color:var(--muted); font-size:0.85rem; margin-bottom:20px; }
-  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-bottom:16px; }
-  .kpi-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
-  .kpi-label { color:var(--muted); font-size:0.75rem; }
-  .kpi-value { font-size:1.4rem; font-weight:700; }
-  .kpi-sub { font-size:0.75rem; color:var(--muted); margin-top:2px; }
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:18px; }
+  .kpi-card { background:linear-gradient(165deg, rgba(30,41,59,.5), var(--card) 45%); border:1px solid var(--border); border-radius:12px; padding:16px 14px; text-align:center; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+  .kpi-card:hover { transform:translateY(-2px); border-color:rgba(59,130,246,.45); box-shadow:0 6px 20px -8px rgba(59,130,246,.25); }
+  .kpi-label { color:var(--muted); font-size:0.75rem; letter-spacing:.3px; }
+  .kpi-value { font-size:1.42rem; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .kpi-sub { font-size:0.72rem; color:var(--muted); margin-top:3px; line-height:1.45; }
+  .kpi-hero { grid-column:span 2; background:linear-gradient(135deg, rgba(59,130,246,.16), rgba(139,92,246,.10) 50%, var(--card) 85%); border-color:rgba(59,130,246,.35); }
+  .kpi-hero .kpi-value { font-size:2.05rem; background:linear-gradient(90deg,#60a5fa,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
   .green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.muted{color:var(--muted)}
-  .charts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:14px; margin-bottom:14px; }
-  .chart-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
-  .chart-card h3 { font-size:0.9rem; margin-bottom:8px; color:var(--muted); }
+  .charts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:14px; margin-bottom:16px; }
+  .chart-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; transition:border-color .18s ease; }
+  .chart-card:hover { border-color:rgba(59,130,246,.3); }
+  .chart-card h3, .table-card h3 { font-size:0.92rem; margin-bottom:10px; color:var(--text); font-weight:600; letter-spacing:.3px; }
   .chart-wrap { position:relative; height:280px; width:100%; will-change:transform; }
   .chart-wrap.wide { height:360px; }
-  .table-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:14px; overflow-x:auto; }
-  .table-card h3 { font-size:0.9rem; margin-bottom:8px; color:var(--muted); }
+  .table-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px; overflow-x:auto; transition:border-color .18s ease; }
+  .table-card:hover { border-color:rgba(59,130,246,.3); }
+  .news-meta { color:var(--muted); font-size:0.72rem; font-weight:400; }
   table { width:100%; border-collapse:collapse; font-size:0.82rem; }
-  th,td { padding:7px 9px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; }
-  th { color:var(--muted); font-weight:600; }
+  th,td { padding:8px 9px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; font-variant-numeric:tabular-nums; }
+  th { color:var(--muted); font-weight:600; font-size:0.76rem; letter-spacing:.3px; }
+  tbody tr { transition:background .12s ease; }
+  tbody tr:hover { background:rgba(59,130,246,.05); }
   td:first-child { text-align:left; }
-  .tabs { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
-  .tab { padding:6px 13px; border:1px solid var(--border); border-radius:6px; background:var(--card); color:var(--muted); cursor:pointer; font-size:0.82rem; transition:all .2s; }
-  .tab.active { background:var(--blue); color:white; border-color:var(--blue); }
+  .tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .tab { padding:7px 15px; border:1px solid var(--border); border-radius:999px; background:var(--card); color:var(--muted); cursor:pointer; font-size:0.82rem; transition:all .2s; }
+  .tab.active { background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; border-color:transparent; box-shadow:0 4px 14px -4px rgba(59,130,246,.5); font-weight:600; }
   .tab:hover { border-color:var(--blue); color:var(--text); }
-  .highlight { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:12px; margin:10px 0; font-size:0.85rem; }
-  .footer { text-align:center; color:var(--muted); font-size:0.72rem; margin-top:20px; padding:14px 0; border-top:1px solid var(--border); }
+  .tab.active:hover { color:#fff; }
+  .highlight { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; font-size:0.85rem; }
+  .footer { text-align:center; color:var(--muted); font-size:0.72rem; margin-top:24px; padding:16px 0; border-top:1px solid var(--border); }
   .badge { display:inline-block; padding:2px 7px; border-radius:4px; font-size:0.7rem; font-weight:600; }
   .badge-q { background:rgba(245,158,11,.15); color:var(--amber); }
   tr.cat-row td { background:rgba(59,130,246,.1); color:var(--blue); font-weight:700; font-size:0.8rem; text-align:left; letter-spacing:.5px; }
@@ -76,6 +88,8 @@
     /* KPI compact: 3-col grid, smaller cards */
     .kpi-grid{grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
     .kpi-card{padding:8px 6px;border-radius:7px}
+    .kpi-hero{grid-column:span 3}
+    .kpi-hero .kpi-value{font-size:1.35rem}
     .kpi-label{font-size:0.62rem}
     .kpi-value{font-size:1rem;font-weight:700}
     .kpi-sub{font-size:0.6rem;margin-top:1px;line-height:1.2}
@@ -305,11 +319,11 @@
 </head>
 <body>
 <div class="container">
-<h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:var(--blue);color:#fff;padding:2px 8px;border-radius:4px;vertical-align:middle">v2</span></h1>
+<h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:2px 10px;border-radius:999px;vertical-align:middle;box-shadow:0 2px 8px -2px rgba(59,130,246,.5)">v2</span></h1>
 <p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月31日收盘 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
-  <div class="kpi-card"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,176,467</div><div class="kpi-sub">本金1,539K + 累计637K · 支付宝+嘉实持仓（以收益簿为准）</div></div>
+  <div class="kpi-card kpi-hero"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,176,467</div><div class="kpi-sub">本金1,539K + 累计637K · 支付宝+嘉实持仓（以收益簿为准）</div></div>
   <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+637,263.60</div><div class="kpi-sub">收益率 41.40% · 含已清仓/赎回(018147已赎+8.8万)</div></div>
   <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/31)</div><div class="kpi-value green">+31,005</div><div class="kpi-sub">支付宝+36,040 + 嘉实-5,035(7/30净值) | 科创50 +2.99%高开低走</div></div>
   <div class="kpi-card"><div class="kpi-label">📅 7月MTD</div><div class="kpi-value red">-625,318</div><div class="kpi-sub">23 个交易日 · 7/31回血+31K</div></div>
