@@ -46,17 +46,16 @@
   table { width:100%; border-collapse:collapse; font-size:0.82rem; }
   th,td { padding:8px 9px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; font-variant-numeric:tabular-nums; }
   td { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.78rem; }
-  td:first-child { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; font-size:0.82rem; }
+  td:first-child { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; font-size:0.82rem; text-align:left; }
   th { color:var(--muted); font-weight:600; font-size:0.76rem; letter-spacing:.3px; }
   tbody tr { transition:background .12s ease; }
   tbody tr:hover { background:rgba(59,130,246,.05); }
-  td:first-child { text-align:left; }
   .tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
   .tab { padding:7px 15px; border:1px solid var(--border); border-radius:999px; background:var(--card); color:var(--muted); cursor:pointer; font-size:0.82rem; transition:all .2s; }
   .tab.active { background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:white; border-color:transparent; box-shadow:0 4px 14px -4px rgba(59,130,246,.5); font-weight:600; }
   .tab:hover { border-color:var(--blue); color:var(--text); }
   .tab.active:hover { color:#fff; }
-  .highlight { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:10px; padding:12px 14px; margin:10px 0; font-size:0.85rem; }
+  .highlight { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); border-radius:12px; padding:12px 14px; margin:10px 0; font-size:0.85rem; }
   .footer { text-align:center; color:var(--muted); font-size:0.72rem; margin-top:24px; padding:16px 0; border-top:1px solid var(--border); }
   .badge { display:inline-block; padding:2px 7px; border-radius:4px; font-size:0.7rem; font-weight:600; }
   .badge-q { background:rgba(245,158,11,.15); color:var(--amber); }
@@ -69,7 +68,7 @@
   .fund-link{color:var(--blue);text-decoration:none;cursor:pointer}
   .fund-link:hover{text-decoration:underline;color:#60a5fa}
   /* Feature B: US Market Panel */
-  .us-panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
+  .us-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:16px}
   .us-panel-title{font-size:0.85rem;color:var(--muted);margin-bottom:10px}
   .us-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:8px}
   .us-card{background:rgba(30,41,59,.4);border-radius:8px;padding:10px;text-align:center}
@@ -139,15 +138,21 @@
     /* Compact highlight */
     .highlight{padding:8px;font-size:0.72rem;margin:6px 0}
     .footer{font-size:0.6rem;padding:8px 0}
-    /* Enable flex reorder on overview tab */
+    /* Enable flex reorder on overview tab — direct children only to avoid polluting nested cards */
     #tab-overview{display:flex;flex-direction:column}
-    /* Mobile order: tabs→KPI are outside tab. Inside tab-overview: chart+table first, US/EC/alerts last */
-    .charts-grid{order:1}
-    .table-card{order:2}
-    .highlight{order:3}
-    .us-panel{order:10}
-    #ecSection{order:11}
-    .alert-card{order:12}
+    /* Mobile order: 折叠块(压力测试)最先, 然后图表/持仓表, US/EC/alerts 最后 */
+    #tab-overview>details.collap{order:0}
+    #tab-overview>.charts-grid{order:1}
+    #tab-overview>.table-card{order:2}
+    #tab-overview>.highlight{order:3}
+    #tab-overview>.us-panel{order:10}
+    #tab-overview>#ecSection{order:11}
+    #tab-overview>details:nth-of-type(2){order:12}
+    /* 窄屏补充: watch-grid/stats-bar 防溢出 */
+    .watch-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  }
+  @media(max-width:1100px) and (min-width:769px){
+    .charts-grid{grid-template-columns:1fr 1fr}
   }
   @media(max-width:600px){
     .charts-grid{grid-template-columns:1fr}
@@ -163,7 +168,6 @@
     .ec-item{min-width:95px;padding:5px 7px}
   }
   /* News tab styles */
-  .news-meta{color:var(--muted);font-size:0.72rem;font-weight:400}
   .news-item{padding:7px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
   .news-time{color:var(--muted);font-size:0.72rem;min-width:38px}
   .news-title{font-size:0.82rem;color:var(--text);text-decoration:none;flex:1;min-width:200px}
@@ -183,7 +187,7 @@
   @media(max-width:768px){.news-grid{grid-template-columns:1fr}}
     /* Stress Test */
   .stress-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:6px}
-  .stress-card{border-radius:10px;padding:14px;border:1px solid var(--border)}
+  .stress-card{border-radius:12px;padding:14px;border:1px solid var(--border)}
   .stress-card.green-s{background:rgba(59,130,246,.10);border-color:rgba(59,130,246,.28)}
   .stress-card.amber-s{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.20)}
   .stress-card.red-s{background:rgba(30,41,59,.45);border-color:rgba(100,116,139,.35)}
@@ -211,6 +215,20 @@
   ::-webkit-scrollbar-thumb{background:rgba(100,116,139,.35);border-radius:999px}
   ::-webkit-scrollbar-thumb:hover{background:rgba(59,130,246,.5)}
   *{scrollbar-width:thin;scrollbar-color:rgba(100,116,139,.35) transparent}
+  .tf-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+  .tf-card h2{font-size:14px;color:var(--text);margin-bottom:12px;font-weight:600}
+  .tf-card h2 .badge{font-size:11px;font-weight:400;color:var(--muted);margin-left:8px}
+  .tf-chart{width:100%;height:340px}
+  .tf-chart-tall{height:400px}
+  .tf-insight{background:rgba(59,130,246,.07);border-left:3px solid var(--amber);padding:10px 14px;border-radius:0 8px 8px 0;margin-top:10px;font-size:12px;color:var(--text);line-height:1.5}
+  .tf-insight strong{color:var(--amber)}
+  .tf-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+  .tf-table th{color:var(--muted);font-weight:500;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border)}
+  .tf-table th:first-child{text-align:left}
+  .tf-table td{text-align:right;padding:6px 8px;border-bottom:1px solid rgba(30,41,59,.5)}
+  .tf-table td:first-child{text-align:left;color:var(--text);font-weight:500}
+  .tf-tag{display:inline-block;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--blue);margin-right:4px;margin-top:6px}
+  @media(max-width:768px){.tf-chart{height:260px}.tf-chart-tall{height:300px}.tf-table{font-size:10px}.tf-table th,.tf-table td{padding:4px 3px}.stats-bar{grid-template-columns:repeat(2,1fr) !important}}
   .stress-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
   .stress-val{font-size:1.3rem;font-weight:700}
   .stress-detail{font-size:.68rem;color:var(--muted);margin-top:4px;line-height:1.5}
@@ -248,7 +266,7 @@
   /* === Semiconductor Chain Tab === */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
   @media(max-width:900px){.grid2{grid-template-columns:1fr}}
-  .sc-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+  .sc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
   .sc-card h2,.log-card h2{font-size:.9rem;color:var(--muted);margin-bottom:12px}
   .watch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px}
   .watch-card{background:rgba(30,41,59,.4);border-radius:8px;padding:10px 12px;transition:border-color .2s}
@@ -265,7 +283,7 @@
   .legend-dot{width:8px;height:8px;border-radius:2px;display:inline-block}
   .blue{color:var(--blue)}
   /* === Trading Log Tab === */
-  .log-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px}
+  .log-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
   .timeline{position:relative;padding-left:24px}
   .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
   .tl-item{position:relative;margin-bottom:20px;padding-left:24px}
@@ -305,7 +323,7 @@
   th.sort-asc::after{content:' ↑';color:var(--blue);font-size:.8em}
   th.sort-desc::after{content:' ↓';color:var(--blue);font-size:.8em}
   /* Feature 1: Economic Calendar */
-  .ec-section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
+  .ec-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:16px}
   .ec-title{font-size:0.85rem;color:var(--muted);margin-bottom:10px}
   .ec-timeline{display:flex;gap:0;overflow-x:auto;padding-bottom:4px}
   .ec-item{min-width:140px;padding:10px 12px;border-right:1px solid var(--border);position:relative}
@@ -320,7 +338,7 @@
   .ec-past{opacity:.4}
   .ec-current{background:rgba(59,130,246,.12);border-radius:8px;box-shadow:inset 0 0 0 1px var(--blue)}
   /* Feature 2: Position Alert */
-  .alert-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+  .alert-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:16px}
   .alert-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(30,41,59,.4);font-size:0.78rem}
   .alert-row:last-child{border-bottom:none}
   .alert-name{min-width:130px;font-weight:600}
@@ -924,22 +942,6 @@
 </div>
 
 <div id="tab-techflow" style="display:none;">
-<style>
-.tf-card{background:var(--card);border:1px solid var(--border,#1e2433);border-radius:8px;padding:16px;margin-bottom:16px}
-.tf-card h2{font-size:14px;color:#e8eaed;margin-bottom:12px;font-weight:600}
-.tf-card h2 .badge{font-size:11px;font-weight:400;color:#8b949e;margin-left:8px}
-.tf-chart{width:100%;height:340px}
-.tf-chart-tall{height:400px}
-.tf-insight{background:#161b22;border-left:3px solid #ffcc00;padding:10px 14px;border-radius:0 6px 6px 0;margin-top:10px;font-size:12px;color:#d0d4dc;line-height:1.5}
-.tf-insight strong{color:#ffcc00}
-.tf-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
-.tf-table th{background:#161b22;color:#8b949e;font-weight:500;text-align:right;padding:6px 8px;border-bottom:1px solid #21262d}
-.tf-table th:first-child{text-align:left}
-.tf-table td{text-align:right;padding:6px 8px;border-bottom:1px solid #161b22}
-.tf-table td:first-child{text-align:left;color:#e8eaed;font-weight:500}
-.tf-tag{display:inline-block;background:#1c2128;border:1px solid #30363d;border-radius:4px;padding:2px 6px;font-size:10px;color:#58a6ff;margin-right:4px;margin-top:6px}
-@media(max-width:768px){.tf-chart{height:260px}.tf-chart-tall{height:300px}.tf-table{font-size:10px}.tf-table th,.tf-table td{padding:4px 3px}}
-</style>
 <div class="tf-card">
   <h2>各板块资金净流入 — 今日 vs 5日 vs 10日 <span class="badge">东方财富全板块数据</span></h2>
   <span class="tf-tag">5大板块</span><span class="tf-tag">全板块覆盖</span><span class="tf-tag">三周期对比</span>
@@ -1569,7 +1571,7 @@ function initTechFlow(){
   if(tfInited)return;tfInited=true;
   if(typeof echarts==='undefined'){console.error('ECharts not loaded');return;}
   const DATA={"半导体": {"series": [{"date": "06/22", "main": -27.74, "retail": 27.74, "elg": -40.44, "lg": 12.71, "md": 15.41, "sm": 12.33, "cum_main": -27.74, "cum_retail": 27.74}, {"date": "06/23", "main": -119.95, "retail": 119.95, "elg": -96.43, "lg": -23.52, "md": 65.35, "sm": 54.6, "cum_main": -147.69, "cum_retail": 147.69}, {"date": "06/24", "main": 76.17, "retail": -76.17, "elg": 89.52, "lg": -13.35, "md": -56.75, "sm": -19.42, "cum_main": -71.53, "cum_retail": 71.53}, {"date": "06/25", "main": 14.04, "retail": -14.04, "elg": 26.12, "lg": -12.08, "md": -18.29, "sm": 4.25, "cum_main": -57.49, "cum_retail": 57.49}, {"date": "06/26", "main": -127.69, "retail": 127.69, "elg": -141.71, "lg": 14.02, "md": 65.61, "sm": 62.08, "cum_main": -185.18, "cum_retail": 185.18}, {"date": "06/29", "main": -32.6, "retail": 32.6, "elg": -67.71, "lg": 35.11, "md": -8.69, "sm": 41.29, "cum_main": -217.78, "cum_retail": 217.78}, {"date": "06/30", "main": -15.64, "retail": 15.64, "elg": -19.16, "lg": 3.53, "md": 26.1, "sm": -10.46, "cum_main": -233.42, "cum_retail": 233.42}, {"date": "07/01", "main": -147.63, "retail": 147.63, "elg": -134.96, "lg": -12.67, "md": 88.37, "sm": 59.26, "cum_main": -381.05, "cum_retail": 381.05}, {"date": "07/02", "main": -277.56, "retail": 277.56, "elg": -192.53, "lg": -85.03, "md": 166.91, "sm": 110.65, "cum_main": -658.61, "cum_retail": 658.61}, {"date": "07/03", "main": -132.47, "retail": 132.47, "elg": -82.96, "lg": -49.51, "md": 55.11, "sm": 77.36, "cum_main": -791.08, "cum_retail": 791.08}, {"date": "07/06", "main": -87.06, "retail": 87.06, "elg": -68.48, "lg": -18.59, "md": 35.35, "sm": 51.71, "cum_main": -878.15, "cum_retail": 878.15}, {"date": "07/07", "main": -42.96, "retail": 42.96, "elg": -21.26, "lg": -21.7, "md": 47.13, "sm": -4.17, "cum_main": -921.1, "cum_retail": 921.1}, {"date": "07/08", "main": -114.34, "retail": 114.34, "elg": -85.38, "lg": -28.97, "md": 55.0, "sm": 59.34, "cum_main": -1035.45, "cum_retail": 1035.45}, {"date": "07/09", "main": 107.46, "retail": -107.46, "elg": 61.52, "lg": 45.94, "md": -52.76, "sm": -54.7, "cum_main": -927.99, "cum_retail": 927.99}, {"date": "07/10", "main": -70.41, "retail": 70.41, "elg": -75.12, "lg": 4.71, "md": 65.13, "sm": 5.28, "cum_main": -998.4, "cum_retail": 998.4}, {"date": "07/13", "main": -250.1, "retail": 250.1, "elg": -167.02, "lg": -83.08, "md": 127.68, "sm": 122.42, "cum_main": -1248.5, "cum_retail": 1248.5}, {"date": "07/14", "main": -87.92, "retail": 87.92, "elg": -45.31, "lg": -42.62, "md": 29.4, "sm": 58.53, "cum_main": -1336.42, "cum_retail": 1336.42}, {"date": "07/15", "main": -145.29, "retail": 145.29, "elg": -97.54, "lg": -47.75, "md": 60.6, "sm": 84.69, "cum_main": -1481.71, "cum_retail": 1481.71}, {"date": "07/16", "main": -159.57, "retail": 159.57, "elg": -88.59, "lg": -70.97, "md": 62.62, "sm": 96.94, "cum_main": -1641.28, "cum_retail": 1641.28}, {"date": "07/17", "main": -159.18, "retail": 159.18, "elg": -110.75, "lg": -48.43, "md": 77.13, "sm": 82.05, "cum_main": -1800.46, "cum_retail": 1800.46}, {"date": "07/20", "main": -78.17, "retail": 78.17, "elg": -65.67, "lg": -12.5, "md": 34.14, "sm": 44.03, "cum_main": -1878.63, "cum_retail": 1878.63}, {"date": "07/21", "main": 37.91, "retail": -37.91, "elg": 54.32, "lg": -16.41, "md": -42.64, "sm": 4.73, "cum_main": -1840.72, "cum_retail": 1840.72}, {"date": "07/22", "main": 51.9, "retail": -51.9, "elg": 64.49, "lg": -12.59, "md": -27.28, "sm": -24.61, "cum_main": -1788.82, "cum_retail": 1788.82}, {"date": "07/23", "main": -75.24, "retail": 75.24, "elg": -67.49, "lg": -7.76, "md": 38.52, "sm": 36.72, "cum_main": -1864.06, "cum_retail": 1864.06}, {"date": "07/24", "main": 3.83, "retail": -3.83, "elg": 18.71, "lg": -14.88, "md": 0.77, "sm": -4.59, "cum_main": -1860.23, "cum_retail": 1860.23}, {"date": "07/27", "main": 290.63, "retail": -290.63, "elg": 317.2, "lg": -26.58, "md": -110.44, "sm": -180.19, "cum_main": -1569.6, "cum_retail": 1569.6}, {"date": "07/28", "main": -149.98, "retail": 149.98, "elg": -140.57, "lg": -9.41, "md": 68.97, "sm": 81.01, "cum_main": -1719.58, "cum_retail": 1719.58}, {"date": "07/29", "main": -82.53, "retail": 82.53, "elg": -48.21, "lg": -34.32, "md": 27.22, "sm": 55.32, "cum_main": -1802.11, "cum_retail": 1802.11}, {"date": "07/30", "main": -51.16, "retail": 51.16, "elg": -54.23, "lg": 3.07, "md": 2.82, "sm": 48.35, "cum_main": -1853.27, "cum_retail": 1853.27}, {"date": "07/31", "main": 108.99, "retail": -108.99, "elg": 165.55, "lg": -56.56, "md": -86.81, "sm": -22.18, "cum_main": -1744.28, "cum_retail": 1744.28, "total_elg": 165.55, "total_lg": -56.56, "total_md": -86.81, "total_sm": -22.18}], "total_main": -1864.06, "total_retail": 1864.06, "total_elg": -1372.54, "total_lg": -491.51, "total_md": 909.15, "total_sm": 954.9, "n_stocks": 195, "n_days": 24, "mcp_today": 94.97, "mcp_5d": 224.03, "mcp_10d": 120.93, "has_daily": true}, "通信设备": {"series": [{"date": "06/22", "main": -49.93, "retail": 49.93, "elg": -53.08, "lg": 3.14, "md": 25.22, "sm": 24.72, "cum_main": -49.93, "cum_retail": 49.93}, {"date": "06/23", "main": -165.38, "retail": 165.38, "elg": -110.61, "lg": -54.77, "md": 92.58, "sm": 72.8, "cum_main": -215.31, "cum_retail": 215.31}, {"date": "06/24", "main": -37.67, "retail": 37.67, "elg": -9.11, "lg": -28.56, "md": 11.53, "sm": 26.15, "cum_main": -252.98, "cum_retail": 252.98}, {"date": "06/25", "main": -18.14, "retail": 18.14, "elg": 10.6, "lg": -28.74, "md": -16.14, "sm": 34.27, "cum_main": -271.12, "cum_retail": 271.12}, {"date": "06/26", "main": -272.65, "retail": 272.65, "elg": -195.31, "lg": -77.34, "md": 137.23, "sm": 135.42, "cum_main": -543.77, "cum_retail": 543.77}, {"date": "06/29", "main": -129.92, "retail": 129.92, "elg": -42.38, "lg": -87.53, "md": 61.47, "sm": 68.45, "cum_main": -673.68, "cum_retail": 673.68}, {"date": "06/30", "main": 94.84, "retail": -94.84, "elg": 87.35, "lg": 7.49, "md": -83.04, "sm": -11.81, "cum_main": -578.84, "cum_retail": 578.84}, {"date": "07/01", "main": -137.26, "retail": 137.26, "elg": -86.67, "lg": -50.59, "md": 50.87, "sm": 86.39, "cum_main": -716.1, "cum_retail": 716.1}, {"date": "07/02", "main": -168.42, "retail": 168.42, "elg": -113.56, "lg": -54.85, "md": 96.69, "sm": 71.73, "cum_main": -884.52, "cum_retail": 884.52}, {"date": "07/03", "main": 6.04, "retail": -6.04, "elg": -4.75, "lg": 10.8, "md": -3.71, "sm": -2.33, "cum_main": -878.47, "cum_retail": 878.47}, {"date": "07/06", "main": -109.0, "retail": 109.0, "elg": -39.98, "lg": -69.02, "md": 49.55, "sm": 59.45, "cum_main": -987.47, "cum_retail": 987.47}, {"date": "07/07", "main": -30.1, "retail": 30.1, "elg": -25.98, "lg": -4.12, "md": -0.45, "sm": 30.55, "cum_main": -1017.57, "cum_retail": 1017.57}, {"date": "07/08", "main": 32.89, "retail": -32.89, "elg": 24.3, "lg": 8.59, "md": -22.59, "sm": -10.31, "cum_main": -984.68, "cum_retail": 984.68}, {"date": "07/09", "main": 103.49, "retail": -103.49, "elg": 90.69, "lg": 12.8, "md": -76.42, "sm": -27.08, "cum_main": -881.18, "cum_retail": 881.18}, {"date": "07/10", "main": -29.01, "retail": 29.01, "elg": -14.08, "lg": -14.93, "md": 23.93, "sm": 5.08, "cum_main": -910.19, "cum_retail": 910.19}, {"date": "07/13", "main": -104.2, "retail": 104.2, "elg": -64.2, "lg": -40.0, "md": 31.0, "sm": 73.2, "cum_main": -1014.39, "cum_retail": 1014.39}, {"date": "07/14", "main": 80.44, "retail": -80.44, "elg": 64.35, "lg": 16.09, "md": -90.8, "sm": 10.36, "cum_main": -933.95, "cum_retail": 933.95}, {"date": "07/15", "main": -18.27, "retail": 18.27, "elg": -17.2, "lg": -1.07, "md": -12.65, "sm": 30.92, "cum_main": -952.22, "cum_retail": 952.22}, {"date": "07/16", "main": -90.19, "retail": 90.19, "elg": -54.0, "lg": -36.19, "md": 45.46, "sm": 44.73, "cum_main": -1042.41, "cum_retail": 1042.41}, {"date": "07/17", "main": -177.59, "retail": 177.59, "elg": -137.44, "lg": -40.16, "md": 91.84, "sm": 85.76, "cum_main": -1220.0, "cum_retail": 1220.0}, {"date": "07/20", "main": -36.51, "retail": 36.51, "elg": -33.62, "lg": -2.89, "md": 1.0, "sm": 35.52, "cum_main": -1256.52, "cum_retail": 1256.52}, {"date": "07/21", "main": 44.22, "retail": -44.22, "elg": 70.46, "lg": -26.24, "md": -61.21, "sm": 16.99, "cum_main": -1212.3, "cum_retail": 1212.3}, {"date": "07/22", "main": -55.24, "retail": 55.24, "elg": -24.77, "lg": -30.47, "md": 59.24, "sm": -4.0, "cum_main": -1267.54, "cum_retail": 1267.54}, {"date": "07/23", "main": 0.21, "retail": -0.21, "elg": -0.37, "lg": 0.59, "md": 1.48, "sm": -1.69, "cum_main": -1267.33, "cum_retail": 1267.33}, {"date": "07/24", "main": -49.36, "retail": 49.36, "elg": -40.35, "lg": -9.01, "md": 17.72, "sm": 31.64, "cum_main": -1316.69, "cum_retail": 1316.69}, {"date": "07/27", "main": 5.86, "retail": -5.86, "elg": 4.69, "lg": 1.18, "md": -11.0, "sm": 5.14, "cum_main": -1310.83, "cum_retail": 1310.83}, {"date": "07/28", "main": -173.72, "retail": 173.72, "elg": -113.77, "lg": -59.95, "md": 113.68, "sm": 60.04, "cum_main": -1484.55, "cum_retail": 1484.55}, {"date": "07/29", "main": -3.36, "retail": 3.36, "elg": 3.71, "lg": -7.07, "md": -36.3, "sm": 39.66, "cum_main": -1487.91, "cum_retail": 1487.91}, {"date": "07/30", "main": -118.85, "retail": 118.85, "elg": -85.96, "lg": -32.89, "md": 47.08, "sm": 71.77, "cum_main": -1606.76, "cum_retail": 1606.76}, {"date": "07/31", "main": 65.55, "retail": -65.55, "elg": 79.24, "lg": -13.69, "md": -63.23, "sm": -2.32, "cum_main": -1541.21, "cum_retail": 1541.21, "total_elg": 79.24, "total_lg": -13.69, "total_md": -63.23, "total_sm": -2.32}], "total_main": -1267.33, "total_retail": 1267.33, "total_elg": -679.36, "total_lg": -587.97, "total_md": 412.08, "total_sm": 855.27, "n_stocks": 137, "n_days": 24, "mcp_today": 53.07, "mcp_5d": -2792.06, "mcp_10d": -5266.17, "has_daily": true}, "消费电子": {"series": [], "total_main": -105.66, "total_retail": 105.66, "total_elg": 0, "total_lg": 0, "total_md": 0, "total_sm": 0, "n_stocks": 0, "n_days": 0, "mcp_today": 9.17, "mcp_5d": -1163.24, "mcp_10d": -1155.15, "has_daily": false}, "元件": {"series": [], "total_main": -197.59, "total_retail": 197.59, "total_elg": 0, "total_lg": 0, "total_md": 0, "total_sm": 0, "n_stocks": 0, "n_days": 0, "mcp_today": 89.36, "mcp_5d": -572.2, "mcp_10d": -2016.15, "has_daily": false}, "光学光电子": {"series": [], "total_main": -116.8, "total_retail": 116.8, "total_elg": 0, "total_lg": 0, "total_md": 0, "total_sm": 0, "n_stocks": 0, "n_days": 0, "mcp_today": 7.97, "mcp_5d": -607.41, "mcp_10d": -1372.43, "has_daily": false}};
-  const C={text:'#c0c8d0',axisLine:'#1e2433',splitLine:'#1a1f2e',main:'#ff4d4d',retail:'#00d97e',elg:'#ff2d55',lg:'#ff8c42',md:'#4fc3f7',sm:'#66bb6a'};
+  const C={text:'#94a3b8',axisLine:'#1e293b',splitLine:'#1a2436',main:'#ef4444',retail:'#22c55e',elg:'#f43f5e',lg:'#f59e0b',md:'#60a5fa',sm:'#a78bfa'};
   const sectors=Object.keys(DATA);
   
   // Chart 1: 今日/5日/10日三周期对比 (全板块数据)
@@ -1585,9 +1587,9 @@ function initTechFlow(){
     xAxis:{type:'category',data:sectors,axisLabel:{color:C.text,fontSize:11},axisLine:{lineStyle:{color:C.axisLine}}},
     yAxis:{type:'value',name:'主力净额(亿)',nameTextStyle:{color:'#6b7280'},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
     series:[
-      {name:'今日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_today}),itemStyle:{color:'#00d97e',borderRadius:[2,2,0,0]}},
-      {name:'近5日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_5d}),itemStyle:{color:'#ff8c42',borderRadius:[2,2,0,0]}},
-      {name:'近10日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_10d}),itemStyle:{color:'#ff4d4d',borderRadius:[2,2,0,0]}},
+      {name:'今日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_today}),itemStyle:{color:'#22c55e',borderRadius:[2,2,0,0]}},
+      {name:'近5日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_5d}),itemStyle:{color:'#f59e0b',borderRadius:[2,2,0,0]}},
+      {name:'近10日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_10d}),itemStyle:{color:'#ef4444',borderRadius:[2,2,0,0]}},
     ]});
   tfCharts.push(c1);
 
@@ -1601,7 +1603,7 @@ function initTechFlow(){
     if(DATA[sec].has_daily&&DATA[sec].series.length>0){
       hasTrend=true;
       if(trendDates.length===0)trendDates=DATA[sec].series.map(function(d){return d.date});
-      var sc={半导体:'#ff4d4d',通信设备:'#ffd700'}[sec]||'#4fc3f7';
+      var sc={半导体:'#ef4444',通信设备:'#f59e0b'}[sec]||'#60a5fa';
       trendSeries.push({name:sec+' 主力累计',type:'line',data:DATA[sec].series.map(function(d){return d.cum_main}),smooth:true,symbol:'none',lineStyle:{width:2.5,color:sc},itemStyle:{color:sc}});
       legendData.push(sec+' 主力累计');
     }
@@ -1631,8 +1633,8 @@ function initTechFlow(){
       xAxis:{type:'category',data:sd.map(function(d){return d.date}),axisLabel:{color:'#6b7280',fontSize:9,rotate:45},axisLine:{lineStyle:{color:C.axisLine}}},
       yAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#6b7280'},axisLabel:{color:'#6b7280'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
       series:[
-        {name:'主力净流入',type:'bar',data:sd.map(function(d){return d.main}),itemStyle:{color:function(p){return p.value>=0?'#ff4d4d':'#ff6b6b'}}},
-        {name:'散户净流入',type:'bar',data:sd.map(function(d){return d.retail}),itemStyle:{color:function(p){return p.value>=0?'#00d97e':'#4caf50'}}},
+        {name:'主力净流入',type:'bar',data:sd.map(function(d){return d.main}),itemStyle:{color:function(p){return p.value>=0?'#ef4444':'#f87171'}}},
+        {name:'散户净流入',type:'bar',data:sd.map(function(d){return d.retail}),itemStyle:{color:function(p){return p.value>=0?'#22c55e':'#4ade80'}}},
       ],
       markLine:{silent:true,data:[{yAxis:0,lineStyle:{color:'#3a3f4c',type:'dashed'}}]}
     });
