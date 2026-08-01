@@ -11,8 +11,10 @@
 <title>2026 理财收益分析 v2 | Frank Worth</title>
 <script src="chart.umd.min.js"></script>
 <script src="html2canvas.min.js"></script>
-<script src="echarts.min.js"></script>
+<script src="echarts.common.min.js"></script>
 <style>
+  @font-face{font-family:'JetBrains Mono';src:url('fonts/JetBrainsMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+  @font-face{font-family:'JetBrains Mono';src:url('fonts/JetBrainsMono-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
   :root { --bg:#0a0e17; --card:#131826; --border:#1e293b; --text:#e2e8f0; --muted:#64748b; --green:#ef4444; --red:#22c55e; --blue:#3b82f6; --amber:#f59e0b; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; color:var(--text); padding:20px 16px; line-height:1.6;
@@ -27,7 +29,7 @@
   .kpi-card { background:linear-gradient(165deg, rgba(30,41,59,.5), var(--card) 45%); border:1px solid var(--border); border-radius:12px; padding:16px 14px; text-align:center; transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
   .kpi-card:hover { transform:translateY(-2px); border-color:rgba(59,130,246,.45); box-shadow:0 6px 20px -8px rgba(59,130,246,.25); }
   .kpi-label { color:var(--muted); font-size:0.75rem; letter-spacing:.3px; }
-  .kpi-value { font-size:1.42rem; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .kpi-value { font-size:1.42rem; font-weight:700; font-family:'JetBrains Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums; letter-spacing:.2px; }
   .kpi-sub { font-size:0.72rem; color:var(--muted); margin-top:3px; line-height:1.45; }
   .kpi-hero { grid-column:span 2; background:linear-gradient(135deg, rgba(59,130,246,.16), rgba(139,92,246,.10) 50%, var(--card) 85%); border-color:rgba(59,130,246,.35); }
   .kpi-hero .kpi-value { font-size:2.05rem; background:linear-gradient(90deg,#60a5fa,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
@@ -43,6 +45,8 @@
   .news-meta { color:var(--muted); font-size:0.72rem; font-weight:400; }
   table { width:100%; border-collapse:collapse; font-size:0.82rem; }
   th,td { padding:8px 9px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; font-variant-numeric:tabular-nums; }
+  td { font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.78rem; }
+  td:first-child { font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif; font-size:0.82rem; }
   th { color:var(--muted); font-weight:600; font-size:0.76rem; letter-spacing:.3px; }
   tbody tr { transition:background .12s ease; }
   tbody tr:hover { background:rgba(59,130,246,.05); }
@@ -180,10 +184,33 @@
     /* Stress Test */
   .stress-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:6px}
   .stress-card{border-radius:10px;padding:14px;border:1px solid var(--border)}
-  .stress-card.green-s{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2)}
-  .stress-card.amber-s{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2)}
-  .stress-card.red-s{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2)}
-  .stress-card.dark-s{background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.2)}
+  .stress-card.green-s{background:rgba(59,130,246,.10);border-color:rgba(59,130,246,.28)}
+  .stress-card.amber-s{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.20)}
+  .stress-card.red-s{background:rgba(30,41,59,.45);border-color:rgba(100,116,139,.35)}
+  .stress-card.dark-s{background:rgba(15,20,35,.6);border-color:rgba(100,116,139,.5)}
+  /* 可折叠区块 */
+  details.collap{margin-bottom:16px}
+  details.collap>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:0.92rem;font-weight:600;letter-spacing:.3px;transition:border-color .18s ease;user-select:none}
+  details.collap>summary::-webkit-details-marker{display:none}
+  details.collap>summary:hover{border-color:rgba(59,130,246,.4)}
+  details.collap>summary .chev{margin-left:auto;color:var(--muted);font-size:.75rem;transition:transform .2s ease}
+  details.collap[open]>summary{border-radius:12px 12px 0 0;border-bottom-color:transparent}
+  details.collap[open]>summary .chev{transform:rotate(90deg)}
+  details.collap>.collap-body{background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px 16px}
+  details.collap>.collap-body .table-card, details.collap>.collap-body .alert-card{border:none;padding:0;margin-bottom:0;border-radius:0}
+  details.collap>.collap-body .alert-card{background:transparent}
+  /* 风险徽章 */
+  .risk-badges{display:inline-flex;gap:6px;margin-left:10px;vertical-align:middle}
+  .risk-badge{font-size:.68rem;color:var(--muted);background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);border-radius:999px;padding:2px 9px;font-weight:400}
+  .risk-badge b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+  .risk-badge b.green,.risk-badge b.amber,.risk-badge b.red{background:none}
+  @media(max-width:768px){.risk-badges{display:flex;margin:6px 0 0;flex-wrap:wrap}}
+  /* 暗色滚动条 */
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:rgba(100,116,139,.35);border-radius:999px}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(59,130,246,.5)}
+  *{scrollbar-width:thin;scrollbar-color:rgba(100,116,139,.35) transparent}
   .stress-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
   .stress-val{font-size:1.3rem;font-weight:700}
   .stress-detail{font-size:.68rem;color:var(--muted);margin-top:4px;line-height:1.5}
@@ -328,7 +355,7 @@
 <p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年7月31日收盘 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标</p>
 
 <div class="kpi-grid">
-  <div class="kpi-card kpi-hero"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,176,467</div><div class="kpi-sub">本金1,539K + 累计637K · 支付宝+嘉实持仓（以收益簿为准）</div></div>
+  <div class="kpi-card kpi-hero"><div class="kpi-label">💰 总资产</div><div class="kpi-value">2,176,467</div><svg id="heroSpark" viewBox="0 0 560 56" preserveAspectRatio="none" style="width:100%;height:44px;margin:6px 0 2px;display:block"></svg><div class="kpi-sub">本金1,539K + 累计637K · 支付宝+嘉实持仓（以收益簿为准）</div></div>
   <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+637,263.60</div><div class="kpi-sub">收益率 41.40% · 含已清仓/赎回(018147已赎+8.8万)</div></div>
   <div class="kpi-card"><div class="kpi-label">🕐 今日收益 (7/31)</div><div class="kpi-value green">+31,005</div><div class="kpi-sub">支付宝+36,040 + 嘉实-5,035(7/30净值) | 科创50 +2.99%高开低走</div></div>
   <div class="kpi-card"><div class="kpi-label">📅 7月MTD</div><div class="kpi-value red">-625,318</div><div class="kpi-sub">23 个交易日 · 7/31回血+31K</div></div>
@@ -339,14 +366,15 @@
 
 
 <div class="chart-card" style="margin-top:10px;margin-bottom:10px;padding:10px 14px">
-  <h3 style="margin-bottom:6px">📈 近7日收益趋势 <span style="font-size:.65rem;color:var(--muted)">· 每日盈亏</span></h3>
+  <h3 style="margin-bottom:6px">📈 近7日收益趋势 <span style="font-size:.65rem;color:var(--muted)">· 每日盈亏</span>
+    <span class="risk-badges">
+      <span class="risk-badge">📐 夏普 <b id="sharpeVal">—</b></span>
+      <span class="risk-badge">📊 波动 <b id="volVal">—</b></span>
+      <span class="risk-badge">⏱️ 回撤恢复 <b id="recoveryVal">—</b></span>
+    </span>
+  </h3>
   <div style="height:120px"><canvas id="weekSparkline"></canvas></div>
-</div>
-
-<div class="kpi-grid" id="riskCards" style="margin-top:-6px">
-  <div class="kpi-card"><div class="kpi-label">📐 夏普比率</div><div class="kpi-value" id="sharpeVal">—</div><div class="kpi-sub">年化风险调整后收益</div></div>
-  <div class="kpi-card"><div class="kpi-label">📊 年化波动率</div><div class="kpi-value" id="volVal">—</div><div class="kpi-sub">日波动率 × √252</div></div>
-  <div class="kpi-card"><div class="kpi-label">⏱️ 回撤恢复</div><div class="kpi-value" id="recoveryVal">—</div><div class="kpi-sub" id="recoverySub">最大回撤恢复天数</div></div>
+  <div id="recoverySub" style="display:none">最大回撤恢复天数</div>
 </div>
 
 <div class="tabs">
@@ -361,9 +389,12 @@
 </div>
 
 <div id="tab-overview">
-  <!-- Stress Test -->
+  <!-- Stress Test (collapsible) -->
+  <details class="collap">
+  <summary>🔥 情景压力测试 <span class="news-meta">7/31收盘：科创50 +2.99%·新持仓重算</span><span class="chev">▶</span></summary>
+  <div class="collap-body">
   <div class="table-card" style="margin-bottom:14px">
-  <h3>🔥 情景压力测试 <span class="news-meta">· 7/31收盘：科创50 +2.99%·新持仓重算</span></h3>
+  <h3 style="display:none">🔥 情景压力测试</h3>
   <div class="stress-grid">
     <div class="stress-card green-s">
       <div class="stress-label">✅ 半导体企稳反弹</div>
@@ -388,6 +419,8 @@
   </div>
   <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 基于当前持仓(QDII ¥67.4万/A股 ¥62.1万+医药¥6.7万/现金 ¥63.2万)静态测算。总资产¥217.6万(含已实现)。</div>
   </div>
+  </div>
+  </details>
 
   <div class="us-panel">
     <div class="us-panel-title">🇺🇸 7/30美股收盘 · 半导体爆发 · SOXX+8.50% MU+18.4%</div>
@@ -407,11 +440,16 @@
     <div class="ec-timeline" id="ecTimeline"></div>
   </div>
 
-  <!-- Feature 2: Position Alert -->
+  <!-- Feature 2: Position Alert (collapsible) -->
+  <details class="collap">
+  <summary>🚦 持仓安全垫监测 <span class="news-meta">12只基金 · 含医药仓位</span><span class="chev">▶</span></summary>
+  <div class="collap-body">
   <div class="alert-card" id="alertCard">
-    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px">🚦 持仓安全垫监测</div>
+    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;display:none">🚦 持仓安全垫监测</div>
     <div id="alertRows"></div>
   </div>
+  </div>
+  </details>
 
   <!-- QDII NAV Lag Board -->
   <div class="table-card" style="margin-bottom:14px">
@@ -1433,6 +1471,32 @@ function exportCSV(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='monthly-returns.csv';a.click();
 }
 
+// Hero sparkline: 总资产走势 (本金1539203 + 累计收益rd.c)
+(function drawHeroSpark(){
+  const svg=document.getElementById('heroSpark');
+  if(!svg||typeof rd==='undefined'||!rd.length)return;
+  const PRINCIPAL=1539203, W=560, H=56, PAD=3;
+  const vals=rd.map(x=>PRINCIPAL+x.c);
+  const min=Math.min(...vals), max=Math.max(...vals), rng=max-min||1;
+  const xs=i=>PAD+i*(W-2*PAD)/(vals.length-1);
+  const ys=v=>H-PAD-(v-min)*(H-2*PAD)/rng;
+  let d='M'+xs(0).toFixed(1)+','+ys(vals[0]).toFixed(1);
+  for(let i=1;i<vals.length;i++)d+='L'+xs(i).toFixed(1)+','+ys(vals[i]).toFixed(1);
+  const area=d+'L'+xs(vals.length-1).toFixed(1)+','+(H-PAD)+'L'+xs(0).toFixed(1)+','+(H-PAD)+'Z';
+  const lastX=xs(vals.length-1), lastY=ys(vals[vals.length-1]);
+  const peakY=ys(max);
+  // safe innerHTML: content is fully derived from local numeric constant `rd`, no user/external input
+  svg.innerHTML=
+    '<defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1">'+
+    '<stop offset="0" stop-color="#60a5fa" stop-opacity=".35"/>'+
+    '<stop offset="1" stop-color="#8b5cf6" stop-opacity=".02"/></linearGradient></defs>'+
+    '<path d="'+area+'" fill="url(#hg)"/>'+
+    '<path d="'+d+'" fill="none" stroke="#60a5fa" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<circle cx="'+lastX+'" cy="'+lastY+'" r="3" fill="#a78bfa"/>'+
+    '<circle cx="'+lastX+'" cy="'+lastY+'" r="6" fill="#a78bfa" opacity=".25"/>'+
+    '<text x="'+(W-PAD)+'" y="'+(peakY+4)+'" fill="#64748b" font-size="8" text-anchor="end">峰值 '+(max/10000).toFixed(1)+'万</text>';
+})();
+
 function switchTab(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('[id^="tab-"]').forEach(d=>d.style.display='none');
@@ -1487,9 +1551,14 @@ initOverview();
 // Feature 5: PWA Service Worker
 // One-time SW cleanup: unregister all service workers and clear caches
 // to purge stale cached pages from the buggy cache-first strategy.
+// SW: 版本化注册 — sw.js 内 CACHE_VERSION 每次部署+1，旧缓存自动失效
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister()));
-  if(window.caches) caches.keys().then(keys=>keys.forEach(k=>caches.delete(k)));
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    reg.addEventListener('updatefound',()=>{
+      const nw=reg.installing;
+      nw&&nw.addEventListener('statechange',()=>{ if(nw.state==='activated') location.reload(); });
+    });
+  }).catch(()=>{});
 }
 
 
