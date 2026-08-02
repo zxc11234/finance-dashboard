@@ -37,9 +37,9 @@
   .pos{color:var(--green)}.neg{color:var(--red)}
   .us-value,.watch-price,.stress-val,.stat-val,.thermo-score,.rm-amount,.ec-date,.lag-fill{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
   .charts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:14px; margin-bottom:16px; }
-  .chart-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; transition:border-color .18s ease; }
+  .chart-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; transition:border-color .18s ease; box-shadow:0 2px 8px rgba(0,0,0,.3); }
   .chart-card:hover { border-color:rgba(59,130,246,.3); }
-  .chart-card h3, .table-card h3 { font-size:0.92rem; margin-bottom:10px; color:var(--text); font-weight:600; letter-spacing:.3px; }
+  .chart-card h3, .table-card h3 { font-size:0.92rem; margin-bottom:10px; color:var(--text); font-weight:600; letter-spacing:.3px; border-left:3px solid var(--blue); padding-left:8px; }
   .chart-wrap { position:relative; height:280px; width:100%; will-change:transform; }
   .chart-wrap.wide { height:360px; }
   .table-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px; overflow-x:auto; transition:border-color .18s ease; }
@@ -241,12 +241,22 @@
   .rm-action{font-size:.72rem;color:var(--text);padding:4px 8px;background:rgba(59,130,246,.06);border-radius:4px;display:inline-block;margin-top:2px}
   .rm-amount{font-size:.78rem;font-weight:700;color:var(--blue)}
   /* QDII Lag Board */
-  .lag-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(30,41,59,.3);font-size:.75rem}
+  .lag-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(30,41,59,.3);font-size:.75rem;transition:filter .2s ease}
   .lag-row:last-child{border-bottom:none}
+  .lag-row:hover{filter:drop-shadow(0 0 3px var(--blue))}
   .lag-name{min-width:160px;font-weight:600}
-  .lag-bar{flex:1;height:16px;border-radius:4px;background:rgba(30,41,59,.3);position:relative;overflow:hidden}
-  .lag-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:rgba(255,255,255,.8)}
-  .lag-status{min-width:70px;text-align:right;font-weight:600}
+  .lag-bar{flex:1;display:flex;align-items:center;gap:4px;position:relative}
+  .lag-track{display:flex;flex:1;gap:3px;align-items:center}
+  .lag-seg{flex:1;height:8px;border-radius:4px;background:rgba(30,41,59,.5);position:relative;overflow:hidden}
+  .lag-seg.done-amber{background:linear-gradient(90deg,rgba(245,158,11,.55),rgba(245,158,11,.75))}
+  .lag-seg.done-blue{background:linear-gradient(90deg,rgba(59,130,246,.5),rgba(59,130,246,.8))}
+  .lag-seg.done-anim{background:linear-gradient(90deg,rgba(59,130,246,.45),rgba(96,165,250,.85));animation:lagPulse 1.6s ease-in-out infinite}
+  @keyframes lagPulse{0%,100%{opacity:.65}50%{opacity:1}}
+  .lag-fill{font-size:.65rem;color:var(--muted);font-family:'JetBrains Mono',ui-monospace,monospace;white-space:nowrap}
+  .lag-nav{font-size:.72rem;font-weight:700;color:#fff;font-family:'JetBrains Mono',ui-monospace,monospace;white-space:nowrap}
+  .lag-status{min-width:70px;text-align:center;font-weight:600;font-size:.68rem;border-radius:10px;padding:2px 8px}
+  .lag-status.amber{color:var(--amber);background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35)}
+  .lag-status.green{color:#4ade80;background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.35)}
   /* Thermometer */
   .thermo-wrap{display:flex;align-items:center;gap:20px;padding:16px 0}
   .thermo-bar{flex:1;min-width:0;height:32px;border-radius:16px;background:linear-gradient(90deg,#3b82f6,#22c55e,#f59e0b,#ef4444,#a855f7);position:relative;box-shadow:inset 0 1px 3px rgba(0,0,0,.3)}
@@ -467,11 +477,11 @@
   <!-- QDII NAV Lag Board -->
   <div class="table-card" style="margin-bottom:14px">
   <h3>🕐 QDII 净值延迟看板</h3>
-  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-fill" style="width:50%;background:rgba(245,158,11,.5)">7/30已更新(3.6211)</div></div><div class="lag-status amber">延迟2天</div></div>
-  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(239,68,68,.4)">7/30已更新</div></div><div class="lag-status green">已更新</div></div>
+  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-amber"></div><div class="lag-seg done-anim"></div><div class="lag-seg" title="等待7/31净值"></div></div><span class="lag-fill">7/30已更新</span><span class="lag-nav">3.6211</span></div><div class="lag-status amber">延迟2天</div></div>
+  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">7/30已更新</span></div><div class="lag-status green">已更新</div></div>
   
-  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(239,68,68,.4)">7/30已更新</div></div><div class="lag-status green">已更新</div></div>
-  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-fill" style="width:75%;background:rgba(239,68,68,.4)">7/30已更新</div></div><div class="lag-status green">已更新</div></div>
+  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">7/30已更新</span></div><div class="lag-status green">已更新</div></div>
+  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">7/30已更新</span></div><div class="lag-status green">已更新</div></div>
   <div style="font-size:.68rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。今晚(7/31)支付宝QDII将更新7/30美股收盘后的净值——SOXX +8.5%将兑现，预估建信A/国富/长城净值+2%~+4%。017731净值已更新至7/30(3.6211,-1.34%)，SOXX+8.5%将在7/31净值兑现(预估+2.8%/+1.0万)。</div>
   </div>
 
@@ -1266,13 +1276,64 @@ function initOverview(){
   if(!el||Chart.getChart(el))return;
   const fn=['005661 嘉实资源','019671 港股创新药','003231 创金医疗','008619 永赢医药','006373 国富科技','018036 新能源车','539002 建信A','017731 嘉实产业','006523 财通PCB','016371 信澳光通','017811 东方AI'];
   const fp=[0.40,-2.29,-5.58,-4.28,-4.16,-3.44,-5.80,-2.36,-6.32,-10.14,-7.00];
-  new Chart(el,{type:'bar',data:{labels:fn,datasets:[{data:fp,backgroundColor:fp.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%'},grid:{color:'rgba(100,116,139,.05)'}},y:{grid:{display:false}}},indexAxis:'y'}});
+  // Sort descending (正→负)
+  const srt=fn.map((n,i)=>({n,v:fp[i]})).sort((a,b)=>b.v-a.v);
+  const sNames=srt.map(o=>o.n),sVals=srt.map(o=>o.v);
+  const barColors=sVals.map(v=>{
+    if(v>=0)return 'rgba(239,68,68,.85)';
+    if(v>-5)return 'rgba(74,222,128,.8)';
+    if(v>-10)return 'rgba(34,197,94,.8)';
+    return 'rgba(22,163,74,.9)';
+  });
+  // Inline plugin: value labels at bar end + zero baseline
+  const todayBarLabels={id:'todayBarLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),xScale=chart.scales.x;
+    ctx.save();
+    // zero baseline
+    const zx=xScale.getPixelForValue(0);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(zx,chart.chartArea.top);ctx.lineTo(zx,chart.chartArea.bottom);ctx.stroke();
+    ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';ctx.textBaseline='middle';
+    meta.data.forEach((bar,i)=>{
+      const v=chart.data.datasets[0].data[i];
+      const txt=(v>=0?'+':'')+v.toFixed(1)+'%';
+      ctx.fillStyle=v>=0?'#f87171':(v>-5?'#4ade80':(v>-10?'#22c55e':'#16a34a'));
+      if(v>=0){ctx.textAlign='left';ctx.fillText(txt,bar.x+5,bar.y);}
+      else{ctx.textAlign='right';ctx.fillText(txt,bar.x-5,bar.y);}
+    });
+    ctx.restore();
+  }};
+  new Chart(el,{type:'bar',data:{labels:sNames,datasets:[{data:sVals,backgroundColor:barColors,borderRadius:{topRight:6,bottomRight:6,topLeft:6,bottomLeft:6},borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{right:42,left:4}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%',font:{size:10}},grid:{color:'rgba(148,163,184,.12)'},border:{color:'rgba(148,163,184,.3)'}},y:{grid:{display:false},ticks:{font:{size:10}},border:{display:false}}},indexAxis:'y'},plugins:[todayBarLabels]});
 
   // Weekly sparkline
   const wkDates=dates.slice(-7),wkDaily=daily.slice(-7);
   new Chart(document.getElementById('weekSparkline'),{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}}});
 
-  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:['余额宝','东方AI','长城新能源','嘉实全球','建信新兴A','嘉实资源','国富科技','财通PCB','永赢医药','信澳光通信','广发创新药','创金医疗'],datasets:[{data:[632342,438509,149230,371304,89313,100685,63713,43381,42176,38698,20409,4563],backgroundColor:['#94a3b8','#f59e0b','#3b82f6','#8b5cf6','#10b981','#c084fc','#6ee7b7','#fbbf24','#34d399','#fb7185','#60a5fa','#a855f7'],borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.parsed.toLocaleString()}}}}})
+  // Allocation doughnut: sorted desc, Cat10 palette, pull-out top3, % labels
+  const allocRaw=[['余额宝',632342],['东方AI',438509],['长城新能源',149230],['嘉实全球',371304],['建信新兴A',89313],['嘉实资源',100685],['国富科技',63713],['财通PCB',43381],['永赢医药',42176],['信澳光通信',38698],['广发创新药',20409],['创金医疗',4563]];
+  allocRaw.sort((a,b)=>b[1]-a[1]);
+  const allocLabels=allocRaw.map(o=>o[0]),allocVals=allocRaw.map(o=>o[1]);
+  const allocTotal=allocVals.reduce((a,b)=>a+b,0);
+  const cat10=['#ff6b6b','#feca57','#48dbfb','#1dd1a1','#5f27cd','#ff9f43','#54a0ff','#2ed573','#ff6348','#c4e538','#8d6e63','#576574'];
+  const allocPct=allocVals.map(v=>v/allocTotal*100);
+  const allocPull=allocVals.map((v,i)=>i<3?5:0);
+  const allocLabelsPlugin={id:'allocLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0);
+    ctx.save();
+    meta.data.forEach((arc,i)=>{
+      const pct=allocPct[i];
+      if(pct<4)return; // hide tiny slices
+      const ang=(arc.startAngle+arc.endAngle)/2;
+      const r=(arc.innerRadius+arc.outerRadius)/2;
+      const x=arc.x+Math.cos(ang)*r,y=arc.y+Math.sin(ang)*r;
+      ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillStyle='#0a0e17';
+      ctx.fillText(pct.toFixed(1)+'%',x,y);
+    });
+    ctx.restore();
+  }};
+  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:allocLabels,datasets:[{data:allocVals,backgroundColor:cat10,borderColor:'rgba(255,255,255,.85)',borderWidth:2,offset:allocPull,hoverOffset:8,spacing:1}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12,padding:6,generateLabels(chart){const base=Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);base.forEach((l,i)=>{l.text=allocLabels[i]+' '+(allocVals[i]/10000).toFixed(1)+'万 '+allocPct[i].toFixed(1)+'%';});return base;}}},tooltip:{callbacks:{label:ctx=>ctx.label+': ¥'+ctx.parsed.toLocaleString()+' ('+(ctx.parsed/allocTotal*100).toFixed(1)+'%)'}}}},plugins:[allocLabelsPlugin]})
 }
 
 function initHistory(){
