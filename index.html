@@ -1268,7 +1268,7 @@ function drawRadar(){
   new Chart(ctx,{type:'radar',data:{labels:axes,datasets},
     options:{responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'bottom',labels:{usePointStyle:true,font:{size:10},padding:6}}},
-      scales:{r:{min:0,max:100,grid:{color:'rgba(100,116,139,.1)'},angleLines:{color:'rgba(100,116,139,.1)'},pointLabels:{color:'#64748b',font:{size:10}},ticks:{display:false}}}
+      scales:{r:{min:0,max:100,grid:{color:'rgba(148,163,184,.15)'},angleLines:{color:'rgba(148,163,184,.15)'},pointLabels:{color:'#e2e8f0',font:{size:10}},ticks:{display:true,color:'#94a3b8',font:{size:9},backdropColor:'transparent',stepSize:25}}}
     }});
 }
 function initOverview(){
@@ -1307,7 +1307,25 @@ function initOverview(){
 
   // Weekly sparkline
   const wkDates=dates.slice(-7),wkDaily=daily.slice(-7);
-  new Chart(document.getElementById('weekSparkline'),{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}}});
+  // Inline plugin: value labels at bar top (8px) + zero baseline, todayBar style
+  const wkSparkLabels={id:'wkSparkLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),yScale=chart.scales.y;
+    ctx.save();
+    // zero baseline
+    const zy=yScale.getPixelForValue(0);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(chart.chartArea.left,zy);ctx.lineTo(chart.chartArea.right,zy);ctx.stroke();
+    ctx.font='8px "JetBrains Mono",ui-monospace,monospace';ctx.textAlign='center';ctx.textBaseline='bottom';
+    meta.data.forEach((bar,i)=>{
+      const v=chart.data.datasets[0].data[i];
+      const txt=(v>=0?'+':'')+v.toLocaleString();
+      ctx.fillStyle=v>=0?'#f87171':'#4ade80';
+      if(v>=0){ctx.fillText(txt,bar.x,bar.y-2);}
+      else{ctx.textBaseline='top';ctx.fillText(txt,bar.x,bar.y+2);ctx.textBaseline='bottom';}
+    });
+    ctx.restore();
+  }};
+  new Chart(document.getElementById('weekSparkline'),{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)'),borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}},plugins:[wkSparkLabels]});
 
   // Allocation doughnut: sorted desc, Cat10 palette, pull-out top3, % labels
   const allocRaw=[['余额宝',632342],['东方AI',438509],['长城新能源',149230],['嘉实全球',371304],['建信新兴A',89313],['嘉实资源',100685],['国富科技',63713],['财通PCB',43381],['永赢医药',42176],['信澳光通信',38698],['广发创新药',20409],['创金医疗',4563]];
@@ -1390,8 +1408,9 @@ function initHistory(){
     options:{
       responsive:true,maintainAspectRatio:false,
       plugins:{
-        legend:{display:true,position:'top',labels:{usePointStyle:true,font:{size:10},padding:8}},
+        legend:{display:true,position:'top',align:'start',labels:{usePointStyle:true,font:{size:10},padding:8}},
         tooltip:{
+          backgroundColor:'rgba(15,23,42,.92)',titleColor:'#e2e8f0',bodyColor:'#cbd5e1',borderColor:'rgba(148,163,184,.25)',borderWidth:1,padding:10,cornerRadius:6,titleFont:{size:11},bodyFont:{size:11},
           callbacks:{
             label:function(ctx){
               if(ctx.dataset.label==='事件'){
@@ -1403,7 +1422,7 @@ function initHistory(){
         }
       },
       scales:{
-        y:{position:'left',grid:{color:'rgba(100,116,139,.05)'},ticks:{callback:v=>(v/10000).toFixed(1)+'万'}},
+        y:{position:'left',grid:{color(ctx){return ctx.tick.value===0?'rgba(255,255,255,.55)':'rgba(100,116,139,.05)';},lineWidth(ctx){return ctx.tick.value===0?1.5:1;}},ticks:{callback:v=>(v/10000).toFixed(1)+'万',font:{size:10}}},
         x:{grid:{display:false}}
       },
       interaction:{intersect:false,mode:'index'}
@@ -1412,8 +1431,33 @@ function initHistory(){
   });
 
   const l30=daily.slice(-30),d30=dates.slice(-30);
-  new Chart(document.getElementById('dailyBar'),{type:'bar',data:{labels:d30,datasets:[{data:l30,backgroundColor:l30.map(v=>v>=0?'rgba(239,68,68,.7)':'rgba(34,197,94,.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(100,116,139,.05)'}},x:{grid:{display:false}}}}});
-  new Chart(document.getElementById('platformChart'),{type:'bar',data:{labels:['支付宝','嘉实'],datasets:[{data:[582505.37,55723.72],backgroundColor:['#3b82f6','#f59e0b'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},indexAxis:'y'}});
+  // Inline plugin: value labels at bar top for positive values (8px), Bloomberg terminal style
+  const dailyBarLabels={id:'dailyBarLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0);
+    ctx.save();
+    ctx.font='8px "JetBrains Mono",ui-monospace,monospace';ctx.textAlign='center';ctx.textBaseline='bottom';
+    meta.data.forEach((bar,i)=>{
+      const v=chart.data.datasets[0].data[i];
+      if(v<=0)return; // only show labels for positive values
+      ctx.fillStyle='#f87171';
+      ctx.fillText('+'+v.toLocaleString(),bar.x,bar.y-1);
+    });
+    ctx.restore();
+  }};
+  new Chart(document.getElementById('dailyBar'),{type:'bar',data:{labels:d30,datasets:[{data:l30,backgroundColor:l30.map(v=>v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)'),borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(100,116,139,.05)'},ticks:{font:{size:10}}},x:{grid:{display:false},ticks:{font:{size:9}}}}},plugins:[dailyBarLabels]});
+  // Inline plugin: value labels at horizontal bar end (¥ + toLocaleString, 10px)
+  const platformLabels={id:'platformLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0);
+    ctx.save();
+    ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';ctx.textBaseline='middle';ctx.textAlign='left';
+    meta.data.forEach((bar,i)=>{
+      const v=chart.data.datasets[0].data[i];
+      ctx.fillStyle='#e2e8f0';
+      ctx.fillText('¥'+v.toLocaleString(),bar.x+6,bar.y);
+    });
+    ctx.restore();
+  }};
+  new Chart(document.getElementById('platformChart'),{type:'bar',data:{labels:['支付宝','嘉实'],datasets:[{data:[582505.37,55723.72],backgroundColor:['#3b82f6','#f59e0b'],borderRadius:6,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{right:80}},plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(148,163,184,.12)'},ticks:{font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:10}}}},indexAxis:'y'},plugins:[platformLabels]});
 
   // Feature C: Build alpha heatmap after charts are created
   buildAlphaHeatmap();
@@ -1462,26 +1506,67 @@ function initMonthly(){
   if(!el)return;
   // 已有chart就跳过（Chart.getChart是Chart.js 3+的标准API）
   if(Chart.getChart(el))return;
-  new Chart(el,{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月','7月'],datasets:[{data:[191743.86,31903.36,-181996.27,425432.79,261045.53,534451.94,-625317.61],backgroundColor:['rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)'],borderRadius:6,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  // Inline plugin: value labels at bar top for positive values (8px) + zero baseline, todayBar style
+  const monthlyBarLabels={id:'monthlyBarLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),yScale=chart.scales.y;
+    ctx.save();
+    // zero baseline
+    const zy=yScale.getPixelForValue(0);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(chart.chartArea.left,zy);ctx.lineTo(chart.chartArea.right,zy);ctx.stroke();
+    ctx.font='8px "JetBrains Mono",ui-monospace,monospace';ctx.textAlign='center';ctx.textBaseline='bottom';
+    meta.data.forEach((bar,i)=>{
+      const v=chart.data.datasets[0].data[i];
+      if(v<=0)return; // only show labels for positive values
+      ctx.fillStyle='#f87171';
+      ctx.fillText('+'+v.toLocaleString(),bar.x,bar.y-1);
+    });
+    ctx.restore();
+  }};
+  new Chart(el,{type:'bar',data:{labels:['1月','2月','3月','4月','5月','6月','7月'],datasets:[{data:[191743.86,31903.36,-181996.27,425432.79,261045.53,534451.94,-625317.61],backgroundColor:['rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(239,68,68,.7)','rgba(34,197,94,.7)'],borderRadius:6,borderSkipped:false,borderWidth:0,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(100,116,139,.05)'},ticks:{font:{size:10}}},x:{grid:{display:false},ticks:{font:{size:10}}}}},plugins:[monthlyBarLabels]});
 }
 
 function initAlloc(){
   const el=document.getElementById('allocDonut');
   if(!el||Chart.getChart(el))return;
-  // Donut chart
+  // Donut chart: sorted desc, Cat10 palette, pull-out top2, % labels, white border 2px
+  const allocDonutRaw=[['A股科技',31.7],['QDII',3.4],['医药',34.4],['现金',32.3]];
+  allocDonutRaw.sort((a,b)=>b[1]-a[1]);
+  const allocDonutLabels=allocDonutRaw.map(o=>o[0]),allocDonutVals=allocDonutRaw.map(o=>o[1]);
+  const allocDonutTotal=allocDonutVals.reduce((a,b)=>a+b,0);
+  const cat10=['#ff6b6b','#feca57','#48dbfb','#1dd1a1','#5f27cd','#ff9f43','#54a0ff','#2ed573','#ff6348','#c4e538','#8d6e63','#576574'];
+  const allocDonutPct=allocDonutVals.map(v=>v/allocDonutTotal*100);
+  const allocDonutPull=allocDonutVals.map((v,i)=>i<2?5:0);
+  const allocDonutLabelsPlugin={id:'allocDonutLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0);
+    ctx.save();
+    meta.data.forEach((arc,i)=>{
+      const pct=allocDonutPct[i];
+      if(pct<4)return;
+      const ang=(arc.startAngle+arc.endAngle)/2;
+      const r=(arc.innerRadius+arc.outerRadius)/2;
+      const x=arc.x+Math.cos(ang)*r,y=arc.y+Math.sin(ang)*r;
+      ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillStyle='#0a0e17';
+      ctx.fillText(pct.toFixed(1)+'%',x,y);
+    });
+    ctx.restore();
+  }};
   new Chart(el,{
     type:'doughnut',
     data:{
-      labels:['A股科技','QDII','医药','现金'],
-      datasets:[{data:[31.7,3.4,34.4,32.3],backgroundColor:['#3b82f6','#f59e0b','#94a3b8','#64748b','#34d399'],borderColor:'#131826',borderWidth:2}]
+      labels:allocDonutLabels,
+      datasets:[{data:allocDonutVals,backgroundColor:cat10,borderColor:'rgba(255,255,255,.85)',borderWidth:2,offset:allocDonutPull,hoverOffset:8,spacing:1}]
     },
     options:{
-      responsive:true,maintainAspectRatio:false,
+      responsive:true,maintainAspectRatio:false,cutout:'58%',
       plugins:{
-        legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}},
+        legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11},generateLabels(chart){const base=Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);base.forEach((l,i)=>{l.text=allocDonutLabels[i]+' '+allocDonutVals[i].toFixed(1)+'%';});return base;}}},
         tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.parsed+'%'}}
       }
-    }
+    },
+    plugins:[allocDonutLabelsPlugin]
   });
   // Trend chart
   const allocDates=['1/5','2/9','3/31','4/30','5/29','6/30','7/20','7/27','7/30','7/31'];
@@ -1493,16 +1578,16 @@ function initAlloc(){
     data:{
       labels:allocDates,
       datasets:[
-        {label:'国内基金',data:allocDomestic,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.1)',fill:true,tension:.3,pointRadius:4,borderWidth:2},
-        {label:'QDII',data:allocQDII,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,pointRadius:4,borderWidth:2},
-        {label:'现金',data:allocCash,borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.1)',fill:true,tension:.3,pointRadius:4,borderWidth:2}
+        {label:'国内基金',data:allocDomestic,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.1)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:6,borderWidth:2},
+        {label:'QDII',data:allocQDII,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:6,borderWidth:2},
+        {label:'现金',data:allocCash,borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.1)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:6,borderWidth:2}
       ]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'top',labels:{usePointStyle:true,font:{size:10},padding:8}}},
       scales:{
-        y:{min:0,max:90,grid:{color:'rgba(100,116,139,.05)'},ticks:{callback:v=>v+'%'},title:{display:true,text:'占比 (%)',color:'#64748b',font:{size:10}}},
+        y:{min:0,max:90,grid:{color(ctx){return ctx.tick.value===0?'rgba(255,255,255,.55)':'rgba(100,116,139,.05)';},lineWidth(ctx){return ctx.tick.value===0?1.5:1;}},ticks:{callback:v=>v+'%'},title:{display:true,text:'占比 (%)',color:'#64748b',font:{size:10}}},
         x:{grid:{display:false}}
       },
       interaction:{intersect:false,mode:'index'}
@@ -1648,9 +1733,9 @@ function initTechFlow(){
     xAxis:{type:'category',data:sectors,axisLabel:{color:C.text,fontSize:11},axisLine:{lineStyle:{color:C.axisLine}}},
     yAxis:{type:'value',name:'主力净额(亿)',nameTextStyle:{color:'#64748b'},axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
     series:[
-      {name:'今日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_today}),itemStyle:{color:'#22c55e',borderRadius:[2,2,0,0]}},
-      {name:'近5日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_5d}),itemStyle:{color:'#f59e0b',borderRadius:[2,2,0,0]}},
-      {name:'近10日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_10d}),itemStyle:{color:'#ef4444',borderRadius:[2,2,0,0]}},
+      {name:'今日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_today}),itemStyle:{color:'#22c55e',borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}},markLine:{silent:true,symbol:'none',label:{show:false},data:[{yAxis:0,lineStyle:{color:'rgba(255,255,255,.75)',width:2,type:'solid'}}]}},
+      {name:'近5日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_5d}),itemStyle:{color:'#f59e0b',borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}}},
+      {name:'近10日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_10d}),itemStyle:{color:'#ef4444',borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}}},
     ]});
   tfCharts.push(c1);
 
@@ -1665,7 +1750,7 @@ function initTechFlow(){
       hasTrend=true;
       if(trendDates.length===0)trendDates=DATA[sec].series.map(function(d){return d.date});
       var sc={半导体:'#ef4444',通信设备:'#f59e0b'}[sec]||'#60a5fa';
-      trendSeries.push({name:sec+' 主力累计',type:'line',data:DATA[sec].series.map(function(d){return d.cum_main}),smooth:true,symbol:'none',lineStyle:{width:2.5,color:sc},itemStyle:{color:sc}});
+      trendSeries.push({name:sec+' 主力累计',type:'line',data:DATA[sec].series.map(function(d){return d.cum_main}),smooth:true,symbol:'circle',symbolSize:6,lineStyle:{width:3,color:sc},itemStyle:{color:sc}});
       legendData.push(sec+' 主力累计');
     }
   });
@@ -1676,8 +1761,7 @@ function initTechFlow(){
       grid:{left:55,right:20,bottom:35,top:35},
       xAxis:{type:'category',data:trendDates,axisLabel:{color:'#64748b',fontSize:9,rotate:45},axisLine:{lineStyle:{color:C.axisLine}}},
       yAxis:{type:'value',name:'累计净额(亿)',nameTextStyle:{color:'#64748b'},axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
-      series:trendSeries,
-      markLine:{silent:true,data:[{yAxis:0,lineStyle:{color:'#3a3f4c',type:'dashed'}}]}
+      series:trendSeries.map(function(s,i){if(i===0)s.markLine={silent:true,symbol:'none',label:{show:false},data:[{yAxis:0,lineStyle:{color:'rgba(255,255,255,.75)',width:2,type:'solid'}}]};return s;}),
     });
   }else{
     document.getElementById('tf-trend').innerHTML='<div style="text-align:center;padding:40px;color:#64748b">暂无日级数据</div>';
@@ -1694,11 +1778,9 @@ function initTechFlow(){
       xAxis:{type:'category',data:sd.map(function(d){return d.date}),axisLabel:{color:'#64748b',fontSize:9,rotate:45},axisLine:{lineStyle:{color:C.axisLine}}},
       yAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#64748b'},axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
       series:[
-        {name:'主力净流入',type:'bar',data:sd.map(function(d){return d.main}),itemStyle:{color:function(p){return p.value>=0?'#ef4444':'#f87171'}}},
-        {name:'散户净流入',type:'bar',data:sd.map(function(d){return d.retail}),itemStyle:{color:function(p){return p.value>=0?'#22c55e':'#4ade80'}}},
-      ],
-      markLine:{silent:true,data:[{yAxis:0,lineStyle:{color:'#3a3f4c',type:'dashed'}}]}
-    });
+        {name:'主力净流入',type:'bar',data:sd.map(function(d){return d.main}),itemStyle:{color:function(p){return p.value>=0?'#ef4444':'#f87171'},borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}},markLine:{silent:true,symbol:'none',label:{show:false},data:[{yAxis:0,lineStyle:{color:'rgba(255,255,255,.75)',width:2,type:'solid'}}]}},
+        {name:'散户净流入',type:'bar',data:sd.map(function(d){return d.retail}),itemStyle:{color:function(p){return p.value>=0?'#22c55e':'#4ade80'},borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}}},
+      ]});
     tfCharts.push(c3);
   }
 
