@@ -1,5 +1,5 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20260801-v35-visual';
+const CACHE_VERSION = '20260807-v36-heatmap-fix';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = [
