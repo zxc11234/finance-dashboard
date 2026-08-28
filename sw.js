@@ -1,5 +1,5 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20260826-v54-radar-live';
+const CACHE_VERSION = '20260828-v55-nvda-rebound';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = [
