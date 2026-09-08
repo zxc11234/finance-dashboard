@@ -1,5 +1,5 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20260829-v58-thermo';
+const CACHE_VERSION = '20260908-v59-gpt6-whipsaw';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = [
