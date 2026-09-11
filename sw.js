@@ -1,5 +1,5 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20260908-v59-gpt6-whipsaw';
+const CACHE_VERSION = '20260911-v60-split-discipline5';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = [
