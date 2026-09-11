@@ -20,6 +20,7 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 /* Timeline */
 .timeline{position:relative;padding-left:24px}
 .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-plan .tl-action{color:#f59e0b}
 .tl-item{position:relative;margin-bottom:20px;padding-left:24px}
 .tl-dot{position:absolute;left:-18px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid}
 .tl-buy .tl-dot{border-color:var(--green);background:rgba(34,197,94,.2)}
@@ -83,6 +84,46 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 <div class="card">
   <h2>📅 操作时间线</h2>
   <div class="timeline">
+
+    <div class="tl-item tl-plan">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年9月14日（待执行）</div>
+      <div class="tl-action amber">⏰ 纪律第5版（无条件制）：018036全赎 + 017731赎回10万</div>
+      <div class="tl-detail">018036 全部60,849份（≈16万）+ 017731 约25,300份（≈10万）· 15:00前提交，按当日净值</div>
+      <div class="tl-reason">💡 前4次窗口（8/26、8/31、9/1、9/7净值3.9701≥3.95触发）全部未执行——条件式纪律失效，本版不设价格条件不改期。执行后现金垫2.2%→约9%</div>
+    </div>
+
+    <div class="tl-item tl-adjust">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年9月7~11日</div>
+      <div class="tl-action amber">⚠️ 第4次窗口失效 + GPT-6过山车</div>
+      <div class="tl-detail">9/7净值3.9701站上3.95纪律线、9/9冲3.9999（差0.0001回4.00）均未执行赎回；同期组合+61,503（9/7）→三连阴-35,309（9/8-9/11）</div>
+      <div class="tl-reason">💡 GPT-6 Astra发布引爆算力链（006503 +7.96%/CPO·PCB涨停潮），但三连阴回吐大半；通信/元件5日+517亿与半导体10日-659亿大分裂</div>
+    </div>
+
+    <div class="tl-item tl-adjust">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年8月26日~9月4日</div>
+      <div class="tl-action amber">⚠️ 纪律第1~3次窗口连续失效</div>
+      <div class="tl-detail">8/26（A+B双触发日）、8/31（4.00线触发后截止日）、9/1（第3次窗口）——017731份额115,451逐日验证未动，018036同样未赎</div>
+      <div class="tl-reason">💡 期间017731净值4.0333→3.8557（-4.4%）；9/7反弹+2.97%又给了机会仍未执行</div>
+    </div>
+
+    <div class="tl-item tl-buy">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年8月21日</div>
+      <div class="tl-action green">🔺 加仓：建信新兴市场混合 QDII C <span style="color:var(--muted)">018147</span></div>
+      <div class="tl-detail">加购5万至成本35万（151,777.69份，成本价2.3056）</div>
+      <div class="tl-reason">💡 美股QDII回调后的分批布局；至9/8净值2.43一度+5.4%，9/10回调至2.391（+3.7%）</div>
+    </div>
+
+    <div class="tl-item tl-buy">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026年8月13日</div>
+      <div class="tl-action green">🔺 加仓：嘉实资源精选股票C <span style="color:var(--muted)">005661</span></div>
+      <div class="tl-detail">加购10万（63,314份，成本价约4.7375）至成本30万</div>
+      <div class="tl-reason">💡 工业金属资金持续回流+资源避险逻辑；9/9净值5.0345创历史新高（+6.3%），9/11回调至4.774（+0.7%）</div>
+    </div>
 
     <div class="tl-item tl-sell">
       <div class="tl-dot"></div>
