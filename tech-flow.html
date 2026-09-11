@@ -45,7 +45,7 @@ body{background:#0a0e17;color:#c0c8d0;font-family:-apple-system,'PingFang SC','N
   <div class="insight"><strong>趋势：</strong>半导体30日-1841亿(日均-84亿)，通信设备30日-1212亿(日均-55亿)。7/21半导体单日回流。</div>
 </div>
 <div class="card">
-  <h2>半导体日级资金流 <span class="badge">195只全板块 · 主力vs散户</span></h2>
+  <h2>半导体日级资金流 <span class="badge">全板块 · 主力vs散户</span></h2>
   <div id="tf-semi-daily" class="chart chart-tall"></div>
 </div>
 <div class="card">
@@ -135,7 +135,7 @@ function initTechFlow(){
     var d=DATA[s];
     var fmt=function(v){return(v>=0?'+':'')+v.toFixed(1)};
     var cls=function(v){return v>=0?'pos':'neg'};
-    var stockInfo=d.has_daily?'('+d.n_stocks+'只全板块)':'(全板块)';
+    var stockInfo=d.has_daily?'(10日序列·全板块)':'(全板块)';
     var tr=document.createElement('tr');
     tr.innerHTML='<td>'+s+'<span style="color:#6b7280;font-size:10px">'+stockInfo+'</span></td>'+
       '<td class="'+cls(d.mcp_today)+'">'+fmt(d.mcp_today)+'</td>'+
