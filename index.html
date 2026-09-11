@@ -955,7 +955,7 @@
   <div class="tf-insight"><strong>趋势解读：</strong>半导体8/5单日+136亿（38x爆发），机构系统性回补。8/3-8/7连4阳回血。元件+58亿/消费电子+53亿跟随。通信设备5日+166亿但10日仍-198亿。白酒/银行/电力持续流出，资金从防御→科技迁移。</div>
 </div>
 <div class="tf-card">
-  <h2>半导体板块日级资金流 <span class="badge">195只全板块 · 主力vs散户</span></h2>
+  <h2>半导体板块日级资金流 <span class="badge">全板块 · 主力vs散户</span></h2>
   <div id="tf-semi-daily" class="tf-chart tf-chart-tall"></div>
   <div class="tf-insight"><strong>半导体节奏：</strong>8/3恐慌踩踏-7.27%(IPO清算) → 8/4反弹+3.70% → 8/5机构回补+4.78%+136亿(38x爆发) → 8/6+1.02%企稳 → 8/7续涨。5日累计：半导体+18亿/元件+181亿/消费电子+4亿转正。10日半导体+105亿确认中期反转。017811东方AI从-17.6%收窄至-0.6%。</div>
 </div>
@@ -1797,7 +1797,7 @@ function initTechFlow(){
     var d=DATA[s];
     var fmt=function(v){return(v>=0?'+':'')+v.toFixed(1)};
     var cls=function(v){return v>=0?'pos':'neg'};
-    var stockInfo=d.has_daily?'('+d.n_stocks+'只全板块)':'(全板块)';
+    var stockInfo=d.has_daily?'(10日序列·全板块)':'(全板块)';
     var tr=document.createElement('tr');
     tr.innerHTML='<td>'+s+'<span style="color:#94a3b8;font-size:10px">'+stockInfo+'</span></td>'+
       '<td class="'+cls(d.mcp_today)+'">'+fmt(d.mcp_today)+'</td>'+
