@@ -379,12 +379,36 @@
   .radar-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:0.7rem;font-weight:600}
   /* Report tag missing class */
   .tag-tech{background:rgba(59,130,246,.15);color:var(--blue)}
+  .tag-rpt-macro{background:rgba(245,158,11,.15);color:var(--amber)}
+  .tag-semi{background:rgba(139,92,246,.16);color:#c4b5fd}
+  .asof-bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.28);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:.8rem;line-height:1.45}
+  .asof-bar strong{color:#86efac;font-weight:700}
+  .asof-bar .asof-sub{color:var(--muted);font-size:.72rem}
+  .brief-list{display:flex;flex-direction:column;gap:8px}
+  .brief-card{background:rgba(15,23,42,.35);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+  .brief-top{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:4px}
+  .brief-date{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.72rem;color:var(--blue-2);font-variant-numeric:tabular-nums}
+  .brief-title{font-size:.86rem;font-weight:600;line-height:1.45;color:var(--text)}
+  .brief-sum{font-size:.78rem;color:#cbd5e1;line-height:1.55;margin-top:4px;white-space:normal}
+  .brief-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+  .pill{font-size:.68rem;padding:1px 7px;border-radius:999px;border:1px solid var(--border);color:var(--muted);white-space:nowrap}
+  .pill-ok{color:#86efac;border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1)}
+  .pill-warn{color:var(--amber);border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1)}
+  .pill-fund{color:var(--blue-2);border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.1);font-family:'JetBrains Mono',ui-monospace,monospace}
+  .nav-mini{width:100%;font-size:.75rem}
+  .nav-mini td,.nav-mini th{white-space:nowrap}
+  .idx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
+  .idx-cell{text-align:center;background:rgba(30,41,59,.45);border:1px solid var(--border);border-radius:8px;padding:8px 4px}
+  .idx-cell .k{font-size:.68rem;color:var(--muted)}
+  .idx-cell .v{font-size:1.02rem;font-weight:700;font-family:'JetBrains Mono',ui-monospace,monospace}
+  .idx-cell .c{font-size:.72rem}
+  @media(max-width:768px){.brief-title{font-size:.8rem}.asof-bar{font-size:.74rem}}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:2px 10px;border-radius:999px;vertical-align:middle;box-shadow:0 2px 8px -2px rgba(59,130,246,.5)">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实基金 · 2026年8月17日收盘 | 以收益簿Excel为准 · 含最大回撤/资产配置/风险指标</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实 + 建信 · 收益权威日 2026-10-22 · 资讯更新 2026-10-23 · 纪律第8版「保持弹性」</p>
 
 <div class="kpi-grid">
   <div class="kpi-card kpi-hero"><div class="kpi-label">💰 总资产（收益簿口径）</div><div class="kpi-value">1,881,774</div><svg id="heroSpark" viewBox="0 0 560 56" preserveAspectRatio="none" style="width:100%;height:44px;margin:6px 0 2px;display:block"></svg><div class="kpi-sub">本金1539K + 累计343K · 持仓截图合计约202万（结构层）· 以收益簿为准</div></div>
@@ -421,7 +445,7 @@
 <div id="tab-overview">
   <!-- Stress Test (collapsible) -->
   <details class="collap">
-  <summary>🔥 情景压力测试 <span class="news-meta">8/19收盘：半导体主力-364亿出逃·A+B双触发·满仓重算</span><span class="chev">▶</span></summary>
+  <summary>🔥 情景压力测试 <span class="news-meta">金额仍是 8/19 静态草图 · 2026-10-23 未重算 · 勿当最新盈亏</span><span class="chev">▶</span></summary>
   <div class="collap-body">
   <div class="table-card" style="margin-bottom:14px">
   <h3 style="display:none">🔥 情景压力测试</h3>
@@ -447,26 +471,28 @@
       <div class="stress-detail">AMD财报暴雷+地缘黑天鹅<br>QDII -6% A股科技 -10%<br>历史最大回撤 -682,948（现金垫太薄需减QDII）</div>
     </div>
   </div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">💡 基于当前满仓持仓(QDII ¥115.7万/A股 ¥120.8万+医药¥7.8万/现金 ¥0.4万)静态测算。总资产截图约¥202万 / 收益簿约¥188万。⚠️ 现金垫仅约0.2%，防御依赖QDII浮盈赎回。</div>
+  <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">💡 四格金额是 8/19 压力草图，2026-10-23 没有按最新净值重算，不能当成当前盈亏预测。结构仍是满仓：持仓截图约 202 万 / 收益簿约 188 万，现金垫约 0.2%。纪律第8版用浮盈 QDII 换现金，目标约 12%。</div>
   </div>
   </div>
   </details>
 
   <div class="us-panel">
-    <div class="us-panel-title">🇺🇸 9/17美股收盘 · FOMC加息25bp落地 · 纳指平盘·道指新低</div>
+    <div class="us-panel-title">🇺🇸 美东 2026-10-22 收盘 · 科技/半导体重挫 · 道指点位暂缺</div>
     <div class="us-cards">
-      <div class="us-card"><div class="us-label">纳斯达克</div><div class="us-value">⏳</div><div class="us-change" style="color:#94a3b8">9/17 -0.01%平盘</div></div>
-      <div class="us-card"><div class="us-label">道琼斯</div><div class="us-value">⏳</div><div class="us-change red">📉 -1.21%新低</div></div>
-      <div class="us-card"><div class="us-label">美光 MU·8/17</div><div class="us-value">$1,011.75</div><div class="us-change" style="color:#f59e0b">⏳ 待更新</div></div>
-      <div class="us-card"><div class="us-label">费城半导体 SOX</div><div class="us-value">⏳</div><div class="us-change" style="color:#f59e0b">9/18更新中</div></div>
-      <div class="us-card"><div class="us-label">AMD·8/17</div><div class="us-value">$506.00</div><div class="us-change" style="color:#f59e0b">⏳ 待更新</div></div>
+      <div class="us-card"><div class="us-label">纳斯达克 · 10/22</div><div class="us-value">26,008.86</div><div class="us-change red">-2.60%</div></div>
+      <div class="us-card"><div class="us-label">道琼斯 · 10/22</div><div class="us-value">暂缺</div><div class="us-change" style="color:#94a3b8">收涨 · 点位未核对</div></div>
+      <div class="us-card"><div class="us-label">NVDA · 10/22</div><div class="us-value">$212.21</div><div class="us-change red">-4.40%</div></div>
+      <div class="us-card"><div class="us-label">美光 MU · 10/22</div><div class="us-value">$856.49</div><div class="us-change red">-6.26%</div></div>
+      <div class="us-card"><div class="us-label">费城半导体</div><div class="us-value">点位暂缺</div><div class="us-change red">约 -6.7%</div></div>
+      <div class="us-card"><div class="us-label">AMD · 10/22</div><div class="us-value">价暂缺</div><div class="us-change red">-8.1%</div></div>
     </div>
-    <div class="us-note">💡 9/17美股收盘（北京9/18晨）：FOMC加息25bp至3.75-4.00%落地——沃什主席首秀、12票全票通过，点阵图12/18位官员预计年内再加一次、无人预计降息（去年9月开启的宽松周期正式逆转）。美股高开低走：道指-1.21%创6月中旬以来收盘新低、标普-0.45%、纳指-0.01%平盘（科技韧性）。A股9/18对加息脱敏大涨（创业板+2.25%）——中美股市脱节，资金回流算力链（半导体+182亿）。017731 9/18净值（今晚出）兑现美股9/17加息日：纳指平盘→预计微幅波动，3.9940距4.00差0.006。⚠️加息周期确立（年内或再加一次）——QDII估值压力仍在，4.00上方执行赎回10万不改。</div>
+    <div class="us-note">来源：纳指/NVDA/AMD 涨跌见 CNBC 10/22 收盘综述；纳指点位、NVDA $212.21、MU $856.49 见同日公开行情页。SOX 约 -6.7% 为资讯包已核实转述，指数点位本轮未单列。道指仅确认收涨，点位暂缺。QDII 最新净值多停在 10/21（对应美股反弹日），尚未兑现这笔下跌。</div>
   </div>
 
   <!-- Feature 1: Economic Calendar -->
   <div class="ec-section" id="ecSection">
-    <div class="ec-title">📅 关键事件日历（9/20 更新）</div>
+    <div class="ec-title">📅 近端事项（2026-10-23）</div>
+    <div class="us-note" style="margin-bottom:8px">10/23：A 股交易日，午间指数已核对；QDII 净值多停在 10/21。10/27：纪律第8版第 2 笔减仓计划窗口（或顺延），仍待执行。8 月事件日历已清空。</div>
     <div class="ec-timeline" id="ecTimeline"></div>
   </div>
 
@@ -484,12 +510,12 @@
   <!-- QDII NAV Lag Board -->
   <div class="table-card" style="margin-bottom:14px">
   <h3>🕐 QDII 净值延迟看板</h3>
-  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-amber"></div><div class="lag-seg done-anim"></div><div class="lag-seg done-anim"></div></div><span class="lag-fill">9/17已更新</span><span class="lag-nav">3.9940</span></div><div class="lag-status amber">⏰4.00上方任一日赎10万（第6版）</div></div>
-  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">9/17已更新</span></div><div class="lag-status green">已更新·⏰9/21 15:00前全赎（第6版）</div></div>
-  
-  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">9/17已更新</span></div><div class="lag-status green">已更新·9/17 +1.6%回血</div></div>
-  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">9/17已更新</span></div><div class="lag-status green">已更新·9/17 +2.2%回血</div></div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">💡 QDII净值规则：美股T日收盘→T+1确认→T+2更新净值。权威收益日 <strong>2026-10-22</strong>（嘉实/建信当日按0）。持仓市值时点 <strong>2026-10-23 截图</strong>。⏰纪律第8版「保持弹性再平衡」：018036/006373/539002 分两笔减仓待执行；006503/017811 停加不斩；017731/018147 默认不动；现金目标约12%。每日约14:30 加减仓评估。</div>
+  <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-amber"></div><div class="lag-seg done-anim"></div><div class="lag-seg done-anim"></div></div><span class="lag-fill">净值日 10/21</span><span class="lag-nav">3.5154</span></div><div class="lag-status amber">+1.22% · 默认不动 · 未含美东10/22</div></div>
+  <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 10/21</span><span class="lag-nav">2.1610</span></div><div class="lag-status amber">+2.56% · 默认不动</div></div>
+  <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 10/21</span><span class="lag-nav">2.4192</span></div><div class="lag-status amber">+0.85% · 第8版待减仓</div></div>
+  <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 10/21</span><span class="lag-nav">2.1980</span></div><div class="lag-status amber">+2.61% · 第8版待减仓</div></div>
+  <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 10/21</span><span class="lag-nav">6.5148</span></div><div class="lag-status amber">+1.00% · 第8版待减仓</div></div>
+  <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">💡 QDII 净值规则：美股 T 日收盘 → 通常 T+1 确认、T+2 才反映到国内净值。权威收益日 <strong>2026-10-22</strong>（嘉实/建信当日按 0）。持仓市值时点 <strong>2026-10-23 截图</strong>。A 股基金净值已到 10/22：017811 <strong>2.5569（-4.54%）</strong>、006503 <strong>4.9639（-5.71%）</strong>、005661 <strong>4.0656（-3.09%）</strong>。上表 QDII 仍是 10/21，对应美股反弹日，<strong>尚未兑现美东 10/22 纳指/半导体下跌</strong>。⏰纪律第8版「保持弹性再平衡」：018036/006373/539002 分两笔减仓待执行；006503/017811 停加不斩；017731/018147 默认不动；现金目标约 12%。净值来源：eastmoney / 腾讯行情核对。</div>
   </div>
 
   <div class="charts-grid">
@@ -520,7 +546,7 @@
     · 📉 <strong>累计收益回落至 +342,571（收益率 22.26%）</strong>：相对 7/1 峰值 1,289,206 回撤约 94.7 万；10 月 MTD 约 <strong>-33.1 万</strong>（11 个交易日）。10/22 单日支付宝 -41,829，嘉实/建信 QDII 当日按 0 计（净值延迟）。<br>
     · 🧭 <strong>纪律第8版｜2026-10-23「保持弹性再平衡」</strong>：停加不斩财通 IC <code>006503</code> / 东方 AI <code>017811</code>；从浮盈 QDII（长城新能源车 <code>018036</code>、国富全球科技 <code>006373</code>、建信新兴 A <code>539002</code>）分两笔赎回换现金，目标现金约 12%；嘉实 <code>017731</code>、建信 C <code>018147</code> 默认不动。第 1 笔计划 10/23、第 2 笔计划 10/27（或顺延）——<strong>待执行</strong>。<br>
     · 🧱 <strong>结构</strong>：出海 QDII 约占 51%、A 股 IC+AI 约 32%、资源约 13%、医药约 4%、现金约 0.2%（过低）。持仓市值截图合计约 202 万；收益簿口径总资产约 188 万（本金+累计），差额为结构层/口径差，KPI 仍以收益簿为准。<br>
-    · 📡 <strong>市场雷达 / 科技资金流精确数字</strong>：本轮暂缺，标「待更新」；每日约 14:30 加减仓评估与盘前简报另行推送。
+    · 📡 <strong>市场</strong>：A 股指数更新到 2026-10-23 午间（上证 3614.12，-1.20%）；10/22 收盘上证约 -1.48%、创业板约 -4.37%。板块主力净额精确数字仍暂缺，科技资金流不再展示 9 月旧序列。每日约 14:30 加减仓评估。
 </div>
 </div>
 
@@ -571,63 +597,36 @@
 
   <!-- 💵 Cash Deployment Roadmap -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>🛡️ 防御重建路线图 <span class="news-meta">· ¥49,664 仅剩（2.1%）· 更新于 2026-09-20 · 9/21全赎018036待执行</span></h3>
-  <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;padding:8px;background:rgba(239,68,68,.06);border-radius:6px">📊 当前环境：9/21收盘累计776,730收益率50.46%（总资产¥231.6万）——年内首破50%。9/18-9/21两日+78,147：9/18 A股对加息脱敏大涨+49,069（006503 +3.02%/017811 +4.07%/005661 +1.24%）；9/21 +29,078（QDII兑现美股FOMC后反弹：017731净值4.1078站上4.00、018147 +3.51%；医药9/21暴涨：008619 +2.91%/019671 +5.20%/003231 +6.60%——医疗服务资金5日+40.6亿连续转正，医药行情启动）。资金面：半导体5日+266.0亿/10日+4.4亿转正、通信10日+125.0亿——右侧结构完好（9/21单日-49.8亿属涨后整固）；金属5日-40.6亿续弱。指数三连阳（上证3,949.91、HS300 4,539.57）。⚠️纪律第6版（9/21全赎018036）又未执行——六连败，市场每次都原谅拖延；017731"4.00上方赎10万"9/18已触发待执行（当前净值4.1078，距成本4.1413仅-0.8%）。⏰纪律第7版（承认行为模式）：017731回本即赎20万（净值≥4.15，比"4.00上方10万"更符合心理执行位）；018036并入月度现金再平衡——9/30（月末最后交易日）现金垫<5%则强制赎回，不再设中途窗口。9月中旬V型过山车：9/14-9/15两连跌-41,135（QDII兑现美股9/11大跌：017731净值9/14 -2.92%、018036 -3.78%）→9/16 +37,801暴力反弹（科创50 +4.14%、006503 +3.51%/017811 +4.94%）→9/17企稳+7,511（017731净值3.9940距4.00差0.006）。资金面质变：半导体9/18 +182.2亿暴力回流、5日+244.8亿转正、10日-8.2亿即将归零——右侧信号首次成立；通信10日+268.6亿最强、元件10日+153.1亿。FOMC落地（9/17沃什首秀加息25bp至3.75-4.00%全票、12/18年内再加一次、无人降息）：美股道指-1.21%新低但纳指-0.01%平盘；A股9/18对加息脱敏大涨（上证+0.94%/创业板+2.25%/科创+2.89%）。⏰纪律第6版（极简）：9/21（周一）15:00前018036全赎（60,849份≈16万，只此一件）；017731改永久条件"4.00上方任一日赎10万"（当前3.9940差0.006）。结构分化到极致：通信5日+255.2亿/元件+261.5亿双双大幅转正（PCB/CPO链资金回流是真的）vs 半导体10日-658.8亿仍最大流出——006503转正+0.2%、017811 -10.2%，同主题两基金命运分岔；005661过山车（9/9新高5.0345→9/11 -3.84%，工业金属5日-13.4亿转弱）；医药9/11全跌-2%级。美股本周回调：纳指连跌3天（9/10收26,253.34，CPI前谨慎）、SOX +0.37%微弹11,614.17，QDII 9/10净值兑现美股9/9大跌（018147 -2.25%）。⚠️017731第4次窗口又未执行（9/7净值3.9701≥3.95线、9/9冲3.9999）——"反弹到X就卖"机制连续失效。⏰纪律第5版（无条件制）：下周一9/14 15:00前018036全赎（60,849份，+38.5%垫）+017731赎回10万（约25,300份，按当日净值，不再设价格条件）——连续4次条件触发都没执行，说明条件式纪律对当前的你无效，改为固定日期硬执行。017811反弹3.30+减5万保留。</div>
+  <h3>🛡️ 防御重建路线图 <span class="news-meta">· 2026-10-23 · 纪律第8版 · 现金约 0.2% → 目标约 12%</span></h3>
+  <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;padding:8px;background:rgba(239,68,68,.06);border-radius:6px">当前环境（2026-10-23）：收益簿权威仍是累计 +342,571、收益率 22.26%、总资产约 188 万（10/22）。持仓截图约 202 万，现金约 0.4 万（0.2%）。9 月「收益率破 50% / 纪律第6–7版」描述已撤下。板块主力净额本轮暂缺，路线图只写纪律，不写过期资金流。</div>
   <div class="roadmap-tree">
-    <div class="rm-node"><div class="rm-dot green-d"></div><div class="rm-title">🟢 情景A：科技主线合流（概率 ~45%）· 9/18右侧确认</div>
-      <div class="rm-action">→ 信号：通信5日+255.2亿/元件+261.5亿双转正（连续多日回流非脉冲）+006503四连阳转正</div><br>
-      <div class="rm-amount">006503持有 · 017811反弹即减</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">GPT-6后资金给"AI算力硬件"不给"半导体设备"：同主题006503(+0.2%)与017811(-10.2%)命运分岔。006503继续持有为主力持仓；017811反弹至3.30+减5万（弱侧换现金）。若半导体跟随通信/元件转正（连续2日>50亿），017811减仓节奏放缓。</div>
+    <div class="rm-node"><div class="rm-dot green-d"></div><div class="rm-title">按第8版执行两笔减仓</div>
+      <div class="rm-action">018036 / 006373 / 539002 分两笔赎回换现金；第 1 笔计划 10/23，第 2 笔计划 10/27（或顺延）</div><br>
+      <div class="rm-amount">目标现金约 12% · 目前待执行</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">006503 与 017811 停加不斩。017731、018147 默认不动。评估时盯下一更 QDII 净值：10/21 净值尚未包含美东 10/22 科技下跌。</div>
     </div>
-    <div class="rm-node"><div class="rm-dot amber-d"></div><div class="rm-title">🟡 情景B：箱体磨底（概率 ~40%）· 涨后整固</div>
-      <div class="rm-action">→ 信号：HS300 4,510年内低位震荡、科创50四连阴后技术性反抽，量能不放大</div><br>
-      <div class="rm-amount">9/14双赎回后观望</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">纪律第5版（无条件制）：9/14 15:00前018036全赎（60,849份≈16万）+017731赎10万（约25,300份）——前4次窗口全部未执行，不再设价格条件。执行后现金垫2.2%→约9%，等方向明确再动。</div>
+    <div class="rm-node"><div class="rm-dot amber-d"></div><div class="rm-title">若两笔仍未执行</div>
+      <div class="rm-action">现金垫维持约 0.2%，科技波动直接打在净值上</div><br>
+      <div class="rm-amount">不另设价格触发条件</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">第8版不再使用「回到某净值就卖」的旧条件。未执行就保持记录为待执行，不回写成第6/7版。</div>
     </div>
-    <div class="rm-node"><div class="rm-dot red-d"></div><div class="rm-title">🔴 情景C：加息二次冲击（概率 ~15%）· 已被V型反转部分证伪</div>
-      <div class="rm-action">→ 信号：9月科创50自高点-8.5%、半导体10日-658.8亿、005661高点回撤-5.2%</div><br>
-      <div class="rm-amount">HS300跌破4,450：追加防御</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">9/14双赎回照常执行；若HS300跌破4,450（距当前-1.3%）：017811"反弹3.30+"条件作废改立即减5万，539002止盈3万（+69.9%垫分批落袋）。006503不动——PCB/CPO是本轮唯一有资金持续回流的链。</div>
+    <div class="rm-node"><div class="rm-dot red-d"></div><div class="rm-title">净值延迟</div>
+      <div class="rm-action">A 股基金净值到 10/22；QDII 多停在 10/21</div><br>
+      <div class="rm-amount">减仓窗口看下一更 QDII 净值</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">10/22 A 股已下跌（017811 -4.54%、006503 -5.71%、005661 -3.09%）。美东 10/22 纳指 -2.60% 会滞后进入 QDII。不在这里预测下一更净值的涨跌幅。</div>
     </div>
   </div>
   <div style="font-size:0.7rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律告警（第8版）：现金仅约0.2%（余额宝≈0.4万），目标抬至约12%（≈25万）。A股 IC+AI 深亏停加不斩；用浮盈 QDII（018036/006373/539002）分两笔换现金。017731/018147 默认不动。每日约14:30评估加减仓条件。</div>
   </div>
 
-  <!-- 💰 Capital Structure -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>💰 资金结构总览 <span class="news-meta">· 净值9/21(A股)/9/18(QDII·兑现美股FOMC后) · 9/22周二盘中刷新</span></h3>
-  <table><thead><tr><th>资产类别</th><th>方向</th><th>市值</th><th>占比</th></tr></thead><tbody>
-    <tr class="cat-row"><td colspan="4">🌍 QDII 海外基金（5 只）— 占比 47.6%</td></tr>
-    <tr><td data-label="基金">嘉实全球产业升级 QDII</td><td data-label="方向">全球科技</td><td data-label="市值" class="red">474,125</td><td data-label="占比">19.4%</td></tr>
-    <tr><td data-label="基金">建信新兴市场混合 QDII C</td><td data-label="方向">新兴市场/科技</td><td data-label="市值" class="green">362,442</td><td data-label="占比">14.8%</td></tr>
-    <tr><td data-label="基金">长城全球新能源车 QDII C</td><td data-label="方向">🚗 新能源车</td><td data-label="市值" class="green">159,148</td><td data-label="占比">6.5%</td></tr>
-    <tr><td data-label="基金">建信新兴市场优选混合 A</td><td data-label="方向">新兴市场/科技</td><td data-label="市值" class="green">101,881</td><td data-label="占比">4.2%</td></tr>
-    <tr><td data-label="基金">国富全球科技互联 QDII A</td><td data-label="方向">全球科技</td><td data-label="市值" class="green">67,766</td><td data-label="占比">2.8%</td></tr>
-    <tr class="subtotal"><td>QDII 小计</td><td data-label="方向">—</td><td data-label="市值">1,165,362</td><td data-label="占比">47.6%</td></tr>
-
-    <tr class="cat-row"><td colspan="4">🇨🇳 A股基金（3 只）— 占比 47.1%</td></tr>
-    <tr><td data-label="基金">东方人工智能主题 C</td><td data-label="方向">🔬 半导体设备/AI(-0.0%)</td><td data-label="市值">439,854</td><td data-label="占比">18.0%</td></tr>
-    <tr><td data-label="基金">财通集成电路产业 C</td><td data-label="方向">🔬 PCB/CPO链(+5.1%)</td><td data-label="市值" class="green">418,905</td><td data-label="占比">17.1%</td></tr>
-    <tr><td data-label="基金">嘉实资源精选 C</td><td data-label="方向">🏭 有色资源(-2.2%)</td><td data-label="市值" class="red">293,489</td><td data-label="占比">12.0%</td></tr>
-    <tr class="subtotal"><td>A股小计</td><td data-label="方向">—</td><td data-label="市值">1,152,248</td><td data-label="占比">47.1%</td></tr>
-
-    <tr class="cat-row"><td colspan="4">💊 医药基金（3 只）— 占比 3.2%</td></tr>
-    <tr><td data-label="基金">永赢医药健康股票 C</td><td data-label="方向">🏥 CXO/医药(+13.3%)</td><td data-label="市值" class="green">50,988</td><td data-label="占比">2.1%</td></tr>
-    <tr><td data-label="基金">广发港股创新药ETF联接 C</td><td data-label="方向">🏥 港股创新药(+23.5%)</td><td data-label="市值" class="green">24,698</td><td data-label="占比">1.0%</td></tr>
-    <tr><td data-label="基金">创金合信医疗保健股票 C</td><td data-label="方向">🏥 A股创新药(-1.8%)</td><td data-label="市值" class="red">4,912</td><td data-label="占比">0.2%</td></tr>
-    <tr class="subtotal"><td>医药小计</td><td data-label="方向">—</td><td data-label="市值">80,598</td><td data-label="占比">3.3%</td></tr>
-
-    <tr class="cat-row"><td colspan="4">💵 现金 — 占比 2.1%（余额宝灵活取用）</td></tr>
-    <tr><td data-label="基金">余额宝</td><td data-label="方向">💵 灵活取用</td><td data-label="市值">49,664</td><td data-label="占比">2.1%</td></tr>
-    <tr class="subtotal"><td>现金小计</td><td data-label="方向">—</td><td data-label="市值">49,664</td><td data-label="占比">2.1%</td></tr>
-
-    <tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>总计（Excel权威）</td><td data-label="方向">—</td><td data-label="市值" style="font-weight:700">2,315,933</td><td data-label="占比">100%</td></tr>
-  </tbody></table>
+  <h3>💰 资金结构 <span class="news-meta">· 2026-10-23 截图 · 9月总表已撤下</span></h3>
+  <p style="font-size:.78rem;color:var(--muted);line-height:1.6">9 月那张「总计 231.6 万、现金 2.1%、收益率破 50%」的分类表已从本页删除，避免和收益簿口径（本金 1,539,203 + 累计 342,571 ≈ 1,881,774）以及 10/23 三账户截图（约 202 万）叠成两套「当前」。结构以下面的主题暴露和盈亏表为准。</p>
   </div>
 
   <!-- 🎯 Theme Exposure -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>🎯 主题暴露 — 揭示真实集中度</h3>
+  <h3>🎯 主题暴露 <span class="news-meta">· 2026-10-23 三账户截图</span></h3>
   <table><thead><tr><th>主题</th><th>基金</th><th>市值</th><th>占比</th><th>说明</th></tr></thead><tbody>
     <tr style="background:rgba(59,130,246,.06)"><td data-label="主题"><strong>🌍 出海 QDII</strong></td><td data-label="基金">017731+018147+018036+539002+006373</td><td data-label="市值" class="green">1,038,355</td><td data-label="占比"><strong>51.4%</strong></td><td data-label="说明">盈利仓拟分两笔减仓换现金；017731/018147 弹性方案默认不动</td></tr>
     <tr style="background:rgba(239,68,68,.06)"><td data-label="主题"><strong>🔬 A股 IC + AI</strong></td><td data-label="基金">006503+017811</td><td data-label="市值" class="red">640,801</td><td data-label="占比"><strong>31.7%</strong></td><td data-label="说明">纪律第8版：停加不斩；等费半/芯片 ETF 企稳再议分批</td></tr>
@@ -639,7 +638,7 @@
 
   <!-- 📈 P&L Structure -->
   <div class="table-card" style="margin-bottom:14px">
-  <h3>📈 盈亏结构 — 安全垫厚度</h3>
+  <h3>📈 盈亏结构 <span class="news-meta">· 2026-10-23 截图 · 017731 净值 3.5154 为 10/21</span></h3>
   <table><thead><tr><th>基金</th><th>市值</th><th>成本</th><th>浮盈/浮亏</th><th>收益率</th><th>状态</th></tr></thead><tbody>
     <tr><td data-label="基金">539002 建信新兴市场 A</td><td data-label="市值">92,511</td><td data-label="成本">60,000</td><td data-label="盈亏" class="green">+32,511</td><td data-label="收益率" class="green">+54.2%</td><td data-label="状态">✅ 深垫·待减仓（第8版）</td></tr>
     <tr><td data-label="基金">006373 国富全球科技</td><td data-label="市值">64,228</td><td data-label="成本">41,566</td><td data-label="盈亏" class="green">+22,662</td><td data-label="收益率" class="green">+54.5%</td><td data-label="状态">✅ 深垫·待减仓（第8版）</td></tr>
@@ -649,7 +648,7 @@
     <tr><td data-label="基金">003231 创金合信医疗</td><td data-label="市值">16,580</td><td data-label="成本">17,000</td><td data-label="盈亏" class="red">-420</td><td data-label="收益率" class="red">-2.5%</td><td data-label="状态">维持·成本估</td></tr>
     <tr><td data-label="基金">005661 嘉实资源</td><td data-label="市值">257,455</td><td data-label="成本">300,000</td><td data-label="盈亏" class="red">-42,545</td><td data-label="收益率" class="red">-14.2%</td><td data-label="状态">🟡 压舱·弹性方案保留</td></tr>
     <tr><td data-label="基金">018147 建信新兴市场 C</td><td data-label="市值">327,992</td><td data-label="成本">350,000</td><td data-label="盈亏" class="red">-22,008</td><td data-label="收益率" class="red">-6.3%</td><td data-label="状态">默认不赎回</td></tr>
-    <tr><td data-label="基金">017731 嘉实全球</td><td data-label="市值">405,855</td><td data-label="成本">478,138</td><td data-label="盈亏" class="red">-72,283</td><td data-label="收益率" class="red">-15.1%</td><td data-label="状态">默认不赎回（净值约3.52）</td></tr>
+    <tr><td data-label="基金">017731 嘉实全球</td><td data-label="市值">405,855</td><td data-label="成本">478,138</td><td data-label="盈亏" class="red">-72,283</td><td data-label="收益率" class="red">-15.1%</td><td data-label="状态">默认不赎回 · 净值 3.5154（10/21，+1.22%）</td></tr>
     <tr><td data-label="基金">017811 东方AI</td><td data-label="市值">330,594</td><td data-label="成本">439,736</td><td data-label="盈亏" class="red">-109,142</td><td data-label="收益率" class="red">-24.8%</td><td data-label="状态">🛑 停加不斩</td></tr>
     <tr><td data-label="基金">006503 财通IC</td><td data-label="市值">310,207</td><td data-label="成本">428,637</td><td data-label="盈亏" class="red">-118,430</td><td data-label="收益率" class="red">-27.6%</td><td data-label="状态">🛑 停加不斩</td></tr>
     <tr class="subtotal"><td>基金合计（11只）</td><td data-label="市值">2,016,305</td><td data-label="成本">2,295,072</td><td data-label="盈亏" class="red">-278,767</td><td data-label="收益率" class="red">-12.1%</td><td data-label="状态">3盈8亏</td></tr>
@@ -662,324 +661,193 @@
     · 年初国内半导体为主（80%），逐步加仓QDII全球配置。<br>
     · 7/15清仓024418+020640，7/17减半017811+减1/3 017731，7/21新增016371(光通信)+006523(PCB)各¥5万，7/22新增005661(嘉实资源)¥10万。<br>
     · 7/27全额赎回018147(+8.8万)+5万加仓017811。8/4信澳016371全额清仓（实现-15,065）。<strong>8/13后从余额宝大举部署约35万</strong>：017811补10万、006503补16万、005661补10万，018147加至30万。<br>
-    · 当前 QDII 约47.6%，国内基金约47.1%，医药约3.2%，现金约2.1%（余额宝4.9万）。<br>
-    · ⚠️ 半导体+全球科技总暴露75.9%（A股36.3%+全球39.7%），现金仅2.1%，防御垫大幅下降。017811 +7.5% / 017731 +2.3% 双双转正，当前唯一微亏仅003231(-0.4%)。
+    · 2026-10-23 截图结构：出海 QDII 约 51.4%，A 股 IC+AI 约 31.7%，资源约 12.7%，医药约 3.9%，现金约 0.2%。<br>
+    · 收益簿口径总资产仍约 188 万（累计 +342,571 / 22.26%）。上表浮盈浮亏是截图结构层，不改写 KPI。
   </div>
 </div>
 
 <div id="tab-news" style="display:none;">
-  <div class="highlight" style="margin-bottom:10px">📰 数据时点提示：2026-10-23。资讯研报部分条目可能仍为9月缓存；本轮以操作日志与纪律第8版为准。精确新闻流：暂缺/待更新。</div>
-  <!-- 持仓穿透 -->
-  <div class="table-card"><h3>🔍 持仓穿透：基金重仓股一览 <span class="news-meta">· 2026Q1季报 (3/31)</span></h3>
-  <table><thead><tr><th>股票</th><th>代码</th><th>市场</th><th>持有基金</th><th>最高占比</th><th>相关动态</th></tr></thead><tbody>
-    <tr class="cross-hold"><td>美光科技</td><td>MU</td><td>🇺🇸</td><td>017731 + 006373</td><td class="green">7.69%</td><td class="red">🔥 长鑫IPO+存储紧缺</td></tr>
-    <tr class="cross-hold"><td>台积电</td><td>TSM</td><td>🇹🇼</td><td>017731 + 006373</td><td class="green">7.03%</td><td style="color:var(--muted)">—</td></tr>
-    <tr class="cross-hold"><td>英伟达</td><td>NVDA</td><td>🇺🇸</td><td>017731 + 006373</td><td class="green">5.86%</td><td class="red">回撤 $210→$204</td></tr>
-    <tr class="cross-hold"><td>中微公司</td><td>688012</td><td>🇨🇳</td><td>017811</td><td class="green">9.06%</td><td class="amber">⚠️ 股东权益变动</td></tr>
-    <tr class="cross-hold"><td>华海清科</td><td>688120</td><td>🇨🇳</td><td>017811</td><td class="green">9.22%</td><td style="color:var(--muted)">—</td></tr>
-    <tr class="cross-hold"><td>拓荆科技</td><td>688072</td><td>🇨🇳</td><td>017811</td><td class="green">8.90%</td><td class="red">📢 7/14复牌</td></tr>
-    <tr class="cross-hold"><td>北方华创</td><td>002371</td><td>🇨🇳</td><td>017811</td><td class="green">9.03%</td><td style="color:var(--muted)">—</td></tr>
-    <tr class="cross-hold"><td>富创精密</td><td>688409</td><td>🇨🇳</td><td>017811</td><td class="green">9.34%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>博通</td><td>AVGO</td><td>🇺🇸</td><td>017731</td><td>5.37%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>拉姆研究</td><td>LRCX</td><td>🇺🇸</td><td>006373</td><td>7.02%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>寒武纪</td><td>688256</td><td>🇨🇳</td><td>017731</td><td>3.66%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>阿斯麦</td><td>ASML</td><td>🇳🇱</td><td>017731</td><td>3.70%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>AMD</td><td>AMD</td><td>🇺🇸</td><td>017731</td><td>3.33%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>谷歌</td><td>GOOG</td><td>🇺🇸</td><td>006373</td><td>6.49%</td><td style="color:var(--muted)">—</td></tr>
-    <tr><td>英特尔</td><td>INTC</td><td>🇺🇸</td><td>006373</td><td>3.16%</td><td style="color:var(--muted)">—</td></tr>
-  </tbody></table></div>
-
-  <!-- 市场快讯 + 机构研报 双栏 -->
-  <div class="news-grid">
-    <div class="table-card"><h3>📰 市场快讯 <span class="news-meta">· 8/1 晨（Tushare新浪）</span></h3>
-    <div class="news-item"><span class="news-time">8/7</span><span class="news-title" style="color:var(--green)">🔥 8/7收盘：科创50+1.02%连4阳，组合+21,863。017811东方AI接近回本-0.6%，新建仓006503财通IC(+209%排名2)，018147建信C分批回补15万</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--green)">🔥 日本"硅岛"强震后续：索尼/台积电/东京电子九州工厂持续停产，设备校准需时，最早下周复产——存储/CMOS供给端收缩利好</span><span class="news-src">央视</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--green)">💾 长鑫存储LPDDR6接近研发验证尾声（量产前关键一步）；长鑫科技市值破4万亿稳居A股第一</span><span class="news-src">行业</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--green)">🇰🇷 韩国7月出口飙升至历史第二高：半导体出口同比暴增近180%，存储需求旺盛</span><span class="news-src">海关</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--green)">🚀 科技股反攻基金回血：7/31多只科技ETF单日涨超9%，基金经理称调整或接近尾声</span><span class="news-src">基金报</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--amber)">🏛️ 美联储主席沃什考虑减少议息会议频次；理事穆萨莱姆倾向加息+警告债券抛售潮威胁美联储信誉</span><span class="news-src">NYT</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--red)">⚠️ 隔夜要闻：特朗普下令对伊朗发动新一轮袭击，最早本周末开始——地缘风险再度升温</span><span class="news-src">综合</span></div>
-    <div class="news-item"><span class="news-time">8/15</span><span class="news-title" style="color:var(--red)">⚠️ 交易员押注美联储明年4月前加息概率超50%（沃什鹰派），7月非农意外强劲，QDII尾部风险升温</span><span class="news-src">财联社</span></div>
-    <div class="news-item"><span class="news-time">8/16</span><span class="news-title" style="color:var(--green)">🔥 中芯国际Q2营收/毛利率双超预期+3Q涨价指引，中金/光大/华泰/招商四券商连夜覆盖</span><span class="news-src">财报</span></div>
-    <div class="news-item"><span class="news-time">8/17</span><span class="news-title" style="color:var(--green)">🚀 海力士预警"最严重内存短缺年"，DRAM涨价周期重定价，A股存储链全线暴涨</span><span class="news-src">新浪</span></div>
-    <div class="news-item"><div class="news-title" style="color:var(--red)">🔻 8/19组合-122,909：科创50 -6.89%+半导体主力-364亿出逃，触发器A+B双确认，今日15:00前执行赎回预案</div><span class="news-src">实盘</span></div>      <div class="news-item"><span class="news-time">8/18</span><span class="news-title" style="color:var(--green)">💰 8/18组合+28,506：HS300 -0.32%但嘉实017731 +15,424兑现美股，累计873,062收益率56.72%续创新高</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">8/17</span><span class="news-title" style="color:var(--green)">🚀 8/17半导体主力+195.48亿创8月单日新高，科创50 +4.14%放量上攻，科技硬件全面回流</span><span class="news-src">收盘</span></div>
-    <div class="news-item"><span class="news-time">8/17</span><span class="news-title" style="color:var(--green)">💰 8/17组合+60,491：支付宝+54,193(东方AI+23,764/财通IC+16,979/嘉实资源+9,625)+嘉实017731+1,316。017811转正+5.4%，累计844,557收益率54.87%破50%</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--blue)">🤖 四大科技巨头AI支出承诺超2.4万亿美元；中信证券称北美AI资本开支仍强、市场主线未根本切换</span><span class="news-src">综合</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--blue)">💰 8月风格再平衡：7月红利占优（煤炭+14.29%居首）科技回调，机构称均衡配置应对风格轮动</span><span class="news-src">上证报</span></div>
-    <div class="news-item"><span class="news-time">8/1</span><span class="news-title" style="color:var(--green)">🏦 上海国投先导集成电路母基金拟投2只子基金+生物医药母基金拟投5只子基金</span><span class="news-src">公告</span></div>
-    <div class="news-item"><span class="news-time">7/31</span><span class="news-title" style="color:var(--green)">🚀 8/5收盘高开低走：科创50从+8.37%回落至+2.99%，半导体+94.97亿连续两日百亿级但午后撤至+95亿</span><span class="news-src">盘中</span></div>
-    <div class="news-item"><span class="news-time">7/30</span><span class="news-title" style="color:var(--red)">💰 7/30组合-63,134：支付宝-54,018(东方AI-7.0%/-32,161)+嘉实017731-5,035(7/29净值-2.36%)。科创50 -5.38%科技重挫</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/27</span><span class="news-title" style="color:var(--green)">💰 7/27组合-5,426：支付宝+5,237(东方AI+4.17%)+嘉实017731-10,663(7/24净值-2.10%)。018147全额赎回到账+5万加仓017811</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/27</span><span class="news-title" style="color:var(--green)">🚀 半导体+622.7亿史诗级回流，5日+634亿转正！主力+908亿机构大幅回流，4929家上涨</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/30</span><span class="news-title" style="color:var(--red)">🔻 科技重挫：科创50 -5.38%/创业板 -3.97%，东方AI单日-3.2万，组合-6.3万</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/27</span><span class="news-title" style="color:var(--green)">🔥 全面反弹：上证+1.15%/深指+2.69%/创业板+3.14%，元件+63.9亿/电池+29.7亿/通信设备+13.0亿跟随</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/24</span><span class="news-title" style="color:var(--red)">📉 连跌第5日：组合-4,969（跌幅收窄），017731单日-1.43%(-6,009)，上证-1.61%</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/23</span><span class="news-title" style="color:var(--red)">🔻 科创50暴跌-3.78%，半导体-198亿全市场流出第一，东方AI单日-1.35万</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/23</span><span class="news-title" style="color:var(--green)">🔌 资金切向周期：电网设备+53.9亿、电池+37.3亿、工业金属+29.2亿领涨</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/22</span><span class="news-title" style="color:var(--blue)">🇺🇸 美股收盘：NVDA+0.12%、AMD+1.03%、MU+1.94%——半导体温和</span><span class="news-src">收盘</span></div>
-    <div class="news-item"><span class="news-time">7/21</span><span class="news-title" style="color:var(--green)">🔥 史诗级假反弹！科创50-2.26%，半导体+10.6亿(上午+43亿午后缩水77%)，超大单-72亿机构抄底</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/21</span><span class="news-title" style="color:var(--green)">🏛️ 花旗上调中国股票至超配，沪深300目标5600点，恒指目标29600点</span><span class="news-src">彭博</span></div>
-    <div class="news-item"><span class="news-time">7/21</span><span class="news-title" style="color:var(--blue)">📊 国信荀玉根：牛市尚未结束。ETF上周净申购超2000亿，全A PE 21.8x距牛市高点仍有距离</span><span class="news-src">证券时报</span></div>
-    <div class="news-item"><span class="news-time">7/21</span><span class="news-title" style="color:var(--blue)">🌐 亚洲全线暴拉！韩国KOSPI从盘中-5%拉到+7%。Goldman预期政治局会议更宽松政策</span><span class="news-src">华尔街见闻</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--green)">🔥 创新药逆势突围：恒瑞+2.82%药明康德+3.91%，上半年创新药对外技术授权交易额创新高</span><span class="news-src">新华网</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--red)">🔻 半导体史诗级抛售：板块-88.6亿流出创新高。上证+0.85%靠银行电力白酒护盘，超7成个股下跌。主力-609亿</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--blue)">💾 60亿险资抢筹长鑫科技IPO。韩国券商：中东主权AI资金入场采购韩国内存，Kimi K3是利好不是冲击</span><span class="news-src">新浪/华尔街见闻</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--green)">💊 险资太保继续加仓科技消费新能源。摩根士丹利领跑华尔街AI债务交易半年揽23亿美元</span><span class="news-src">华尔街见闻/财联社</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--blue)">🤖 端侧AI芯片抢抓智能硬件终端。方正证券：AI算力高增倒逼散热材料升级，金刚石散热迎来黄金发展期</span><span class="news-src">财新/新浪</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--green)">🚗 比亚迪超越特斯拉成全球纯电销量第一。存款利率下行，理财子公司盯上硬科技IPO</span><span class="news-src">新浪/同花顺</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--red)">📉 组合操作：卖出020470长城半导体19,708份+017811东方AI 12,857份，买入008619永赢医药健康¥40,000</span><span class="news-src">组合</span></div>
-    <div class="news-item"><span class="news-time">7/20</span><span class="news-title" style="color:var(--amber)">⚠️ 韩国KOSPI盘中-5%→+7%极端波动。建信QDII韩国敞口16.7%，近1月-14.4%。存储周期见顶信号渐显</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/17</span><span class="news-title" style="color:var(--red)">🔻 A股今年最惨日：上证-3.05%深成-5.40%，主力净流出1,569亿。半导体-251亿持续创纪录</span><span class="news-src">实盘</span></div>
-    <div class="news-item"><span class="news-time">7/16</span><span class="news-title" style="color:var(--green)">🔥 TSMC Q2净利+77%创纪录！AI需求爆发CoWoS翻倍。SOX止跌反弹+2.54%</span><span class="news-src">路透</span></div>
-    </div>
-
-    <div class="table-card"><h3>📊 机构研报精选 <span class="news-meta">· 8/18 · Tushare+财联社</span></h3>
-    <div class="report-item"><span class="report-tag tag-semi">🔥 存储</span><a class="news-title" target="_blank">海力士预警"最严重内存短缺年"，长鑫科技受益——DRAM价格持续环比上涨，存储周期在AI需求驱动下正经历重新定价（8/17 A股半导体暴动的直接催化）</a><span class="news-src">08-17 · 华安/新浪</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">中芯Q2</span><a class="news-title" target="_blank">中芯国际2Q26业绩超预期四家券商齐覆盖：中金"盈利能力持续释放"/光大"3Q盈利指引超预期，AI配套芯片需求强劲"/华泰"AI配套拉动，3Q涨价效应持续释放"/招商"业绩及毛利率指引大超预期"</a><span class="news-src">08-16~17 · 中金/光大/华泰/招商</span></div>
-    <div class="report-item"><span class="report-tag tag-tech">设备</span><a class="news-title" target="_blank">微导纳米首次覆盖（国泰海通）：半导体薄膜沉积设备加速放量，平台化布局打开成长空间；中微公司获高盛覆盖：先进制程SPE扩张，2Q26营收+35% YoY</a><span class="news-src">08-18/08-04 · 国泰海通/高盛</span></div>
-    <div class="report-item"><span class="report-tag tag-tech">策略</span><a class="news-title" target="_blank">十大券商策略：维持对科创50为代表的科技主线的战略性看好；华金证券"八月震荡筑底，科技成长仍是主线"——8/17科创50 +4.14%放量大涨验证</a><span class="news-src">08-17 · 财联社</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">风格</span><a class="news-title" target="_blank">券商8月策略密集披露：从"赛道集中"转向"行业均衡"——经历7月剧烈波动后，机构转向注重基本面与持仓分散，关注低位+盈利修复方向</a><span class="news-src">08-17 · 证券时报</span></div>
-    <div class="report-item"><span class="report-tag" style="background:rgba(239,68,68,.15);color:#ef4444">⚠️宏观</span><a class="news-title" target="_blank">交易员加大押注：沃什领导下的美联储可能先加息后降息！利率掉期显示明年4月前加息概率超50%——QDII最大尾部风险，7月非农意外强劲已触发8/7晚存储股跳水</a><span class="news-src">08-15 · 财联社</span></div>
-    <div class="report-item"><span class="report-tag tag-tech">光通信</span><a class="news-title" target="_blank">中际旭创（野村东方国际）：龙头地位稳固，多技术路线护航长期增长；国盛证券通信团队："恐慌宣泄，否极泰来"</a><span class="news-src">08-03 · 野村/国盛</span></div>
-    <div class="report-item"><span class="report-tag tag-tech">有色</span><a class="news-title" target="_blank">华锡有色2026半年报点评（国联民生）：锡价上行带动业绩增长，乘政策东风成长可期——005661嘉实资源有色敞口受益，工业金属10日资金流转正</a><span class="news-src">08-18 · 国联民生</span></div>
-    <div class="report-item"><span class="report-tag tag-semi">AI</span><a class="news-title" target="_blank">鼎阳科技2Q26业绩（中金）：业绩高速增长，积极布局AI领域潜力广；锦华新材（华源）：羟胺水溶液乘AI半导体东风蓄势成长</a><span class="news-src">08-18 · 中金/华源</span></div>
-    <div class="report-item"><span class="report-tag tag-tech">锂电</span><a class="news-title" target="_blank">蔚蓝锂芯（国金）：全极耳电池放量，盈利结构显著改善——018036长城新能源车持仓方向中报景气验证</a><span class="news-src">08-18 · 国金证券</span></div>
+  <div class="asof-bar">
+    <div><strong>资讯更新 2026-10-23 12:00</strong> · Asia/Shanghai · 覆盖约 10/07–10/23</div>
+    <div class="asof-sub">7–9 月「最新」快讯和研报已从本页移除。条目来自已核实内容包；⚠️ 为公开摘要，不另补结论。</div>
   </div>
 
-  <!-- 公告 + 分析 -->
-  <div class="news-grid">
-  <div class="table-card"><h3>📋 持仓股公告速递 <span class="news-meta">· 8/18 · Tushare anns_d</span></h3>
-    <div class="ann-item"><span class="ann-stock">中芯国际</span><span class="news-meta">8/16</span><span class="news-title" style="color:var(--green)">🔥 2Q26业绩发布：营收/毛利率双超预期，3Q涨价指引——4家券商8/16-17齐发覆盖（017811/006503重仓方向）</span></div>
-    <div class="ann-item"><span class="ann-stock">SK海力士</span><span class="news-meta">8/17</span><span class="news-title" style="color:var(--green)">🔥 预警"最严重内存短缺年"——存储链全线暴涨，A股DRAM/NAND概念集体上攻</span></div>
-    <div class="ann-item"><span class="ann-stock">美光MU</span><span class="news-meta">8/17</span><span class="news-title" style="color:var(--green)">🔥 收盘$1,011.75（+4.13%）历史性破千，8月累计反弹超20%（017731/539002/006373重仓）</span></div>
-    <div class="ann-item"><span class="ann-stock">芯片ETF</span><span class="news-meta">8/17</span><span class="news-title" style="color:var(--green)">华宝科创芯片ETF(589190)飙涨5%，CPO概念股集体上攻，半导体主力+195.48亿</span></div>
-    <div class="ann-item"><span class="ann-stock">紫光国微</span><span class="news-meta">8/18</span><span class="news-title" style="color:var(--green)">🟢 华泰证券：新品、新市场拓展顺利（买入）——017811间接持仓方向</span></div>
-    <div class="ann-item"><span class="ann-stock">华锡有色</span><span class="news-meta">8/18</span><span class="news-title" style="color:var(--green)">🟢 H1业绩亮眼+锡价上行（国盛/国联民生双覆盖）——005661嘉实资源有色敞口</span></div>
-    <div class="ann-item"><span class="ann-stock">东方AI</span><span class="news-meta">8/17</span><span class="news-title" style="color:var(--green)">017811净值3.5837（+5.41%）——重仓北方华创/中微/中芯设备链，Q2设备链业绩密集超预期</span></div>
-    <div class="ann-item"><span class="ann-stock">财通IC</span><span class="news-meta">8/17</span><span class="news-title" style="color:var(--green)">006503净值7.6188（+4.05%）——纯半导体持仓直接受益存储+代工双景气</span></div>
-    <div class="ann-item"><span class="ann-stock">⚠️美联储</span><span class="news-meta">8/15</span><span class="news-title" style="color:var(--amber)">🟡 利率掉期押注明年4月前加息概率>50%（沃什鹰派）——QDII净值最大尾部风险</span></div>
-    </div>
+  <div class="table-card">
+    <h3>持仓净值快照 <span class="news-meta">· eastmoney / 腾讯行情 · 2026-10-23 核对</span></h3>
+    <table class="nav-mini"><thead><tr><th style="text-align:left">代码</th><th style="text-align:left">基金</th><th>净值日</th><th>单位净值</th><th>日涨跌</th></tr></thead><tbody>
+      <tr><td>017811</td><td style="text-align:left">东方人工智能主题 C</td><td>10/22</td><td>2.5569</td><td class="red">-4.54%</td></tr>
+      <tr><td>006503</td><td style="text-align:left">财通集成电路产业 C</td><td>10/22</td><td>4.9639</td><td class="red">-5.71%</td></tr>
+      <tr><td>005661</td><td style="text-align:left">嘉实资源精选 C</td><td>10/22</td><td>4.0656</td><td class="red">-3.09%</td></tr>
+      <tr><td>008619</td><td style="text-align:left">永赢医药健康 C</td><td>10/22</td><td>1.1345</td><td class="red">-3.46%</td></tr>
+      <tr><td>019671</td><td style="text-align:left">广发港股创新药联接 C</td><td>10/22</td><td>1.2468</td><td class="red">-5.97%</td></tr>
+      <tr><td>017731</td><td style="text-align:left">嘉实全球产业升级 C</td><td>10/21</td><td>3.5154</td><td class="green">+1.22%</td></tr>
+      <tr><td>018147</td><td style="text-align:left">建信新兴市场混合 C</td><td>10/21</td><td>2.1610</td><td class="green">+2.56%</td></tr>
+      <tr><td>539002</td><td style="text-align:left">建信新兴市场混合 A</td><td>10/21</td><td>2.1980</td><td class="green">+2.61%</td></tr>
+      <tr><td>018036</td><td style="text-align:left">长城全球新能源车 C</td><td>10/21</td><td>2.4192</td><td class="green">+0.85%</td></tr>
+      <tr><td>006373</td><td style="text-align:left">国富全球科技互联 A</td><td>10/21</td><td>6.5148</td><td class="green">+1.00%</td></tr>
+    </tbody></table>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:8px">A 股基金净值到 10/22。QDII 多停在 10/21，对应美股反弹日，尚未兑现美东 10/22 纳指约 -2.6%、费城半导体约 -6.7%。003231 本轮未单列净值。</p>
+  </div>
 
-    <div class="table-card"><h3>💡 综合分析 <span class="news-meta">· 9/21 收盘 · 全量 · 9/22更新</span></h3>
-    <div style="font-size:0.82rem;line-height:1.8">
-      <strong style="color:var(--amber)">🟡 FOMC加息利空出尽：半导体+182.2亿三周期全正（5日+244.8亿/10日+152亿），右侧信号首次成立</strong><br>
-      9/18收盘：上证3,911.87（+0.94%）、创业板+2.25%、科创50 +2.89%——A股对沃什加息脱敏大涨。资金面质变：半导体从9/11的10日-658.8亿大幅逆转为+152.1亿（9/18单日+182.2亿），通信10日+300.4亿全市场最强。结构从"分裂"变"合流"：017811（设备）与006503（PCB/CPO）同步修复（9/16-9/18 017811 +4.94%/+0.47%/+4.07%）。FOMC：加息25bp至3.75-4.00%（沃什首秀、全票、12/18年内再加、无人降息）——美股道指-1.21%新低但纳指平盘。<br><br>
-      <strong style="color:var(--blue)">🔵 轮动结论：006503与017811同主题命运分岔是本轮最重要信号</strong><br>
-      006503四连阳转正+0.2%（9/11逆势+1.79%）vs 017811四连阴-10.2%——资金给链不给板块。005661过山车（9/9净值5.0345历史新高→9/11 -3.84%，工业金属5日-13.4亿转弱）；医药9/11全跌-2%级（垫收窄）；A股半导体32.9%+全球科技QDII 41.7%的组合暴露仍在高位。<br><br>
-      <strong style="color:var(--green)">🟢 持仓影响：收益率首破50%——017811回本(+130/-0.03%)、017731距回本0.8%（净值4.1078站上4.00）</strong>：017811 +130回本（9/16-9/18三连阳+9.4%收复全部失地）；006503 +5.1%（7.3421新高，半导体5日+266亿/10日+4.4亿转正）；017731净值4.1078站上4.00（距成本4.1413仅-0.8%——"4.00上方"永久条件9/18已触发）；医药三只9/21暴涨（008619 +2.91%/019671 +5.20%/003231 +6.60%）；005661 -2.2%企稳。9月MTD +50,555。⏰纪律第7版（承认行为模式）：017731回本(净值≥4.15)即赎20万；018036并入月度现金再平衡——9/30现金垫<5%强制赎回，不再设中途窗口。<br><br>
-      <strong style="color:var(--amber)">🟡 QDII：FOMC加息落地后科技反弹——017731净值4.1078站上4.00</strong><br>
-      FOMC 9/17加息25bp（沃什首秀、全票、12/18年内再加、无人降息）：道指-1.21%新低但纳指-0.01%平盘；QDII净值9/18兑现反弹：017731 +2.85%至4.1078（站上4.00，距成本4.1413仅-0.8%）、018147 +3.51%/539002 +3.54%/006373 +1.85%。9/21嘉实+13,138/建信+12,294兑现。⚠️加息周期确立（年内或再加一次）——017731回本即赎，别恋战。<br><br>
-      <strong style="color:var(--red)">⚪ 操作：纪律第7版（承认行为模式）——回本即赎+月末再平衡</strong><br>
-      六连败的教训：价格条件（1-4版）、无条件日期（5版）、极简单一动作（6版）都没能执行——但市场每次都奖励了持有（017731从首次窗口4.0333到现在4.1078不降反升）。第7版顺势而为：①017731回本即赎20万（净值≥4.15，比"4.00上方10万"更贴心理执行位，当前-0.8%一步之遥）；②018036并入月度现金再平衡——9/30（月末最后交易日）现金垫<5%强制赎回16万，永不再设中途窗口；③017811已回本，3.50+减5万条件保留；④006503不动（通信10日+125亿主线）；医药三只持有（行情启动）；⑤005661 -2.2%观察。
-    </div>
+  <div class="table-card news-section">
+    <h3>要闻速览 <span class="news-meta">· 10 条 · 近一周优先</span></h3>
+    <div class="brief-list">
+      <article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-22</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">Meta上调AI资本开支引爆融资担忧，纳指跌2.6%、费城半导体跌约6.7%</div><p class="brief-sum">Meta Q3业绩超预期，但上调2026年capex指引至1350–1450亿美元，并披露未来支出承诺约8250亿美元；纳指创6月以来最大单日跌幅，MU/AMD/设备与光通信链普跌。布油受中东扰动冲高，10年期美债收益率跌破5%。</p><div class="brief-meta"><span class="pill">华尔街见闻/东方财富</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006373</span><span class="pill pill-fund">018036</span><span class="pill pill-fund">018147</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-21</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">美股科技回流：纳指+1.05%，费城半导体约+2%，存储与光通信走强</div><p class="brief-sum">美东10/21三大指数上涨，NVDA+2.54%、AMD+3.36%、MU+1.96%；为10/22暴跌前的反弹日，对应国内QDII 10/21净值偏强。</p><div class="brief-meta"><span class="pill">财联社/东方财富</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006373</span><span class="pill pill-fund">018147</span><span class="pill pill-fund">539002</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-21</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">半导体大跌中ETF逆势净申购约177亿份（近一月）</div><p class="brief-sum">截至10/20，中证全指半导体产品与设备指数近一月跌超17%；半导体相关ETF规模缩水近400亿，但净申购份额约177亿份。国泰基金等提示设备方向短期宜审慎、关注右侧。</p><div class="brief-meta"><span class="pill">上海证券报/21经济网</span><span class="pill pill-fund">006503</span><span class="pill pill-fund">017811</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-22</span><span class="pill pill-warn">部分待验证</span></div><div class="brief-title">A股科技继续杀估值：创业板约-4.4%；价格下跌与ETF净流入报道并存</div><p class="brief-sum">公开晨会：10/22上证约-1.48%、创业板约-4.37%；光通信/元件/先进封装等承压。财联社称科创50ETF易方达月内净流入超35亿、创业板算力ETF连续多日净申购（营销口径数字待交叉）。</p><div class="brief-meta"><span class="pill">智通财经晨会/财联社ETF稿</span><span class="pill pill-fund">006503</span><span class="pill pill-fund">017811</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-16</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">台积电Q3与指引偏强：AI需求仍远高于供给</div><p class="brief-sum">媒体转述台积电给出偏强四季度销售额/毛利率指引，并展望2026年美元营收增长约44%；管理层强调AI需求持续强劲。精确数字以公司IR公告为准。</p><div class="brief-meta"><span class="pill">新浪财经/界面</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006373</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-21</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">高盛续建议正面配置商品，铜价均值预期较现货约+7%</div><p class="brief-sum">高盛称BCOM商品篮子YTD回报约36%，维持战术/结构商品长仓；基本情景布油年底或回落，结构性看好铜、金等。目标价属机构观点。</p><div class="brief-meta"><span class="pill">新浪财经转引高盛</span><span class="pill pill-fund">005661</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-01</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">10月大宗商品分化：油强、铜弱、金高位震荡</div><p class="brief-sum">公开研究综述：中东地缘推升原油风险溢价；工业铜受需求修复偏弱压制；黄金在避险购金与强美元超买间拉锯。方向性描述，盘中价位请以行情为准。</p><div class="brief-meta"><span class="pill">真灼财经/新浪有色解读</span><span class="pill pill-fund">005661</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-13</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">新能源车：9月销量182.3万辆；出口退税率2027年4月起降至9%</div><p class="brief-sum">中汽协：9月新能源车销量同比+13.6%，新车占比约61.6%。财政部/税务总局自2027-04-01起将新能源车增值税出口退税率由13%调至9%。</p><div class="brief-meta"><span class="pill">财联社汽车早报</span><span class="pill pill-fund">018036</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-16</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">特斯拉Roadster热度：约14只QDII重仓特斯拉（截至10/15）</div><p class="brief-sum">公募排排网统计截至10/15约14只QDII重仓特斯拉；全球新能源车主题QDII为主要敞口载体。发布会属情绪催化，盈利仍看量产与需求。</p><div class="brief-meta"><span class="pill">公募排排网</span><span class="pill pill-fund">018036</span></div></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-15</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">新兴市场扰动背景：韩股剧烈波动、印度外资流出压力</div><p class="brief-sum">公开报道称韩股10月中旬出现极端波动并讨论应急预案；印度外资年内大幅净卖出、资金向北亚AI链迁移讨论增多。对新兴市场混合QDII构成区域波动提示。</p><div class="brief-meta"><span class="pill">华尔街见闻等</span><span class="pill pill-fund">018147</span><span class="pill pill-fund">539002</span></div></article>
     </div>
   </div>
-</div>
+
+  <div class="table-card news-section">
+    <h3>机构研报精选 <span class="news-meta">· 8 条 · 日期 · 机构 · 结论 · Semi / Tech / Macro</span></h3>
+    <div class="brief-list">
+      <article class="brief-card"><div class="brief-top"><span class="report-tag tag-semi">Semi</span><span class="brief-date">2026-10-19</span><span class="pill">国海证券（同花顺iNews转载）</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">国海证券电子周报：关注强业绩兑现的SoC、PCB、被动件</div><p class="brief-sum">结论：经历极致上涨后波动加大；短期关注三季报强兑现的端侧SoC/PCB/被动件；中期仍看好制造端设备及零部件。</p><div class="brief-meta"><span class="pill pill-fund">006503</span><span class="pill pill-fund">017811</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-tech">Tech</span><span class="brief-date">2026-10-21</span><span class="pill">中银证券（同花顺iNews转载）</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">中银证券TMT周报：开源放大需求，制造端业绩验证景气</div><p class="brief-sum">结论：Meta开源模型拉动先进芯片需求；ASML/台积电财报验证制造端景气，继续看好半导体设备、零部件与材料。</p><div class="brief-meta"><span class="pill pill-fund">017811</span><span class="pill pill-fund">006503</span><span class="pill pill-fund">017731</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-semi">Semi</span><span class="brief-date">2026-10-23</span><span class="pill">中信证券（智通财经晨会转引）</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">中信证券电子：零部件订单上修，设备保持高景气</div><p class="brief-sum">结论：湾芯展观察：设备订单向上游零部件传导；海外核心件交期拉长推动国产备胎转正，持续看好国产半导体零部件及设备。</p><div class="brief-meta"><span class="pill pill-fund">017811</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-rpt-macro">Macro</span><span class="brief-date">2026-10-20</span><span class="pill">西南证券研究院PDF</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">西南证券有色Q4策略：金属寻底，首推金铜和战略金属</div><p class="brief-sum">结论：Q4四条主线：金银铜（分母端）、铝锡（分子端）、稀土等战略矿产、能源金属供给侧扰动；附风险提示。</p><div class="brief-meta"><span class="pill pill-fund">005661</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-rpt-macro">Macro</span><span class="brief-date">2026-10-21</span><span class="pill">高盛（新浪财经转引）</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">高盛：续建议正面配置商品，铜价料再升约7%</div><p class="brief-sum">结论：战术与结构维持商品正面配置；能源留意地缘溢价回落，铜金等供给约束品种更偏结构性看好。</p><div class="brief-meta"><span class="pill pill-fund">005661</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-rpt-macro">Macro</span><span class="brief-date">2026-10-12</span><span class="pill">新浪财经策略合集</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">十大券商一周策略：把握四季度窗口，硬科技仍是中期方向</div><p class="brief-sum">结论：光大等看修复窗口与政策锚；方正提示科技超跌反弹与有色化工逢低。合集转述，非单一机构全文。</p><div class="brief-meta"><span class="pill pill-fund">006503</span><span class="pill pill-fund">017811</span><span class="pill pill-fund">005661</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-rpt-macro">Macro</span><span class="brief-date">2026-10-18</span><span class="pill">金鹰基金（新浪财经）</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">金鹰周评：缩量震荡延续，均衡配置静待破局</div><p class="brief-sum">结论：科技短线消化估值与AI融资分歧，选股更重订单兑现；价值端关注红利与医药等。</p><div class="brief-meta"><span class="pill pill-fund">017811</span><span class="pill pill-fund">006503</span><span class="pill pill-fund">008619</span></div></article><article class="brief-card"><div class="brief-top"><span class="report-tag tag-rpt-macro">Macro</span><span class="brief-date">2026-10-23</span><span class="pill">国泰海通（智通财经晨会转引）</span><span class="pill pill-warn">公开摘要</span></div><div class="brief-title">国泰海通策略：算力稀缺持续验证，能源价格走强、金属回落</div><p class="brief-sum">结论：中观景气：AI硬件仍强但Token调用等需观察；地缘支撑油价，金属价格回落——与油强金属弱一致。</p><div class="brief-meta"><span class="pill pill-fund">005661</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006503</span></div></article>
+    </div>
+  </div>
+
+  <div class="table-card news-section">
+    <h3>公告与事件 <span class="news-meta">· 5 条 · 与持仓主题相关</span></h3>
+    <div class="brief-list">
+      <article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-22</span><span class="pill pill-ok">已核实</span><span class="pill">华尔街见闻</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006373</span><span class="pill pill-fund">017811</span></div><div class="brief-title">Meta财报/指引与Lam Research供应限制冲击AI与设备链</div><p class="brief-sum">海外核心持仓方向重大事件日：AI融资担忧+设备指引/供应瓶颈，美股半导体与光通信重挫，将滞后传导至QDII净值。</p></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-16</span><span class="pill pill-ok">已核实</span><span class="pill">新浪财经/界面</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006373</span></div><div class="brief-title">台积电Q3业绩发布（媒体转述偏强指引）</div><p class="brief-sum">代工龙头财报验证AI需求；精确营收/指引数字以台积电IR原文为准。</p></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-12</span><span class="pill pill-ok">已核实</span><span class="pill">财联社/财政部税务总局公告转引</span><span class="pill pill-fund">018036</span></div><div class="brief-title">两部门：新能源车出口退税率2027年4月起由13%调至9%</div><p class="brief-sum">政策预留较长缓冲期；乘联分会等解读为预期内结构性优化。</p></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-07</span><span class="pill pill-ok">已核实</span><span class="pill">财联社汽车早报</span><span class="pill pill-fund">018036</span></div><div class="brief-title">比亚迪9月新能源销量46.36万辆，出口18.07万辆</div><p class="brief-sum">产销快报：9月产量46.39万、销量46.36万；本年累计销量313.16万辆，同比-3.94%。</p></article><article class="brief-card"><div class="brief-top"><span class="brief-date">2026-10-23</span><span class="pill pill-ok">已核实</span><span class="pill">eastmoney净值接口核对</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">018147</span><span class="pill pill-fund">018036</span><span class="pill pill-fund">006373</span><span class="pill pill-fund">539002</span></div><div class="brief-title">净值延迟提示：QDII尚未兑现美东10/22纳指/SOX暴跌</div><p class="brief-sum">行情接口显示A股基金净值至10/22，QDII多至10/21（对应美股反弹日）。评估减仓窗口请盯下一更QDII净值，勿仅看A股当日盈亏。</p></article>
+    </div>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:8px">本轮未检索到 017811 / 006503 / 005661 / 017731 需单独披露的重大临时公告。国内基金若有新公告，以基金公司原文为准。</p>
+  </div>
+
+  <details class="collap">
+    <summary>纪律第8版怎么读这些信息 <span class="news-meta">非投资建议 · 只对照已写入口径</span><span class="chev">▶</span></summary>
+    <div class="collap-body" style="font-size:.8rem;line-height:1.65">
+      <p>停加不斩 006503 / 017811：多家券商仍维持设备与制造端叙事，但 10 月价格由估值和 AI 融资担忧主导。半导体 ETF「越跌越买」不等于主动仓位加仓。</p>
+      <p style="margin-top:6px">浮盈 QDII 换现金（018036 / 006373 / 539002）：10/21 净值仍偏强，美东 10/22 的下跌要等随后 1–2 个净值日。减仓评估看下一更净值。</p>
+      <p style="margin-top:6px">005661 作资源压舱：公开稿描述油强、铜弱、金高位震荡。10/22 该基金净值 -3.09%，短线不等于油价单边。</p>
+      <p style="margin-top:6px">017731 / 018147 默认不动：全球科技和新兴市场波动同步放大，按第8版承受，不解读成新开仓信号。</p>
+    </div>
+  </details>
+
+  <details class="collap">
+    <summary>持仓穿透 · 2026Q1 季报权重 <span class="news-meta">3/31 · 已与新闻流分开 · 个股 10 月涨跌不在此表</span><span class="chev">▶</span></summary>
+    <div class="collap-body">
+      <div class="table-card">
+        <table><thead><tr><th style="text-align:left">股票</th><th style="text-align:left">代码</th><th>市场</th><th style="text-align:left">持有基金</th><th>季报最高占比</th></tr></thead><tbody>
+          <tr><td>美光科技</td><td>MU</td><td>🇺🇸</td><td>017731 + 006373</td><td>7.69%</td></tr>
+          <tr><td>台积电</td><td>TSM</td><td>🇹🇼</td><td>017731 + 006373</td><td>7.03%</td></tr>
+          <tr><td>英伟达</td><td>NVDA</td><td>🇺🇸</td><td>017731 + 006373</td><td>5.86%</td></tr>
+          <tr><td>中微公司</td><td>688012</td><td>🇨🇳</td><td>017811</td><td>9.06%</td></tr>
+          <tr><td>华海清科</td><td>688120</td><td>🇨🇳</td><td>017811</td><td>9.22%</td></tr>
+          <tr><td>拓荆科技</td><td>688072</td><td>🇨🇳</td><td>017811</td><td>8.90%</td></tr>
+          <tr><td>北方华创</td><td>002371</td><td>🇨🇳</td><td>017811</td><td>9.03%</td></tr>
+          <tr><td>富创精密</td><td>688409</td><td>🇨🇳</td><td>017811</td><td>9.34%</td></tr>
+          <tr><td>博通</td><td>AVGO</td><td>🇺🇸</td><td>017731</td><td>5.37%</td></tr>
+          <tr><td>拉姆研究</td><td>LRCX</td><td>🇺🇸</td><td>006373</td><td>7.02%</td></tr>
+          <tr><td>寒武纪</td><td>688256</td><td>🇨🇳</td><td>017731</td><td>3.66%</td></tr>
+          <tr><td>阿斯麦</td><td>ASML</td><td>🇳🇱</td><td>017731</td><td>3.70%</td></tr>
+          <tr><td>AMD</td><td>AMD</td><td>🇺🇸</td><td>017731</td><td>3.33%</td></tr>
+          <tr><td>谷歌</td><td>GOOG</td><td>🇺🇸</td><td>006373</td><td>6.49%</td></tr>
+          <tr><td>英特尔</td><td>INTC</td><td>🇺🇸</td><td>006373</td><td>3.16%</td></tr>
+        </tbody></table>
+        <p style="font-size:.72rem;color:var(--muted);margin-top:8px">占比来自 2026Q1 季报，不是 10 月持仓。原先写在表内的 7 月复牌、8 月股价备注已删除。10/22 已核对的美股收盘见市场雷达：NVDA $212.21（-4.40%）、MU $856.49（-6.26%）；TSM / AVGO / LRCX 收盘价本轮暂缺。</p>
+      </div>
+    </div>
+  </details>
 </div>
 
 <div id="tab-semicon" style="display:none;">
-  <div class="highlight" style="margin-bottom:10px">📡 市场雷达：本轮精确资金流/监测数字暂缺，待后续交易日更新。</div>
-<div class="sc-card" style="padding:12px 14px">
-  <h2 style="margin-bottom:8px">📈 A股大盘速览 <span style="font-size:.7rem;color:var(--muted)">· 9/18 收盘</span></h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px">
-    <div style="text-align:center;background:rgba(239,68,68,.12);border-radius:6px;padding:8px 4px;border:1px solid rgba(239,68,68,.2)">
-      <div style="font-size:0.7rem;color:var(--muted)">上证指数</div>
-      <div style="font-size:1.05rem;font-weight:700" class="green">3,911.87</div>
-      <div style="font-size:.72rem" class="green">📈 +0.94%</div>
-    </div>
-    <div style="text-align:center;background:rgba(239,68,68,.12);border-radius:6px;padding:8px 4px;border:1px solid rgba(239,68,68,.2)">
-      <div style="font-size:0.7rem;color:var(--muted)">深证成指</div>
-      <div style="font-size:1.05rem;font-weight:700" class="green">13,640.87</div>
-      <div style="font-size:.72rem" class="green">📈 +1.72%</div>
-    </div>
-    <div style="text-align:center;background:rgba(239,68,68,.12);border-radius:6px;padding:8px 4px;border:1px solid rgba(239,68,68,.2)">
-      <div style="font-size:0.7rem;color:var(--muted)">创业板指</div>
-      <div style="font-size:1.05rem;font-weight:700" class="green">3,372.68</div>
-      <div style="font-size:.72rem" class="green">📈 +2.25%</div>
-    </div>
-    <div style="text-align:center;background:rgba(34,197,94,.18);border-radius:6px;padding:8px 4px;border:1px solid rgba(34,197,94,.35)">
-      <div style="font-size:0.7rem;color:var(--muted)">科创50</div>
-      <div style="font-size:1.05rem;font-weight:700" class="green">1,652.63</div>
-      <div style="font-size:.72rem" class="green">📈 +2.89%</div>
-    </div>
-    <div style="text-align:center;background:rgba(239,68,68,.12);border-radius:6px;padding:8px 4px;border:1px solid rgba(239,68,68,.2)">
-      <div style="font-size:0.7rem;color:var(--muted)">沪深300</div>
-      <div style="font-size:1.05rem;font-weight:700" class="green">4,507.39</div>
-      <div style="font-size:.72rem" class="green">📈 +1.06%（FOMC后脱敏）</div>
-    </div>
+  <div class="asof-bar">
+    <div><strong>市场雷达 2026-10-23 午间</strong> · 指数已更新 · 主力净额暂缺</div>
+    <div class="asof-sub">9/18 的亿级资金流、温度计 44 分和「右侧确认」已撤下，不再当作最新。</div>
   </div>
-  <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:0.7rem;color:var(--muted);padding:6px 4px 0;border-top:1px solid var(--border)">
-    <span>📊 两市成交 <strong style="color:var(--text)">~2.19万亿</strong></span>
-    <span>📈 涨 <strong style="color:var(--green)">4,535</strong> · 📉 跌 <strong style="color:var(--red)">636</strong> · 平 <strong style="color:var(--muted)">104</strong></span>
-    <span>💸 主力净流入 <strong style="color:var(--green)">+625.4亿</strong></span>
-    <span>🏠 北向 <strong style="color:var(--muted)">数据暂不可用</strong></span>
-  </div>
-  <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
-    <span style="font-size:0.7rem;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);color:#ef4444">超大单 +699.9亿</span>
-    <span style="font-size:0.7rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">大单 -74.6亿</span>
-    <span style="font-size:0.7rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">中单 -506.2亿</span>
-    <span style="font-size:0.7rem;padding:2px 8px;border-radius:3px;background:rgba(34,197,94,.1);color:#22c55e">小单 -119.2亿</span>
-    <span style="font-size:0.7rem;color:var(--muted);padding:2px 4px">| 🔥 机构回流·高开低走兑现盘</span>
-  </div>
-</div>
 
+  <div class="sc-card" style="padding:12px 14px">
+    <h2 style="margin-bottom:8px">A 股指数 <span style="font-size:.7rem;color:var(--muted)">· 10/23 午间约 11:59 · 东财延迟行情，与腾讯一致 · 尚未收盘</span></h2>
+    <div class="idx-grid">
+      <div class="idx-cell"><div class="k">上证指数</div><div class="v">3614.12</div><div class="c red">-1.20%</div></div>
+      <div class="idx-cell"><div class="k">深证成指</div><div class="v">11175.85</div><div class="c red">-1.60%</div></div>
+      <div class="idx-cell"><div class="k">创业板指</div><div class="v">2521.77</div><div class="c red">-2.14%</div></div>
+      <div class="idx-cell"><div class="k">科创50</div><div class="v">1265.77</div><div class="c red">-3.07%</div></div>
+      <div class="idx-cell"><div class="k">沪深300</div><div class="v">4014.60</div><div class="c red">-0.54%</div></div>
+    </div>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:8px">10/22 收盘（同花顺复盘 / 新华财经）：上证 3658.03（-1.48%），深成 11357.32（-2.96%），创业板 2576.90（-4.37%），科创50 1305.87（-2.78%），沪深300 4036.30（-1.84%）。涨跌家数 530 / 4923 / 36（同花顺）。两市成交额约 1.54 万亿见当日收盘播报。主力净流入本轮暂缺。</p>
+  </div>
 
-<!-- Thermometer -->
-<div class="sc-card">
-  <h2>📊 板块轮动雷达 <span style="font-size:.7rem;color:var(--muted)">· 截至9/18收盘 · 5日=9/12-18 · 10日=9/4-9/18</span></h2>
-  <div style="margin:8px 0;padding:8px 10px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.35);border-radius:8px;font-size:.8rem">
-    ⏰ <strong>纪律第6版（极简）——9/21（周一）15:00前只做一件事：018036全赎（60,849份≈16万）</strong>。前5次窗口（8/26、8/31、9/1、9/7-3.95触发、9/14无条件）全部未执行——条件式与日期式都失效，本版砍到只剩单一动作。017731撤销价格纪律，改为"4.00上方任一日赎10万"（永久有效，当前3.9940差0.006）。执行后现金垫2.1%→约8.8%。
-  </div>
-  <div class="radar-grid">
-    <div class="radar-group" style="border-left:3px solid #22c55e">
-      <div class="radar-group-title">⚡ 持仓方向 — 半导体9/18 +182.2亿暴力回流：右侧信号首次成立</div>
-      <table class="radar-table">
-        <thead><tr><th>板块</th><th>9/18(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
-        <tbody>
-          <tr><td>半导体</td><td class="green">+182.2</td><td class="green">+244.8</td><td class="green">+152.1</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">🔥 5日/10日双转正·右侧首次确认</span></td></tr>
-          <tr><td>通信设备</td><td class="green">+46.3</td><td class="green">+45.2</td><td class="green">+300.4</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">🔥 10日+300亿最强·CPO主线</span></td></tr>
-          <tr><td>元件</td><td class="red">-38.1</td><td class="red">-86.4</td><td class="green">+175.2</td><td><span class="radar-tag" style="background:rgba(245,158,11,.15);color:#f59e0b">⚠️ 5日回落·10日仍强</span></td></tr>
-          <tr><td>光学光电子</td><td class="green">+21.7</td><td class="green">+47.0</td><td class="green">+2.1</td><td><span class="radar-tag" style="background:rgba(148,163,184,.15);color:#94a3b8">➖ 10日归零修复</span></td></tr>
-          <tr><td>消费电子</td><td class="green">+19.0</td><td class="red">-20.1</td><td class="red">-59.6</td><td><span class="radar-tag" style="background:rgba(148,163,184,.15);color:#94a3b8">➖ 弱势</span></td></tr>
-        </tbody>
-      </table>
-      <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">FOMC加息落地（9/17沃什首秀+25bp）反而利空出尽：A股9/18脱敏大涨（创业板+2.25%/科创+2.89%），半导体单日+182.2亿、10日-659亿→+152亿完成大逆转。通信10日+300亿是全市场最强主线。持仓启示：006503/017811双击窗口——017811从-10.2%收窄至-3.1%。</div>
-    </div>
-    <div class="radar-group" style="border-left:3px solid #f59e0b">
-      <div class="radar-group-title">🏭 周期/防御 — 金属续弱，医疗服务5日转正</div>
-      <table class="radar-table">
-        <thead><tr><th>板块</th><th>9/18(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
-        <tbody>
-          <tr><td>医疗服务</td><td class="green">+11.2</td><td class="green">+44.3</td><td class="green">+30.3</td><td><span class="radar-tag" style="background:rgba(239,68,68,.15);color:#ef4444">✅ 5日/10日双转正</span></td></tr>
-          <tr><td>工业金属</td><td class="green">+16.4</td><td class="red">-39.2</td><td class="red">-75.6</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 10日-75.6亿·005661转亏</span></td></tr>
-          <tr><td>证券</td><td class="green">+11.2</td><td class="red">-25.4</td><td class="red">-92.9</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 三周期偏弱</span></td></tr>
-        </tbody>
-      </table>
-      <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">加息周期下金属/金融承压（005661从9/9高点5.0345回撤-8.1%转亏-2.3%）；医疗服务5日+44.3亿转正是防御端唯一亮点（008619 9/17大涨回+8.9%）。</div>
-    </div>
-    <div class="radar-group" style="border-left:3px solid #3b82f6">
-      <div class="radar-group-title">💻 软件/AI应用 — 依旧被抽血</div>
-      <table class="radar-table">
-        <thead><tr><th>板块</th><th>9/18(亿)</th><th>5日(亿)</th><th>10日(亿)</th><th>信号</th></tr></thead>
-        <tbody>
-          <tr><td>软件开发</td><td class="green">+5.9</td><td class="red">-15.1</td><td class="red">-54.1</td><td><span class="radar-tag" style="background:rgba(34,197,94,.15);color:#22c55e">⬇️ 10日-54.1亿</span></td></tr>
-        </tbody>
-      </table>
-      <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">资金依旧"给硬件不给软件"——组合无软件敞口的结构是对的。</div>
-    </div>
-  </div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:8px;padding:6px;background:rgba(34,197,94,.06);border-radius:6px">📊 <strong>轮动结论（9/18收盘）</strong>：FOMC加息利空出尽，A股9/18脱敏大涨——半导体单日+182.2亿、5日+244.8亿、10日+152亿三周期全正（右侧信号首次成立），通信10日+300亿全市场最强。结构从"分化"变"合流"：017811（设备）与006503（PCB/CPO）同步修复。操作：006503持有；017811反弹3.50+减5万（链内弱侧但已大幅收窄）；9/21执行018036全赎重建现金垫；017731等4.00上方赎10万。</div>
-  <div style="font-size:.7rem;color:var(--muted);padding:8px;background:rgba(148,163,184,.06);border-radius:6px;margin-top:8px;border:1px dashed var(--border)">
-    📝 <strong>概念板块资金流</strong>（创新药/AI算力/HBM/国产替代等）：数据源暂不可用，待修复后接入。<br>
-    ⚠️ 北向资金：港交所自2024年起停止公布日度陆股通明细，仅可参考交易活跃度，不再反映真实净流入。
-  </div>
-</div>
-
-<div class="sc-card">
-  <h2>💊 医药可投标的速查 <span style="font-size:.7rem;color:var(--muted)">· 资金流入加速时的备选方向</span></h2>
-  <div style="font-size:.75rem">
-    <table style="width:100%;font-size:.75rem">
-      <thead><tr style="color:var(--muted);font-size:0.7rem"><th style="text-align:left">子赛道</th><th>ETF/基金</th><th>代码</th><th>类型</th></tr></thead>
+  <div class="sc-card">
+    <h2>10/22 行业指数涨跌 <span style="font-size:.7rem;color:var(--muted)">· 同花顺复盘 · 这是价格指数，不是主力净额</span></h2>
+    <table class="radar-table">
+      <thead><tr><th>行业指数</th><th>10/22 涨跌</th><th>成交额(亿)</th><th>近5日</th><th>近30日</th></tr></thead>
       <tbody>
-        <tr><td style="font-weight:600;color:#ef4444">🔥 创新药</td><td style="text-align:left">创新药ETF广发</td><td><a class="fund-link" href="https://fund.eastmoney.com/515120.html" target="_blank">515120</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td></td><td style="text-align:left">创新药ETF东财</td><td><a class="fund-link" href="https://fund.eastmoney.com/159622.html" target="_blank">159622</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td></td><td style="text-align:left">创新药ETF银华</td><td><a class="fund-link" href="https://fund.eastmoney.com/159992.html" target="_blank">159992</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td style="font-weight:600;color:#ef4444">🏥 医药综合</td><td style="text-align:left">医药ETF易方达</td><td><a class="fund-link" href="https://fund.eastmoney.com/512010.html" target="_blank">512010</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td></td><td style="text-align:left">医药ETF广发</td><td><a class="fund-link" href="https://fund.eastmoney.com/159938.html" target="_blank">159938</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td style="font-weight:600;color:#ef4444">🧬 生物医药</td><td style="text-align:left">生物医药ETF华安</td><td><a class="fund-link" href="https://fund.eastmoney.com/159508.html" target="_blank">159508</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td></td><td style="text-align:left">生物医药ETF天弘</td><td><a class="fund-link" href="https://fund.eastmoney.com/159859.html" target="_blank">159859</a></td><td style="color:var(--muted)">指数</td></tr>
-        <tr><td style="font-weight:600;color:#3b82f6">📊 主动管理</td><td style="text-align:left">华夏医疗健康C</td><td><a class="fund-link" href="https://fund.eastmoney.com/000946.html" target="_blank">000946</a></td><td style="color:var(--muted)">混合</td></tr>
-        <tr><td></td><td style="text-align:left">前海开源医疗健康C</td><td><a class="fund-link" href="https://fund.eastmoney.com/005454.html" target="_blank">005454</a></td><td style="color:var(--muted)">混合</td></tr>
+        <tr><td>半导体</td><td class="red">-2.96%</td><td>1901.86</td><td class="red">-1.41%</td><td class="red">-17.42%</td></tr>
+        <tr><td>通信设备</td><td class="red">-3.85%</td><td>1192.75</td><td class="green">+0.10%</td><td class="red">-14.38%</td></tr>
+        <tr><td>元件</td><td class="red">-5.38%</td><td>796.29</td><td class="red">-7.39%</td><td class="red">-2.14%</td></tr>
+        <tr><td>消费电子</td><td class="red">-2.93%</td><td>355.44</td><td class="green">+1.03%</td><td class="red">-15.34%</td></tr>
+        <tr><td>电池</td><td class="red">-2.82%</td><td>531.47</td><td class="red">-7.62%</td><td class="red">-13.13%</td></tr>
       </tbody>
     </table>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:8px">当日行业指数 2 个上涨、88 个下跌。电机约 +4.30% 居涨幅前列。半导体、通信设备、元件成交居前。主力 / 超大单 / 北向的亿元净额：2026-10-23 暂缺，不沿用 9/18 的 +182 亿等数字。</p>
   </div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:8px;padding:6px;background:rgba(245,158,11,.06);border-radius:6px">💡 <strong>选择逻辑</strong>：被动ETF（创新药/医药/生物医药）费率低、风格纯粹；主动基金有选股alpha但风格漂移风险。建议用ETF做核心仓位（80%），主动基金做卫星（20%）。⚠️ <strong>当前仅备选库，不构成建仓建议</strong>——等医药资金流连续3日确认后再行动。</div>
-</div>
 
-<div class="sc-card">
-  <h2>🌡️ 半导体情绪温度计 <span style="font-size:.7rem;color:var(--muted)">· 9/18 收盘</span></h2>
-  <div class="thermo-wrap">
-    <div class="thermo-bar"><div class="thermo-needle" style="left:44%"></div></div>
-    <div>
-      <div class="thermo-score" style="color:#f59e0b">44</div>
-      <div class="thermo-info">🟡 右侧确认·FOMC落地</div>
+  <div class="sc-card">
+    <h2>外围 10/22 <span style="font-size:.7rem;color:var(--muted)">· 与 QDII 相关 · 点位未全部核对的标暂缺</span></h2>
+    <div class="idx-grid">
+      <div class="idx-cell"><div class="k">纳斯达克</div><div class="v">26008.86</div><div class="c red">-2.60%</div></div>
+      <div class="idx-cell"><div class="k">费城半导体</div><div class="v">点位暂缺</div><div class="c red">约 -6.7%</div></div>
+      <div class="idx-cell"><div class="k">NVDA</div><div class="v">212.21</div><div class="c red">-4.40%</div></div>
+      <div class="idx-cell"><div class="k">MU</div><div class="v">856.49</div><div class="c red">-6.26%</div></div>
+      <div class="idx-cell"><div class="k">AMD</div><div class="v">价暂缺</div><div class="c red">-8.1%</div></div>
     </div>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:8px">亚太同日公开收盘播报：韩国综指 5533.77（-3.52%），三星电子 -4.03%，SK 海力士 -5.49%；日经 225 62907.84（-2.65%）。道指仅确认收涨，点位暂缺。情绪温度计依赖资金流因子，本轮不打分。</p>
   </div>
-  <div style="font-size:.78rem;color:var(--text);padding:8px;background:rgba(239,68,68,.06);border-radius:8px;margin-bottom:10px">
-    <strong style="color:var(--amber)">9/18收盘：半导体+182.2亿暴力回流、三周期全正（5日+244.8亿/10日+152亿）——右侧信号首次成立，V型反转确认。</strong>半导体10日-658.8亿仍全行业最大流出、温度创阶段新低；但通信/元件5日+255.2/+261.5亿双转正（连续多日回流，GPT-6后结构性切换而非脉冲）。017811四连阴-10.2%（半导体设备失血）vs 006503四连阳+0.2%转正（PCB/CPO吸金）。<strong>关键判断：①资金给"AI算力硬件"不给"半导体设备"——006503持有、017811反弹即减；②017731第4次窗口（9/7净值3.9701≥3.95）又未执行，9/9冲3.9999差0.0001回4.00；③纪律第6版（极简）：9/21（周一）15:00前018036全赎（只此一件）；017731改"4.00上方任一日赎10万"永久有效——五连败后砍到单一动作</strong>
-  <div class="thermo-factors">
-    <div class="thermo-factor"><div class="tf-label">📊 今日资金流(9/18收盘)</div><div class="tf-val green">+182.2亿</div></div>
-    <div class="thermo-factor"><div class="tf-label">📊 5日资金流</div><div class="tf-val green">+244.8亿</div></div>
-    <div class="thermo-factor"><div class="tf-label">📊 10日资金流</div><div class="tf-val green">+152.1亿</div></div>
-    <div class="thermo-factor"><div class="tf-label">🔄 内部轮动</div><div class="tf-val" style="color:#22c55e">通信10日+300亿最强</div></div>
-    <div class="thermo-factor"><div class="tf-label">📈 大盘(9/18收盘)</div><div class="tf-val green">创业板+2.25%/科创+2.89%</div></div>
-    <div class="thermo-factor"><div class="tf-label">💡 温度判断</div><div class="tf-val" style="color:#f59e0b">右侧确认·FOMC落地</div></div>
-  </div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:8px">0=冰点恐慌 20=超卖 40=偏低 50=中性 60=偏热 80=过热 100=狂热。温度计综合板块资金流(40%)、内部轮动(20%)、PE分位(20%)、涨跌比(20%)计算。</div>
-</div>
 
-<div class="sc-card">
-  <h2>🇺🇸 美股重仓看板 <span style="font-size:.7rem;color:var(--muted)">· 报价为8/26 · 本周美股回调（纳指连跌3天/SOX 11,614）</span></h2>
-  <div class="legend">
-    <span><span class="legend-dot" style="background:var(--green)"></span>涨</span>
-    <span><span class="legend-dot" style="background:var(--red)"></span>跌</span>
-    <span style="color:var(--blue)">蓝色标签=你的持仓基金</span>
+  <div class="sc-card">
+    <h2>美股重仓报价 <span style="font-size:.7rem;color:var(--muted)">· 2026-10-22 收盘 · 无公开价的标 —</span></h2>
+    <div class="watch-grid" id="watchGrid"></div>
   </div>
-  <div class="watch-grid" id="watchGrid"></div>
-</div>
-<div class="sc-card">
-  <h2>🏭 半导体产业链 · 你的持仓位置</h2>
-  <p style="font-size:.7rem;color:var(--muted);margin-bottom:8px">蓝色实线=当前持仓 | 灰色虚线=已清仓 | 红色标签=QDII | 蓝色标签=A股基金</p>
-  <svg viewBox="0 0 600 420" style="width:100%;max-width:560px;height:auto;display:block;margin:0 auto" id="chainSvg"></svg>
-</div>
-<div class="sc-card">
-  <h2>🤖 AI 分析</h2>
-  <div class="ai-summary">
-    <strong style="color:var(--amber)">🟡 9/18收盘：FOMC加息利空出尽——半导体+182亿三周期全正，A股对加息脱敏</strong>9/8-9/11三连阴回吐GPT-6反弹大半（HS300 -0.84%收4,510.16年内低位、科创50四连阴1,553.39、组合三连阴-35,309）。但资金结构剧变且持续：通信5日+255.2亿/元件+261.5亿双双大幅转正（连续多日回流，GPT-6后资金给AI算力硬件不给半导体设备）——006503四连阳+0.2%转正 vs 017811四连阴-10.2%。金属/证券/软件全线转弱（005661 9/9新高5.0345→9/11 -3.84%过山车）。<br><br>
-    <strong style="color:var(--green)">🟢 持仓影响：收益率首破50%——017811回本(+130/-0.03%)、017731距回本0.8%（净值4.1078站上4.00）</strong>：017811 +130回本（9/16-9/18三连阳+9.4%收复全部失地）；006503 +5.1%（7.3421新高，半导体5日+266亿/10日+4.4亿转正）；017731净值4.1078站上4.00（距成本4.1413仅-0.8%——"4.00上方"永久条件9/18已触发）；医药三只9/21暴涨（008619 +2.91%/019671 +5.20%/003231 +6.60%）；005661 -2.2%企稳。9月MTD +50,555。⏰纪律第7版（承认行为模式）：017731回本(净值≥4.15)即赎20万；018036并入月度现金再平衡——9/30现金垫<5%强制赎回，不再设中途窗口。><br>
-    <strong style="color:var(--amber)">⚠️ 策略研判（9/20周日）：纪律第6版（极简）——9/21只做一件事</strong>第5版（9/14无条件双赎回）又未执行——五连败。但客观看：不执行的代价这次很小（017731净值3.9940距4.00仅差0.006、018036 2.5547），市场走势部分"原谅"了拖延。第6版极简化：9/21（周一）15:00前只做一件事——018036全赎（60,849份≈16万，+35.2%垫落袋，现金垫2.1%→约8.8%）；017731撤销所有价格纪律，改为"4.00上方任一日赎10万"（永久有效，当前差0.006——回到4就是心理执行位）。017811反弹3.50+减5万（-3.1%已大幅收窄，减仓位上调）。006503不动：通信10日+300亿最强主线。539002/006373深垫（+64.0%/+57.7%）不动。005661转亏-2.3%但资源逻辑未破（金属10日-75.6亿是压力），持有观察。
+
+  <div class="sc-card">
+    <h2>半导体产业链 · 持仓位置 <span style="font-size:.7rem;color:var(--muted)">· 金额为 2026-10-23 截图</span></h2>
+    <svg viewBox="0 0 600 420" style="width:100%;max-width:560px;height:auto;display:block;margin:0 auto" id="chainSvg"></svg>
   </div>
-</div>
-</div>
+
+  <div class="sc-card">
+    <h2>医药可投标的 <span style="font-size:.7rem;color:var(--muted)">· 备选代码目录 · 无最新行情</span></h2>
+    <table class="radar-table">
+      <thead><tr><th>子赛道</th><th>ETF / 基金</th><th>代码</th><th>类型</th></tr></thead>
+      <tbody>
+        <tr><td>创新药</td><td>创新药ETF广发</td><td><a class="fund-link" href="https://fund.eastmoney.com/515120.html" target="_blank">515120</a></td><td>指数</td></tr>
+        <tr><td></td><td>创新药ETF东财</td><td><a class="fund-link" href="https://fund.eastmoney.com/159622.html" target="_blank">159622</a></td><td>指数</td></tr>
+        <tr><td></td><td>创新药ETF银华</td><td><a class="fund-link" href="https://fund.eastmoney.com/159992.html" target="_blank">159992</a></td><td>指数</td></tr>
+        <tr><td>医药综合</td><td>医药ETF易方达</td><td><a class="fund-link" href="https://fund.eastmoney.com/512010.html" target="_blank">512010</a></td><td>指数</td></tr>
+        <tr><td></td><td>医药ETF广发</td><td><a class="fund-link" href="https://fund.eastmoney.com/159938.html" target="_blank">159938</a></td><td>指数</td></tr>
+        <tr><td>生物医药</td><td>生物医药ETF华安</td><td><a class="fund-link" href="https://fund.eastmoney.com/159508.html" target="_blank">159508</a></td><td>指数</td></tr>
+        <tr><td></td><td>生物医药ETF天弘</td><td><a class="fund-link" href="https://fund.eastmoney.com/159859.html" target="_blank">159859</a></td><td>指数</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.72rem;color:var(--muted);margin-top:8px">代码目录，不是买卖建议，也没有填 10 月涨跌。持仓里的医药基金见盈亏表：008619、019671、003231。</p>
+  </div>
 </div>
 
 <div id="tab-techflow" style="display:none;">
-  <div class="highlight" style="margin-bottom:10px">🔬 科技资金流：精确数字本轮暂缺（待更新）。勿将旧缓存当作最新。</div>
-<div class="tf-card">
-  <h2>各板块资金净流入 — 今日 vs 5日 vs 10日 <span class="badge">东方财富全板块数据</span></h2>
-  <span class="tf-tag">5大板块</span><span class="tf-tag">全板块覆盖</span><span class="tf-tag">三周期对比</span>
-  <div id="tf-overview" class="tf-chart" style="margin-top:8px"></div>
-  <div class="tf-insight"><strong>核心发现：</strong>8/17半导体主力+195.48亿创8月单日新高，超大单+196.79亿（大单-1.31亿）主导，散户-195.16亿对手盘。通信设备+59.63亿/光学光电子+29.41亿/消费电子+26.89亿跟随。三周期：半导体（+195/+91/+190亿）全正唯一主线，通信设备5日+275.87亿爆发，元件5日-22.89亿仍偏弱。</div>
-</div>
-<div class="tf-card">
-  <h2>主力资金累计净流出趋势 <span class="badge">半导体(195只)+通信设备(137只)全板块日级数据</span></h2>
-  <div id="tf-trend" class="tf-chart tf-chart-tall"></div>
-  <div class="tf-insight"><strong>趋势解读：</strong>半导体8/5单日+136亿（38x爆发），机构系统性回补。8/3-8/7连4阳回血。元件+58亿/消费电子+53亿跟随。通信设备5日+166亿但10日仍-198亿。白酒/银行/电力持续流出，资金从防御→科技迁移。</div>
-</div>
-<div class="tf-card">
-  <h2>半导体板块日级资金流 <span class="badge">全板块 · 主力vs散户</span></h2>
-  <div id="tf-semi-daily" class="tf-chart tf-chart-tall"></div>
-  <div class="tf-insight"><strong>半导体节奏：</strong>8/3恐慌踩踏-7.27%(IPO清算) → 8/4反弹+3.70% → 8/5机构回补+4.78%+136亿(38x爆发) → 8/6+1.02%企稳 → 8/7续涨。5日累计：半导体+18亿/元件+181亿/消费电子+4亿转正。10日半导体+105亿确认中期反转。017811东方AI从-17.6%收窄至-0.6%。</div>
-</div>
-<div class="tf-card">
-  <h2>资金流向汇总表 <span class="badge">单位：亿元 · 全板块</span></h2>
-  <table class="tf-table"><thead><tr><th>板块</th><th>今日</th><th>近5日</th><th>近10日</th><th>30日超大单</th><th>30日大单</th><th>30日中单</th><th>30日小单</th></tr></thead><tbody id="tf-tbody"></tbody></table>
-</div>
+  <div class="asof-bar">
+    <div><strong>科技资金流 · 精确数字暂缺</strong> · 时点 2026-10-23</div>
+    <div class="asof-sub">上一版日序列停在 2026-09-08 至 09-21。本轮没有可核对的 10 月板块主力净额，因此不画旧图。</div>
+  </div>
+  <div class="table-card">
+    <h3>为什么这里是空的</h3>
+    <p style="font-size:.82rem;line-height:1.65">东财全板块「今日 / 5 日 / 10 日」主力净额、半导体日级主力与散户对照、30 日超大单拆分，2026-10-23 均暂缺。9 月日序列已从本页删掉，避免旧的亿元数字看起来像最新。</p>
+    <p style="font-size:.82rem;line-height:1.65;margin-top:8px">能核对的价格侧信息在「市场雷达」：10/23 午间指数，以及 10/22 行业指数涨跌和成交额（同花顺复盘）。那不是资金净流入。</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:8px">恢复图表的条件：拿到 10 月连续交易日、来源可追溯的板块主力净额后再填。在此之前本页保持空白说明。</p>
+  </div>
 </div>
 
 <div id="tab-tradelog" style="display:none;">
+<div class="highlight">操作时间线是历史成交（主要在 6–8 月）。2026-10-23 纪律第8版减仓仍待执行，不计入下方笔数。收益权威日 2026-10-22：累计 +342,571（22.26%）。简报归档顶部已有 10/21–10/23。</div>
 <div class="stats-bar">
   <div class="stat-card"><div class="stat-label">累计交易</div><div class="stat-val green">15 笔</div></div>
   <div class="stat-card"><div class="stat-label">买入</div><div class="stat-val green">4 笔</div></div>
   <div class="stat-card"><div class="stat-label">卖出/清仓</div><div class="stat-val red">8 笔</div></div>
   <div class="stat-card"><div class="stat-label">调仓/加减</div><div class="stat-val amber">3 笔</div></div>
   <div class="stat-card"><div class="stat-label">已实现收益</div><div class="stat-val green">+¥230K+</div></div>
-  <div class="stat-card"><div class="stat-label">简报存档</div><div class="stat-val blue">7 篇</div></div>
+  <div class="stat-card"><div class="stat-label">简报存档</div><div class="stat-val blue">至10/23</div></div>
 </div>
 <div class="log-card">
   <h2>📅 操作时间线</h2>
   <div class="timeline">
+    <div class="tl-item tl-adjust"><div class="tl-dot"></div><div class="tl-date">2026年10月23日</div><div class="tl-action amber">纪律第8版「保持弹性再平衡」· 待执行</div><div class="tl-detail">计划分两笔减 018036 / 006373 / 539002 换现金。第 1 笔计划 10/23，第 2 笔计划 10/27（或顺延）。006503 / 017811 停加不斩。017731 / 018147 默认不动。</div><div class="tl-reason">尚未成交，不计入「累计交易」。</div></div>
     <div class="tl-item tl-sell"><div class="tl-dot"></div><div class="tl-date">2026年7月27日</div><div class="tl-action red">❌ 全额赎回：建信新兴市场优选 QDII C <span style="color:var(--muted)">018147</span></div><div class="tl-detail">全额赎回，成本¥150,000→到账约¥238,000，实现收益约+¥88,000。余额宝升至63.2万</div><div class="tl-reason">💡 半导体10日-425亿仍弱+韩国敞口波动，锁定QDII收益释放现金防御。</div></div>
     <div class="tl-item tl-buy"><div class="tl-dot"></div><div class="tl-date">2026年7月27日</div><div class="tl-action green">🔺 加仓：东方人工智能主题 C <span style="color:var(--muted)">017811</span></div><div class="tl-detail">+¥50,000（确认中），市值升至¥497,375，总成本¥479,447</div><div class="tl-reason">💡 半导体+622.7亿史诗级回流5日转正，右侧信号初现，加仓核心A股科技。</div></div>
     <div class="tl-item tl-buy"><div class="tl-dot"></div><div class="tl-date">2026年7月22日</div><div class="tl-action green">🆕 新建仓：嘉实资源精选 C <span style="color:var(--muted)">005661</span></div><div class="tl-detail">+¥100,000，有色资源方向分散科技集中度</div><div class="tl-reason">💡 工业金属10日+104.6亿周期强势，分散半导体过度集中。</div></div>
@@ -1014,7 +882,7 @@
 </div>
 </div>
 
-<div class="footer">📊 Hermes Agent · 数据源：2026理财收益簿Excel + 蚂蚁财富/嘉实App + 天天基金 MCP · 2026年8月18日收盘更新（Excel收益簿全量同步） · v2</div>
+<div class="footer">数据：收益簿权威 2026-10-22（累计 +342,571 · 22.26% · 纪律第8版「保持弹性」）· 资讯 2026-10-23 · 板块主力净额暂缺 · 不构成投资建议</div>
 
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
@@ -1141,17 +1009,7 @@ function calcRiskMetrics(){
 
 // Feature 1: Economic Calendar
 const ecEvents=[
-  {date:'2026-08-07',event:'中芯国际Q2业绩说明会(已公告)',tag:'hot'},
-  {date:'2026-08-07',event:'美国7月非农就业报告',tag:'hot'},
-  {date:'2026-08-10',event:'台积电7月营收(预估)',tag:'info'},
-  {date:'2026-08-12',event:'美国7月CPI(预估)',tag:'hot'},
-  {date:'2026-08-14',event:'美国7月PPI+零售销售(预估)',tag:'warn'},
-  {date:'2026-08-15',event:'017811 Q2季报',tag:'info'},
-  {date:'2026-08-20',event:'中国8月LPR报价(预估)',tag:'warn'},
-  {date:'2026-08-21',event:'Jackson Hole央行年会(预估)',tag:'hot'},
-  {date:'2026-08-28',event:'NVDA Q2财报',tag:'hot'},
-  {date:'2026-08-31',event:'中国8月官方PMI(预估)',tag:'warn'},
-  {date:'2026-09-17',event:'美联储FOMC利率决议(预估)',tag:'hot'},
+  {date:'2026-10-27',event:'纪律第8版第2笔减仓计划窗口（或顺延，待执行）',tag:'warn'},
 ];
 (function buildCalendar(){
   const now=new Date();
@@ -1725,104 +1583,20 @@ if('serviceWorker' in navigator){
 
 var tfCharts=[];var tfInited=false;
 function initTechFlow(){
-  if(tfInited)return;tfInited=true;
-  const DATA={"半导体":{"series":[{"date":"09/08","main":-13.89,"elg":-10.4,"lg":-3.5,"md":5.37,"sm":8.42,"cum_main":-13.89,"retail":13.89,"cum_retail":13.89},{"date":"09/09","main":-65.48,"elg":-43.84,"lg":-21.64,"md":35.46,"sm":30.0,"cum_main":-79.37,"retail":65.48,"cum_retail":79.37},{"date":"09/10","main":-23.25,"elg":-14.97,"lg":-8.28,"md":14.05,"sm":9.05,"cum_main":-102.62,"retail":23.25,"cum_retail":102.62},{"date":"09/11","main":-87.99,"elg":-42.73,"lg":-45.25,"md":11.65,"sm":75.79,"cum_main":-190.61,"retail":87.99,"cum_retail":190.61},{"date":"09/14","main":-71.0,"elg":-52.58,"lg":-18.42,"md":18.84,"sm":53.0,"cum_main":-261.61,"retail":71.0,"cum_retail":261.61},{"date":"09/15","main":44.61,"elg":42.14,"lg":2.47,"md":-27.82,"sm":-16.39,"cum_main":-217.0,"retail":-44.61,"cum_retail":217.0},{"date":"09/16","main":136.51,"elg":121.33,"lg":15.18,"md":-81.34,"sm":-54.82,"cum_main":-80.49,"retail":-136.51,"cum_retail":80.49},{"date":"09/17","main":-47.55,"elg":-22.4,"lg":-25.15,"md":-25.33,"sm":72.51,"cum_main":-128.04,"retail":47.55,"cum_retail":128.04},{"date":"09/18","main":182.2,"elg":136.11,"lg":46.09,"md":-107.69,"sm":-73.77,"cum_main":54.16,"retail":-182.2,"cum_retail":-54.16},{"date":"09/21","main":-49.78,"elg":-41.19,"lg":-8.58,"md":-6.62,"sm":56.28,"cum_main":4.38,"retail":49.78,"cum_retail":-4.38}],"total_main":4.38,"total_retail":-4.38,"total_elg":71.47,"total_lg":-67.08,"total_md":-163.43,"total_sm":160.07,"n_days":10,"mcp_today":-49.78,"mcp_5d":265.99,"mcp_10d":4.38,"has_daily":true},"通信设备":{"series":[{"date":"09/08","main":1.08,"elg":5.12,"lg":-4.04,"md":-19.26,"sm":18.69,"cum_main":1.08,"retail":-1.08,"cum_retail":-1.08},{"date":"09/09","main":51.01,"elg":46.65,"lg":4.36,"md":-34.04,"sm":-17.46,"cum_main":52.09,"retail":-51.01,"cum_retail":-52.09},{"date":"09/10","main":-45.62,"elg":-37.51,"lg":-8.11,"md":19.86,"sm":25.75,"cum_main":6.47,"retail":45.62,"cum_retail":-6.47},{"date":"09/11","main":47.41,"elg":40.91,"lg":6.5,"md":-54.34,"sm":7.76,"cum_main":53.88,"retail":-47.41,"cum_retail":-53.88},{"date":"09/14","main":-72.61,"elg":-59.13,"lg":-13.48,"md":40.15,"sm":32.78,"cum_main":-18.73,"retail":72.61,"cum_retail":18.73},{"date":"09/15","main":-16.42,"elg":6.92,"lg":-23.34,"md":0.43,"sm":15.78,"cum_main":-35.15,"retail":16.42,"cum_retail":35.15},{"date":"09/16","main":106.34,"elg":93.45,"lg":12.89,"md":-64.93,"sm":-41.28,"cum_main":71.19,"retail":-106.34,"cum_retail":-71.19},{"date":"09/17","main":-18.43,"elg":-11.21,"lg":-7.21,"md":2.89,"sm":13.86,"cum_main":52.76,"retail":18.43,"cum_retail":-52.76},{"date":"09/18","main":46.28,"elg":45.83,"lg":0.45,"md":-43.81,"sm":-2.24,"cum_main":99.04,"retail":-46.28,"cum_retail":-99.04},{"date":"09/21","main":25.99,"elg":33.81,"lg":-7.81,"md":-33.89,"sm":7.0,"cum_main":125.03,"retail":-25.99,"cum_retail":-125.03}],"total_main":125.03,"total_retail":-125.03,"total_elg":164.84,"total_lg":-39.79,"total_md":-186.94,"total_sm":60.64,"n_days":10,"mcp_today":25.99,"mcp_5d":143.76,"mcp_10d":125.03,"has_daily":true},"消费电子":{"series":[{"date":"09/08","main":-32.58,"elg":-22.92,"lg":-9.66,"md":3.81,"sm":28.34,"cum_main":-32.58,"retail":32.58,"cum_retail":32.58},{"date":"09/09","main":-3.54,"elg":-0.85,"lg":-2.69,"md":-0.97,"sm":4.23,"cum_main":-36.12,"retail":3.54,"cum_retail":36.12},{"date":"09/10","main":-17.16,"elg":-6.6,"lg":-10.55,"md":-3.42,"sm":20.43,"cum_main":-53.28,"retail":17.16,"cum_retail":53.28},{"date":"09/11","main":-13.88,"elg":-7.92,"lg":-5.96,"md":-1.15,"sm":14.93,"cum_main":-67.16,"retail":13.88,"cum_retail":67.16},{"date":"09/14","main":-23.82,"elg":-15.44,"lg":-8.38,"md":2.27,"sm":21.44,"cum_main":-90.98,"retail":23.82,"cum_retail":90.98},{"date":"09/15","main":-24.93,"elg":-15.18,"lg":-9.75,"md":0.15,"sm":24.62,"cum_main":-115.91,"retail":24.93,"cum_retail":115.91},{"date":"09/16","main":14.47,"elg":13.38,"lg":1.09,"md":-9.89,"sm":-4.34,"cum_main":-101.44,"retail":-14.47,"cum_retail":101.44},{"date":"09/17","main":-4.89,"elg":4.19,"lg":-9.08,"md":-7.7,"sm":12.41,"cum_main":-106.33,"retail":4.89,"cum_retail":106.33},{"date":"09/18","main":19.04,"elg":14.74,"lg":4.3,"md":-13.7,"sm":-5.22,"cum_main":-87.29,"retail":-19.04,"cum_retail":87.29},{"date":"09/21","main":-5.07,"elg":-2.93,"lg":-2.14,"md":1.27,"sm":3.82,"cum_main":-92.36,"retail":5.07,"cum_retail":92.36}],"total_main":-92.36,"total_retail":92.36,"total_elg":-39.53,"total_lg":-52.82,"total_md":-29.33,"total_sm":120.66,"n_days":10,"mcp_today":-5.07,"mcp_5d":-1.38,"mcp_10d":-92.36,"has_daily":true},"元件":{"series":[{"date":"09/08","main":-13.04,"elg":3.47,"lg":-16.51,"md":-5.18,"sm":17.68,"cum_main":-13.04,"retail":13.04,"cum_retail":13.04},{"date":"09/09","main":49.63,"elg":41.44,"lg":8.18,"md":-28.61,"sm":-20.64,"cum_main":36.59,"retail":-49.63,"cum_retail":-36.59},{"date":"09/10","main":30.17,"elg":33.58,"lg":-3.41,"md":-10.41,"sm":-19.68,"cum_main":66.76,"retail":-30.17,"cum_retail":-66.76},{"date":"09/11","main":37.87,"elg":30.28,"lg":7.6,"md":-17.72,"sm":-20.13,"cum_main":104.63,"retail":-37.87,"cum_retail":-104.63},{"date":"09/14","main":28.84,"elg":22.16,"lg":6.68,"md":-15.1,"sm":-14.56,"cum_main":133.47,"retail":-28.84,"cum_retail":-133.47},{"date":"09/15","main":-21.11,"elg":-3.92,"lg":-17.19,"md":-14.31,"sm":35.17,"cum_main":112.36,"retail":21.11,"cum_retail":-112.36},{"date":"09/16","main":24.93,"elg":19.83,"lg":5.1,"md":-6.47,"sm":-18.12,"cum_main":137.29,"retail":-24.93,"cum_retail":-137.29},{"date":"09/17","main":-80.96,"elg":-50.26,"lg":-30.7,"md":15.5,"sm":64.87,"cum_main":56.33,"retail":80.96,"cum_retail":-56.33},{"date":"09/18","main":-38.06,"elg":-11.66,"lg":-26.41,"md":1.87,"sm":36.44,"cum_main":18.27,"retail":38.06,"cum_retail":-18.27},{"date":"09/21","main":14.77,"elg":17.03,"lg":-2.26,"md":-15.52,"sm":1.69,"cum_main":33.04,"retail":-14.77,"cum_retail":-33.04}],"total_main":33.04,"total_retail":-33.04,"total_elg":101.95,"total_lg":-68.92,"total_md":-95.95,"total_sm":62.72,"n_days":10,"mcp_today":14.77,"mcp_5d":-100.43,"mcp_10d":33.04,"has_daily":true},"光学光电子":{"series":[{"date":"09/08","main":-17.03,"elg":-13.46,"lg":-3.58,"md":4.18,"sm":12.54,"cum_main":-17.03,"retail":17.03,"cum_retail":17.03},{"date":"09/09","main":3.95,"elg":0.76,"lg":3.19,"md":1.24,"sm":-5.12,"cum_main":-13.08,"retail":-3.95,"cum_retail":13.08},{"date":"09/10","main":-13.73,"elg":-7.75,"lg":-5.98,"md":0.28,"sm":12.97,"cum_main":-26.81,"retail":13.73,"cum_retail":26.81},{"date":"09/11","main":-23.97,"elg":-11.49,"lg":-12.48,"md":4.51,"sm":19.19,"cum_main":-50.78,"retail":23.97,"cum_retail":50.78},{"date":"09/14","main":-3.31,"elg":-1.2,"lg":-2.11,"md":-3.95,"sm":7.31,"cum_main":-54.09,"retail":3.31,"cum_retail":54.09},{"date":"09/15","main":-6.25,"elg":-0.5,"lg":-5.75,"md":-1.47,"sm":8.52,"cum_main":-60.34,"retail":6.25,"cum_retail":60.34},{"date":"09/16","main":14.6,"elg":14.54,"lg":0.06,"md":-13.7,"sm":-0.82,"cum_main":-45.74,"retail":-14.6,"cum_retail":45.74},{"date":"09/17","main":20.24,"elg":21.47,"lg":-1.23,"md":-9.15,"sm":-10.66,"cum_main":-25.5,"retail":-20.24,"cum_retail":25.5},{"date":"09/18","main":21.72,"elg":13.53,"lg":8.2,"md":-6.18,"sm":-15.27,"cum_main":-3.78,"retail":-21.72,"cum_retail":3.78},{"date":"09/21","main":5.32,"elg":2.78,"lg":2.54,"md":-6.08,"sm":1.25,"cum_main":1.54,"retail":-5.32,"cum_retail":-1.54}],"total_main":1.54,"total_retail":-1.54,"total_elg":18.68,"total_lg":-17.14,"total_md":-30.32,"total_sm":29.91,"n_days":10,"mcp_today":5.32,"mcp_5d":55.63,"mcp_10d":1.54,"has_daily":true}};
-  const C={text:'#94a3b8',axisLine:'#1e293b',splitLine:'#1a2436',main:'#ef4444',retail:'#22c55e',elg:'#f43f5e',lg:'#f59e0b',md:'#60a5fa',sm:'#a78bfa'};
-  const sectors=Object.keys(DATA);
-  
-  // Chart 1: 今日/5日/10日三周期对比 (全板块数据)
-  const c1=echarts.init(document.getElementById('tf-overview'),'dark');
-  c1.setOption({backgroundColor:'transparent',
-    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){
-      let s=p[0].axisValue+'<br/>';
-      p.forEach(function(i){s+=i.marker+i.seriesName+': '+(i.value>=0?'+':'')+i.value.toFixed(1)+'亿<br/>';});
-      return s;
-    }},
-    legend:{data:['今日','近5日','近10日'],textStyle:{color:C.text},top:0},
-    grid:{left:55,right:20,bottom:30,top:35},
-    xAxis:{type:'category',data:sectors,axisLabel:{color:C.text,fontSize:11},axisLine:{lineStyle:{color:C.axisLine}}},
-    yAxis:{type:'value',name:'主力净额(亿)',nameTextStyle:{color:'#94a3b8'},axisLabel:{color:'#94a3b8'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
-    series:[
-      {name:'今日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_today}),itemStyle:{color:'#22c55e',borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}},markLine:{silent:true,symbol:'none',label:{show:false},data:[{yAxis:0,lineStyle:{color:'rgba(255,255,255,.75)',width:2,type:'solid'}}]}},
-      {name:'近5日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_5d}),itemStyle:{color:'#f59e0b',borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}}},
-      {name:'近10日',type:'bar',data:sectors.map(function(s){return DATA[s].mcp_10d}),itemStyle:{color:'#ef4444',borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}}},
-    ]});
-  tfCharts.push(c1);
-
-  // Chart 2: 30日累计趋势（只有半导体+通信设备有完整日级数据）
-  const c2=echarts.init(document.getElementById('tf-trend'),'dark');
-  var trendSeries=[];
-  var legendData=[];
-  var trendDates=[];
-  var hasTrend=false;
-  sectors.forEach(function(sec){
-    if(DATA[sec].has_daily&&DATA[sec].series.length>0){
-      hasTrend=true;
-      if(trendDates.length===0)trendDates=DATA[sec].series.map(function(d){return d.date});
-      var sc={半导体:'#ef4444',通信设备:'#f59e0b'}[sec]||'#60a5fa';
-      trendSeries.push({name:sec+' 主力累计',type:'line',data:DATA[sec].series.map(function(d){return d.cum_main}),smooth:true,symbol:'circle',symbolSize:6,lineStyle:{width:3,color:sc},itemStyle:{color:sc}});
-      legendData.push(sec+' 主力累计');
-    }
-  });
-  if(hasTrend){
-    c2.setOption({backgroundColor:'transparent',
-      tooltip:{trigger:'axis'},
-      legend:{data:legendData,textStyle:{color:C.text},top:0},
-      grid:{left:55,right:20,bottom:35,top:35},
-      xAxis:{type:'category',data:trendDates,axisLabel:{color:'#94a3b8',fontSize:9,rotate:45},axisLine:{lineStyle:{color:C.axisLine}}},
-      yAxis:{type:'value',name:'累计净额(亿)',nameTextStyle:{color:'#94a3b8'},axisLabel:{color:'#94a3b8'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
-      series:trendSeries.map(function(s,i){if(i===0)s.markLine={silent:true,symbol:'none',label:{show:false},data:[{yAxis:0,lineStyle:{color:'rgba(255,255,255,.75)',width:2,type:'solid'}}]};return s;}),
-    });
-  }else{
-    document.getElementById('tf-trend').innerHTML='<div style="text-align:center;padding:40px;color:#94a3b8">暂无日级数据</div>';
-  }
-  tfCharts.push(c2);
-
-  // Chart 3: 半导体日级柱状图
-  if(DATA['半导体']&&DATA['半导体'].has_daily){
-    var sd=DATA['半导体'].series;
-    var c3=echarts.init(document.getElementById('tf-semi-daily'),'dark');
-    c3.setOption({backgroundColor:'transparent',tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-      legend:{data:['主力净流入','散户净流入'],textStyle:{color:C.text},top:0},
-      grid:{left:55,right:20,bottom:35,top:35},
-      xAxis:{type:'category',data:sd.map(function(d){return d.date}),axisLabel:{color:'#94a3b8',fontSize:9,rotate:45},axisLine:{lineStyle:{color:C.axisLine}}},
-      yAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#94a3b8'},axisLabel:{color:'#94a3b8'},splitLine:{lineStyle:{color:C.splitLine}},axisLine:{show:false}},
-      series:[
-        {name:'主力净流入',type:'bar',data:sd.map(function(d){return d.main}),itemStyle:{color:function(p){return p.value>=0?'#ef4444':'#f87171'},borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}},markLine:{silent:true,symbol:'none',label:{show:false},data:[{yAxis:0,lineStyle:{color:'rgba(255,255,255,.75)',width:2,type:'solid'}}]}},
-        {name:'散户净流入',type:'bar',data:sd.map(function(d){return d.retail}),itemStyle:{color:function(p){return p.value>=0?'#22c55e':'#4ade80'},borderRadius:[2,2,0,0]},label:{show:true,position:'top',fontSize:10,color:'#e2e8f0',formatter:function(p){return (p.value>=0?'+':'')+p.value.toFixed(1);}}},
-      ]});
-    tfCharts.push(c3);
-  }
-
-  // Table: 三周期汇总
-  var tbody=document.getElementById('tf-tbody');
-  sectors.forEach(function(s){
-    var d=DATA[s];
-    var fmt=function(v){return(v>=0?'+':'')+v.toFixed(1)};
-    var cls=function(v){return v>=0?'pos':'neg'};
-    var stockInfo=d.has_daily?'(10日序列·全板块)':'(全板块)';
-    var tr=document.createElement('tr');
-    tr.innerHTML='<td>'+s+'<span style="color:#94a3b8;font-size:10px">'+stockInfo+'</span></td>'+
-      '<td class="'+cls(d.mcp_today)+'">'+fmt(d.mcp_today)+'</td>'+
-      '<td class="'+cls(d.mcp_5d)+'">'+fmt(d.mcp_5d)+'</td>'+
-      '<td class="'+cls(d.mcp_10d)+'">'+fmt(d.mcp_10d)+'</td>'+
-      (d.has_daily?'<td class="'+cls(d.total_elg)+'">'+fmt(d.total_elg)+'</td><td class="'+cls(d.total_lg)+'">'+fmt(d.total_lg)+'</td><td class="'+cls(d.total_md)+'">'+fmt(d.total_md)+'</td><td class="'+cls(d.total_sm)+'">'+fmt(d.total_sm)+'</td>':'<td colspan="4" style="color:#94a3b8;text-align:center">—</td>');
-    tbody.appendChild(tr);
-  });
-
-  setTimeout(function(){tfCharts.forEach(function(c){try{c.resize();}catch(e){}})},100);
+  if(tfInited)return;
+  tfInited=true;
 }
+
 window.addEventListener('resize',function(){tfCharts.forEach(function(c){try{c.resize();}catch(e){}})});
 
 function initSemicon(){
   if(document.getElementById('watchGrid').innerHTML)return;
   var stocks=[
-    {sym:'NVDA',name:'英伟达',price:217.57,chg:-4.57,funds:['017731','006373']},
-    {sym:'MU',name:'美光科技',price:990.21,chg:18.36,funds:['017731','006373']},
-    {sym:'TSM',name:'台积电',price:415.58,chg:7.64,funds:['017731','006373']},
-    {sym:'MRVL',name:'迈威尔',price:210.78,chg:12.18,funds:['017731']},
-    {sym:'AVGO',name:'博通',price:392.47,chg:4.73,funds:['017731','006373']},
-    {sym:'AMD',name:'AMD',price:539.69,chg:13.00,funds:['006373']}
+    {sym:'NVDA',name:'英伟达 · 10/22',price:212.21,chg:-4.40,funds:['017731','006373']},
+    {sym:'MU',name:'美光 · 10/22',price:856.49,chg:-6.26,funds:['017731','006373']},
+    {sym:'AMD',name:'AMD · 10/22 价暂缺',price:null,chg:-8.1,funds:['006373']},
+    {sym:'TSM',name:'台积电 · 价暂缺',price:null,chg:null,funds:['017731','006373']},
+    {sym:'AVGO',name:'博通 · 价暂缺',price:null,chg:null,funds:['017731','006373']}
   ];
   var grid=document.getElementById('watchGrid'),html='';
   stocks.forEach(function(s){
@@ -1855,19 +1629,19 @@ function initSemicon(){
     '<text x="470" y="78" fill="#94a3b8" font-size="9" text-anchor="middle">逻辑 · 存储 · 晶圆代工</text>'+
     '<text x="470" y="93" fill="#3b82f6" font-size="9" text-anchor="middle">⬅ QDII主战场</text>'+
     '<rect x="375" y="105" width="90" height="18" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
-    '<text x="420" y="118" fill="#ef4444" font-size="8" font-weight="500" text-anchor="middle">017731 ¥37.6万</text>'+
+    '<text x="420" y="118" fill="#ef4444" font-size="8" font-weight="500" text-anchor="middle">017731 ¥40.6万</text>'+
     '<rect x="470" y="105" width="90" height="18" rx="4" fill="rgba(30,41,59,.4)" stroke="#475569" stroke-width="1" stroke-dasharray="3,2"/>'+
     '<text x="515" y="118" fill="#475569" font-size="8" font-weight="500" text-anchor="middle">018147 已回补</text>'+
     '<rect x="375" y="126" width="90" height="18" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
-    '<text x="420" y="139" fill="#ef4444" font-size="8" font-weight="500" text-anchor="middle">539002 ¥8.3万</text>'+
+    '<text x="420" y="139" fill="#ef4444" font-size="8" font-weight="500" text-anchor="middle">539002 ¥9.3万</text>'+
     '<rect x="470" y="126" width="90" height="18" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>'+
-    '<text x="515" y="139" fill="#ef4444" font-size="8" font-weight="500" text-anchor="middle">006373 ¥5.9万</text>'+
+    '<text x="515" y="139" fill="#ef4444" font-size="8" font-weight="500" text-anchor="middle">006373 ¥6.4万</text>'+
     // 箭头向下
     '<line x1="440" y1="148" x2="290" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ah)"/>'+
     '<line x1="500" y1="148" x2="480" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ah)"/>'+
     // 跨环节标签
     '<rect x="195" y="200" width="135" height="18" rx="4" fill="rgba(59,130,246,.08)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>'+
-    '<text x="262" y="213" fill="#3b82f6" font-size="8" font-weight="500" text-anchor="middle">017811 ¥42.7万 (跨设备/制造)</text>'+
+    '<text x="262" y="213" fill="#3b82f6" font-size="8" font-weight="500" text-anchor="middle">017811 ¥33.1万 (设备/制造)</text>'+
     '<rect x="195" y="222" width="135" height="18" rx="4" fill="rgba(59,130,246,.08)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>'+
     '<text x="262" y="235" fill="#475569" font-size="8" font-weight="500" text-anchor="middle">020470 已清仓</text>'+
     // 封装测试
@@ -1878,10 +1652,10 @@ function initSemicon(){
     '<rect x="370" y="270" width="190" height="60" rx="8" fill="rgba(30,41,59,.6)" stroke="#1e293b" stroke-width="1.5"/>'+
     '<text x="465" y="295" fill="#e2e8f0" font-size="12" font-weight="600" text-anchor="middle">📱 终端应用</text>'+
     '<text x="465" y="313" fill="#94a3b8" font-size="9" text-anchor="middle">AI服务器 · 消费电子 · 汽车</text>'+
-    '<text x="465" y="325" fill="#3b82f6" font-size="8" text-anchor="middle">018036 ¥14.2万 (新能源车)</text>'+
+    '<text x="465" y="325" fill="#3b82f6" font-size="8" text-anchor="middle">018036 ¥14.8万 (新能源车)</text>'+
     // 底部说明
-    '<text x="300" y="360" fill="#94a3b8" font-size="9" text-anchor="middle">💡 8/17收盘：QDII(¥112.9万)+A股(¥120.5万)，现金¥4.9万(2.1%)。018147已回补至30万</text>'+
-    '<text x="300" y="375" fill="#94a3b8" font-size="8" text-anchor="middle">半导体+195.48亿单日新高三周期全正 · 科创50 +4.14%放量确认</text>'+
+    '<text x="300" y="360" fill="#94a3b8" font-size="9" text-anchor="middle">2026-10-23截图：出海QDII约103.8万，IC+AI约64.1万，现金约0.4万</text>'+
+    '<text x="300" y="375" fill="#94a3b8" font-size="8" text-anchor="middle">板块主力净额 2026-10-23 暂缺 · 勿用 8/17 或 9/18 旧数字</text>'+
     '<text x="300" y="400" fill="#475569" font-size="7" text-anchor="middle">蓝色实线框=当前持仓 | 灰色虚线框=已清仓环节 | 红色标签=QDII | 蓝色标签=A股</text>';
 }
 
