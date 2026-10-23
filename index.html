@@ -1540,7 +1540,8 @@ function initAlloc(){
   const el=document.getElementById('allocDonut');
   if(!el||Chart.getChart(el))return;
   // Donut chart: sorted desc, Cat10 palette, pull-out top2, % labels, white border 2px
-  const allocDonutRaw=[['出海QDII',103.8],['A股IC+AI',64.1],['A股资源',25.7],['医药',8.0],['现金',0.4]],['QDII',51.7],['医药',4.7],['现金',38.4]];
+  // 单位：万元。对应 2026-10-23 主题暴露（出海QDII 103.8 / IC+AI 64.1 / 资源 25.7 / 医药 8.0 / 现金 0.4）
+  const allocDonutRaw=[['出海QDII',103.8],['A股IC+AI',64.1],['A股资源',25.7],['医药',8.0],['现金',0.4]];
   allocDonutRaw.sort((a,b)=>b[1]-a[1]);
   const allocDonutLabels=allocDonutRaw.map(o=>o[0]),allocDonutVals=allocDonutRaw.map(o=>o[1]);
   const allocDonutTotal=allocDonutVals.reduce((a,b)=>a+b,0);
@@ -1572,8 +1573,8 @@ function initAlloc(){
     options:{
       responsive:true,maintainAspectRatio:false,cutout:'58%',
       plugins:{
-        legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11},generateLabels(chart){const base=Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);base.forEach((l,i)=>{l.text=allocDonutLabels[i]+' '+allocDonutVals[i].toFixed(1)+'%';});return base;}}},
-        tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.parsed+'%'}}
+        legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11},generateLabels(chart){const base=Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);base.forEach((l,i)=>{l.text=allocDonutLabels[i]+' '+allocDonutVals[i].toFixed(1)+'万 '+allocDonutPct[i].toFixed(1)+'%';});return base;}}},
+        tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.parsed+'万 ('+allocDonutPct[ctx.dataIndex].toFixed(1)+'%)'}}
       }
     },
     plugins:[allocDonutLabelsPlugin]
