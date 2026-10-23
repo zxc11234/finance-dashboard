@@ -546,7 +546,7 @@
     · 📉 <strong>累计收益回落至 +342,571（收益率 22.26%）</strong>：相对 7/1 峰值 1,289,206 回撤约 94.7 万；10 月 MTD 约 <strong>-33.1 万</strong>（11 个交易日）。10/22 单日支付宝 -41,829，嘉实/建信 QDII 当日按 0 计（净值延迟）。<br>
     · 🧭 <strong>纪律第8版｜2026-10-23「保持弹性再平衡」</strong>：停加不斩财通 IC <code>006503</code> / 东方 AI <code>017811</code>；从浮盈 QDII（长城新能源车 <code>018036</code>、国富全球科技 <code>006373</code>、建信新兴 A <code>539002</code>）分两笔赎回换现金，目标现金约 12%；嘉实 <code>017731</code>、建信 C <code>018147</code> 默认不动。第 1 笔计划 10/23、第 2 笔计划 10/27（或顺延）——<strong>待执行</strong>。<br>
     · 🧱 <strong>结构</strong>：出海 QDII 约占 51%、A 股 IC+AI 约 32%、资源约 13%、医药约 4%、现金约 0.2%（过低）。持仓市值截图合计约 202 万；收益簿口径总资产约 188 万（本金+累计），差额为结构层/口径差，KPI 仍以收益簿为准。<br>
-    · 📡 <strong>市场</strong>：A 股指数更新到 2026-10-23 午间（上证 3614.12，-1.20%）；10/22 收盘上证约 -1.48%、创业板约 -4.37%。板块主力净额精确数字仍暂缺，科技资金流不再展示 9 月旧序列。每日约 14:30 加减仓评估。
+    · 📡 <strong>市场</strong>：A 股指数更新到 2026-10-23 午间（上证 3614.12，-1.20%）；10/22 收盘上证约 -1.48%、创业板约 -4.37%。科技资金流：今日行业/概念为新浪 10/23；东财五板块日序仅 09/28–10/14（窗口截至 10/14，非完整 10 日），缺 10/15–10/23。每日约 14:30 加减仓评估。
 </div>
 </div>
 
@@ -823,14 +823,81 @@
 
 <div id="tab-techflow" style="display:none;">
   <div class="asof-bar">
-    <div><strong>科技资金流 · 精确数字暂缺</strong> · 时点 2026-10-23</div>
-    <div class="asof-sub">上一版日序列停在 2026-09-08 至 09-21。本轮没有可核对的 10 月板块主力净额，因此不画旧图。</div>
+    <div><strong>科技资金流 · 2026-10-23</strong> · 单位：亿元</div>
+    <div class="asof-sub">今日榜：新浪 MoneyFlow.ssl_bkzj_bk（行业/概念净流入）。日序：Tushare moneyflow_ind_dc，窗口 2026-09-28～10-14（8 个交易日）；缺 10/15–10/23（10/15 起 IP数量超限，最大数量为10个），完整近 5 日 / 近 10 日待 Tushare IP 恢复。5日/10日若取该窗口累计：窗口截至 10/14，非完整 10 日。</div>
   </div>
-  <div class="table-card">
-    <h3>为什么这里是空的</h3>
-    <p style="font-size:.82rem;line-height:1.65">东财全板块「今日 / 5 日 / 10 日」主力净额、半导体日级主力与散户对照、30 日超大单拆分，2026-10-23 均暂缺。9 月日序列已从本页删掉，避免旧的亿元数字看起来像最新。</p>
-    <p style="font-size:.82rem;line-height:1.65;margin-top:8px">能核对的价格侧信息在「市场雷达」：10/23 午间指数，以及 10/22 行业指数涨跌和成交额（同花顺复盘）。那不是资金净流入。</p>
-    <p style="font-size:.78rem;color:var(--muted);margin-top:8px">恢复图表的条件：拿到 10 月连续交易日、来源可追溯的板块主力净额后再填。在此之前本页保持空白说明。</p>
+
+  <div class="tf-card">
+    <h2>今日净流入 · 行业·科技相关 <span class="badge">新浪 · 2026-10-23</span></h2>
+    <div class="chart-wrap" style="height:220px"><canvas id="tfIndChart"></canvas></div>
+    <p class="tf-insight" id="tfTodayNote"></p>
+  </div>
+  <div class="tf-card">
+    <h2>行业·科技相关 <span class="badge">今日净流入 · 涨跌% · 领涨</span></h2>
+    <table class="tf-table">
+      <thead><tr><th>板块</th><th>今日净流入(亿)</th><th>涨跌%</th><th>领涨</th></tr></thead>
+      <tbody id="tfIndBody"></tbody>
+    </table>
+    <p class="tf-insight">这张今日榜没有 5 日/10 日。东财日序只覆盖半导体、通信设备、消费电子、元件、光学光电子，窗口截至 10/14，非完整 10 日。</p>
+  </div>
+
+  <div class="tf-card">
+    <h2>今日净流入 · 概念·科技相关 <span class="badge">新浪 · 2026-10-23</span></h2>
+    <div class="chart-wrap" style="height:480px"><canvas id="tfConChart"></canvas></div>
+  </div>
+  <div class="tf-card">
+    <h2>概念·科技相关 <span class="badge">今日净流入 · 涨跌% · 领涨</span></h2>
+    <table class="tf-table">
+      <thead><tr><th>板块</th><th>今日净流入(亿)</th><th>涨跌%</th><th>领涨</th></tr></thead>
+      <tbody id="tfConBody"></tbody>
+    </table>
+  </div>
+
+  <div class="charts-grid">
+    <div class="tf-card">
+      <h2>全市场行业流入 TOP10 <span class="badge">新浪 · 今日</span></h2>
+      <table class="tf-table">
+        <thead><tr><th>板块</th><th>今日净流入(亿)</th><th>涨跌%</th><th>领涨</th></tr></thead>
+        <tbody id="tfTopBody"></tbody>
+      </table>
+    </div>
+    <div class="tf-card">
+      <h2>全市场行业流出 <span class="badge">新浪 · 今日净额靠后</span></h2>
+      <table class="tf-table">
+        <thead><tr><th>板块</th><th>今日净流入(亿)</th><th>涨跌%</th><th>领涨</th></tr></thead>
+        <tbody id="tfBotBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tf-card">
+    <h2>全市场行业 · 流入前五与流出前五 <span class="badge">新浪 · 今日</span></h2>
+    <div class="chart-wrap" style="height:360px"><canvas id="tfMktChart"></canvas></div>
+  </div>
+
+  <div class="tf-card">
+    <h2>东财五板块 · 窗口内对比 <span class="badge">Tushare moneyflow_ind_dc · 截至 10/14</span></h2>
+    <p class="tf-insight"><strong>窗口截至 10/14，非完整 10 日。</strong>10/14 当日不是 10/23 今日。窗口内 5 日是 10/08、10/09、10/12、10/13、10/14 五个交易日，不含 10/15–10/23。窗口累计是 09/28–10/14 共 8 个交易日。10/15 起 Tushare 报 IP数量超限（最大数量为10个），日序停在这里。</p>
+    <div class="chart-wrap" style="height:320px"><canvas id="tfWinChart"></canvas></div>
+    <table class="tf-table" style="margin-top:12px">
+      <thead><tr>
+        <th>板块</th>
+        <th>10/14 当日</th>
+        <th>窗口内5日</th>
+        <th>窗口8日累计</th>
+        <th>8日超大单</th>
+        <th>8日大单</th>
+        <th>8日中单</th>
+        <th>8日小单</th>
+      </tr></thead>
+      <tbody id="tfWinBody"></tbody>
+    </table>
+    <p class="tf-insight" id="tfWindowNote"></p>
+  </div>
+
+  <div class="tf-card">
+    <h2>主力净流入日序 <span class="badge">Tushare · 09/28–10/14 · 亿元</span></h2>
+    <div class="chart-wrap" style="height:320px"><canvas id="tfDailyChart"></canvas></div>
+    <table class="tf-table" id="tfDailyTable"></table>
   </div>
 </div>
 
@@ -882,7 +949,7 @@
 </div>
 </div>
 
-<div class="footer">数据：收益簿权威 2026-10-22（累计 +342,571 · 22.26% · 纪律第8版「保持弹性」）· 资讯 2026-10-23 · 板块主力净额暂缺 · 不构成投资建议</div>
+<div class="footer">数据：收益簿权威 2026-10-22（累计 +342,571 · 22.26% · 纪律第8版「保持弹性」）· 资讯 2026-10-23 · 科技资金流今日新浪、日序截至 10/14 · 不构成投资建议</div>
 
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
@@ -1581,10 +1648,280 @@ if('serviceWorker' in navigator){
 
 
 
-var tfCharts=[];var tfInited=false;
+/* 今日截面：新浪 MoneyFlow.ssl_bkzj_bk，2026-10-23。亿元数字只来自该包。 */
+const TF_SINA = {"as_of":"2026-10-23","source":"sina MoneyFlow.ssl_bkzj_bk","unit":"亿元","note":"新浪板块资金流（今日）。Tushare moneyflow_ind_dc 当前因账号 IP 数超限(max 10)暂不可用，本包用新浪公开接口顶上；后续 IP 恢复可切回 Tushare 日序列。","tushare_status":"IP数量超限，最大数量为10个","industry_tech":[{"name":"电子信息","net_yi":25.25,"pct":-2.47,"turnover_yi":210.73,"lead":"榕基软件","in_yi":385.78,"out_yi":360.53,"ratio":3.19},{"name":"汽车制造","net_yi":-2.53,"pct":-0.62,"turnover_yi":96.7,"lead":"航天晨光","in_yi":93.73,"out_yi":96.26,"ratio":-1.26},{"name":"传媒娱乐","net_yi":-3.38,"pct":-3.42,"turnover_yi":246.22,"lead":"长动退","in_yi":40.31,"out_yi":43.69,"ratio":-3.9},{"name":"电子器件","net_yi":-18.24,"pct":-3.2,"turnover_yi":196.35,"lead":"力源信息","in_yi":339.21,"out_yi":357.45,"ratio":-2.44}],"concept_tech":[{"name":"新能源","net_yi":10.44,"pct":-0.98,"turnover_yi":114.75,"lead":"大港股份","in_yi":97.06,"out_yi":86.61,"ratio":5.45},{"name":"固态电池","net_yi":10.0,"pct":1.63,"turnover_yi":133.16,"lead":"宁德时代","in_yi":101.26,"out_yi":91.26,"ratio":4.69},{"name":"锂电池","net_yi":8.49,"pct":-1.22,"turnover_yi":155.81,"lead":"大港股份","in_yi":166.91,"out_yi":158.42,"ratio":2.48},{"name":"钠电池","net_yi":6.04,"pct":2.31,"turnover_yi":144.85,"lead":"宁德时代","in_yi":82.02,"out_yi":75.98,"ratio":3.41},{"name":"光伏概念","net_yi":4.78,"pct":-2.52,"turnover_yi":145.05,"lead":"大港股份","in_yi":218.21,"out_yi":213.43,"ratio":1.03},{"name":"国产软件","net_yi":4.4,"pct":-2.41,"turnover_yi":170.09,"lead":"榕基软件","in_yi":30.89,"out_yi":26.49,"ratio":7.32},{"name":"消费电子","net_yi":0.41,"pct":-2.82,"turnover_yi":151.83,"lead":"精研科技","in_yi":92.74,"out_yi":92.33,"ratio":0.2},{"name":"钒电池","net_yi":-0.82,"pct":-1.55,"turnover_yi":88.98,"lead":"龙佰集团","in_yi":22.27,"out_yi":23.09,"ratio":-1.74},{"name":"华为汽车","net_yi":-2.18,"pct":-2.21,"turnover_yi":169.35,"lead":"兆威机电","in_yi":92.28,"out_yi":94.46,"ratio":-1.09},{"name":"HIT电池","net_yi":-2.89,"pct":-4.03,"turnover_yi":171.3,"lead":"*ST嘉寓","in_yi":31.46,"out_yi":34.34,"ratio":-4.03},{"name":"HJT电池","net_yi":-2.89,"pct":-4.03,"turnover_yi":171.3,"lead":"*ST嘉寓","in_yi":31.46,"out_yi":34.34,"ratio":-4.03},{"name":"BC电池","net_yi":-3.01,"pct":-3.34,"turnover_yi":177.92,"lead":"爱旭股份","in_yi":38.95,"out_yi":41.96,"ratio":-3.44},{"name":"汽车电子","net_yi":-5.33,"pct":-4.11,"turnover_yi":194.81,"lead":"华域汽车","in_yi":56.33,"out_yi":61.66,"ratio":-4.16},{"name":"电子支付","net_yi":-6.78,"pct":-3.28,"turnover_yi":225.75,"lead":"南天信息","in_yi":49.88,"out_yi":56.65,"ratio":-5.95},{"name":"光伏","net_yi":-9.65,"pct":-1.53,"turnover_yi":138.33,"lead":"林州重机","in_yi":291.46,"out_yi":301.11,"ratio":-1.54}],"industry_top10":[{"name":"机械行业","net_yi":25.54,"pct":-2.42,"lead":"林州重机"},{"name":"电子信息","net_yi":25.25,"pct":-2.47,"lead":"榕基软件"},{"name":"酿酒行业","net_yi":20.26,"pct":1.88,"lead":"古井贡酒"},{"name":"有色金属","net_yi":11.98,"pct":-1.19,"lead":"紫金矿业"},{"name":"金融行业","net_yi":6.83,"pct":-0.28,"lead":"XD中国太"},{"name":"房地产","net_yi":5.11,"pct":-1.42,"lead":"大名城"},{"name":"商业百货","net_yi":4.28,"pct":-0.32,"lead":"上海九百"},{"name":"食品行业","net_yi":2.77,"pct":0.84,"lead":"天润乳业"},{"name":"塑料制品","net_yi":2.45,"pct":-2.35,"lead":"慈文传媒"},{"name":"交通运输","net_yi":2.11,"pct":1.01,"lead":"XD中远海"}],"industry_bottom10":[{"name":"电子器件","net_yi":-18.24,"pct":-3.2,"lead":"力源信息"},{"name":"化工行业","net_yi":-5.89,"pct":-2.24,"lead":"永新股份"},{"name":"电力行业","net_yi":-5.35,"pct":-0.93,"lead":"国投电力"},{"name":"传媒娱乐","net_yi":-3.38,"pct":-3.42,"lead":"长动退"},{"name":"玻璃行业","net_yi":-2.78,"pct":-4.16,"lead":"山东药玻"},{"name":"农林牧渔","net_yi":-2.75,"pct":-0.96,"lead":"统一股份"},{"name":"综合行业","net_yi":-2.68,"pct":-1.98,"lead":"东方盛虹"},{"name":"汽车制造","net_yi":-2.53,"pct":-0.62,"lead":"航天晨光"},{"name":"造纸行业","net_yi":-2.5,"pct":-2.3,"lead":"太阳纸业"},{"name":"服装鞋类","net_yi":-2.27,"pct":-0.99,"lead":"朗姿股份"}]};
+/* 日序：Tushare moneyflow_ind_dc。窗口 2026-09-28～10-14。mcp_today 是 10/14，不是 10/23。mcp_10d 是 8 日累计，非完整 10 日。 */
+const DATA = {"半导体":{"series":[{"date":"09/28","main":-153.33,"elg":-134.38,"lg":-18.96,"md":67.0,"sm":85.91,"cum_main":-153.33,"retail":153.33,"cum_retail":153.33},{"date":"09/29","main":6.87,"elg":9.14,"lg":-2.26,"md":2.09,"sm":-9.23,"cum_main":-146.46,"retail":-6.87,"cum_retail":146.46},{"date":"09/30","main":-101.92,"elg":-70.51,"lg":-31.4,"md":43.38,"sm":58.26,"cum_main":-248.38,"retail":101.92,"cum_retail":248.38},{"date":"10/08","main":-159.85,"elg":-98.13,"lg":-61.71,"md":67.34,"sm":92.23,"cum_main":-408.23,"retail":159.85,"cum_retail":408.23},{"date":"10/09","main":-41.29,"elg":-43.98,"lg":2.68,"md":29.34,"sm":11.68,"cum_main":-449.52,"retail":41.29,"cum_retail":449.52},{"date":"10/12","main":-22.92,"elg":-26.42,"lg":3.5,"md":-2.47,"sm":25.16,"cum_main":-472.44,"retail":22.92,"cum_retail":472.44},{"date":"10/13","main":2.14,"elg":-5.21,"lg":7.35,"md":26.58,"sm":-28.86,"cum_main":-470.3,"retail":-2.14,"cum_retail":470.3},{"date":"10/14","main":-73.34,"elg":-53.1,"lg":-20.24,"md":28.9,"sm":44.35,"cum_main":-543.64,"retail":73.34,"cum_retail":543.64}],"total_main":-543.64,"total_retail":543.64,"total_elg":-422.59,"total_lg":-121.04,"total_md":262.16,"total_sm":279.5,"n_days":8,"mcp_today":-73.34,"mcp_5d":-295.26,"mcp_10d":-543.64,"has_daily":true,"as_of":"10/14","window_start":"09/28"},"通信设备":{"series":[{"date":"09/28","main":-168.98,"elg":-113.22,"lg":-55.76,"md":75.49,"sm":92.96,"cum_main":-168.98,"retail":168.98,"cum_retail":168.98},{"date":"09/29","main":-2.04,"elg":2.43,"lg":-4.48,"md":3.92,"sm":-1.6,"cum_main":-171.02,"retail":2.04,"cum_retail":171.02},{"date":"09/30","main":-3.7,"elg":1.65,"lg":-5.35,"md":0.58,"sm":3.4,"cum_main":-174.72,"retail":3.7,"cum_retail":174.72},{"date":"10/08","main":-97.31,"elg":-50.31,"lg":-47.0,"md":8.7,"sm":87.67,"cum_main":-272.03,"retail":97.31,"cum_retail":272.03},{"date":"10/09","main":-38.64,"elg":-17.8,"lg":-20.84,"md":2.71,"sm":36.15,"cum_main":-310.67,"retail":38.64,"cum_retail":310.67},{"date":"10/12","main":-62.26,"elg":-27.99,"lg":-34.28,"md":8.75,"sm":53.53,"cum_main":-372.93,"retail":62.26,"cum_retail":372.93},{"date":"10/13","main":1.13,"elg":3.54,"lg":-2.41,"md":-4.95,"sm":4.48,"cum_main":-371.8,"retail":-1.13,"cum_retail":371.8},{"date":"10/14","main":-62.37,"elg":-37.88,"lg":-24.5,"md":20.61,"sm":41.31,"cum_main":-434.17,"retail":62.37,"cum_retail":434.17}],"total_main":-434.17,"total_retail":434.17,"total_elg":-239.58,"total_lg":-194.62,"total_md":115.81,"total_sm":317.9,"n_days":8,"mcp_today":-62.37,"mcp_5d":-259.45,"mcp_10d":-434.17,"has_daily":true,"as_of":"10/14","window_start":"09/28"},"消费电子":{"series":[{"date":"09/28","main":-34.12,"elg":-24.83,"lg":-9.29,"md":11.11,"sm":22.78,"cum_main":-34.12,"retail":34.12,"cum_retail":34.12},{"date":"09/29","main":-1.25,"elg":-1.62,"lg":0.38,"md":-1.21,"sm":2.49,"cum_main":-35.37,"retail":1.25,"cum_retail":35.37},{"date":"09/30","main":-7.25,"elg":-4.85,"lg":-2.4,"md":0.18,"sm":6.98,"cum_main":-42.62,"retail":7.25,"cum_retail":42.62},{"date":"10/08","main":-16.44,"elg":-7.23,"lg":-9.2,"md":0.24,"sm":16.06,"cum_main":-59.06,"retail":16.44,"cum_retail":59.06},{"date":"10/09","main":-20.03,"elg":-12.28,"lg":-7.75,"md":2.0,"sm":18.13,"cum_main":-79.09,"retail":20.03,"cum_retail":79.09},{"date":"10/12","main":-17.63,"elg":-7.12,"lg":-10.51,"md":-2.43,"sm":19.94,"cum_main":-96.72,"retail":17.63,"cum_retail":96.72},{"date":"10/13","main":-6.28,"elg":-1.4,"lg":-4.88,"md":-2.96,"sm":9.2,"cum_main":-103.0,"retail":6.28,"cum_retail":103.0},{"date":"10/14","main":-19.08,"elg":-11.26,"lg":-7.83,"md":2.91,"sm":16.08,"cum_main":-122.08,"retail":19.08,"cum_retail":122.08}],"total_main":-122.08,"total_retail":122.08,"total_elg":-70.59,"total_lg":-51.48,"total_md":9.84,"total_sm":111.66,"n_days":8,"mcp_today":-19.08,"mcp_5d":-79.46,"mcp_10d":-122.08,"has_daily":true,"as_of":"10/14","window_start":"09/28"},"元件":{"series":[{"date":"09/28","main":-97.38,"elg":-61.57,"lg":-35.81,"md":-0.29,"sm":96.99,"cum_main":-97.38,"retail":97.38,"cum_retail":97.38},{"date":"09/29","main":29.21,"elg":20.04,"lg":9.18,"md":-6.1,"sm":-22.93,"cum_main":-68.17,"retail":-29.21,"cum_retail":68.17},{"date":"09/30","main":-39.33,"elg":-21.51,"lg":-17.82,"md":-3.36,"sm":42.34,"cum_main":-107.5,"retail":39.33,"cum_retail":107.5},{"date":"10/08","main":-15.64,"elg":-13.1,"lg":-2.54,"md":-0.41,"sm":15.71,"cum_main":-123.14,"retail":15.64,"cum_retail":123.14},{"date":"10/09","main":-58.88,"elg":-27.84,"lg":-31.05,"md":-0.81,"sm":59.49,"cum_main":-182.02,"retail":58.88,"cum_retail":182.02},{"date":"10/12","main":-40.24,"elg":-21.37,"lg":-18.86,"md":-2.78,"sm":42.78,"cum_main":-222.26,"retail":40.24,"cum_retail":222.26},{"date":"10/13","main":13.67,"elg":5.24,"lg":8.43,"md":-3.75,"sm":-9.64,"cum_main":-208.59,"retail":-13.67,"cum_retail":208.59},{"date":"10/14","main":12.77,"elg":3.47,"lg":9.3,"md":-8.93,"sm":-3.8,"cum_main":-195.82,"retail":-12.77,"cum_retail":195.82}],"total_main":-195.82,"total_retail":195.82,"total_elg":-116.64,"total_lg":-79.17,"total_md":-26.43,"total_sm":220.94,"n_days":8,"mcp_today":12.77,"mcp_5d":-88.32,"mcp_10d":-195.82,"has_daily":true,"as_of":"10/14","window_start":"09/28"},"光学光电子":{"series":[{"date":"09/28","main":-6.67,"elg":-2.49,"lg":-4.18,"md":1.49,"sm":5.32,"cum_main":-6.67,"retail":6.67,"cum_retail":6.67},{"date":"09/29","main":-11.18,"elg":-8.23,"lg":-2.94,"md":-0.94,"sm":11.73,"cum_main":-17.85,"retail":11.18,"cum_retail":17.85},{"date":"09/30","main":7.49,"elg":5.76,"lg":1.73,"md":-1.4,"sm":-6.12,"cum_main":-10.36,"retail":-7.49,"cum_retail":10.36},{"date":"10/08","main":-18.89,"elg":-13.3,"lg":-5.59,"md":0.94,"sm":17.18,"cum_main":-29.25,"retail":18.89,"cum_retail":29.25},{"date":"10/09","main":-8.94,"elg":-6.21,"lg":-2.73,"md":-0.08,"sm":9.06,"cum_main":-38.19,"retail":8.94,"cum_retail":38.19},{"date":"10/12","main":-7.82,"elg":-5.16,"lg":-2.66,"md":3.62,"sm":3.84,"cum_main":-46.01,"retail":7.82,"cum_retail":46.01},{"date":"10/13","main":3.97,"elg":3.4,"lg":0.57,"md":-2.98,"sm":-1.05,"cum_main":-42.04,"retail":-3.97,"cum_retail":42.04},{"date":"10/14","main":-14.85,"elg":-11.04,"lg":-3.81,"md":4.95,"sm":9.84,"cum_main":-56.89,"retail":14.85,"cum_retail":56.89}],"total_main":-56.89,"total_retail":56.89,"total_elg":-37.27,"total_lg":-19.61,"total_md":5.6,"total_sm":49.8,"n_days":8,"mcp_today":-14.85,"mcp_5d":-46.53,"mcp_10d":-56.89,"has_daily":true,"as_of":"10/14","window_start":"09/28"}};
+
+/* 今日截面：新浪 MoneyFlow.ssl_bkzj_bk，2026-10-23。亿元数字只来自数据包。 */
+/* 日序：Tushare moneyflow_ind_dc（行业）。窗口 2026-09-28～10-14，共 8 个交易日。
+   mcp_today = 10/14 当日，不是 10/23 今日。
+   mcp_5d = 窗口内最后 5 个交易日（10/08–10/14）。
+   mcp_10d = 窗口 8 日累计，非完整 10 日。缺 10/15–10/23。 */
+var tfCharts=[];
+var tfInited=false;
+
+function tfRound(v){
+  var n=Number(v);
+  if(!isFinite(n))return 0;
+  return Math.round(n*100)/100;
+}
+function tfSum(arr){
+  var s=0;
+  for(var i=0;i<arr.length;i++)s+=Number(arr[i])||0;
+  return tfRound(s);
+}
+function tfYi(v){
+  var n=tfRound(v);
+  return (n>0?'+':'')+n.toFixed(2);
+}
+function tfPct(v){
+  var n=tfRound(v);
+  return (n>0?'+':'')+n.toFixed(2)+'%';
+}
+function tfCls(v){
+  var n=Number(v);
+  return n>0?'pos':(n<0?'neg':'');
+}
+function tfNum(v){
+  return tfRound(v).toFixed(2);
+}
+function tfSumKey(series,key){
+  var arr=[];
+  for(var i=0;i<series.length;i++)arr.push(series[i][key]);
+  return tfSum(arr);
+}
+function tfSetText(id,text){
+  var el=document.getElementById(id);
+  if(el)el.textContent=text;
+}
+function tfClear(id){
+  var el=document.getElementById(id);
+  if(el)el.innerHTML='';
+  return el;
+}
+
+var tfYiLabels={id:'tfYiLabels',afterDatasetsDraw:function(chart){
+  if(chart.options.indexAxis!=='y')return;
+  var ctx=chart.ctx;
+  var meta=chart.getDatasetMeta(0);
+  var xScale=chart.scales.x;
+  ctx.save();
+  var zx=xScale.getPixelForValue(0);
+  ctx.strokeStyle='rgba(255,255,255,.45)';
+  ctx.lineWidth=1.25;
+  ctx.beginPath();
+  ctx.moveTo(zx,chart.chartArea.top);
+  ctx.lineTo(zx,chart.chartArea.bottom);
+  ctx.stroke();
+  ctx.font='10px "JetBrains Mono",ui-monospace,monospace';
+  ctx.textBaseline='middle';
+  meta.data.forEach(function(bar,i){
+    var v=Number(chart.data.datasets[0].data[i]);
+    var txt=tfYi(v);
+    ctx.fillStyle=v>=0?'#f87171':'#4ade80';
+    if(v>=0){ctx.textAlign='left';ctx.fillText(txt,bar.x+4,bar.y);}
+    else{ctx.textAlign='right';ctx.fillText(txt,bar.x-4,bar.y);}
+  });
+  ctx.restore();
+}};
+
+function tfHBar(canvasId,labels,values){
+  if(typeof Chart==='undefined')return;
+  var el=document.getElementById(canvasId);
+  if(!el)return;
+  var prev=Chart.getChart(el);
+  if(prev)prev.destroy();
+  var colors=values.map(function(v){return v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)';});
+  var chart=new Chart(el,{
+    type:'bar',
+    data:{labels:labels,datasets:[{data:values,backgroundColor:colors,borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      indexAxis:'y',
+      layout:{padding:{left:52,right:62,top:4,bottom:4}},
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:function(ctx){return tfYi(ctx.parsed.x)+' 亿';}}}
+      },
+      scales:{
+        x:{ticks:{callback:function(v){return (Number(v)>0?'+':'')+v;},font:{size:10}},grid:{color:'rgba(148,163,184,.12)'},border:{color:'rgba(148,163,184,.3)'}},
+        y:{grid:{display:false},ticks:{font:{size:11}},border:{display:false}}
+      }
+    },
+    plugins:[tfYiLabels]
+  });
+  tfCharts.push(chart);
+}
+
+function tfFillNetTable(tbodyId,rows){
+  var tb=tfClear(tbodyId);
+  if(!tb)return;
+  rows.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+r.name+'</td>'+
+      '<td class="'+tfCls(r.net_yi)+'">'+tfYi(r.net_yi)+'</td>'+
+      '<td class="'+tfCls(r.pct)+'">'+tfPct(r.pct)+'</td>'+
+      '<td>'+r.lead+'</td>';
+    tb.appendChild(tr);
+  });
+}
+
+function tfRenderTables(){
+  tfFillNetTable('tfIndBody',TF_SINA.industry_tech);
+  tfFillNetTable('tfConBody',TF_SINA.concept_tech);
+  tfFillNetTable('tfTopBody',TF_SINA.industry_top10);
+  tfFillNetTable('tfBotBody',TF_SINA.industry_bottom10);
+
+  var names=Object.keys(DATA);
+  var winTb=tfClear('tfWinBody');
+  names.forEach(function(name){
+    var ser=DATA[name].series;
+    var mains=ser.map(function(d){return d.main;});
+    var day=tfRound(ser[ser.length-1].main);
+    var d5=tfSum(mains.slice(-5));
+    var d8=tfSum(mains);
+    var elg=tfSumKey(ser,'elg');
+    var lg=tfSumKey(ser,'lg');
+    var md=tfSumKey(ser,'md');
+    var sm=tfSumKey(ser,'sm');
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+name+'</td>'+
+      '<td class="'+tfCls(day)+'">'+tfYi(day)+'</td>'+
+      '<td class="'+tfCls(d5)+'">'+tfYi(d5)+'</td>'+
+      '<td class="'+tfCls(d8)+'">'+tfYi(d8)+'</td>'+
+      '<td class="'+tfCls(elg)+'">'+tfYi(elg)+'</td>'+
+      '<td class="'+tfCls(lg)+'">'+tfYi(lg)+'</td>'+
+      '<td class="'+tfCls(md)+'">'+tfYi(md)+'</td>'+
+      '<td class="'+tfCls(sm)+'">'+tfYi(sm)+'</td>';
+    if(winTb)winTb.appendChild(tr);
+  });
+
+  var dates=DATA[names[0]].series.map(function(d){return d.date;});
+  var daily=document.getElementById('tfDailyTable');
+  if(daily){
+    var head='<tr><th>板块</th>'+dates.map(function(d){return '<th>'+d+'</th>';}).join('')+'</tr>';
+    var body=names.map(function(name){
+      var cells=DATA[name].series.map(function(d){
+        return '<td class="'+tfCls(d.main)+'">'+tfYi(d.main)+'</td>';
+      }).join('');
+      return '<tr><td>'+name+'</td>'+cells+'</tr>';
+    }).join('');
+    daily.innerHTML='<thead>'+head+'</thead><tbody>'+body+'</tbody>';
+  }
+
+  var ind=TF_SINA.industry_tech.slice().sort(function(a,b){return b.net_yi-a.net_yi;});
+  var con=TF_SINA.concept_tech.slice().sort(function(a,b){return b.net_yi-a.net_yi;});
+  var semi=tfSum(DATA['半导体'].series.map(function(d){return d.main;}));
+  var top3=con.slice(0,3).map(function(r){return r.name+' '+tfYi(r.net_yi);}).join('、');
+  tfSetText('tfTodayNote',
+    '今日行业（新浪）：'+ind[0].name+' '+tfYi(ind[0].net_yi)+' 亿居前，'+ind[ind.length-1].name+' '+tfYi(ind[ind.length-1].net_yi)+' 亿居后。概念净流入靠前：'+top3+'。');
+  tfSetText('tfWindowNote',
+    '东财窗口内半导体 8 日主力累计 '+tfYi(semi)+' 亿（截至 10/14，非完整 10 日）。这与新浪今日榜不是同一口径，消费电子两边都有名字，数字不能横比。');
+}
+
+function tfRenderCharts(){
+  if(typeof Chart==='undefined')return;
+  tfCharts.forEach(function(c){try{c.destroy();}catch(e){}});
+  tfCharts=[];
+  var ind=TF_SINA.industry_tech;
+  tfHBar('tfIndChart',ind.map(function(r){return r.name;}),ind.map(function(r){return r.net_yi;}));
+  var con=TF_SINA.concept_tech;
+  tfHBar('tfConChart',con.map(function(r){return r.name;}),con.map(function(r){return r.net_yi;}));
+  var mkt=TF_SINA.industry_top10.slice(0,5).concat(TF_SINA.industry_bottom10.slice(0,5));
+  mkt.sort(function(a,b){return b.net_yi-a.net_yi;});
+  tfHBar('tfMktChart',mkt.map(function(r){return r.name;}),mkt.map(function(r){return r.net_yi;}));
+
+  var names=Object.keys(DATA);
+  var dates=DATA[names[0]].series.map(function(d){return d.date;});
+  var day=[],d5=[],d8=[];
+  names.forEach(function(name){
+    var mains=DATA[name].series.map(function(d){return d.main;});
+    day.push(tfRound(mains[mains.length-1]));
+    d5.push(tfSum(mains.slice(-5)));
+    d8.push(tfSum(mains));
+  });
+  var winEl=document.getElementById('tfWinChart');
+  if(winEl){
+    var prevWin=Chart.getChart(winEl);
+    if(prevWin)prevWin.destroy();
+    tfCharts.push(new Chart(winEl,{
+      type:'bar',
+      data:{
+        labels:names,
+        datasets:[
+          {label:'10/14 当日',data:day,backgroundColor:'rgba(96,165,250,.9)',borderRadius:3,borderSkipped:false},
+          {label:'窗口内5日（10/08–10/14）',data:d5,backgroundColor:'rgba(251,191,36,.9)',borderRadius:3,borderSkipped:false},
+          {label:'窗口8日累计（截至10/14，非完整10日）',data:d8,backgroundColor:'rgba(248,113,113,.9)',borderRadius:3,borderSkipped:false}
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{labels:{boxWidth:12,font:{size:11}}},
+          tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+' '+tfYi(ctx.parsed.y)+' 亿';}}}
+        },
+        scales:{
+          x:{grid:{display:false},ticks:{font:{size:11}}},
+          y:{ticks:{callback:function(v){return (Number(v)>0?'+':'')+v;},font:{size:10}},grid:{color:'rgba(148,163,184,.12)'}}
+        }
+      }
+    }));
+  }
+
+  var palette=['#f87171','#fbbf24','#60a5fa','#a78bfa','#34d399'];
+  var dailyEl=document.getElementById('tfDailyChart');
+  if(dailyEl){
+    var prevDaily=Chart.getChart(dailyEl);
+    if(prevDaily)prevDaily.destroy();
+    tfCharts.push(new Chart(dailyEl,{
+      type:'line',
+      data:{
+        labels:dates,
+        datasets:names.map(function(name,i){
+          return {
+            label:name,
+            data:DATA[name].series.map(function(d){return d.main;}),
+            borderColor:palette[i%palette.length],
+            backgroundColor:palette[i%palette.length],
+            tension:.25,
+            pointRadius:3,
+            borderWidth:2,
+            fill:false
+          };
+        })
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+          legend:{labels:{boxWidth:12,font:{size:11}}},
+          tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+' '+tfYi(ctx.parsed.y)+' 亿';}}}
+        },
+        scales:{
+          x:{grid:{display:false},ticks:{font:{size:10}}},
+          y:{title:{display:true,text:'主力净额（亿）',color:'#94a3b8',font:{size:11}},ticks:{callback:function(v){return (Number(v)>0?'+':'')+v;},font:{size:10}},grid:{color:'rgba(148,163,184,.12)'}}
+        }
+      }
+    }));
+  }
+}
+
 function initTechFlow(){
-  if(tfInited)return;
-  tfInited=true;
+  if(tfInited){
+    tfCharts.forEach(function(c){try{c.resize();}catch(e){}});
+    return;
+  }
+  try{
+    tfRenderTables();
+    tfRenderCharts();
+    tfInited=true;
+    setTimeout(function(){tfCharts.forEach(function(c){try{c.resize();}catch(e){}});},60);
+  }catch(err){
+    console.error(err);
+  }
 }
 
 window.addEventListener('resize',function(){tfCharts.forEach(function(c){try{c.resize();}catch(e){}})});
@@ -1655,7 +1992,7 @@ function initSemicon(){
     '<text x="465" y="325" fill="#3b82f6" font-size="8" text-anchor="middle">018036 ¥14.8万 (新能源车)</text>'+
     // 底部说明
     '<text x="300" y="360" fill="#94a3b8" font-size="9" text-anchor="middle">2026-10-23截图：出海QDII约103.8万，IC+AI约64.1万，现金约0.4万</text>'+
-    '<text x="300" y="375" fill="#94a3b8" font-size="8" text-anchor="middle">板块主力净额 2026-10-23 暂缺 · 勿用 8/17 或 9/18 旧数字</text>'+
+    '<text x="300" y="375" fill="#94a3b8" font-size="8" text-anchor="middle">资金流见「科技资金流」：今日新浪；东财日序截至10/14（非完整10日）</text>'+
     '<text x="300" y="400" fill="#475569" font-size="7" text-anchor="middle">蓝色实线框=当前持仓 | 灰色虚线框=已清仓环节 | 红色标签=QDII | 蓝色标签=A股</text>';
 }
 
