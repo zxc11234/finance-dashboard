@@ -1135,7 +1135,7 @@
 
 <div class="footer">数据：收益簿权威 2026-11-04（累计 +157,541 · 10.24% · 纪律第8版「保持弹性」）· 市场与资讯 2026-11-04 收盘 · 科技资金流 Tushare 日序截至 11/04，新浪截面仍是 10/23 · QDII 净值 11/02 · 持仓截图 10/23 · 不构成投资建议</div>
 
-<script src="redemptions.js?v=20261104-v80-alloc-ui"></script>
+<script src="redemptions.js?v=20261104-v81-alloc-axis"></script>
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
 // P3: Chart.js tooltip 全局统一样式（各图只需再写 callbacks）
@@ -1404,6 +1404,14 @@ function initOverview(){
   const srt=fn.map((n,i)=>({n,v:fp[i]})).sort((a,b)=>b.v-a.v);
   const sNames=srt.map(o=>o.n),sVals=srt.map(o=>o.v);
   const barColors=sVals.map(v=>v>=0?ALLOC_UP_BAR:ALLOC_DN_BAR);
+  // 对称轴：max(|收益率|)×1.1 再向上取整到刻度。硬边界盖住真值，不再把 +54.5% 裁在 ±30。
+  const allocPeak=sVals.reduce((m,v)=>Math.max(m,Math.abs(v)),0);
+  const allocTarget=allocPeak*1.1||1;
+  const allocRough=allocTarget/3;
+  const allocPow=Math.pow(10,Math.floor(Math.log10(allocRough)));
+  const allocFrac=allocRough/allocPow;
+  const allocStep=(allocFrac<=1?1:allocFrac<=2?2:allocFrac<=5?5:10)*allocPow;
+  const allocSpan=Math.ceil((allocTarget-1e-9)/allocStep)*allocStep;
   const allocNarrow=window.matchMedia('(max-width:900px)').matches;
   const labelGutter=allocNarrow?6:58;
   const todayBarLabels={id:'todayBarLabels',afterDraw(chart){
@@ -1453,8 +1461,8 @@ function initOverview(){
       },
       scales:{
         x:{
-          min:-30,max:30,
-          ticks:{stepSize:10,color:ALLOC_FAINT,callback:function(v){return (v>0?'+':'')+v+'%';},font:{size:12,family:ALLOC_FONT}},
+          min:-allocSpan,max:allocSpan,
+          ticks:{stepSize:allocStep,color:ALLOC_FAINT,callback:function(v){return (v>0?'+':'')+v+'%';},font:{size:12,family:ALLOC_FONT}},
           grid:{color:function(ctx){return ctx.tick.value===0?'rgba(161,167,179,.4)':'rgba(107,114,128,.18)';}},
           border:{display:false}
         },
@@ -1973,7 +1981,7 @@ applyHash();
 // to purge stale cached pages from the buggy cache-first strategy.
 // SW: 版本化注册 — sw.js 内 CACHE_VERSION 每次部署+1，旧缓存自动失效
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js?v=20261104-v80-alloc-ui').then(reg=>{
+  navigator.serviceWorker.register('sw.js?v=20261104-v81-alloc-axis').then(reg=>{
     reg.addEventListener('updatefound',()=>{
       const nw=reg.installing;
       nw&&nw.addEventListener('statechange',()=>{ if(nw.state==='activated') location.reload(); });
