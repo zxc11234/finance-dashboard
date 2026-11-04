@@ -1,5 +1,5 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20261103-v73-ledger-1102';
+const CACHE_VERSION = '20261104-v74-ledger-1103';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = [
