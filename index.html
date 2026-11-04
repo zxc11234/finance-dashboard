@@ -50,6 +50,58 @@
   .chart-card h3, .table-card h3 { font-size:0.92rem; margin-bottom:10px; color:var(--text); font-weight:600; letter-spacing:.3px; border-left:3px solid var(--blue); padding-left:8px; }
   .chart-wrap { position:relative; height:280px; width:100%; will-change:transform; }
   .chart-wrap.wide { height:360px; }
+  /* 结构页图表：主题色、字号、卡片（仅 #tab-alloc） */
+  #tab-alloc .alloc-board{
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr);
+    grid-template-areas:"sun returns" "sun trend";
+    gap:14px;
+    margin-bottom:16px;
+  }
+  #tab-alloc .alloc-sunburst{grid-area:sun;display:flex;flex-direction:column}
+  #tab-alloc .alloc-returns-card{grid-area:returns}
+  #tab-alloc .alloc-trend-card{grid-area:trend}
+  #tab-alloc .chart-card{
+    background:#141A26;
+    border:1px solid rgba(255,255,255,.06);
+    padding:20px;
+    box-shadow:none;
+  }
+  #tab-alloc .chart-card:hover{border-color:rgba(91,141,239,.35)}
+  #tab-alloc .chart-card h3{
+    font-size:16px;
+    line-height:1.35;
+    color:#E6EAF0;
+    font-weight:600;
+    margin-bottom:12px;
+    border-left:3px solid #5B8DEF;
+    padding-left:8px;
+  }
+  #tab-alloc .alloc-sun-body{flex:1;display:flex;align-items:center;gap:8px 16px;min-height:0}
+  #tab-alloc .alloc-sun-canvas{position:relative;width:300px;height:520px;flex:0 0 300px}
+  #tab-alloc .alloc-legend{
+    flex:1;min-width:0;
+    display:grid;
+    grid-template-columns:12px minmax(0,1fr) 5em 3.6em;
+    column-gap:8px;row-gap:4px;align-items:center;
+    font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif;
+    font-variant-numeric:tabular-nums;
+    font-feature-settings:"tnum" 1;
+  }
+  #tab-alloc .alloc-leg-gap{grid-column:1 / -1;height:8px}
+  #tab-alloc .alloc-swatch{width:10px;height:10px;border-radius:2px;justify-self:center}
+  #tab-alloc .alloc-leg-head{font-size:14px;font-weight:600;color:#E6EAF0}
+  #tab-alloc .alloc-leg-fund{font-size:13px;color:#C5CCD6;padding-left:10px}
+  #tab-alloc .alloc-num{font-size:14px;text-align:right;color:#E6EAF0;font-variant-numeric:tabular-nums}
+  #tab-alloc .alloc-leg-fund-num{font-size:14px;text-align:right;color:#C5CCD6;font-variant-numeric:tabular-nums}
+  #tab-alloc .alloc-returns-card .chart-wrap{height:392px}
+  #tab-alloc .alloc-trend-card .chart-wrap{height:340px}
+  #tab-alloc .alloc-note{margin-top:10px;font-size:13px;line-height:1.5;color:#8B95A5}
+  @media(max-width:900px){
+    #tab-alloc .alloc-board{grid-template-columns:1fr;grid-template-areas:"sun" "returns" "trend"}
+    #tab-alloc .alloc-sun-body{flex-direction:column;align-items:stretch}
+    #tab-alloc .alloc-sun-canvas{width:100%;flex:none;height:320px}
+  }
   .table-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px; overflow-x:auto; transition:border-color .18s ease; }
   .table-card:hover { border-color:rgba(59,130,246,.3); }
   .news-meta { color:var(--muted); font-size:0.72rem; font-weight:400; }
@@ -589,14 +641,20 @@
 
 </div>
 <div id="tab-alloc" style="display:none;">
-<div class="charts-grid">
-    <div class="chart-card"><h3>🥧 资产配置</h3><div class="chart-wrap"><canvas id="allocPie"></canvas></div></div>
-    <div class="chart-card"><h3>📊 持仓收益率</h3><div class="chart-wrap"><canvas id="todayBar"></canvas></div></div>
-  </div>
-
-  <div class="charts-grid">
-    <div class="chart-card"><h3>🥧 当前资产配置</h3><div class="chart-wrap"><canvas id="allocDonut"></canvas></div></div>
-    <div class="chart-card"><h3>📊 配置变化趋势</h3><div class="chart-wrap wide"><canvas id="allocTrend"></canvas></div></div>
+<div class="alloc-board">
+    <div class="chart-card alloc-sunburst">
+      <h3>资产配置</h3>
+      <div class="alloc-sun-body">
+        <div class="chart-wrap alloc-sun-canvas"><canvas id="allocSunburst"></canvas></div>
+        <div id="allocLegend" class="alloc-legend"></div>
+      </div>
+    </div>
+    <div class="chart-card alloc-returns-card"><h3>持仓收益率</h3><div class="chart-wrap"><canvas id="todayBar"></canvas></div></div>
+    <div class="chart-card alloc-trend-card">
+      <h3>配置变化趋势</h3>
+      <div class="chart-wrap"><canvas id="allocTrend"></canvas></div>
+      <p class="alloc-note">堆叠用原记录：国内基金、QDII、现金。与 100% 的差额记为未单列，不新造主题历史。7/31 为 31.7 + 34.4 + 32.3，未单列 1.6。7/27 原合计 100.1%，已按比例收到 100%。</p>
+    </div>
   </div>
   
   
@@ -1064,7 +1122,7 @@
 
 <div class="footer">数据：收益簿权威 2026-11-04（累计 +157,541 · 10.24% · 纪律第8版「保持弹性」）· 市场与资讯 2026-11-04 收盘 · 科技资金流 Tushare 日序截至 11/04，新浪截面仍是 10/23 · QDII 净值 11/02 · 持仓截图 10/23 · 不构成投资建议</div>
 
-<script src="redemptions.js?v=20261104-v78-ledger"></script>
+<script src="redemptions.js?v=20261104-v79-alloc-ui"></script>
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
 // P3: Chart.js tooltip 全局统一样式（各图只需再写 callbacks）
@@ -1257,66 +1315,120 @@ function initWeekSpark(){
   }};
   new Chart(wk,{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)'),borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}},plugins:[wkSparkLabels]});
 }
+const ALLOC_FONT="-apple-system,'PingFang SC','Noto Sans SC',sans-serif";
+const ALLOC_UP_BAR='#E5534B', ALLOC_UP_TEXT='#FF7B72';
+const ALLOC_DN_BAR='#2EA043', ALLOC_DN_TEXT='#56D364';
+const ALLOC_THEMES=[
+  {name:'出海QDII',color:'#5B8DEF',funds:[['嘉实全球',405855],['建信新兴C',327992],['长城新能源',147770],['建信新兴A',92511],['国富科技',64228]]},
+  {name:'IC+AI',color:'#9B7BEA',funds:[['东方AI',330594],['财通IC',310207]]},
+  {name:'资源',color:'#E3B04B',funds:[['嘉实资源',257455]]},
+  {name:'医药',color:'#3FBFA0',funds:[['永赢医药',42191],['港股创新药',20923],['创金医疗',16580]]},
+  {name:'现金',color:'#8B95A5',funds:[['余额宝',3948]]}
+];
+function allocHexRgb(hex){
+  const n=parseInt(hex.slice(1),16);
+  return [(n>>16)&255,(n>>8)&255,n&255];
+}
+function allocRgbHex(r,g,b){
+  const h=v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0');
+  return '#'+h(r)+h(g)+h(b);
+}
+function allocHslToRgb(h,s,l){
+  const c=(1-Math.abs(2*l-1))*s, hp=h/60, x=c*(1-Math.abs(hp%2-1));
+  let r=0,g=0,b=0;
+  if(hp<1){r=c;g=x;}
+  else if(hp<2){r=x;g=c;}
+  else if(hp<3){g=c;b=x;}
+  else if(hp<4){g=x;b=c;}
+  else if(hp<5){r=x;b=c;}
+  else {r=c;b=x;}
+  const m=l-c/2;
+  return [(r+m)*255,(g+m)*255,(b+m)*255];
+}
+function allocRgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b), l=(max+min)/2, d=max-min;
+  if(!d) return [0,0,l];
+  const s=d/(1-Math.abs(2*l-1));
+  let h=max===r?((g-b)/d)%6:(max===g?(b-r)/d+2:(r-g)/d+4);
+  h*=60; if(h<0) h+=360;
+  return [h,s,l];
+}
+function allocShade(hex, count, index){
+  if(count<=1||index<=0) return hex;
+  const [r,g,b]=allocHexRgb(hex);
+  const [h,s,l]=allocRgbToHsl(r,g,b);
+  const nl=Math.max(0.30, l-index*(0.32/Math.max(1,count-1)));
+  const [rr,gg,bb]=allocHslToRgb(h,s,nl);
+  return allocRgbHex(rr,gg,bb);
+}
+function allocAlpha(hex, a){
+  const [r,g,b]=allocHexRgb(hex);
+  return 'rgba('+r+','+g+','+b+','+a+')';
+}
+function allocTooltip(extra){
+  return Object.assign({
+    backgroundColor:'rgba(10,14,23,.88)',
+    titleColor:'#E6EAF0',
+    bodyColor:'#E6EAF0',
+    footerColor:'#C5CCD6',
+    borderColor:'rgba(255,255,255,.08)',
+    borderWidth:1,
+    padding:12,
+    cornerRadius:8,
+    titleFont:{size:14,family:ALLOC_FONT},
+    bodyFont:{size:14,family:ALLOC_FONT},
+    footerFont:{size:13,family:ALLOC_FONT},
+    boxPadding:4
+  }, extra||{});
+}
 function initOverview(){
   initWeekSpark();
   const el=document.getElementById('todayBar');
   if(!el||Chart.getChart(el)||!el.offsetParent)return;
   const fn=["539002 建信新兴A", "006373 国富科技", "018036 新能源车", "019671 港股创新药", "008619 永赢医药", "006503 财通IC", "018147 建信新兴C", "017811 东方AI", "017731 嘉实全球", "005661 嘉实资源", "003231 创金医疗"];
   const fp=[54.19, 54.52, 28.5, 4.61, -6.24, -27.63, -6.29, -24.82, -15.12, -14.18, -2.47];
-  // Sort descending (正→负)
+  // Sort descending (正→负)。收益率数字本身不改，只改画法。
   const srt=fn.map((n,i)=>({n,v:fp[i]})).sort((a,b)=>b.v-a.v);
   const sNames=srt.map(o=>o.n),sVals=srt.map(o=>o.v);
-  const barColors=sVals.map(v=>{
-    if(v>=0)return 'rgba(239,68,68,.85)';
-    if(v>-5)return 'rgba(74,222,128,.8)';
-    if(v>-10)return 'rgba(34,197,94,.8)';
-    return 'rgba(22,163,74,.9)';
-  });
-  // Inline plugin: value labels at bar end + zero baseline
-  const todayBarLabels={id:'todayBarLabels',afterDatasetsDraw(chart){
-    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),xScale=chart.scales.x;
+  const barColors=sVals.map(v=>v>=0?ALLOC_UP_BAR:ALLOC_DN_BAR);
+  const todayBarLabels={id:'todayBarLabels',afterDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),xScale=chart.scales.x,area=chart.chartArea;
+    if(!meta.data.length)return;
     ctx.save();
-    // zero baseline
     const zx=xScale.getPixelForValue(0);
-    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(zx,chart.chartArea.top);ctx.lineTo(zx,chart.chartArea.bottom);ctx.stroke();
-    ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';ctx.textBaseline='middle';
+    ctx.strokeStyle='rgba(230,234,240,.4)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(zx,area.top);ctx.lineTo(zx,area.bottom);ctx.stroke();
+    ctx.font='14px '+ALLOC_FONT;
+    ctx.textAlign='left';ctx.textBaseline='middle';
     meta.data.forEach((bar,i)=>{
       const v=chart.data.datasets[0].data[i];
-      const txt=(v>=0?'+':'')+v.toFixed(1)+'%';
-      ctx.fillStyle=v>=0?'#f87171':(v>-5?'#4ade80':(v>-10?'#22c55e':'#16a34a'));
-      if(v>=0){ctx.textAlign='left';ctx.fillText(txt,bar.x+5,bar.y);}
-      else{ctx.textAlign='right';ctx.fillText(txt,bar.x-5,bar.y);}
+      ctx.fillStyle=v>=0?ALLOC_UP_TEXT:ALLOC_DN_TEXT;
+      ctx.fillText((v>=0?'+':'')+v.toFixed(1)+'%', area.right+10, bar.y);
     });
     ctx.restore();
   }};
-  new Chart(el,{type:'bar',data:{labels:sNames,datasets:[{data:sVals,backgroundColor:barColors,borderRadius:{topRight:6,bottomRight:6,topLeft:6,bottomLeft:6},borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{right:42,left:4}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%',font:{size:10}},grid:{color:'rgba(148,163,184,.12)'},border:{color:'rgba(148,163,184,.3)'}},y:{grid:{display:false},ticks:{font:{size:10}},border:{display:false}}},indexAxis:'y'},plugins:[todayBarLabels]});
-
-  // Allocation doughnut: sorted desc, Cat10 palette, pull-out top3, % labels
-  const allocRaw=[["东方AI", 330594], ["财通IC", 310207], ["嘉实全球", 405855], ["建信新兴C", 327992], ["嘉实资源", 257455], ["长城新能源", 147770], ["建信新兴A", 92511], ["国富科技", 64228], ["永赢医药", 42191], ["港股创新药", 20923], ["创金医疗", 16580], ["余额宝", 3948]];
-  allocRaw.sort((a,b)=>b[1]-a[1]);
-  const allocLabels=allocRaw.map(o=>o[0]),allocVals=allocRaw.map(o=>o[1]);
-  const allocTotal=allocVals.reduce((a,b)=>a+b,0);
-  const cat10=CAT10;
-  const allocPct=allocVals.map(v=>v/allocTotal*100);
-  const allocPull=allocVals.map((v,i)=>i<3?5:0);
-  const allocLabelsPlugin={id:'allocLabels',afterDatasetsDraw(chart){
-    const ctx=chart.ctx,meta=chart.getDatasetMeta(0);
-    ctx.save();
-    meta.data.forEach((arc,i)=>{
-      const pct=allocPct[i];
-      if(pct<4)return; // hide tiny slices
-      const ang=(arc.startAngle+arc.endAngle)/2;
-      const r=(arc.innerRadius+arc.outerRadius)/2;
-      const x=arc.x+Math.cos(ang)*r,y=arc.y+Math.sin(ang)*r;
-      ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';
-      ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillStyle='#0a0e17';
-      ctx.fillText(pct.toFixed(1)+'%',x,y);
-    });
-    ctx.restore();
-  }};
-  new Chart(document.getElementById('allocPie'),{type:'doughnut',data:{labels:allocLabels,datasets:[{data:allocVals,backgroundColor:cat10,borderColor:'rgba(255,255,255,.85)',borderWidth:2,offset:allocPull,hoverOffset:8,spacing:1}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12,padding:6,generateLabels(chart){const base=Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);base.forEach((l,i)=>{l.text=allocLabels[i]+' '+(allocVals[i]/10000).toFixed(1)+'万 '+allocPct[i].toFixed(1)+'%';});return base;}}},tooltip:{callbacks:{label:ctx=>ctx.label+': ¥'+ctx.parsed.toLocaleString()+' ('+(ctx.parsed/allocTotal*100).toFixed(1)+'%)'}}}},plugins:[allocLabelsPlugin]})
+  new Chart(el,{
+    type:'bar',
+    data:{labels:sNames,datasets:[{data:sVals,backgroundColor:barColors,borderRadius:2,borderSkipped:false,barThickness:14}]},
+    options:{
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      color:'#8B95A5',
+      font:{family:ALLOC_FONT,size:13},
+      layout:{padding:{right:86,left:2,top:2,bottom:0}},
+      plugins:{
+        legend:{display:false},
+        tooltip:allocTooltip({callbacks:{label:function(ctx){return (ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%';}}})
+      },
+      scales:{
+        x:{ticks:{color:'#8B95A5',callback:function(v){return (v>0?'+':'')+v+'%';},font:{size:13,family:ALLOC_FONT}},grid:{color:'rgba(139,149,165,.16)'},border:{color:'rgba(139,149,165,.28)'}},
+        y:{grid:{display:false},border:{display:false},ticks:{color:'#C5CCD6',autoSkip:false,padding:6,font:{size:13,family:ALLOC_FONT}}}
+      }
+    },
+    plugins:[todayBarLabels]
+  });
 }
 
 function initHistory(){
@@ -1495,69 +1607,163 @@ function initMonthly(){
 }
 
 function initAlloc(){
-  const el=document.getElementById('allocDonut');
-  if(!el||Chart.getChart(el))return;
-  // Donut chart: sorted desc, Cat10 palette, pull-out top2, % labels, white border 2px
-  // 单位：万元。对应 2026-10-23 主题暴露（出海QDII 103.8 / IC+AI 64.1 / 资源 25.7 / 医药 8.0 / 现金 0.4）
-  const allocDonutRaw=[['出海QDII',103.8],['A股IC+AI',64.1],['A股资源',25.7],['医药',8.0],['现金',0.4]];
-  allocDonutRaw.sort((a,b)=>b[1]-a[1]);
-  const allocDonutLabels=allocDonutRaw.map(o=>o[0]),allocDonutVals=allocDonutRaw.map(o=>o[1]);
-  const allocDonutTotal=allocDonutVals.reduce((a,b)=>a+b,0);
-  const cat10=CAT10;
-  const allocDonutPct=allocDonutVals.map(v=>v/allocDonutTotal*100);
-  const allocDonutPull=allocDonutVals.map((v,i)=>i<2?5:0);
-  const allocDonutLabelsPlugin={id:'allocDonutLabels',afterDatasetsDraw(chart){
-    const ctx=chart.ctx,meta=chart.getDatasetMeta(0);
-    ctx.save();
-    meta.data.forEach((arc,i)=>{
-      const pct=allocDonutPct[i];
-      if(pct<4)return;
-      const ang=(arc.startAngle+arc.endAngle)/2;
-      const r=(arc.innerRadius+arc.outerRadius)/2;
-      const x=arc.x+Math.cos(ang)*r,y=arc.y+Math.sin(ang)*r;
-      ctx.font='bold 10px "JetBrains Mono",ui-monospace,monospace';
-      ctx.textAlign='center';ctx.textBaseline='middle';
-      ctx.fillStyle='#0a0e17';
-      ctx.fillText(pct.toFixed(1)+'%',x,y);
+  const sun=document.getElementById('allocSunburst');
+  const trendEl=document.getElementById('allocTrend');
+  if(!sun||!trendEl||Chart.getChart(sun))return;
+  // 基金市值与原先饼图相同（元）。内环按主题加总，外环同序，保证两环对齐。
+  const allocTotal=ALLOC_THEMES.reduce((s,t)=>s+t.funds.reduce((a,f)=>a+f[1],0),0);
+  const legend=document.getElementById('allocLegend');
+  if(legend&&legend.dataset.ready!=='1'){
+    legend.dataset.ready='1';
+    ALLOC_THEMES.forEach((t,ti)=>{
+      if(ti){
+        const gap=document.createElement('div');
+        gap.className='alloc-leg-gap';
+        legend.appendChild(gap);
+      }
+      const sum=t.funds.reduce((a,f)=>a+f[1],0);
+      const headSw=document.createElement('span');
+      headSw.className='alloc-swatch';
+      headSw.style.background=t.color;
+      const headNm=document.createElement('span');
+      headNm.className='alloc-leg-head';
+      headNm.textContent=t.name;
+      const headWan=document.createElement('span');
+      headWan.className='alloc-num';
+      headWan.textContent=(sum/10000).toFixed(1)+'万';
+      const headPct=document.createElement('span');
+      headPct.className='alloc-num';
+      headPct.textContent=(sum/allocTotal*100).toFixed(1)+'%';
+      legend.append(headSw,headNm,headWan,headPct);
+      t.funds.forEach((f,i)=>{
+        const sw=document.createElement('span');
+        sw.className='alloc-swatch';
+        sw.style.background=allocShade(t.color,t.funds.length,i);
+        const nm=document.createElement('span');
+        nm.className='alloc-leg-fund';
+        nm.textContent=f[0];
+        const wan=document.createElement('span');
+        wan.className='alloc-leg-fund-num';
+        wan.textContent=(f[1]/10000).toFixed(1)+'万';
+        const pct=document.createElement('span');
+        pct.className='alloc-leg-fund-num';
+        pct.textContent=(f[1]/allocTotal*100).toFixed(1)+'%';
+        legend.append(sw,nm,wan,pct);
+      });
     });
+  }
+  const outerLabels=[],outerVals=[],outerColors=[],innerLabels=[],innerVals=[],innerColors=[];
+  ALLOC_THEMES.forEach(t=>{
+    const sum=t.funds.reduce((a,f)=>a+f[1],0);
+    innerLabels.push(t.name);innerVals.push(sum);innerColors.push(t.color);
+    t.funds.forEach((f,i)=>{
+      outerLabels.push(f[0]);outerVals.push(f[1]);outerColors.push(allocShade(t.color,t.funds.length,i));
+    });
+  });
+  const ringBorder='#141A26';
+  const allocCenter={id:'allocCenter',afterDraw(chart){
+    const area=chart.chartArea; if(!area)return;
+    const ctx=chart.ctx;
+    const x=(area.left+area.right)/2, y=(area.top+area.bottom)/2;
+    ctx.save();
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle='#8B95A5';
+    ctx.font='13px '+ALLOC_FONT;
+    ctx.fillText('总资产',x,y-12);
+    ctx.fillStyle='#E6EAF0';
+    ctx.font='600 16px '+ALLOC_FONT;
+    ctx.fillText((allocTotal/10000).toFixed(1)+'万',x,y+12);
     ctx.restore();
   }};
-  new Chart(el,{
+  new Chart(sun,{
     type:'doughnut',
     data:{
-      labels:allocDonutLabels,
-      datasets:[{data:allocDonutVals,backgroundColor:cat10,borderColor:'rgba(255,255,255,.85)',borderWidth:2,offset:allocDonutPull,hoverOffset:8,spacing:1}]
+      datasets:[
+        {label:'基金',data:outerVals,customLabels:outerLabels,backgroundColor:outerColors,borderColor:ringBorder,borderWidth:2,borderAlign:'inner',hoverOffset:6,weight:1.25},
+        {label:'主题',data:innerVals,customLabels:innerLabels,backgroundColor:innerColors,borderColor:ringBorder,borderWidth:2,borderAlign:'inner',hoverOffset:4,weight:1}
+      ]
     },
     options:{
-      responsive:true,maintainAspectRatio:false,cutout:'58%',
+      responsive:true,maintainAspectRatio:false,cutout:'52%',
       plugins:{
-        legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11},generateLabels(chart){const base=Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);base.forEach((l,i)=>{l.text=allocDonutLabels[i]+' '+allocDonutVals[i].toFixed(1)+'万 '+allocDonutPct[i].toFixed(1)+'%';});return base;}}},
-        tooltip:{callbacks:{label:ctx=>ctx.label+': '+ctx.parsed+'万 ('+allocDonutPct[ctx.dataIndex].toFixed(1)+'%)'}}
+        legend:{display:false},
+        tooltip:allocTooltip({callbacks:{
+          title(){return '';},
+          label(ctx){
+            const name=ctx.dataset.customLabels[ctx.dataIndex];
+            const v=ctx.raw;
+            return name+'  '+(v/10000).toFixed(1)+'万  '+(v/allocTotal*100).toFixed(1)+'%';
+          }
+        }})
       }
     },
-    plugins:[allocDonutLabelsPlugin]
+    plugins:[allocCenter]
   });
-  // Trend chart
+  // 原记录。合计不足 100 的日期用未单列补齐；7/27 原为 100.1，按比例归一。不拆主题、不新造历史权重。
   const allocDates=['1/5','2/9','3/31','4/30','5/29','6/30','7/20','7/27','7/30','7/31','8/4','10/23'];
-  const allocDomestic=[80,70,60,50,40,35,12.0,35.9,30.8,31.7,26.6,44.4];
-  const allocQDII=[0,10,25,40,52,60,42.0,34.4,33.7,34.4,51.7,51.4];
-  const allocCash=[20,20,15,10,8,5,44.7,29.8,32.2,32.3,21.7,0.2];
-  new Chart(document.getElementById('allocTrend'),{
+  const domesticRaw=[80,70,60,50,40,35,12.0,35.9,30.8,31.7,26.6,44.4];
+  const qdiiRaw=[0,10,25,40,52,60,42.0,34.4,33.7,34.4,51.7,51.4];
+  const cashRaw=[20,20,15,10,8,5,44.7,29.8,32.2,32.3,21.7,0.2];
+  const allocDomestic=[],allocQDII=[],allocCash=[],allocGap=[];
+  for(let i=0;i<allocDates.length;i++){
+    const parts=[domesticRaw[i],qdiiRaw[i],cashRaw[i]];
+    const sum=Math.round(parts.reduce((a,b)=>a+b,0)*10)/10;
+    if(sum>100){
+      const scaled=parts.map(v=>Math.round(v*100/sum*10)/10);
+      let drift=Math.round((100-scaled.reduce((a,b)=>a+b,0))*10)/10;
+      let idx=0; scaled.forEach((v,j)=>{ if(v>scaled[idx]) idx=j; });
+      scaled[idx]=Math.round((scaled[idx]+drift)*10)/10;
+      allocDomestic.push(scaled[0]);allocQDII.push(scaled[1]);allocCash.push(scaled[2]);allocGap.push(0);
+    }else{
+      const rounded=parts.map(v=>Math.round(v*10)/10);
+      allocDomestic.push(rounded[0]);allocQDII.push(rounded[1]);allocCash.push(rounded[2]);
+      allocGap.push(Math.round((100-sum)*10)/10);
+    }
+  }
+  allocDates.forEach((d,i)=>{
+    const tenths=Math.round((allocDomestic[i]+allocQDII[i]+allocCash[i]+allocGap[i])*10);
+    if(tenths!==1000) console.warn('alloc stack',d,tenths/10);
+  });
+  const areaDs=(label,data,color,extra)=>Object.assign({
+    label,data,stack:'alloc',
+    borderColor:color,backgroundColor:allocAlpha(color,.9),
+    borderWidth:1.5,fill:'stack',tension:0,pointRadius:3,pointHoverRadius:5,
+    pointBackgroundColor:color,pointBorderWidth:0
+  },extra||{});
+  new Chart(trendEl,{
     type:'line',
     data:{
       labels:allocDates,
       datasets:[
-        {label:'国内基金',data:allocDomestic,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.1)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:6,borderWidth:2},
-        {label:'QDII',data:allocQDII,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:6,borderWidth:2},
-        {label:'现金',data:allocCash,borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.1)',fill:true,tension:.3,pointRadius:3,pointHoverRadius:6,borderWidth:2}
+        areaDs('国内基金',allocDomestic,'#9B7BEA',{fill:'origin'}),
+        areaDs('QDII',allocQDII,'#5B8DEF'),
+        areaDs('现金',allocCash,'#8B95A5'),
+        areaDs('未单列',allocGap,'#6B7684',{backgroundColor:'rgba(107,118,132,.45)',borderDash:[4,3],borderWidth:1})
       ]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'top',labels:{usePointStyle:true,font:{size:10},padding:8}}},
+      color:'#8B95A5',
+      font:{family:ALLOC_FONT,size:13},
+      plugins:{
+        legend:{position:'top',align:'end',labels:{usePointStyle:true,pointStyle:'circle',padding:12,color:'#C5CCD6',boxWidth:8,font:{size:13,family:ALLOC_FONT}}},
+        tooltip:allocTooltip({callbacks:{
+          label(ctx){
+            const y=ctx.parsed.y;
+            if(ctx.dataset.label==='未单列'&&!y) return null;
+            return ctx.dataset.label+'  '+y.toFixed(1)+'%';
+          },
+          footer(items){
+            if(!items.length) return '';
+            const i=items[0].dataIndex;
+            const s=items[0].chart.data.datasets.reduce((a,ds)=>a+(Number(ds.data[i])||0),0);
+            return '合计 '+s.toFixed(1)+'%';
+          }
+        }})
+      },
       scales:{
-        y:{min:0,max:90,grid:{color(ctx){return ctx.tick.value===0?'rgba(255,255,255,.55)':'rgba(100,116,139,.05)';},lineWidth(ctx){return ctx.tick.value===0?1.5:1;}},ticks:{callback:v=>v+'%'},title:{display:true,text:'占比 (%)',color:'#94a3b8',font:{size:10}}},
-        x:{grid:{display:false}}
+        y:{min:0,max:100,stacked:true,border:{display:false},grid:{color:'rgba(139,149,165,.14)'},ticks:{color:'#8B95A5',stepSize:20,font:{size:13,family:ALLOC_FONT},callback:v=>v+'%'}},
+        x:{stacked:true,grid:{display:false},border:{display:false},ticks:{color:'#8B95A5',maxRotation:0,autoSkip:true,font:{size:13,family:ALLOC_FONT}}}
       },
       interaction:{intersect:false,mode:'index'}
     }
@@ -1705,7 +1911,7 @@ applyHash();
 // to purge stale cached pages from the buggy cache-first strategy.
 // SW: 版本化注册 — sw.js 内 CACHE_VERSION 每次部署+1，旧缓存自动失效
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js?v=20261104-v78-ledger').then(reg=>{
+  navigator.serviceWorker.register('sw.js?v=20261104-v79-alloc-ui').then(reg=>{
     reg.addEventListener('updatefound',()=>{
       const nw=reg.installing;
       nw&&nw.addEventListener('statechange',()=>{ if(nw.state==='activated') location.reload(); });
