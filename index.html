@@ -148,14 +148,15 @@
     .footer{font-size:0.7rem;padding:8px 0}
     /* Enable flex reorder on overview tab — direct children only to avoid polluting nested cards */
     #tab-overview{display:flex;flex-direction:column}
-    /* Mobile order: 折叠块(压力测试)最先, 然后图表/持仓表, US/EC/alerts 最后 */
-    #tab-overview>details.collap{order:0}
-    #tab-overview>.charts-grid{order:1}
-    #tab-overview>.table-card{order:2}
-    #tab-overview>.highlight{order:3}
+    /* 手机：现金/在途 → 敏感度 → 持仓表 → 其余。压力测试四格已删除，不再 order:0。 */
+    #tab-overview>#cashCard{order:0}
+    #tab-overview>#sensLine{order:1}
+    #tab-overview>#holdingsCard{order:2}
+    #tab-overview>.charts-grid{order:3}
+    #tab-overview>#qdiiBoard{order:4}
+    #tab-overview>.highlight{order:5}
     #tab-overview>.us-panel{order:10}
     #tab-overview>#ecSection{order:11}
-    #tab-overview>details:nth-of-type(2){order:12}
     /* 窄屏补充: watch-grid/stats-bar 防溢出 */
     .watch-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
   }
@@ -403,21 +404,74 @@
   .idx-cell .v{font-size:1.02rem;font-weight:700;font-family:'JetBrains Mono',ui-monospace,monospace}
   .idx-cell .c{font-size:.72rem}
   @media(max-width:768px){.brief-title{font-size:.8rem}.asof-bar{font-size:.74rem}}
+  /* 全局数据时点 */
+  .data-asof{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;background:rgba(15,23,42,.55);border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin:0 0 14px;font-size:.75rem;line-height:1.4}
+  .data-asof .asof-k{color:var(--muted);font-weight:600;letter-spacing:.3px}
+  .asof-item{display:inline-flex;align-items:center;gap:6px;background:rgba(30,41,59,.55);border:1px solid var(--border);border-radius:999px;padding:2px 8px 2px 2px;color:var(--text);font-variant-numeric:tabular-nums}
+  .asof-item .asof-tag{background:rgba(59,130,246,.16);color:var(--blue-2);border-radius:999px;padding:1px 7px;font-size:.68rem;font-weight:600}
+  .asof-item.stale{color:var(--muted);background:rgba(15,23,42,.35)}
+  .asof-item.stale .asof-tag{background:rgba(100,116,139,.16);color:var(--muted)}
+  .asof-item .asof-flag{font-style:normal;font-size:.66rem;color:#cbd5e1;background:rgba(100,116,139,.25);border-radius:999px;padding:0 6px}
+  .date-badge{display:inline-block;margin-left:8px;font-size:.68rem;font-weight:500;color:var(--blue-2);background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.28);border-radius:999px;padding:1px 7px;vertical-align:middle;letter-spacing:0}
+  .date-badge.stale{color:var(--muted);background:rgba(100,116,139,.12);border-color:rgba(100,116,139,.28)}
+  /* 数值空态：灰色斜体，不用涨跌色，不放 emoji */
+  .miss{color:var(--muted)!important;font-style:italic;font-weight:400}
+  /* 敏感度一行，替代四格压力测试 */
+  .sens-line{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:.82rem;line-height:1.5}
+  .sens-line .sens-k{font-weight:700;border-left:3px solid var(--blue);padding-left:8px}
+  .sens-line .sens-note{flex-basis:100%;color:var(--muted);font-size:.7rem}
+  /* 现金 / 在途 */
+  .cash-head{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:flex-end;margin-bottom:10px}
+  .cash-total{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;font-size:1.45rem;font-weight:700}
+  .cash-sub{color:var(--muted);font-size:.72rem;margin-top:2px}
+  .cash-target{font-size:.75rem;color:var(--muted);text-align:right}
+  .prog{position:relative;height:10px;border-radius:999px;background:rgba(30,41,59,.8);margin:8px 0 4px;overflow:hidden}
+  .prog-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#38bdf8,#86efac);border-radius:999px}
+  .prog-mark{position:absolute;top:-3px;width:2px;height:16px;background:#fbbf24;border-radius:1px}
+  .prog-scale{position:relative;display:flex;justify-content:space-between;font-size:.66rem;color:var(--muted);margin-bottom:10px;min-height:1.1em}
+  .prog-scale .mid{position:absolute;top:0;transform:translateX(-50%);color:#fbbf24;white-space:nowrap}
+  .rd-row{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid rgba(30,41,59,.65)}
+  .rd-name{font-size:.82rem;font-weight:600}
+  .rd-meta{font-size:.7rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .rd-row.overdue{background:rgba(248,113,113,.06)}
+  .pipe{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:.68rem}
+  .pipe .step{color:var(--muted);padding:1px 6px;border-radius:999px;border:1px solid var(--border)}
+  .pipe .step.done{color:#cbd5e1;border-color:rgba(148,163,184,.4)}
+  .pipe .step.on{color:#86efac;border-color:rgba(134,239,172,.55);background:rgba(34,197,94,.12);font-weight:700}
+  .pipe .step.overdue{color:#fecaca;border-color:rgba(248,113,113,.6);background:rgba(248,113,113,.12);font-weight:700}
+  .pipe .arr{color:var(--muted);font-size:.65rem}
+  .cash-note{font-size:.7rem;color:var(--muted);margin-top:8px;line-height:1.5}
+  @media(max-width:480px){
+    .kpi-grid{grid-template-columns:1fr 1fr;gap:6px}
+    .kpi-hero{grid-column:1 / -1}
+    .kpi-hero .kpi-value{font-size:1.45rem;background:none;-webkit-text-fill-color:var(--text);color:var(--text)}
+    .kpi-value{font-size:1.02rem}
+    .kpi-sub{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.62rem;line-height:1.25;max-width:100%}
+    .cash-total{font-size:1.2rem}
+    .cash-target{text-align:left}
+    .data-asof{font-size:.7rem}
+  }
 </style>
 </head>
 <body>
 <div class="container">
 <h1>📊 2026 理财收益分析 <span style="font-size:0.7rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;padding:2px 10px;border-radius:999px;vertical-align:middle;box-shadow:0 2px 8px -2px rgba(59,130,246,.5)">v2</span></h1>
-<p class="subtitle">Frank Worth · 支付宝 + 嘉实 + 建信 · 收益权威日 2026-11-03 · 资讯更新 2026-11-04 · 纪律第8版「保持弹性」</p>
+<p class="subtitle">Frank Worth · 支付宝 + 嘉实 + 建信 · 纪律第8版「保持弹性」</p>
+<div class="data-asof" id="dataAsof" aria-label="数据时点">
+  <span class="asof-k">数据时点</span>
+  <span class="asof-item" data-asof="2026-11-03"><span class="asof-tag">收益簿</span><span class="asof-date">2026-11-03</span></span>
+  <span class="asof-item" data-asof="2026-10-23"><span class="asof-tag">持仓截图</span><span class="asof-date">2026-10-23</span></span>
+  <span class="asof-item" data-asof="2026-11-02"><span class="asof-tag">QDII净值</span><span class="asof-date">2026-11-02</span></span>
+  <span class="asof-item" data-asof="2026-11-03"><span class="asof-tag">市场数据</span><span class="asof-date">2026-11-03</span></span>
+</div>
 
 <div class="kpi-grid">
-  <div class="kpi-card kpi-hero"><div class="kpi-label">💰 总资产（收益簿口径）</div><div class="kpi-value">1,618,448</div><svg id="heroSpark" viewBox="0 0 560 56" preserveAspectRatio="none" style="width:100%;height:44px;margin:6px 0 2px;display:block"></svg><div class="kpi-sub">本金1,539,203 + 累计79,245 · 持仓截图合计约202万（结构层）· 以收益簿为准</div></div>
-  <div class="kpi-card"><div class="kpi-label">📈 累计总收益</div><div class="kpi-value green">+79,245</div><div class="kpi-sub">收益率 5.15% · 峰值 1,289,206 (7/1) · 距峰值 -1,209,961</div></div>
-  <div class="kpi-card"><div class="kpi-label">🕐 最新单日 (11/03)</div><div class="kpi-value red">-58,359</div><div class="kpi-sub">支付宝 -45,366.97 · 嘉实 -4,340.94 · 建信 -8,651.33 · 权威日</div></div>
-  <div class="kpi-card"><div class="kpi-label">📅 11月MTD</div><div class="kpi-value red">-94,792</div><div class="kpi-sub">2 个交易日 · 支付宝 -55,870 · 嘉实 -30,271 · 建信 -8,651</div></div>
-  <div class="kpi-card"><div class="kpi-label">✅ 胜率</div><div class="kpi-value">51.7%</div><div class="kpi-sub">104 盈 / 97 亏 / 201 交易日</div></div>
-  <div class="kpi-card"><div class="kpi-label">📊 日均收益</div><div class="kpi-value green">394</div><div class="kpi-sub">最高 +93,183.78 · 最大 -165,316.30</div></div>
-  <div class="kpi-card"><div class="kpi-label">📉 最大回撤</div><div class="kpi-value red" id="maxDDValue">-1,209,961</div><div class="kpi-sub" id="maxDDSub">7/1 → 11/03 · 当前距峰值-1,209,961</div></div>
+  <div class="kpi-card kpi-hero"><div class="kpi-label">总资产（收益簿口径）</div><div class="kpi-value">1,618,448</div><svg id="heroSpark" viewBox="0 0 560 56" preserveAspectRatio="none" style="width:100%;height:44px;margin:6px 0 2px;display:block"></svg><div class="kpi-sub" title="本金 1,539,203.11 + 累计 79,245.34。持仓截图合计约 202 万（结构层，2026-10-23），KPI 以收益簿为准。">本金 1,539,203 + 累计 79,245</div></div>
+  <div class="kpi-card"><div class="kpi-label">累计总收益</div><div class="kpi-value green">+79,245</div><div class="kpi-sub" title="峰值累计 1,289,206（7/1），当前距峰值 -1,209,961。">收益率 5.15%</div></div>
+  <div class="kpi-card"><div class="kpi-label">最新单日 (11/03)</div><div class="kpi-value red">-58,359</div><div class="kpi-sub" title="支付宝 -45,366.97 · 嘉实 -4,340.94 · 建信 -8,651.33。权威日，含已入账的 QDII 净值影响。">支付宝 -45,367 · 嘉实 -4,341 · 建信 -8,651</div></div>
+  <div class="kpi-card" id="cashKpi"><div class="kpi-label">现金水位（含在途）</div><div class="kpi-value" id="cashKpiValue">—</div><div class="kpi-sub" id="cashKpiSub" title="余额宝为已在账现金。在途为 2026-11-04 已提交赎回的估算金额，尚未确认到账。">在途估算计入水位</div></div>
+  <div class="kpi-card"><div class="kpi-label">11月MTD</div><div class="kpi-value red">-94,792</div><div class="kpi-sub" title="支付宝 -55,869.99 · 嘉实 -30,271.12 · 建信 -8,651.33">2 个交易日</div></div>
+  <div class="kpi-card"><div class="kpi-label">最大回撤</div><div class="kpi-value red" id="maxDDValue">-1,209,961</div><div class="kpi-sub" id="maxDDSub" title="金额为累计收益从 7/1 峰值到 11/03 的落差，与累计卡里的距峰值是同一个数。">7/1 → 11/03</div></div>
 </div>
 
 <div class="chart-card" style="margin-top:10px;margin-bottom:10px;padding:10px 14px">
@@ -443,41 +497,28 @@
 </div>
 
 <div id="tab-overview">
-  <!-- Stress Test (collapsible) -->
-  <details class="collap">
-  <summary>🔥 情景压力测试 <span class="news-meta">金额仍是 8/19 静态草图 · 2026-11-03 未重算 · 勿当最新盈亏</span><span class="chev">▶</span></summary>
-  <div class="collap-body">
-  <div class="table-card" style="margin-bottom:14px">
-  <h3 style="display:none">🔥 情景压力测试</h3>
-  <div class="stress-grid">
-    <div class="stress-card green-s">
-      <div class="stress-label">✅ 半导体主线延续</div>
-      <div class="stress-val green">+48,000</div>
-      <div class="stress-detail">三周期全正延续+科创50站上1780<br>A股半导体+4% QDII+2%<br>满仓吃弹性·不动</div>
+  <div class="table-card" id="cashCard">
+    <h3>现金 / 赎回在途 <span class="date-badge" data-asof="2026-11-04">提交日 2026-11-04</span></h3>
+    <div class="cash-head">
+      <div>
+        <div class="cash-total" id="cashTotal">—</div>
+        <div class="cash-sub" id="cashSub">余额宝 + 在途估算</div>
+      </div>
+      <div class="cash-target" id="cashTarget"></div>
     </div>
-    <div class="stress-card amber-s">
-      <div class="stress-label">🟡 高位震荡</div>
-      <div class="stress-val amber">-15,000</div>
-      <div class="stress-detail">半导体-100~+100亿区间震荡<br>科创50在1600附近磨底<br>持有观望·不加仓</div>
-    </div>
-    <div class="stress-card red-s">
-      <div class="stress-label">🔴 二次探底</div>
-      <div class="stress-val red">-113,000</div>
-      <div class="stress-detail">半导体单日流出>300亿+科创50跌破1700<br>A股半导体-8% QDII-4%<br>赎回018036(+47.6%)重建现金垫15万</div>
-    </div>
-    <div class="stress-card dark-s">
-      <div class="stress-label">🟣 极端情景</div>
-      <div class="stress-val red">-180,000</div>
-      <div class="stress-detail">AMD财报暴雷+地缘黑天鹅<br>QDII -6% A股科技 -10%<br>历史最大回撤 -682,948（现金垫太薄需减QDII）</div>
-    </div>
+    <div class="prog" id="cashProg" aria-hidden="true"><div class="prog-fill" id="cashFill"></div><div class="prog-mark" id="cashMark"></div></div>
+    <div class="prog-scale"><span>0%</span><span id="cashScaleMid" class="mid">目标 12%</span><span>100% 总资产</span></div>
+    <div id="cashRows"></div>
+    <p class="cash-note" id="cashNote"></p>
   </div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">💡 四格金额是 8/19 压力草图，2026-11-04 没有按最新净值重算，不能当成当前盈亏预测。结构仍是满仓：持仓截图约 202 万 / 收益簿约 162 万，现金垫约 0.2%。纪律第8版用浮盈 QDII 换现金，目标约 12%。</div>
+  <div class="sens-line" id="sensLine">
+    <span class="sens-k">敏感度 · 1% 近似</span>
+    <span id="sensText"><span class="miss">— 暂缺</span></span>
+    <span class="sens-note" id="sensNote"></span>
   </div>
-  </div>
-  </details>
 
   <div class="us-panel">
-    <div class="us-panel-title">🇺🇸 美东 2026-11-03 收盘 · 纳指与芯片反弹、道指收跌 · 费城半导体指数暂缺</div>
+    <div class="us-panel-title">美东 2026-11-03 收盘 · 纳指与芯片反弹、道指收跌 <span class="date-badge" data-asof="2026-11-03">市场 2026-11-03</span></div>
     <div class="us-cards">
       <div class="us-card"><div class="us-label">纳斯达克 · 11/03</div><div class="us-value">25,372.01</div><div class="us-change green">+0.83%</div></div>
       <div class="us-card"><div class="us-label">道琼斯 · 11/03</div><div class="us-value">51,786.72</div><div class="us-change red">-0.38%</div></div>
@@ -485,6 +526,7 @@
       <div class="us-card"><div class="us-label">美光 MU · 11/03</div><div class="us-value">$855.10</div><div class="us-change green">+2.58%</div></div>
       <div class="us-card"><div class="us-label">SMH · 11/03</div><div class="us-value">$518.52</div><div class="us-change green">+2.01%</div></div>
       <div class="us-card"><div class="us-label">AMD · 11/03</div><div class="us-value">$483.90</div><div class="us-change green">+3.65%</div></div>
+      <div class="us-card"><div class="us-label">费城半导体 · 11/03</div><div class="us-value miss">— 暂缺</div><div class="us-change miss">本轮未记入收盘</div></div>
     </div>
     <div class="us-note">点位来自腾讯行情，时间戳为美东 2026-11-03 收盘（个股 16:00，纳指 17:15，道指 16:34，标普 16:30）。标普 7,568.92（+0.36%）。个股：AVGO 332.13（+3.07%），TSM 404.80（+1.55%），INTC 60.55（+0.97%），MSFT 520.99（+2.74%），AAPL 331.90（-1.90%），AMZN 250.69（+2.06%），TSLA 398.50（-1.32%），ASML 1552.14（+1.70%），AMAT 381.92（+1.97%），LRCX 230.72（+1.39%），GOOGL 280.03（+0.37%）。SMH 518.52（+2.01%），SOXX 465.00（+2.50%）。费城半导体指数、VIX、罗素2000 本轮没有取到 11/03 收盘（腾讯 VIX 报价停在 2026-09-14，不采用）。原油/黄金报价时间是 2026-11-04 盘中，不记为 11/03 收盘。11/04 盘中价不写入。</div>
   </div>
@@ -496,20 +538,9 @@
     <div class="ec-timeline" id="ecTimeline"></div>
   </div>
 
-  <!-- Feature 2: Position Alert (collapsible) -->
-  <details class="collap">
-  <summary>🚦 持仓安全垫监测 <span class="news-meta">12只基金 · 含医药仓位</span><span class="chev">▶</span></summary>
-  <div class="collap-body">
-  <div class="alert-card" id="alertCard">
-    <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;display:none">🚦 持仓安全垫监测</div>
-    <div id="alertRows"></div>
-  </div>
-  </div>
-  </details>
-
   <!-- QDII NAV Lag Board -->
-  <div class="table-card" style="margin-bottom:14px">
-  <h3>🕐 QDII 净值延迟看板</h3>
+  <div class="table-card" id="qdiiBoard" style="margin-bottom:14px">
+  <h3>QDII 净值延迟看板 <span class="date-badge" data-asof="2026-11-02">净值 2026-11-02</span></h3>
   <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-amber"></div><div class="lag-seg done-anim"></div><div class="lag-seg done-anim"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">3.0436</span></div><div class="lag-status amber">-1.22% · 默认不动</div></div>
   <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">1.9980</span></div><div class="lag-status amber">-2.77% · 默认不动</div></div>
   <div class="lag-row"><div class="lag-name">018036 长城全球新能源车</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">2.2477</span></div><div class="lag-status amber">-1.56% · 第8版待减仓</div></div>
@@ -522,7 +553,7 @@
     <div class="chart-card"><h3>📊 持仓收益率</h3><div class="chart-wrap"><canvas id="todayBar"></canvas></div></div>
   </div>
 
-  <div class="table-card" id="holdingsCard"><h3>当前持仓明细</h3>
+  <div class="table-card" id="holdingsCard"><h3>当前持仓明细 <span class="date-badge" data-asof="2026-10-23">持仓截图 2026-10-23</span></h3>
   <div class="holdings-toolbar">
     <input class="holdings-search" id="holdingsSearch" type="text" placeholder="🔍 搜索基金名称或代码...">
   </div>
@@ -550,6 +581,10 @@
 </div>
 
 <div id="tab-history" style="display:none;">
+  <div class="stats-bar">
+    <div class="stat-card"><div class="stat-label">胜率 · 收益簿至 11/03</div><div class="stat-val">51.7%</div><div class="stat-label">104 盈 / 97 亏 / 201 交易日</div></div>
+    <div class="stat-card"><div class="stat-label">日均收益</div><div class="stat-val pos">394</div><div class="stat-label">最高 +93,183.78 · 最大单日 -165,316.30</div></div>
+  </div>
   <div class="charts-grid">
     <div class="chart-card" style="grid-column:1/-1"><h3>📈 累计收益走势（2026.1－11/03）</h3><div class="chart-wrap wide"><canvas id="cumChart"></canvas></div></div>
   </div>
@@ -591,12 +626,6 @@
     <div class="chart-card"><h3>🥧 当前资产配置</h3><div class="chart-wrap"><canvas id="allocDonut"></canvas></div></div>
     <div class="chart-card"><h3>📊 配置变化趋势</h3><div class="chart-wrap wide"><canvas id="allocTrend"></canvas></div></div>
   </div>
-  <!-- Feature 6: Fund Radar -->
-  <div class="chart-card" style="margin-bottom:14px"><h3>📊 基金对比雷达图</h3>
-    <div class="fund-select" id="radarChips"></div>
-    <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
-  </div>
-
   <!-- 💵 Cash Deployment Roadmap -->
   <div class="table-card" style="margin-bottom:14px">
   <h3>🛡️ 防御重建路线图 <span class="news-meta">· 2026-10-23 · 纪律第8版 · 现金约 0.2% → 目标约 12%</span></h3>
@@ -619,11 +648,6 @@
     </div>
   </div>
   <div style="font-size:0.7rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律告警（第8版）：现金仅约0.2%（余额宝≈0.4万），目标抬至约12%（≈25万）。A股 IC+AI 深亏停加不斩；用浮盈 QDII（018036/006373/539002）分两笔换现金。017731/018147 默认不动。每日约14:30评估加减仓条件。</div>
-  </div>
-
-  <div class="table-card" style="margin-bottom:14px">
-  <h3>💰 资金结构 <span class="news-meta">· 2026-10-23 截图 · 9月总表已撤下</span></h3>
-  <p style="font-size:.78rem;color:var(--muted);line-height:1.6">9 月那张「总计 231.6 万、现金 2.1%、收益率破 50%」的分类表已从本页删除，避免和收益簿口径（本金 1,539,203 + 累计 79,245 ≈ 1,618,448）以及 10/23 三账户截图（约 202 万）叠成两套「当前」。结构以下面的主题暴露和盈亏表为准。</p>
   </div>
 
   <!-- 🎯 Theme Exposure -->
@@ -683,11 +707,11 @@
       <tr><td>008619</td><td style="text-align:left">永赢医药健康 C</td><td>11/03</td><td>1.0976</td><td class="red">-2.81%</td></tr>
       <tr><td>019671</td><td style="text-align:left">广发港股创新药联接 C</td><td>11/03</td><td>1.1869</td><td class="red">-2.77%</td></tr>
       <tr><td>003231</td><td style="text-align:left">创金合信医疗</td><td>11/03</td><td>1.5091</td><td class="red">-2.54%</td></tr>
-      <tr><td>017731</td><td style="text-align:left">嘉实全球产业升级 C</td><td>10/30</td><td>3.0812</td><td class="red">-6.79%</td></tr>
-      <tr><td>018147</td><td style="text-align:left">建信新兴市场混合 C</td><td>10/30</td><td>2.055</td><td class="red">-6.34%</td></tr>
-      <tr><td>539002</td><td style="text-align:left">建信新兴市场混合 A</td><td>10/30</td><td>2.09</td><td class="red">-6.36%</td></tr>
-      <tr><td>018036</td><td style="text-align:left">长城全球新能源车 C</td><td>10/30</td><td>2.2833</td><td class="red">-4.58%</td></tr>
-      <tr><td>006373</td><td style="text-align:left">国富全球科技互联 A</td><td>10/30</td><td>6.0676</td><td class="red">-4.84%</td></tr>
+      <tr><td>017731</td><td style="text-align:left">嘉实全球产业升级 C</td><td>11/02</td><td>3.0436</td><td class="red">-1.22%</td></tr>
+      <tr><td>018147</td><td style="text-align:left">建信新兴市场混合 C</td><td>11/02</td><td>1.9980</td><td class="red">-2.77%</td></tr>
+      <tr><td>539002</td><td style="text-align:left">建信新兴市场混合 A</td><td>11/02</td><td>2.0320</td><td class="red">-2.78%</td></tr>
+      <tr><td>018036</td><td style="text-align:left">长城全球新能源车 C</td><td>11/02</td><td>2.2477</td><td class="red">-1.56%</td></tr>
+      <tr><td>006373</td><td style="text-align:left">国富全球科技互联 A</td><td>11/02</td><td>5.9292</td><td class="red">-2.28%</td></tr>
     </tbody></table>
     <p style="font-size:.72rem;color:var(--muted);margin-top:8px">A 股基金到 11/03。QDII 公布到 11/02，11/03 净值暂缺。003231 累计净值 1.3784，与单位净值 1.5091 不是同一个数。盘中估值本轮未取，表内只有已公布单位净值。这张表不是 10/23 持仓截图，市值结构层未改。</p>
   </div>
@@ -710,8 +734,8 @@
   </div>
 
   <div class="table-card news-section">
-    <h3>机构研报精选 <span class="news-meta">· 本轮暂缺</span></h3>
-    <p style="font-size:.78rem;color:var(--muted);line-height:1.6">2026-11-04 本轮没有取到可单列的券商研报原文。更早的华泰、中信等转述没有重新打开。机构研报暂缺。</p>
+    <h3>机构研报精选 <span class="date-badge stale">本轮未取到</span></h3>
+    <p class="miss">— 暂缺 · 2026-11-04 没有可单列的券商研报原文</p>
   </div>
 
   <div class="table-card news-section">
@@ -967,6 +991,7 @@
 
 <div class="footer">数据：收益簿权威 2026-11-03（累计 +79,245 · 5.15% · 纪律第8版「保持弹性」）· 资讯 2026-11-04 · 科技资金流东财日序截至 11/03，新浪截面仍是 10/23 · 持仓截图 10/23 · 不构成投资建议</div>
 
+<script src="redemptions.js?v=20261104-v75-cash-1104"></script>
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
 // P3: Chart.js tooltip 全局统一样式（各图只需再写 callbacks）
@@ -1096,7 +1121,8 @@ function calcRiskMetrics(){
   if(sub){
     const md=s=>{const p=s.split('-');return parseInt(p[1],10)+'/'+parseInt(p[2],10);};
     const gap=Math.round(dd.peakVal-cum[cum.length-1]);
-    sub.textContent=md(dates[dd.maxStart])+' → '+md(dates[dd.maxEnd])+' · 当前距峰值-'+gap.toLocaleString();
+    sub.textContent=md(dates[dd.maxStart])+' → '+md(dates[dd.maxEnd]);
+    sub.title='当前距峰值 -'+gap.toLocaleString()+'。与累计卡里的距峰值是同一个金额。';
   }
 })();
 
@@ -1136,107 +1162,6 @@ const ecEvents=[
   if(firstCurrent){tl.scrollLeft=firstCurrent.offsetLeft-tl.offsetLeft-8;}
 })();
 
-// Feature 2: Position Alert
-const alertData=[
-  {name:'005661 嘉实资源',cost:300000,mkt:293489,pct:-2.17},
-  {name:'003231 创金医疗',cost:5000,mkt:4912,pct:-1.76},
-  {name:'017731 嘉实全球 QDII',cost:478138,mkt:474125,pct:-0.84},
-  {name:'017811 东方AI',cost:439724,mkt:439854,pct:0.03},
-  {name:'018147 建信新兴C',cost:350000,mkt:362442,pct:3.55},
-  {name:'006503 财通IC',cost:398614,mkt:418905,pct:5.09},
-  {name:'008619 永赢医药',cost:45000,mkt:50988,pct:13.31},
-  {name:'019671 港股创新药',cost:20000,mkt:24698,pct:23.49},
-  {name:'018036 新能源车',cost:115000,mkt:159148,pct:38.39},
-  {name:'006373 国富科技',cost:41566,mkt:67766,pct:63.02},
-  {name:'539002 建信新兴A',cost:60000,mkt:101881,pct:69.80}
-];
-(function buildAlerts(){
-  const c=document.getElementById('alertRows');
-  if(!c)return;
-  // 分组：新买入确认中的医药单独排在最后
-  const normal=alertData.filter(d=>!d.isNew).sort((a,b)=>a.pct-b.pct);
-  const newBuys=alertData.filter(d=>d.isNew);
-  const renderRow=d=>{
-    let color,dot,bg;
-    if(d.pct<0){color='var(--red)';dot='#22c55e';bg='rgba(34,197,94,.6)';}
-    else if(d.pct<5){color='var(--amber)';dot='#f59e0b';bg='rgba(245,158,11,.5)';}
-    else if(d.pct<20){color='var(--green)';dot='#ef4444';bg='rgba(239,68,68,.5)';}
-    else{color='var(--green)';dot='#ef4444';bg='rgba(239,68,68,.7)';}
-    const fillW=Math.max(0,Math.min(100,d.pct*2));
-    const row=document.createElement('div');
-    row.className='alert-row';
-    row.innerHTML=`<div class="alert-dot" style="background:${dot}"></div><div class="alert-name">${d.name}</div><div class="alert-bar"><div class="alert-fill" style="width:${fillW}%;background:${bg}"></div></div><div class="alert-pct ${d.pct<0?'red':d.pct<5?'amber':'green'}">${d.pct>=0?'+':''}${d.pct.toFixed(1)}%</div>`;
-    c.appendChild(row);
-  };
-  normal.forEach(renderRow);
-  if(newBuys.length){
-    const hdr=document.createElement('div');
-    hdr.className='alert-row';
-    hdr.innerHTML=`<div class="alert-name" style="color:var(--muted);font-size:0.7rem">── 💊 医药仓位 ──</div>`;
-    c.appendChild(hdr);
-    newBuys.forEach(renderRow);
-  }
-})();
-
-// Feature 6: Radar Chart
-var radarFunds={
-'017811':{name:'017811 东方AI',color:'#3b82f6',data:[5.37,66011,23764,18.8,5.37]},
-'006503':{name:'006503 财通IC',color:'#06b6d4',data:[9.49,43110,16979,17.7,9.49]},
-'005661':{name:'005661 嘉实资源',color:'#f59e0b',data:[1.67,5019,9625,12.4,1.67]},
-'017731':{name:'017731 嘉实全球',color:'#ef4444',data:[-0.96,-4572,1316,19.2,-0.96]},
-'018036':{name:'018036 新能源车',color:'#10b981',data:[43.92,50508,470,6.7,43.92]},
-'539002':{name:'539002 建信新兴A',color:'#c084fc',data:[72.63,43581,1852,4.2,72.63]},
-'006373':{name:'006373 国富科技',color:'#f97316',data:[67.97,26294,410,2.8,67.97]},
-'018147':{name:'018147 建信新兴C',color:'#ec4899',data:[5.42,16248,3825,12.8,5.42]}
-};
-let radarSelected=['017811','006503','017731'];
-function initRadar(){
-  const cv=document.getElementById('radarChart');
-  if(!cv||cv.dataset.init)return;cv.dataset.init='1';
-  // Build chips
-  const chips=document.getElementById('radarChips');
-  Object.keys(radarFunds).forEach(code=>{
-    const f=radarFunds[code];
-    const chip=document.createElement('div');
-    chip.className='fund-chip'+(radarSelected.includes(code)?' active':'');
-    chip.textContent=f.name;
-    chip.onclick=()=>{
-      if(radarSelected.includes(code)){
-        if(radarSelected.length<=1)return;
-        radarSelected=radarSelected.filter(c=>c!==code);
-        chip.classList.remove('active');
-      }else{
-        if(radarSelected.length>=4)return;
-        radarSelected.push(code);
-        chip.classList.add('active');
-      }
-      drawRadar();
-    };
-    chips.appendChild(chip);
-  });
-  drawRadar();
-}
-function drawRadar(){
-  const cv=document.getElementById('radarChart');
-  if(!cv)return;
-  const ctx=cv.getContext('2d');
-  let chart=Chart.getChart('radarChart');
-  if(chart)chart.destroy();
-  // Normalize: [收益率%, 利润¥, 今日%, 占比%, 距成本%]
-  // Max scales: 收益率80, 利润120000, 今日10, 占比25, 距成本80
-  const axes=['收益率','利润额','今日涨跌','占比','安全垫'];
-  const maxes=[80,120000,10,25,80];
-  const datasets=radarSelected.map(code=>{
-    const f=radarFunds[code];
-    const norm=f.data.map((v,i)=>Math.max(0,Math.min(100,v/maxes[i]*100)));
-    return{label:f.name,data:norm,borderColor:f.color,backgroundColor:f.color+'15',borderWidth:2,pointBackgroundColor:f.color,pointRadius:3};
-  });
-  new Chart(ctx,{type:'radar',data:{labels:axes,datasets},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{usePointStyle:true,font:{size:10},padding:6}}},
-      scales:{r:{min:0,max:100,grid:{color:'rgba(148,163,184,.15)'},angleLines:{color:'rgba(148,163,184,.15)'},pointLabels:{color:'#e2e8f0',font:{size:10}},ticks:{display:true,color:'#94a3b8',font:{size:9},backdropColor:'transparent',stepSize:25}}}
-    }});
-}
 function initOverview(){
   const el=document.getElementById('todayBar');
   if(!el||Chart.getChart(el))return;
@@ -1635,7 +1560,7 @@ function switchTab(name,el){
       if(name==='overview')initOverview();
       else if(name==='history')initHistory();
       else if(name==='monthly')initMonthly();
-      else if(name==='alloc'){initAlloc();initRadar();}
+      else if(name==='alloc'){initAlloc();}
       else if(name==='semicon')initSemicon();
       else if(name==='tradelog')initTradelog();
       else if(name==='techflow')initTechFlow();
@@ -1675,7 +1600,7 @@ initOverview();
 // to purge stale cached pages from the buggy cache-first strategy.
 // SW: 版本化注册 — sw.js 内 CACHE_VERSION 每次部署+1，旧缓存自动失效
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js').then(reg=>{
+  navigator.serviceWorker.register('sw.js?v=20261104-v75-cash-1104').then(reg=>{
     reg.addEventListener('updatefound',()=>{
       const nw=reg.installing;
       nw&&nw.addEventListener('statechange',()=>{ if(nw.state==='activated') location.reload(); });
@@ -2125,24 +2050,27 @@ function filterArchive(){
     medical: '💊 医药基金（3 只）',
     qdii:    '🌍 QDII 基金（5 只）'
   };
+  // mkt: A / US / EM / HK。lag: 0=净值与 A 股同日，1=QDII 通常晚一个交易日。
+  // sleeve 只给敏感度用：ustech=纳指/费半口径，atech=A股科技。018036 是全球新能源车，不算进纳指/费半。
   var FUNDS=[
-    {g:'domestic',n:'东方人工智能主题混合 C', c:'017811',p:'📱', cost:439736, mkt:330594.1, today:null, cum:-109141.9, rate:-24.82, nx:"停加不斩·深度浮亏", bg:'rgba(239,68,68,.06)'},
-    {g:'domestic',n:'财通集成电路产业股票 C', c:'006503',p:'📱', cost:428637, mkt:310206.82, today:null, cum:-118430.18, rate:-27.63, nx:"停加不斩·深度浮亏", bg:'rgba(239,68,68,.06)'},
-    {g:'domestic',n:'嘉实资源精选股票C', c:'005661',p:'📱', cost:300000, mkt:257455.38, today:null, cum:-42544.62, rate:-14.18, nx:"弹性方案保留·压舱", bg:'rgba(239,68,68,.04)'},
-    {g:'medical',n:'永赢医药健康股票 C', c:'008619',p:'📱', cost:45000, mkt:42191.19, today:null, cum:-2808.81, rate:-6.24, nx:"小仓维持", bg:'rgba(239,68,68,.02)'},
-    {g:'medical',n:'广发港股创新药ETF联接 QDII C', c:'019671',p:'📱', cost:20000, mkt:20922.97, today:null, cum:922.97, rate:4.61, nx:"小仓维持", bg:'rgba(34,197,94,.04)'},
-    {g:'medical',n:'创金合信医疗保健股票 C', c:'003231',p:'📱', cost:17000, mkt:16579.59, today:null, cum:-420.41, rate:-2.47, nx:"小仓维持·成本估", bg:'rgba(239,68,68,.02)'},
-    {g:'qdii',n:'嘉实全球产业升级 QDII C', c:'017731',p:'嘉实', cost:478138, mkt:405854.68, today:null, cum:-72283.32, rate:-15.12, nx:"弹性方案默认不赎回", bg:'rgba(239,68,68,.04)'},
-    {g:'qdii',n:'长城全球新能源车 QDII C', c:'018036',p:'📱', cost:114995, mkt:147769.94, today:null, cum:32774.94, rate:28.5, nx:"待执行第1/2笔减仓", bg:'rgba(245,158,11,.08)'},
-    {g:'qdii',n:'建信新兴市场混合 QDII A', c:'539002',p:'📱', cost:60000, mkt:92511.38, today:null, cum:32511.38, rate:54.19, nx:"待执行第1/2笔减仓", bg:'rgba(245,158,11,.08)'},
-    {g:'qdii',n:'国富全球科技互联混合 QDII 人民币 A', c:'006373',p:'📱', cost:41566, mkt:64227.65, today:null, cum:22661.65, rate:54.52, nx:"待执行第1/2笔减仓", bg:'rgba(245,158,11,.08)'},
-    {g:'qdii',n:'建信新兴市场混合 QDII C', c:'018147',p:'建信', cost:350000, mkt:327991.59, today:null, cum:-22008.41, rate:-6.29, nx:"弹性方案默认不赎回", bg:'rgba(239,68,68,.02)'}
+    {g:'domestic',n:'东方人工智能主题混合 C', c:'017811',p:'📱', cost:439736, mkt:330594.1, today:null, cum:-109141.9, rate:-24.82, nx:"停加不斩·深度浮亏", bg:'rgba(239,68,68,.06)', mktTag:'A', lag:0, sleeve:'atech'},
+    {g:'domestic',n:'财通集成电路产业股票 C', c:'006503',p:'📱', cost:428637, mkt:310206.82, today:null, cum:-118430.18, rate:-27.63, nx:"停加不斩·深度浮亏", bg:'rgba(239,68,68,.06)', mktTag:'A', lag:0, sleeve:'atech'},
+    {g:'domestic',n:'嘉实资源精选股票C', c:'005661',p:'📱', cost:300000, mkt:257455.38, today:null, cum:-42544.62, rate:-14.18, nx:"弹性方案保留·压舱", bg:'rgba(239,68,68,.04)', mktTag:'A', lag:0, sleeve:'ares'},
+    {g:'medical',n:'永赢医药健康股票 C', c:'008619',p:'📱', cost:45000, mkt:42191.19, today:null, cum:-2808.81, rate:-6.24, nx:"小仓维持", bg:'rgba(239,68,68,.02)', mktTag:'A', lag:0, sleeve:'amed'},
+    {g:'medical',n:'广发港股创新药ETF联接 QDII C', c:'019671',p:'📱', cost:20000, mkt:20922.97, today:null, cum:922.97, rate:4.61, nx:"小仓维持", bg:'rgba(34,197,94,.04)', mktTag:'HK', lag:1, sleeve:'hk'},
+    {g:'medical',n:'创金合信医疗保健股票 C', c:'003231',p:'📱', cost:17000, mkt:16579.59, today:null, cum:-420.41, rate:-2.47, nx:"小仓维持·成本估", bg:'rgba(239,68,68,.02)', mktTag:'A', lag:0, sleeve:'amed'},
+    {g:'qdii',n:'嘉实全球产业升级 QDII C', c:'017731',p:'嘉实', cost:478138, mkt:405854.68, today:null, cum:-72283.32, rate:-15.12, nx:"弹性方案默认不赎回", bg:'rgba(239,68,68,.04)', mktTag:'US', lag:1, sleeve:'ustech'},
+    {g:'qdii',n:'长城全球新能源车 QDII C', c:'018036',p:'📱', cost:114995, mkt:147769.94, today:null, cum:32774.94, rate:28.5, nx:"待执行第1/2笔减仓", bg:'rgba(245,158,11,.08)', mktTag:'US', lag:1, sleeve:'nev'},
+    {g:'qdii',n:'建信新兴市场混合 QDII A', c:'539002',p:'📱', cost:60000, mkt:92511.38, today:null, cum:32511.38, rate:54.19, nx:"待执行第1/2笔减仓", bg:'rgba(245,158,11,.08)', mktTag:'EM', lag:1, sleeve:'em'},
+    {g:'qdii',n:'国富全球科技互联混合 QDII 人民币 A', c:'006373',p:'📱', cost:41566, mkt:64227.65, today:null, cum:22661.65, rate:54.52, nx:"待执行第1/2笔减仓", bg:'rgba(245,158,11,.08)', mktTag:'US', lag:1, sleeve:'ustech'},
+    {g:'qdii',n:'建信新兴市场混合 QDII C', c:'018147',p:'建信', cost:350000, mkt:327991.59, today:null, cum:-22008.41, rate:-6.29, nx:"弹性方案默认不赎回", bg:'rgba(239,68,68,.02)', mktTag:'EM', lag:1, sleeve:'em'}
   ];
+  window.HOLDINGS_FUNDS=FUNDS;
 
   var _sc=null, _sa=true, _fq='';
 
-  function fv(v){if(v==null)return '—';if(v===0)return '0';return(v>0?'+':'')+v.toLocaleString();}
-  function fvr(v){if(v==null)return '—';return(v>0?'+':'')+v.toFixed(1)+'%';}
+  function fv(v){if(v==null)return '<span class="miss">— 暂缺</span>';if(v===0)return '0';return(v>0?'+':'')+v.toLocaleString();}
+  function fvr(v){if(v==null)return '<span class="miss">— 暂缺</span>';return(v>0?'+':'')+v.toFixed(1)+'%';}
   function clz(v){if(v==null||v===0)return '';return v>0?'green':'red';}
 
   function buildFundRow(f){
@@ -2173,7 +2101,7 @@ function filterArchive(){
 
     var html='';
     // Cash row (always visible)
-    html+='<tr style="background:rgba(148,163,184,.06)"><td data-label="基金">💵 余额宝</td><td data-label="代码">—</td><td data-label="平台">👛</td><td data-label="成本">3,948</td><td data-label="市值" style="font-weight:700">3,948</td><td data-label="今日" class="muted">—</td><td data-label="累计" class="muted">—</td><td data-label="收益率" class="muted">—</td></tr>';
+    html+='<tr style="background:rgba(148,163,184,.06)"><td data-label="基金">余额宝</td><td data-label="代码">—</td><td data-label="平台">支付宝</td><td data-label="成本">3,948</td><td data-label="市值" style="font-weight:700">3,948</td><td data-label="今日"><span class="miss">— 暂缺</span></td><td data-label="累计"><span class="miss">— 暂缺</span></td><td data-label="收益率"><span class="miss">— 暂缺</span></td></tr>';
 
     ['domestic','medical','qdii'].forEach(function(g){
       var gAll=FUNDS.filter(function(f){return f.g===g;});
@@ -2199,7 +2127,8 @@ function filterArchive(){
     var allVis=FUNDS.filter(function(f){return f._vis;});
     var tc=allVis.reduce(function(s,f){return s+f.cost;},0)+3948;
     var tm=allVis.reduce(function(s,f){return s+f.mkt;},0)+3948;
-    var tt=allVis.reduce(function(s,f){return s+(f.today||0);},0);
+    var hasAnyToday=allVis.some(function(f){return f.today!=null;});
+    var tt=hasAnyToday?allVis.reduce(function(s,f){return s+(f.today||0);},0):null;
     var tcu=allVis.filter(function(f){return f.cum!=null;}).reduce(function(s,f){return s+(f.cum||0);},0);
     var tr2=tc>0?(tm-tc)/tc*100:0;
     html+='<tr class="subtotal" style="background:rgba(59,130,246,.04)"><td>合计（含余额宝）</td><td data-label="代码">—</td><td data-label="平台">—</td><td data-label="成本">'+tc.toLocaleString()+'</td><td data-label="市值" style="font-weight:700">'+tm.toLocaleString()+'</td><td data-label="今日" class="'+clz(tt)+'">'+fv(tt)+'</td><td data-label="累计" class="'+clz(tcu)+'">'+fv(tcu)+'</td><td data-label="收益率" class="'+clz(tr2)+'">'+fvr(tr2)+'</td></tr>';
@@ -2229,6 +2158,194 @@ function filterArchive(){
   });
 
   render();
+})();
+
+// 数据时点、现金在途、1% 敏感度。赎回记录来自 redemptions.js。
+(function initWeek1(){
+  var LEDGER_ASSETS=1618448;
+  var YUEBAO=3948;
+  var PIPE=['计划','已提交','已确认','已到账'];
+  var STALE_DAYS=5;
+
+  function esc(s){
+    return String(s==null?'':s).replace(/[&<>"']/g,function(ch){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+    });
+  }
+  function yuan(n){
+    var v=Math.round(Number(n)||0);
+    return (v<0?'-':'')+Math.abs(v).toLocaleString('zh-CN');
+  }
+  function shToday(){
+    try{
+      return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    }catch(e){
+      return '2026-11-04';
+    }
+  }
+  function tradingDaysAfter(startIso,endIso){
+    if(!startIso||!endIso||endIso<=startIso)return 0;
+    var t=Date.parse(startIso+'T00:00:00Z')+86400000;
+    var end=Date.parse(endIso+'T00:00:00Z');
+    var n=0;
+    for(;t<=end;t+=86400000){
+      var wd=new Date(t).getUTCDay();
+      if(wd!==0&&wd!==6)n++;
+    }
+    return n;
+  }
+  function markAsOf(){
+    var today=shToday();
+    document.querySelectorAll('[data-asof]').forEach(function(el){
+      var age=tradingDaysAfter(el.getAttribute('data-asof'),today);
+      if(age>STALE_DAYS){
+        el.classList.add('stale');
+        if(!el.querySelector('.asof-flag')){
+          var flag=document.createElement('span');
+          flag.className='asof-flag';
+          flag.textContent='过期 · '+age+' 个交易日';
+          el.appendChild(flag);
+        }
+      }
+    });
+  }
+
+  function book(){return window.REDEMPTIONS||{redemptions:[],cashTargetPct:0.12,note:''};}
+  function rowAmount(r){
+    if((r.status==='已确认'||r.status==='已到账')&&r.confirmedAmount!=null)return Number(r.confirmedAmount)||0;
+    return Number(r.amountEst)||0;
+  }
+  function renderCash(){
+    var data=book();
+    var rows=data.redemptions||[];
+    var today=shToday();
+    var inTransit=0, arrived=0;
+    rows.forEach(function(r){
+      var amt=rowAmount(r);
+      if(r.status==='已提交'||r.status==='已确认')inTransit+=amt;
+      else if(r.status==='已到账')arrived+=amt;
+    });
+    var onHand=YUEBAO+arrived;
+    var cash=onHand+inTransit;
+    var targetPct=Number(data.cashTargetPct);
+    if(!isFinite(targetPct)||targetPct<=0)targetPct=0.12;
+    var pct=LEDGER_ASSETS>0?cash/LEDGER_ASSETS:0;
+    var targetAmt=LEDGER_ASSETS*targetPct;
+    var pctLabel=(pct*100).toFixed(1)+'%';
+
+    var kpiV=document.getElementById('cashKpiValue');
+    var kpiS=document.getElementById('cashKpiSub');
+    if(kpiV)kpiV.textContent=yuan(cash);
+    if(kpiS){
+      kpiS.textContent='占收益簿 '+pctLabel+' · 目标 '+(targetPct*100).toFixed(0)+'%';
+      kpiS.title='已在账 '+yuan(onHand)+'（余额宝 '+yuan(YUEBAO)+(arrived?' + 已到账 '+yuan(arrived):'')+'）+ 在途估算 '+yuan(inTransit)+'。分母是收益簿总资产 '+yuan(LEDGER_ASSETS)+'。在途仍包含在总资产里，不是再加一笔。';
+    }
+    var total=document.getElementById('cashTotal');
+    var sub=document.getElementById('cashSub');
+    var tgt=document.getElementById('cashTarget');
+    if(total)total.textContent=yuan(cash);
+    if(sub)sub.textContent='已在账 '+yuan(onHand)+' + 在途估算 '+yuan(inTransit);
+    if(tgt)tgt.innerHTML='占收益簿总资产 '+yuan(LEDGER_ASSETS)+' 的 <strong style="color:var(--text)">'+pctLabel+'</strong><br>目标 '+(targetPct*100).toFixed(0)+'% ≈ '+yuan(targetAmt)+(pct+0.0005>=targetPct?' · 已超过目标':'');
+    var fill=document.getElementById('cashFill');
+    var mark=document.getElementById('cashMark');
+    if(fill)fill.style.width=Math.max(0,Math.min(100,pct*100))+'%';
+    if(mark)mark.style.left=Math.max(0,Math.min(100,targetPct*100))+'%';
+    var mid=document.getElementById('cashScaleMid');
+    if(mid){
+      var leftPct=Math.max(0,Math.min(100,targetPct*100));
+      mid.textContent='目标 '+(targetPct*100).toFixed(0)+'%';
+      if(leftPct<22){
+        mid.style.left='2.4rem';
+        mid.style.transform='none';
+      }else if(leftPct>78){
+        mid.style.left=leftPct+'%';
+        mid.style.transform='translateX(-100%)';
+      }else{
+        mid.style.left=leftPct+'%';
+        mid.style.transform='translateX(-50%)';
+      }
+    }
+
+    var host=document.getElementById('cashRows');
+    if(host){
+      host.innerHTML=rows.map(function(r){
+        var idx=PIPE.indexOf(r.status);
+        if(idx<0)idx=0;
+        var planDate=r.deadline||r.date||'';
+        var overdue=r.status==='计划'&&planDate&&planDate<today;
+        var late=r.expectedArrive&&r.expectedArrive<today&&r.status!=='已到账'&&r.status!=='计划';
+        var amt=rowAmount(r);
+        var amtLabel=(r.status==='已确认'||r.status==='已到账')&&r.confirmedAmount!=null?'确认金额':'估算';
+        var pipe=PIPE.map(function(step,i){
+          var cls='step';
+          if(overdue&&i===idx)cls+=' overdue';
+          else if(i<idx)cls+=' done';
+          else if(i===idx)cls+=' on';
+          return '<span class="'+cls+'">'+step+'</span>'+(i<PIPE.length-1?'<span class="arr">→</span>':'');
+        }).join('');
+        var extra=overdue?'<div class="rd-meta" style="color:#fecaca">计划已过 '+esc(planDate)+'，仍未提交</div>':'';
+        if(late)extra+='<div class="rd-meta">已过预计到账日 '+esc(r.expectedArrive)+'</div>';
+        return '<div class="rd-row'+(overdue?' overdue':'')+'">'+
+          '<div class="rd-main"><div class="rd-name">'+esc(r.code)+' '+esc(r.name)+' <span class="pill">'+esc(r.account)+'</span></div>'+
+          '<div class="rd-meta">份额 '+Number(r.shares).toLocaleString('zh-CN')+' · 参考净值 '+r.navRef+'（'+esc(r.navRefDate)+'）· '+amtLabel+' '+yuan(amt)+' · 预计到账 '+esc(r.expectedArrive||'—')+'</div>'+extra+'</div>'+
+          '<div class="pipe" aria-label="状态 '+esc(r.status)+'">'+pipe+'</div></div>';
+      }).join('');
+    }
+    var note=document.getElementById('cashNote');
+    if(note){
+      var ops=data.ops||{};
+      var bits=[];
+      if(data.note)bits.push(esc(data.note));
+      if(ops.doNotRebuyIcAiToday)bits.push('今日不加 IC/AI。');
+      if(ops.qdiiDefaultHold)bits.push('QDII 默认持有。');
+      if(ops.remainingFocus&&ops.remainingFocus.length)bits.push('未在这批赎回里的代码：'+ops.remainingFocus.map(esc).join('、')+'。');
+      bits.push('状态顺序：计划 → 已提交 → 已确认 → 已到账。计划超过日期仍未提交会标红。');
+      note.innerHTML=bits.join(' ');
+    }
+  }
+
+  function sleeveNet(sleeve, cuts){
+    var gross=0, net=0, codes=[];
+    (window.HOLDINGS_FUNDS||[]).forEach(function(f){
+      if(f.sleeve!==sleeve)return;
+      var g=Number(f.mkt)||0;
+      var c=Math.min(g, cuts[f.c]||0);
+      gross+=g; net+=g-c; codes.push(f.c);
+    });
+    return {gross:gross, net:net, codes:codes};
+  }
+  function renderSensitivity(){
+    var text=document.getElementById('sensText');
+    var note=document.getElementById('sensNote');
+    if(!text)return;
+    var funds=window.HOLDINGS_FUNDS||[];
+    if(!funds.length){
+      text.innerHTML='<span class="miss">— 暂缺 · 持仓数组未就绪</span>';
+      return;
+    }
+    var cuts={};
+    (book().redemptions||[]).forEach(function(r){
+      if(r.status==='已提交'||r.status==='已确认')cuts[r.code]=(cuts[r.code]||0)+rowAmount(r);
+    });
+    var us=sleeveNet('ustech',cuts);
+    var a=sleeveNet('atech',cuts);
+    var nev=sleeveNet('nev',cuts);
+    function piece(label, bucket){
+      if(!bucket.codes.length)return label+' <span class="miss">— 暂缺</span>';
+      var one=bucket.net*0.01;
+      return label+' ±1% ≈ <strong>'+(one===0?'±0':'±'+yuan(Math.abs(one)))+'</strong>（'+bucket.codes.join('+')+'）';
+    }
+    text.innerHTML=piece('纳指/费半',us)+'；'+piece('A股科技',a);
+    if(note){
+      note.textContent='持仓市值仍是 2026-10-23 截图。已提交或已确认的赎回按估算金额从对应基金扣减，且不低于 0。'
+        +'018036 全球新能源车未计入纳指/费半（其 ±1% ≈ ±'+yuan(nev.net*0.01)+'）。新兴市场与港股也不在这两格里。'
+        +'扣赎回前 A股科技 ±1% ≈ ±'+yuan(a.gross*0.01)+'。不是回归 beta；截图市值和 11/03 赎回净值不是同一天，只看量级。';
+    }
+  }
+
+  markAsOf();
+  renderCash();
+  renderSensitivity();
 })();
 </script>
 </body>
