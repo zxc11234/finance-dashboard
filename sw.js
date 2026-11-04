@@ -1,9 +1,9 @@
 // Cache version - increment on each deploy
-const CACHE_VERSION = '20261104-v74-ledger-1103';
+const CACHE_VERSION = '20261104-v75-cash-1104';
 
 const CACHE_NAME = 'finance-dashboard-v2-' + CACHE_VERSION;
 const ASSETS = [
-  './index.html', './manifest.json', './chart.umd.min.js', './html2canvas.min.js',
+  './index.html', './manifest.json', './redemptions.js', './chart.umd.min.js', './html2canvas.min.js',
   './echarts.common.min.js', './fonts/JetBrainsMono-Regular.woff2', './fonts/JetBrainsMono-Bold.woff2'
 ];
 self.addEventListener('install', e => {
@@ -17,7 +17,10 @@ self.addEventListener('activate', e => {
 // Network-first for HTML (always fresh), cache-first for static assets
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
-  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/')) {
+  // HTML and redemption data are network-first so a Pages refresh is not stuck on the last precache.
+  const path = url.pathname;
+  const networkFirst = e.request.mode === 'navigate' || path.endsWith('.html') || path.endsWith('/') || path.endsWith('/redemptions.js');
+  if (networkFirst) {
     e.respondWith(fetch(e.request).then(r => {
       const clone = r.clone();
       caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
