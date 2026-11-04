@@ -485,19 +485,15 @@
   <div style="height:120px"><canvas id="weekSparkline"></canvas></div>
 </div>
 
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('overview',this)">📋 持仓总览</div>
-  <div class="tab" onclick="switchTab('history',this)">📈 历史走势</div>
-  <div class="tab" onclick="switchTab('monthly',this)">🗓 月度明细</div>
-  <div class="tab" onclick="switchTab('alloc',this)">📊 资产配置</div>
-  <div class="tab" onclick="switchTab('news',this)">📰 资讯研报</div>
-  <div class="tab" onclick="switchTab('semicon',this)">📡 市场雷达</div>
-  <div class="tab" onclick="switchTab('techflow',this)">🔬 科技资金流</div>
-  <div class="tab" onclick="switchTab('tradelog',this)">📋 操作日志</div>
+<div class="tabs" id="tabBar">
+  <div class="tab active" data-tab="overview" onclick="switchTab('overview',this)">总览</div>
+  <div class="tab" data-tab="trend" onclick="switchTab('trend',this)">走势</div>
+  <div class="tab" data-tab="alloc" onclick="switchTab('alloc',this)">结构</div>
+  <div class="tab" data-tab="market" onclick="switchTab('market',this)">市场·高级</div>
+  <div class="tab" data-tab="log" onclick="switchTab('log',this)">日志</div>
 </div>
-
 <div id="tab-overview">
-  <div class="table-card" id="cashCard">
+<div class="table-card" id="cashCard">
     <h3>现金 / 赎回在途 <span class="date-badge" data-asof="2026-11-04">提交日 2026-11-04</span></h3>
     <div class="cash-head">
       <div>
@@ -511,47 +507,17 @@
     <div id="cashRows"></div>
     <p class="cash-note" id="cashNote"></p>
   </div>
-  <div class="sens-line" id="sensLine">
+<div class="sens-line" id="sensLine">
     <span class="sens-k">敏感度 · 1% 近似</span>
     <span id="sensText"><span class="miss">— 暂缺</span></span>
     <span class="sens-note" id="sensNote"></span>
   </div>
-
-<div class="us-panel">
-    <div class="us-panel-title">A股 2026-11-04 收盘 · 科创50 +9.92%，创业板 +6.40% <span class="date-badge" data-asof="2026-11-04">市场 2026-11-04</span></div>
-    <div class="idx-grid">
-      <div class="idx-cell"><div class="k">上证指数</div><div class="v">3686.17</div><div class="c green">+2.16%</div></div>
-      <div class="idx-cell"><div class="k">深证成指</div><div class="v">11335.69</div><div class="c green">+4.22%</div></div>
-      <div class="idx-cell"><div class="k">创业板指</div><div class="v">2544.73</div><div class="c green">+6.40%</div></div>
-      <div class="idx-cell"><div class="k">科创50</div><div class="v">1265.47</div><div class="c green">+9.92%</div></div>
-      <div class="idx-cell"><div class="k">沪深300</div><div class="v">4101.34</div><div class="c green">+2.31%</div></div>
-    </div>
-    <div class="us-note">腾讯 11/04 收盘，涨跌相对 11/03。半导体/芯片 ETF 多数近涨停（512480 +9.97%，512760 +10.05%，588000 +10.29%）。恒生 23882.72（+1.52%），中芯国际 +9.01%。沪深成交约 2.04 万亿，较上一交易日放量约 3343 亿（财联社/新浪收评）。明细在「市场雷达」。单日反抽不改观望口令：不加 IC/AI。</div>
-  </div>
-
-    <div class="us-panel">
-    <div class="us-panel-title">美东 2026-11-03 收盘 · 纳指与芯片反弹、道指收跌 <span class="date-badge" data-asof="2026-11-03">市场 2026-11-03</span></div>
-    <div class="us-cards">
-      <div class="us-card"><div class="us-label">纳斯达克 · 11/03</div><div class="us-value">25,372.01</div><div class="us-change green">+0.83%</div></div>
-      <div class="us-card"><div class="us-label">道琼斯 · 11/03</div><div class="us-value">51,786.72</div><div class="us-change red">-0.38%</div></div>
-      <div class="us-card"><div class="us-label">NVDA · 11/03</div><div class="us-value">$206.69</div><div class="us-change green">+2.29%</div></div>
-      <div class="us-card"><div class="us-label">美光 MU · 11/03</div><div class="us-value">$855.10</div><div class="us-change green">+2.58%</div></div>
-      <div class="us-card"><div class="us-label">SMH · 11/03</div><div class="us-value">$518.52</div><div class="us-change green">+2.01%</div></div>
-      <div class="us-card"><div class="us-label">AMD · 11/03</div><div class="us-value">$483.90</div><div class="us-change green">+3.65%</div></div>
-      <div class="us-card"><div class="us-label">费城半导体 · 11/03</div><div class="us-value miss">— 暂缺</div><div class="us-change miss">本轮未记入收盘</div></div>
-    </div>
-    <div class="us-note">点位来自腾讯行情，时间戳为美东 2026-11-03 收盘（个股 16:00，纳指 17:15，道指 16:34，标普 16:30）。标普 7,568.92（+0.36%）。个股：AVGO 332.13（+3.07%），TSM 404.80（+1.55%），INTC 60.55（+0.97%），MSFT 520.99（+2.74%），AAPL 331.90（-1.90%），AMZN 250.69（+2.06%），TSLA 398.50（-1.32%），ASML 1552.14（+1.70%），AMAT 381.92（+1.97%），LRCX 230.72（+1.39%），GOOGL 280.03（+0.37%）。SMH 518.52（+2.01%），SOXX 465.00（+2.50%）。费城半导体指数、VIX、罗素2000 本轮没有取到 11/03 收盘（腾讯 VIX 报价停在 2026-09-14，不采用）。A 股与港股 11/04 收盘已写入上方指数条和市场雷达。11/04 美股尚未收盘，纽约原油/黄金期货的午后报价不记为美股收盘。AMD 11/03 收盘后财报超预期（营收 133.8 亿美元、调整 EPS 2.09），盘后涨幅不是本卡收盘价。</div>
-  </div>
-
-  <!-- Feature 1: Economic Calendar -->
-  <div class="ec-section" id="ecSection">
+<div class="ec-section" id="ecSection">
     <div class="ec-title">📅 近端事项（核对于 2026-11-04 · 北京 · 收盘已写入，未取到的结果不补）</div>
-    <div class="us-note" style="margin-bottom:8px">A 股与港股已写入 11/04 收盘，美东最近完整收盘仍是 11/03，点位见市场雷达。纪律第8版第 1 笔（10/23）、第 2 笔（10/27 或顺延）的日历日已过。收益簿仍停在 11/03，减仓仍记「待执行」——本页不把净值涨跌或单日反抽当成已成交。观望口令不变：不加 IC/AI、不斩仓、不急情景B。</div>
+    <div class="us-note" style="margin-bottom:8px">A 股与港股已写入 11/04 收盘，美东最近完整收盘仍是 11/03，点位在「市场」。纪律第8版第 1 笔（10/23）、第 2 笔（10/27 或顺延）的日历日已过。收益簿仍停在 11/03，减仓仍记「待执行」——本页不把净值涨跌或单日反抽当成已成交。观望口令不变：不加 IC/AI、不斩仓、不急情景B。</div>
     <div class="ec-timeline" id="ecTimeline"></div>
   </div>
-
-  <!-- QDII NAV Lag Board -->
-  <div class="table-card" id="qdiiBoard" style="margin-bottom:14px">
+<div class="table-card" id="qdiiBoard" style="margin-bottom:14px">
   <h3>QDII 净值延迟看板 <span class="date-badge" data-asof="2026-11-02">净值 2026-11-02</span></h3>
   <div class="lag-row"><div class="lag-name">017731 嘉实全球产业升级</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-amber"></div><div class="lag-seg done-anim"></div><div class="lag-seg done-anim"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">3.0436</span></div><div class="lag-status amber">-1.22% · 默认不动</div></div>
   <div class="lag-row"><div class="lag-name">018147 建信新兴市场 C</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">1.9980</span></div><div class="lag-status amber">-2.77% · 默认不动</div></div>
@@ -559,13 +525,7 @@
   <div class="lag-row"><div class="lag-name">539002 建信新兴市场 A</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">2.0320</span></div><div class="lag-status amber">-2.78% · 第8版待减仓</div></div>
   <div class="lag-row"><div class="lag-name">006373 国富全球科技</div><div class="lag-bar"><div class="lag-track"><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div><div class="lag-seg done-blue"></div></div><span class="lag-fill">净值日 11/02</span><span class="lag-nav">5.9292</span></div><div class="lag-status amber">-2.28% · 第8版待减仓</div></div>
   <div style="font-size:0.7rem;color:var(--muted);margin-top:6px">💡 净值来源：天天基金 eastmoney，2026-11-04 拉取的已公布单位净值，不是盘中估值（估值接口本轮未用）。权威收益日是 <strong>2026-11-03</strong>（当日支付宝 -45,366.97 / 嘉实 -4,340.94 / 建信 -8,651.33）。持仓市值时点仍是 <strong>2026-10-23 截图</strong>，上表只更新单位净值，不改截图市值。A 股基金已到 11/03：017811 <strong>2.0023（-6.63%）</strong>、006503 <strong>3.6473（-8.22%）</strong>、005661 <strong>4.0121（+0.62%）</strong>、008619 <strong>1.0976（-2.81%）</strong>、019671 <strong>1.1869（-2.77%）</strong>、003231 <strong>1.5091（-2.54%）</strong>。QDII 公布到 11/02：017731 3.0436（-1.22%）、018147 1.9980（-2.77%）、018036 2.2477（-1.56%）、539002 2.0320（-2.78%）、006373 5.9292（-2.28%）。11/03 的 QDII 净值暂缺，不能当成已经兑现美东 11/03 收盘。⏰纪律第8版仍记待执行：018036/006373/539002 分两笔减仓；006503/017811 停加不斩；017731/018147 默认不动。11/04 官方净值尚未公布；资讯页的 11/04 数字若标成估值，是非官方参考，不回写本表单位净值，也不改收益簿。</div>  </div>
-
-  <div class="charts-grid">
-    <div class="chart-card"><h3>🥧 资产配置</h3><div class="chart-wrap"><canvas id="allocPie"></canvas></div></div>
-    <div class="chart-card"><h3>📊 持仓收益率</h3><div class="chart-wrap"><canvas id="todayBar"></canvas></div></div>
-  </div>
-
-  <div class="table-card" id="holdingsCard"><h3>当前持仓明细 <span class="date-badge" data-asof="2026-10-23">持仓截图 2026-10-23</span></h3>
+<div class="table-card" id="holdingsCard"><h3>当前持仓明细 <span class="date-badge" data-asof="2026-10-23">持仓截图 2026-10-23</span></h3>
   <div class="holdings-toolbar">
     <input class="holdings-search" id="holdingsSearch" type="text" placeholder="🔍 搜索基金名称或代码...">
   </div>
@@ -582,17 +542,13 @@
     </tr></thead>
     <tbody id="holdingsTbody"></tbody>
   </table></div>
-
-  <div class="highlight">
-    <strong>💡 更新说明（2026-11-04 · 收益簿权威至11/03 · 持仓截图仍为10/23）</strong><br>
-    · 📉 <strong>累计收益修订至 +79,245（收益率 5.15%）</strong>：本金 1,539,203.11，收益簿口径总资产约 1,618,448。相对 7/1 峰值 1,289,206，当前距峰值约 121.0 万（最大回撤落在 11/03，约 121.0 万）。10 月整月 <strong>-499,254.95</strong>（17 个交易日：支付宝 -357,032.44 / 嘉实 -81,207.88 / 建信 -61,014.63）。11 月 MTD <strong>-94,792.44</strong>（2 个交易日：支付宝 -55,869.99 / 嘉实 -30,271.12 / 建信 -8,651.33）。10/28 建信回填后当日 +42,495.71（支付宝 +31,410.56 / 嘉实 -1,512.40 / 建信 +12,597.55），累计 287,320.23，不再沿用旧口径「当日 +29,898 / 建信按 0 / 累计 274,723」。10/29 当日 -27,655.93（支付宝 -38,061.60 / 嘉实 +15,262.56 / 建信 -4,856.89），累计 259,664.30。10/30 当日 -85,626.52（支付宝 -48,874.33 / 嘉实 -15,655.09 / 建信 -21,097.10），累计 174,037.78。11/02 当日 -36,433.20（支付宝 -10,503.02 / 嘉实 -25,930.18 / 建信空按 0），累计 137,604.58。11/03 当日 -58,359.24（支付宝 -45,366.97 / 嘉实 -4,340.94 / 建信 -8,651.33），累计 79,245.34。10/31、11/01 非交易日。<br>
-    · 🧭 <strong>纪律第8版｜2026-10-23「保持弹性再平衡」</strong>：停加不斩财通 IC <code>006503</code> / 东方 AI <code>017811</code>；从浮盈 QDII（长城新能源车 <code>018036</code>、国富全球科技 <code>006373</code>、建信新兴 A <code>539002</code>）分两笔赎回换现金，目标现金约 12%；嘉实 <code>017731</code>、建信 C <code>018147</code> 默认不动。第 1 笔计划 10/23、第 2 笔计划 10/27（或顺延）——日历日已过，<strong>仍记待执行</strong>（无成交证据，不记已成交）。观望口令：不加 IC/AI、不斩仓、不急情景B。<br>
-    · 🧱 <strong>结构</strong>：出海 QDII 约占 51%、A 股 IC+AI 约 32%、资源约 13%、医药约 4%、现金约 0.2%（过低）。持仓市值截图合计约 202 万（仍为 10/23 截图，本轮无新截图，明细数字未改）；收益簿口径总资产约 162 万（本金 1,539,203 + 累计 79,245），差额为结构层/口径差，KPI 仍以收益簿为准。<br>
-    · 📡 <strong>市场</strong>：A 股指数更新到 2026-11-04 收盘（腾讯：上证 3686.17，+2.16%；深成 11335.69，+4.22%；创业板 2544.73，+6.40%；科创50 1265.47，+9.92%；沪深300 4101.34，+2.31%）。沪深成交约 2.04 万亿。恒生 11/04 收 23882.72（+1.52%），中芯国际 +9.01%。美东最近完整收盘仍是 11/03：道指 51,786.72（-0.38%），标普 7,568.92（+0.36%），纳指 25,372.01（+0.83%），SMH 518.52（+2.01%）。科技资金流：Tushare 五板块日序截至 11/04 · 近10交易日（10/22–11/04）；11/04 半导体主力 +195.89 亿。新浪行业/概念截面仍停在 2026-10-23。两融、北向本轮暂缺。单日反抽不改每日约 14:30 的观望口令。
-</div>
+<div class="highlight" id="pendingNote">
+  <strong>待办</strong> · 纪律第8版两笔减仓仍记待执行（无成交证据）。观望口令不变：不加 IC/AI、不斩仓、不急情景B。长文在「日志」。11/04 收盘、资讯和资金流在「市场」。
 </div>
 
-<div id="tab-history" style="display:none;">
+</div>
+<div id="tab-trend" style="display:none;">
+
   <div class="stats-bar">
     <div class="stat-card"><div class="stat-label">胜率 · 收益簿至 11/03</div><div class="stat-val">51.7%</div><div class="stat-label">104 盈 / 97 亏 / 201 交易日</div></div>
     <div class="stat-card"><div class="stat-label">日均收益</div><div class="stat-val pos">394</div><div class="stat-label">最高 +93,183.78 · 最大单日 -165,316.30</div></div>
@@ -607,9 +563,8 @@
   <div class="chart-card" style="grid-column:1/-1"><h3>🎯 每日 Alpha 热力图（跑赢/跑输沪深300）</h3><div id="hs300Ref" style="display:flex;gap:2px;flex-wrap:wrap;margin-bottom:8px;font-size:0.7rem"></div><div id="alphaHeatmap"></div></div>
   <!-- Feature 3: Underwater Plot -->
   <div class="chart-card" style="grid-column:1/-1"><h3>🌊 水下曲线（从峰值回撤 %）</h3><div class="chart-wrap"><canvas id="underwaterChart"></canvas></div></div>
-</div>
 
-<div id="tab-monthly" style="display:none;">
+
   <div class="chart-card" style="margin-bottom:14px"><h3>🗓 月度收益</h3><div class="chart-wrap wide"><canvas id="monthlyChart"></canvas></div></div>
   <div class="export-btns">
     <button class="export-btn" onclick="exportScreenshot()">📸 截图导出</button>
@@ -631,36 +586,20 @@
   </tbody></table>
   <p style="font-size:.72rem;color:var(--muted);margin-top:8px">10月拆分：支付宝 -357,032.44 / 嘉实 -81,207.88 / 建信 -61,014.63（17 个交易日）。11月 MTD（2 日）：支付宝 -55,869.99 / 嘉实 -30,271.12 / 建信 -8,651.33。表内「嘉实」列不含建信，与 8–9 月相同。平台累计：支付宝 159,277.61 / 嘉实 -23,811.92 / 建信 -55,254.86 / 华宝 -1,783.32 / 南方 817.83。1月月收益较支付宝+嘉实少 965.49，对应平台累计里的华宝 -1,783.32 与南方 +817.83。12 月无交易日，不写入日序列。</p>
   </div>
-</div>
 
+</div>
 <div id="tab-alloc" style="display:none;">
+<div class="charts-grid">
+    <div class="chart-card"><h3>🥧 资产配置</h3><div class="chart-wrap"><canvas id="allocPie"></canvas></div></div>
+    <div class="chart-card"><h3>📊 持仓收益率</h3><div class="chart-wrap"><canvas id="todayBar"></canvas></div></div>
+  </div>
+
   <div class="charts-grid">
     <div class="chart-card"><h3>🥧 当前资产配置</h3><div class="chart-wrap"><canvas id="allocDonut"></canvas></div></div>
     <div class="chart-card"><h3>📊 配置变化趋势</h3><div class="chart-wrap wide"><canvas id="allocTrend"></canvas></div></div>
   </div>
-  <!-- 💵 Cash Deployment Roadmap -->
-  <div class="table-card" style="margin-bottom:14px">
-  <h3>🛡️ 防御重建路线图 <span class="news-meta">· 2026-10-23 · 纪律第8版 · 现金约 0.2% → 目标约 12%</span></h3>
-  <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;padding:8px;background:rgba(239,68,68,.06);border-radius:6px">当前环境（收益簿 2026-11-03 · 市场 2026-11-04）：收益簿权威是累计 +79,245、收益率 5.15%、总资产约 162 万。持仓截图仍为 10/23，约 202 万，现金约 0.4 万（0.2%）。9 月「收益率破 50% / 纪律第6–7版」描述已撤下。行业资金流日序已至 11/04（半导体当日主力约 +195.9 亿），见「科技资金流」。单日反抽不改口令，这里不把资金流写成加仓或减仓指令。</div>
-  <div class="roadmap-tree">
-    <div class="rm-node"><div class="rm-dot green-d"></div><div class="rm-title">按第8版执行两笔减仓</div>
-      <div class="rm-action">018036 / 006373 / 539002 分两笔赎回换现金；第 1 笔计划 10/23，第 2 笔计划 10/27（或顺延）</div><br>
-      <div class="rm-amount">目标现金约 12% · 目前待执行</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">006503 与 017811 停加不斩。017731、018147 默认不动。已公布净值：A 股基金到 11/03，QDII 到 11/02。美东 11/03 已收盘。减仓是否成交仍以收益簿为准，本页仍记待执行，不把净值涨跌写成已成交。</div>
-    </div>
-    <div class="rm-node"><div class="rm-dot amber-d"></div><div class="rm-title">若两笔仍未执行</div>
-      <div class="rm-action">现金垫维持约 0.2%，科技波动直接打在净值上</div><br>
-      <div class="rm-amount">不另设价格触发条件</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">第8版不再使用「回到某净值就卖」的旧条件。未执行就保持记录为待执行，不回写成第6/7版。</div>
-    </div>
-    <div class="rm-node"><div class="rm-dot red-d"></div><div class="rm-title">净值延迟</div>
-      <div class="rm-action">A 股基金净值到 11/03；QDII 公布到 11/02，11/03 暂缺</div><br>
-      <div class="rm-amount">减仓是否成交看收益簿，不看单日净值</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">已公布仍是 11/03：017811 -6.63%、006503 -8.22%、005661 +0.62%。QDII 11/02：017731 -1.22%、018147 -2.77%、018036 -1.56%、539002 -2.78%、006373 -2.28%。11/03 的 QDII 净值暂缺，11/04 官方净值未出。非官方估值不写进这条，也不在这里预测下一更净值。</div>
-    </div>
-  </div>
-  <div style="font-size:0.7rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律告警（第8版）：现金仅约0.2%（余额宝≈0.4万），目标抬至约12%（≈25万）。A股 IC+AI 深亏停加不斩；用浮盈 QDII（018036/006373/539002）分两笔换现金。017731/018147 默认不动。每日约14:30评估加减仓条件。</div>
-  </div>
+  
+  
 
   <!-- 🎯 Theme Exposure -->
   <div class="table-card" style="margin-bottom:14px">
@@ -702,9 +641,21 @@
     · 2026-10-23 截图结构：出海 QDII 约 51.4%，A 股 IC+AI 约 31.7%，资源约 12.7%，医药约 3.9%，现金约 0.2%。<br>
     · 收益簿口径总资产约 162 万（累计 +79,245 / 5.15%，权威至 2026-11-03）。上表浮盈浮亏是 10/23 截图结构层，不改写 KPI。
   </div>
-</div>
 
-<div id="tab-news" style="display:none;">
+</div>
+<div id="tab-market" style="display:none;">
+<div class="us-panel">
+    <div class="us-panel-title">A股 2026-11-04 收盘 · 科创50 +9.92%，创业板 +6.40% <span class="date-badge" data-asof="2026-11-04">市场 2026-11-04</span></div>
+    <div class="idx-grid">
+      <div class="idx-cell"><div class="k">上证指数</div><div class="v">3686.17</div><div class="c green">+2.16%</div></div>
+      <div class="idx-cell"><div class="k">深证成指</div><div class="v">11335.69</div><div class="c green">+4.22%</div></div>
+      <div class="idx-cell"><div class="k">创业板指</div><div class="v">2544.73</div><div class="c green">+6.40%</div></div>
+      <div class="idx-cell"><div class="k">科创50</div><div class="v">1265.47</div><div class="c green">+9.92%</div></div>
+      <div class="idx-cell"><div class="k">沪深300</div><div class="v">4101.34</div><div class="c green">+2.31%</div></div>
+    </div>
+    <div class="us-note">腾讯 11/04 收盘，涨跌相对 11/03。半导体/芯片 ETF 多数近涨停（512480 +9.97%，512760 +10.05%，588000 +10.29%）。恒生 23882.72（+1.52%），中芯国际 +9.01%。沪深成交约 2.04 万亿，较上一交易日放量约 3343 亿（财联社/新浪收评）。明细在下方「雷达明细」。单日反抽不改观望口令：不加 IC/AI。</div>
+  </div>
+
   <div class="asof-bar">
     <div><strong>资讯更新 2026-11-04</strong> · Asia/Shanghai · 覆盖至 A股 11/04 收盘</div>
     <div class="asof-sub">条目写本轮取到的 11/04 收盘、Tushare 资金流和已公布净值。11/04 估值单独标成非官方。⚠️ 为公开摘要，不另补结论。收益簿 KPI 仍停在 11/03（累计约 +79,245，5.15%）。持仓截图仍是 10/23。</div>
@@ -749,7 +700,10 @@
       <article class="brief-card"><div class="brief-top"><span class="brief-date">2026-11-03</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">美股纳指 +0.83%，SOXX +2.50%；AMD Q3 营收 133.8 亿美元、调整 EPS 2.09</div><p class="brief-sum">美东 11/03 收盘：道指 51786.72（-0.38%），标普 7568.92（+0.36%），纳指 25372.01（+0.83%）。NVDA 206.69（+2.29%），MU 855.10（+2.58%），AMD 483.90（+3.65%），AVGO 332.13（+3.07%），TSM 404.80（+1.55%）。SMH 518.52（+2.01%），SOXX 465.00（+2.50%）。AMD Q3 营收 133.8 亿美元、调整 EPS 2.09，Q4 指引约 170 亿美元，数据中心收入同比近翻倍，盘后大涨；盘后涨幅不是 11/03 收盘价。嘉实全球产业升级前十大含 AMD。隔夜美半导体重回买入，为 11/04 A 股科技反抽提供外部情绪。QDII 最新公布仍是 11/02，还没兑现这一天。11/04 美股尚未收盘。</p><div class="brief-meta"><span class="pill">CNBC / 腾讯 · AMD IR</span><span class="pill pill-fund">017731</span><span class="pill pill-fund">006373</span></div></article>
       <article class="brief-card"><div class="brief-top"><span class="brief-date">2026-11-04</span><span class="pill pill-warn">纪律不变</span></div><div class="brief-title">界面：半导体今日或属反抽，不宜把单日涨停外推成加仓</div><p class="brief-sum">界面新闻盘中分析把今天写成「缩量反抽」而非趋势反转，要看后续量能和订单。收评另写两市成交约 2.04 万亿、较前一交易日放量约 3343 亿，所以「缩量」是该篇的判断，不是本页自算。和观望纪律一致：赎回在途未到账前，不把单日涨停写成加仓信号。港股同日：恒生 23882.72（+1.52%），中芯国际 46.46（+9.01%），南方恒生科技 3.854（+1.47%）。黄金 ETF 华安 +3.00%，煤炭 ETF 国泰 -0.41%，资源内部不齐。</p><div class="brief-meta"><span class="pill">界面新闻 · 腾讯</span><span class="pill pill-fund">005661</span><span class="pill pill-fund">017811</span><span class="pill pill-fund">006503</span></div></article>
 
-    <h3 style="margin-top:16px">此前归档 <span class="news-meta">· 11/03 及更早 · 不覆盖上面的 11/04 收盘</span></h3>
+    <details class="collap" id="advNewsMore">
+  <summary>延伸阅读 · 归档 / 公告 / 纪律对照 <span class="news-meta">默认折叠</span><span class="chev">▶</span></summary>
+  <div class="collap-body">
+<h3 style="margin-top:16px">此前归档 <span class="news-meta">· 11/03 及更早 · 不覆盖上面的 11/04 收盘</span></h3>
     <div class="brief-list">
       <article class="brief-card"><div class="brief-top"><span class="brief-date">2026-11-02</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">A股收盘：上证 3638.03（+1.08%），科创50 +3.11%，两市成交约 1.78 万亿</div><p class="brief-sum">盘前简报引 Tushare index_daily 与腾讯/新浪交叉，并对照新华财经收评。上证 3638.03（+1.08%），深证成指 11010.68（+1.63%），创业板 2458.70（+1.87%），科创50 1196.94（+3.11%），沪深300 4016.92（+0.79%）。上证成交额约 8474.59 亿元。沪深两市约 1.78 万亿，较上一交易日放量约 +1092 亿（新华财经）；沪深京合计约 1.795–1.797 万亿，几家媒体口径略有差别。上涨家数全市场超 4600 只。AI 漫剧/传媒、游戏、白酒、大金融走强；半导体/设备午后反包。11/03 盘中价不记收盘。</p><div class="brief-meta"><span class="pill">Tushare · 腾讯/新浪 · 新华财经</span><span class="pill pill-fund">017811</span><span class="pill pill-fund">006503</span></div></article>
       <article class="brief-card"><div class="brief-top"><span class="brief-date">2026-11-02</span><span class="pill pill-ok">已核实</span></div><div class="brief-title">东财五板块：半导体当日 +46.08 亿，近5日约 -154，近10日约 -198</div><p class="brief-sum">Tushare moneyflow_ind_dc（行业，亿元），日序滚到 11/02，近10个交易日为 10/20–11/02。11/02 主力净额：半导体 +46.08（涨跌 +2.77%）、通信设备 +11.17（+2.69%）、消费电子 +6.76（+3.28%）、元件 +8.14（+1.33%）、光学光电子 -4.86（涨跌 +2.91%）。半导体近5日 -154.02、近10日 -198.47。21 经济引东财写主力净流入半导体约 46.08 亿，与日序当日一致。10/29 半导体主力 -136.40、10/30 -56.14。新浪行业/概念截面未更新，仍停在 10/23。</p><div class="brief-meta"><span class="pill">Tushare moneyflow_ind_dc</span><span class="pill pill-fund">006503</span><span class="pill pill-fund">017811</span></div></article>
@@ -810,12 +764,30 @@
       </div>
     </div>
   </details>
-</div>
 
-<div id="tab-semicon" style="display:none;">
+  </div>
+</details>
+
+<details class="collap" id="advRadar">
+  <summary>雷达明细 · ETF / 港股 / 美股 / 产业链 <span class="news-meta">默认折叠</span><span class="chev">▶</span></summary>
+  <div class="collap-body">
+<div class="us-panel">
+    <div class="us-panel-title">美东 2026-11-03 收盘 · 纳指与芯片反弹、道指收跌 <span class="date-badge" data-asof="2026-11-03">市场 2026-11-03</span></div>
+    <div class="us-cards">
+      <div class="us-card"><div class="us-label">纳斯达克 · 11/03</div><div class="us-value">25,372.01</div><div class="us-change green">+0.83%</div></div>
+      <div class="us-card"><div class="us-label">道琼斯 · 11/03</div><div class="us-value">51,786.72</div><div class="us-change red">-0.38%</div></div>
+      <div class="us-card"><div class="us-label">NVDA · 11/03</div><div class="us-value">$206.69</div><div class="us-change green">+2.29%</div></div>
+      <div class="us-card"><div class="us-label">美光 MU · 11/03</div><div class="us-value">$855.10</div><div class="us-change green">+2.58%</div></div>
+      <div class="us-card"><div class="us-label">SMH · 11/03</div><div class="us-value">$518.52</div><div class="us-change green">+2.01%</div></div>
+      <div class="us-card"><div class="us-label">AMD · 11/03</div><div class="us-value">$483.90</div><div class="us-change green">+3.65%</div></div>
+      <div class="us-card"><div class="us-label">费城半导体 · 11/03</div><div class="us-value miss">— 暂缺</div><div class="us-change miss">本轮未记入收盘</div></div>
+    </div>
+    <div class="us-note">点位来自腾讯行情，时间戳为美东 2026-11-03 收盘（个股 16:00，纳指 17:15，道指 16:34，标普 16:30）。标普 7,568.92（+0.36%）。个股：AVGO 332.13（+3.07%），TSM 404.80（+1.55%），INTC 60.55（+0.97%），MSFT 520.99（+2.74%），AAPL 331.90（-1.90%），AMZN 250.69（+2.06%），TSLA 398.50（-1.32%），ASML 1552.14（+1.70%），AMAT 381.92（+1.97%），LRCX 230.72（+1.39%），GOOGL 280.03（+0.37%）。SMH 518.52（+2.01%），SOXX 465.00（+2.50%）。费城半导体指数、VIX、罗素2000 本轮没有取到 11/03 收盘（腾讯 VIX 报价停在 2026-09-14，不采用）。A 股与港股 11/04 收盘在本页指数条。ETF、港股、美股在下方「雷达明细」。11/04 美股尚未收盘，纽约原油/黄金期货的午后报价不记为美股收盘。AMD 11/03 收盘后财报超预期（营收 133.8 亿美元、调整 EPS 2.09），盘后涨幅不是本卡收盘价。</div>
+  </div>
+
   <div class="asof-bar">
     <div><strong>市场雷达 2026-11-04 收盘</strong> · A股与港股已收盘 · 美东最近完整收盘仍是 11/03</div>
-    <div class="asof-sub">A 股、ETF 与恒生点位来自腾讯 2026-11-04 收盘。美股来自同一数据包里的美东 11/03 收盘，11/04 美股尚未收盘，期货午后报价不记入收盘。五板块主力见下方及「科技资金流」，来源 Tushare moneyflow_ind_dc。下表是收盘点位，不是支撑/压力预测。温度计不再打分。</div>
+    <div class="asof-sub">A 股、ETF 与恒生点位来自腾讯 2026-11-04 收盘。美股来自同一数据包里的美东 11/03 收盘，11/04 美股尚未收盘，期货午后报价不记入收盘。五板块主力见本折叠区及下方科技资金流，来源 Tushare moneyflow_ind_dc。下表是收盘点位，不是支撑/压力预测。温度计不再打分。</div>
   </div>
 
   <div class="sc-card" style="padding:12px 14px">
@@ -918,9 +890,13 @@
     </table>
     <p style="font-size:.72rem;color:var(--muted);margin-top:8px">代码目录，不是买卖建议，也没有填 10 月涨跌。持仓里的医药基金见盈亏表：008619、019671、003231。</p>
   </div>
-</div>
 
-<div id="tab-techflow" style="display:none;">
+  </div>
+</details>
+<details class="collap" id="advFlow">
+  <summary>科技资金流 · 日序至 11/04 <span class="news-meta">默认折叠 · 半导体当日 +195.89 亿</span><span class="chev">▶</span></summary>
+  <div class="collap-body">
+
   <div class="asof-bar">
     <div><strong>科技资金流 · 日序截至 2026-11-04</strong> · 单位：亿元</div>
     <div class="asof-sub">日序：Tushare moneyflow_ind_dc（行业），截至 11/04 · 近10交易日（10/22–11/04，跳过周末与 11/01）。11/04 半导体主力 +195.89 亿。新浪行业/概念截面没有交易日字段，下表仍是 2026-10-23，不能当作 11/04 今日榜。</div>
@@ -998,9 +974,41 @@
     <div class="chart-wrap" style="height:320px"><canvas id="tfDailyChart"></canvas></div>
     <table class="tf-table" id="tfDailyTable"></table>
   </div>
+
+  </div>
+</details>
+</div>
+<div id="tab-log" style="display:none;">
+<div class="table-card" style="margin-bottom:14px">
+  <h3>🛡️ 防御重建路线图 <span class="news-meta">· 2026-10-23 · 纪律第8版 · 现金约 0.2% → 目标约 12%</span></h3>
+  <div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;padding:8px;background:rgba(239,68,68,.06);border-radius:6px">当前环境（收益簿 2026-11-03 · 市场 2026-11-04）：收益簿权威是累计 +79,245、收益率 5.15%、总资产约 162 万。持仓截图仍为 10/23，约 202 万，现金约 0.4 万（0.2%）。9 月「收益率破 50% / 纪律第6–7版」描述已撤下。行业资金流日序已至 11/04（半导体当日主力约 +195.9 亿），见「市场」里折叠的科技资金流。单日反抽不改口令，这里不把资金流写成加仓或减仓指令。</div>
+  <div class="roadmap-tree">
+    <div class="rm-node"><div class="rm-dot green-d"></div><div class="rm-title">按第8版执行两笔减仓</div>
+      <div class="rm-action">018036 / 006373 / 539002 分两笔赎回换现金；第 1 笔计划 10/23，第 2 笔计划 10/27（或顺延）</div><br>
+      <div class="rm-amount">目标现金约 12% · 目前待执行</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">006503 与 017811 停加不斩。017731、018147 默认不动。已公布净值：A 股基金到 11/03，QDII 到 11/02。美东 11/03 已收盘。减仓是否成交仍以收益簿为准，本页仍记待执行，不把净值涨跌写成已成交。</div>
+    </div>
+    <div class="rm-node"><div class="rm-dot amber-d"></div><div class="rm-title">若两笔仍未执行</div>
+      <div class="rm-action">现金垫维持约 0.2%，科技波动直接打在净值上</div><br>
+      <div class="rm-amount">不另设价格触发条件</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">第8版不再使用「回到某净值就卖」的旧条件。未执行就保持记录为待执行，不回写成第6/7版。</div>
+    </div>
+    <div class="rm-node"><div class="rm-dot red-d"></div><div class="rm-title">净值延迟</div>
+      <div class="rm-action">A 股基金净值到 11/03；QDII 公布到 11/02，11/03 暂缺</div><br>
+      <div class="rm-amount">减仓是否成交看收益簿，不看单日净值</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:3px">已公布仍是 11/03：017811 -6.63%、006503 -8.22%、005661 +0.62%。QDII 11/02：017731 -1.22%、018147 -2.77%、018036 -1.56%、539002 -2.78%、006373 -2.28%。11/03 的 QDII 净值暂缺，11/04 官方净值未出。非官方估值不写进这条，也不在这里预测下一更净值。</div>
+    </div>
+  </div>
+  <div style="font-size:0.7rem;color:var(--muted);margin-top:8px;padding:8px;background:rgba(245,158,11,.06);border-radius:6px">⚠️ 铁律告警（第8版）：现金仅约0.2%（余额宝≈0.4万），目标抬至约12%（≈25万）。A股 IC+AI 深亏停加不斩；用浮盈 QDII（018036/006373/539002）分两笔换现金。017731/018147 默认不动。每日约14:30评估加减仓条件。</div>
+  </div>
+<div class="highlight">
+    <strong>💡 更新说明（2026-11-04 · 收益簿权威至11/03 · 持仓截图仍为10/23）</strong><br>
+    · 📉 <strong>累计收益修订至 +79,245（收益率 5.15%）</strong>：本金 1,539,203.11，收益簿口径总资产约 1,618,448。相对 7/1 峰值 1,289,206，当前距峰值约 121.0 万（最大回撤落在 11/03，约 121.0 万）。10 月整月 <strong>-499,254.95</strong>（17 个交易日：支付宝 -357,032.44 / 嘉实 -81,207.88 / 建信 -61,014.63）。11 月 MTD <strong>-94,792.44</strong>（2 个交易日：支付宝 -55,869.99 / 嘉实 -30,271.12 / 建信 -8,651.33）。10/28 建信回填后当日 +42,495.71（支付宝 +31,410.56 / 嘉实 -1,512.40 / 建信 +12,597.55），累计 287,320.23，不再沿用旧口径「当日 +29,898 / 建信按 0 / 累计 274,723」。10/29 当日 -27,655.93（支付宝 -38,061.60 / 嘉实 +15,262.56 / 建信 -4,856.89），累计 259,664.30。10/30 当日 -85,626.52（支付宝 -48,874.33 / 嘉实 -15,655.09 / 建信 -21,097.10），累计 174,037.78。11/02 当日 -36,433.20（支付宝 -10,503.02 / 嘉实 -25,930.18 / 建信空按 0），累计 137,604.58。11/03 当日 -58,359.24（支付宝 -45,366.97 / 嘉实 -4,340.94 / 建信 -8,651.33），累计 79,245.34。10/31、11/01 非交易日。<br>
+    · 🧭 <strong>纪律第8版｜2026-10-23「保持弹性再平衡」</strong>：停加不斩财通 IC <code>006503</code> / 东方 AI <code>017811</code>；从浮盈 QDII（长城新能源车 <code>018036</code>、国富全球科技 <code>006373</code>、建信新兴 A <code>539002</code>）分两笔赎回换现金，目标现金约 12%；嘉实 <code>017731</code>、建信 C <code>018147</code> 默认不动。第 1 笔计划 10/23、第 2 笔计划 10/27（或顺延）——日历日已过，<strong>仍记待执行</strong>（无成交证据，不记已成交）。观望口令：不加 IC/AI、不斩仓、不急情景B。<br>
+    · 🧱 <strong>结构</strong>：出海 QDII 约占 51%、A 股 IC+AI 约 32%、资源约 13%、医药约 4%、现金约 0.2%（过低）。持仓市值截图合计约 202 万（仍为 10/23 截图，本轮无新截图，明细数字未改）；收益簿口径总资产约 162 万（本金 1,539,203 + 累计 79,245），差额为结构层/口径差，KPI 仍以收益簿为准。<br>
+    · 📡 <strong>市场</strong>：A 股指数更新到 2026-11-04 收盘（腾讯：上证 3686.17，+2.16%；深成 11335.69，+4.22%；创业板 2544.73，+6.40%；科创50 1265.47，+9.92%；沪深300 4101.34，+2.31%）。沪深成交约 2.04 万亿。恒生 11/04 收 23882.72（+1.52%），中芯国际 +9.01%。美东最近完整收盘仍是 11/03：道指 51,786.72（-0.38%），标普 7,568.92（+0.36%），纳指 25,372.01（+0.83%），SMH 518.52（+2.01%）。科技资金流：Tushare 五板块日序截至 11/04 · 近10交易日（10/22–11/04）；11/04 半导体主力 +195.89 亿。新浪行业/概念截面仍停在 2026-10-23。两融、北向本轮暂缺。单日反抽不改每日约 14:30 的观望口令。
 </div>
 
-<div id="tab-tradelog" style="display:none;">
 <div class="highlight">操作时间线是历史成交（主要在 6–8 月）。纪律第8版减仓仍待执行，不计入下方笔数。收益权威日 2026-11-03：累计 +79,245（5.15%）。A 股与科技资金流同步记到 11/04 收盘。简报归档顶部是 11/04 收盘同步。纪律第8版减仓仍无成交证据，不加 IC/AI。</div>
 <div class="stats-bar">
   <div class="stat-card"><div class="stat-label">累计交易</div><div class="stat-val green">15 笔</div></div>
@@ -1048,12 +1056,14 @@
   <div class="search-bar"><input type="text" id="searchInput" placeholder="搜索关键词：半导体、CPI、调仓、NVDA..." oninput="filterArchive()"></div>
   <div id="archiveList"></div>
 </div>
+
 </div>
+
 </div>
 
 <div class="footer">数据：收益簿权威 2026-11-03（累计 +79,245 · 5.15% · 纪律第8版「保持弹性」）· 市场与资讯 2026-11-04 收盘 · 科技资金流 Tushare 日序截至 11/04，新浪截面仍是 10/23 · QDII 净值 11/02 · 持仓截图 10/23 · 不构成投资建议</div>
 
-<script src="redemptions.js?v=20261104-v76-close"></script>
+<script src="redemptions.js?v=20261104-v77-tabs"></script>
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
 // P3: Chart.js tooltip 全局统一样式（各图只需再写 callbacks）
@@ -1224,9 +1234,32 @@ const ecEvents=[
   if(firstCurrent){tl.scrollLeft=firstCurrent.offsetLeft-tl.offsetLeft-8;}
 })();
 
+function initWeekSpark(){
+  const wk=document.getElementById('weekSparkline');
+  if(!wk||Chart.getChart(wk))return;
+  const wkDates=dates.slice(-7),wkDaily=daily.slice(-7);
+  const wkSparkLabels={id:'wkSparkLabels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),yScale=chart.scales.y;
+    ctx.save();
+    const zy=yScale.getPixelForValue(0);
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(chart.chartArea.left,zy);ctx.lineTo(chart.chartArea.right,zy);ctx.stroke();
+    ctx.font='8px "JetBrains Mono",ui-monospace,monospace';ctx.textAlign='center';ctx.textBaseline='bottom';
+    meta.data.forEach((bar,i)=>{
+      const v=chart.data.datasets[0].data[i];
+      const txt=(v>=0?'+':'')+v.toLocaleString();
+      ctx.fillStyle=v>=0?'#f87171':'#4ade80';
+      if(v>=0){ctx.fillText(txt,bar.x,bar.y-2);}
+      else{ctx.textBaseline='top';ctx.fillText(txt,bar.x,bar.y+2);ctx.textBaseline='bottom';}
+    });
+    ctx.restore();
+  }};
+  new Chart(wk,{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)'),borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}},plugins:[wkSparkLabels]});
+}
 function initOverview(){
+  initWeekSpark();
   const el=document.getElementById('todayBar');
-  if(!el||Chart.getChart(el))return;
+  if(!el||Chart.getChart(el)||!el.offsetParent)return;
   const fn=["539002 建信新兴A", "006373 国富科技", "018036 新能源车", "019671 港股创新药", "008619 永赢医药", "006503 财通IC", "018147 建信新兴C", "017811 东方AI", "017731 嘉实全球", "005661 嘉实资源", "003231 创金医疗"];
   const fp=[54.19, 54.52, 28.5, 4.61, -6.24, -27.63, -6.29, -24.82, -15.12, -14.18, -2.47];
   // Sort descending (正→负)
@@ -1257,28 +1290,6 @@ function initOverview(){
     ctx.restore();
   }};
   new Chart(el,{type:'bar',data:{labels:sNames,datasets:[{data:sVals,backgroundColor:barColors,borderRadius:{topRight:6,bottomRight:6,topLeft:6,bottomLeft:6},borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{right:42,left:4}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%'}}},scales:{x:{ticks:{callback:v=>(v>=0?'+':'')+v+'%',font:{size:10}},grid:{color:'rgba(148,163,184,.12)'},border:{color:'rgba(148,163,184,.3)'}},y:{grid:{display:false},ticks:{font:{size:10}},border:{display:false}}},indexAxis:'y'},plugins:[todayBarLabels]});
-
-  // Weekly sparkline
-  const wkDates=dates.slice(-7),wkDaily=daily.slice(-7);
-  // Inline plugin: value labels at bar top (8px) + zero baseline, todayBar style
-  const wkSparkLabels={id:'wkSparkLabels',afterDatasetsDraw(chart){
-    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),yScale=chart.scales.y;
-    ctx.save();
-    // zero baseline
-    const zy=yScale.getPixelForValue(0);
-    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=1.5;
-    ctx.beginPath();ctx.moveTo(chart.chartArea.left,zy);ctx.lineTo(chart.chartArea.right,zy);ctx.stroke();
-    ctx.font='8px "JetBrains Mono",ui-monospace,monospace';ctx.textAlign='center';ctx.textBaseline='bottom';
-    meta.data.forEach((bar,i)=>{
-      const v=chart.data.datasets[0].data[i];
-      const txt=(v>=0?'+':'')+v.toLocaleString();
-      ctx.fillStyle=v>=0?'#f87171':'#4ade80';
-      if(v>=0){ctx.fillText(txt,bar.x,bar.y-2);}
-      else{ctx.textBaseline='top';ctx.fillText(txt,bar.x,bar.y+2);ctx.textBaseline='bottom';}
-    });
-    ctx.restore();
-  }};
-  new Chart(document.getElementById('weekSparkline'),{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)'),borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}},plugins:[wkSparkLabels]});
 
   // Allocation doughnut: sorted desc, Cat10 palette, pull-out top3, % labels
   const allocRaw=[["东方AI", 330594], ["财通IC", 310207], ["嘉实全球", 405855], ["建信新兴C", 327992], ["嘉实资源", 257455], ["长城新能源", 147770], ["建信新兴A", 92511], ["国富科技", 64228], ["永赢医药", 42191], ["港股创新药", 20923], ["创金医疗", 16580], ["余额宝", 3948]];
@@ -1607,26 +1618,32 @@ function exportCSV(){
     '<text x="'+(W-PAD)+'" y="'+(peakY+4)+'" fill="#94a3b8" font-size="8" text-anchor="end">峰值 '+(max/10000).toFixed(1)+'万</text>';
 })();
 
+const TAB_ALIAS={
+  overview:'overview',trend:'trend',alloc:'alloc',market:'market',log:'log',
+  history:'trend',monthly:'trend',
+  news:'market',semicon:'market',techflow:'market',
+  tradelog:'log'
+};
 function switchTab(name,el){
+  name=TAB_ALIAS[name]||'overview';
+  if(!el)el=document.querySelector('.tab[data-tab="'+name+'"]');
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('[id^="tab-"]').forEach(d=>d.style.display='none');
   const target=document.getElementById('tab-'+name);
+  if(!target||!el)return;
   target.style.display='';
   el.classList.add('active');
-  // 等浏览器真正完成 reflow（用 ResizeObserver 监听容器宽度，最可靠）
+  if(location.hash!=='#'+name)history.replaceState(null,'','#'+name);
   let attempts=0;
   const tryInit=()=>{
     attempts++;
     const w=target.offsetWidth;
     if(w>0||attempts>20){
-      if(name==='overview')initOverview();
-      else if(name==='history')initHistory();
-      else if(name==='monthly')initMonthly();
-      else if(name==='alloc'){initAlloc();}
-      else if(name==='semicon')initSemicon();
-      else if(name==='tradelog')initTradelog();
-      else if(name==='techflow')initTechFlow();
-      // resize 所有 chart 防止 0x0
+      if(name==='overview')initWeekSpark();
+      else if(name==='trend'){initHistory();initMonthly();}
+      else if(name==='alloc'){initAlloc();initOverview();}
+      else if(name==='market')initSemicon();
+      else if(name==='log')initTradelog();
       setTimeout(()=>{
         if(window.Chart&&Chart.instances)Object.values(Chart.instances).forEach(c=>{try{c.resize();}catch(e){}});
       },50);
@@ -1636,7 +1653,32 @@ function switchTab(name,el){
   };
   tryInit();
 }
-initOverview();
+document.getElementById('advFlow').addEventListener('toggle',function(){
+  if(!this.open)return;
+  const go=()=>{
+    const host=document.getElementById('tfDailyChart');
+    if(host&&host.offsetParent)initTechFlow();
+    else setTimeout(go,50);
+  };
+  go();
+});
+function applyHash(){
+  const raw=(location.hash||'#overview').replace('#','');
+  const name=TAB_ALIAS[raw]||'overview';
+  const tab=document.querySelector('.tab[data-tab="'+name+'"]');
+  if(name==='overview'&&document.querySelector('.tab.active')===tab&&location.hash!=='#overview'){
+    history.replaceState(null,'','#overview');
+    return;
+  }
+  if(tab)switchTab(name,tab);
+  if(raw==='techflow'){
+    const d=document.getElementById('advFlow');
+    if(d&&!d.open)d.open=true;
+  }
+}
+window.addEventListener('hashchange',applyHash);
+initWeekSpark();
+applyHash();
 
 // Feature D: Populate risk cards on load
 (function(){
@@ -1662,7 +1704,7 @@ initOverview();
 // to purge stale cached pages from the buggy cache-first strategy.
 // SW: 版本化注册 — sw.js 内 CACHE_VERSION 每次部署+1，旧缓存自动失效
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js?v=20261104-v76-close').then(reg=>{
+  navigator.serviceWorker.register('sw.js?v=20261104-v77-tabs').then(reg=>{
     reg.addEventListener('updatefound',()=>{
       const nw=reg.installing;
       nw&&nw.addEventListener('statechange',()=>{ if(nw.state==='activated') location.reload(); });
@@ -2020,7 +2062,7 @@ function initSemicon(){
     '<text x="465" y="325" fill="#3b82f6" font-size="8" text-anchor="middle">018036 ¥14.8万 (新能源车)</text>'+
     // 底部说明
     '<text x="300" y="360" fill="#94a3b8" font-size="9" text-anchor="middle">2026-10-23截图：出海QDII约103.8万，IC+AI约64.1万，现金约0.4万</text>'+
-    '<text x="300" y="375" fill="#94a3b8" font-size="8" text-anchor="middle">资金流见「科技资金流」：Tushare日序截至11/04；新浪截面仍是10/23</text>'+
+    '<text x="300" y="375" fill="#94a3b8" font-size="8" text-anchor="middle">资金流在本页折叠区：Tushare日序截至11/04；新浪截面仍是10/23</text>'+
     '<text x="300" y="400" fill="#475569" font-size="7" text-anchor="middle">蓝色实线框=当前持仓 | 灰色虚线框=已清仓环节 | 红色标签=QDII | 蓝色标签=A股</text>';
 }
 
