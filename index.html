@@ -50,7 +50,7 @@
   .chart-card h3, .table-card h3 { font-size:0.92rem; margin-bottom:10px; color:var(--text); font-weight:600; letter-spacing:.3px; border-left:3px solid var(--blue); padding-left:8px; }
   .chart-wrap { position:relative; height:280px; width:100%; will-change:transform; }
   .chart-wrap.wide { height:360px; }
-  /* 结构页图表：主题色、字号、卡片（仅 #tab-alloc） */
+  /* 结构页图表 v80：降饱和、收尺寸。只作用于 #tab-alloc，不改其它页色板。 */
   #tab-alloc .alloc-board{
     display:grid;
     grid-template-columns:minmax(0,1.15fr) minmax(0,.95fr);
@@ -58,49 +58,62 @@
     gap:14px;
     margin-bottom:16px;
   }
-  #tab-alloc .alloc-sunburst{grid-area:sun;display:flex;flex-direction:column}
+  #tab-alloc .alloc-sunburst{grid-area:sun;display:flex;flex-direction:column;align-self:start}
   #tab-alloc .alloc-returns-card{grid-area:returns}
   #tab-alloc .alloc-trend-card{grid-area:trend}
   #tab-alloc .chart-card{
-    background:#141A26;
-    border:1px solid rgba(255,255,255,.06);
-    padding:20px;
+    background:#161A21;
+    border:1px solid #232833;
+    padding:24px;
     box-shadow:none;
   }
-  #tab-alloc .chart-card:hover{border-color:rgba(91,141,239,.35)}
+  #tab-alloc .chart-card:hover{border-color:#2C3340}
   #tab-alloc .chart-card h3{
-    font-size:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
     line-height:1.35;
-    color:#E6EAF0;
+    color:#E6E8EC;
     font-weight:600;
     margin-bottom:12px;
-    border-left:3px solid #5B8DEF;
-    padding-left:8px;
+    border-left:none;
+    padding-left:0;
   }
-  #tab-alloc .alloc-sun-body{flex:1;display:flex;align-items:center;gap:8px 16px;min-height:0}
-  #tab-alloc .alloc-sun-canvas{position:relative;width:300px;height:520px;flex:0 0 300px}
+  #tab-alloc .chart-card h3::before{
+    content:'';
+    width:2px;
+    height:12px;
+    border-radius:1px;
+    background:#4E6A9E;
+    flex:none;
+  }
+  #tab-alloc .alloc-sun-body{flex:0 0 auto;display:flex;align-items:center;gap:40px;min-height:0}
+  #tab-alloc .alloc-sun-canvas{position:relative;width:220px;height:220px;flex:0 0 220px}
   #tab-alloc .alloc-legend{
-    flex:1;min-width:0;
+    width:260px;flex:0 0 260px;min-width:0;
     display:grid;
-    grid-template-columns:12px minmax(0,1fr) 5em 3.6em;
+    grid-template-columns:8px minmax(0,1fr) 62px 46px;
     column-gap:8px;row-gap:4px;align-items:center;
     font-family:-apple-system,'PingFang SC','Noto Sans SC',sans-serif;
     font-variant-numeric:tabular-nums;
     font-feature-settings:"tnum" 1;
   }
-  #tab-alloc .alloc-leg-gap{grid-column:1 / -1;height:8px}
-  #tab-alloc .alloc-swatch{width:10px;height:10px;border-radius:2px;justify-self:center}
-  #tab-alloc .alloc-leg-head{font-size:14px;font-weight:600;color:#E6EAF0}
-  #tab-alloc .alloc-leg-fund{font-size:13px;color:#C5CCD6;padding-left:10px}
-  #tab-alloc .alloc-num{font-size:14px;text-align:right;color:#E6EAF0;font-variant-numeric:tabular-nums}
-  #tab-alloc .alloc-leg-fund-num{font-size:14px;text-align:right;color:#C5CCD6;font-variant-numeric:tabular-nums}
-  #tab-alloc .alloc-returns-card .chart-wrap{height:392px}
-  #tab-alloc .alloc-trend-card .chart-wrap{height:340px}
-  #tab-alloc .alloc-note{margin-top:10px;font-size:13px;line-height:1.5;color:#8B95A5}
+  #tab-alloc .alloc-leg-gap{grid-column:1 / -1;height:10px}
+  #tab-alloc .alloc-swatch{width:8px;height:8px;border-radius:2px;justify-self:center}
+  #tab-alloc .alloc-leg-head{font-size:13px;font-weight:600;color:#E6E8EC;line-height:1.35}
+  #tab-alloc .alloc-leg-fund{font-size:12px;font-weight:400;color:#A1A7B3;padding-left:16px;line-height:1.35}
+  #tab-alloc .alloc-num{font-size:13px;font-weight:600;text-align:right;color:#E6E8EC;font-variant-numeric:tabular-nums}
+  #tab-alloc .alloc-leg-fund-num{font-size:12px;font-weight:400;text-align:right;color:#A1A7B3;font-variant-numeric:tabular-nums}
+  /* 收益率：11 行 × 28px + 底轴。趋势：绘图区约 260（图例和轴在画布里，容器再高一截）。 */
+  #tab-alloc .alloc-returns-card .chart-wrap{height:344px}
+  #tab-alloc .alloc-trend-card .chart-wrap{height:320px}
+  #tab-alloc .alloc-note{margin-top:10px;font-size:12px;line-height:1.5;color:#6B7280}
   @media(max-width:900px){
     #tab-alloc .alloc-board{grid-template-columns:1fr;grid-template-areas:"sun" "returns" "trend"}
-    #tab-alloc .alloc-sun-body{flex-direction:column;align-items:stretch}
-    #tab-alloc .alloc-sun-canvas{width:100%;flex:none;height:320px}
+    #tab-alloc .alloc-sun-body{flex-direction:column;align-items:center;gap:24px}
+    #tab-alloc .alloc-sun-canvas{width:220px;height:220px;flex:none}
+    #tab-alloc .alloc-legend{width:min(100%,320px);flex:none}
   }
   .table-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px; overflow-x:auto; transition:border-color .18s ease; }
   .table-card:hover { border-color:rgba(59,130,246,.3); }
@@ -1122,7 +1135,7 @@
 
 <div class="footer">数据：收益簿权威 2026-11-04（累计 +157,541 · 10.24% · 纪律第8版「保持弹性」）· 市场与资讯 2026-11-04 收盘 · 科技资金流 Tushare 日序截至 11/04，新浪截面仍是 10/23 · QDII 净值 11/02 · 持仓截图 10/23 · 不构成投资建议</div>
 
-<script src="redemptions.js?v=20261104-v79-alloc-ui"></script>
+<script src="redemptions.js?v=20261104-v80-alloc-ui"></script>
 <script>
 Chart.defaults.color='#94a3b8';Chart.defaults.borderColor='#1e293b';Chart.defaults.font.family="-apple-system,'PingFang SC',sans-serif";
 // P3: Chart.js tooltip 全局统一样式（各图只需再写 callbacks）
@@ -1316,14 +1329,16 @@ function initWeekSpark(){
   new Chart(wk,{type:'bar',data:{labels:wkDates,datasets:[{data:wkDaily,backgroundColor:wkDaily.map(v=>v>=0?'rgba(239,68,68,.85)':'rgba(34,197,94,.85)'),borderRadius:4,borderSkipped:false,barPercentage:.72,categoryPercentage:.82}]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:12}},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.parsed.y>=0?'+':'')+ctx.parsed.y.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}},plugins:[wkSparkLabels]});
 }
 const ALLOC_FONT="-apple-system,'PingFang SC','Noto Sans SC',sans-serif";
-const ALLOC_UP_BAR='#E5534B', ALLOC_UP_TEXT='#FF7B72';
-const ALLOC_DN_BAR='#2EA043', ALLOC_DN_TEXT='#56D364';
+const ALLOC_CARD='#161A21';
+const ALLOC_INK='#E6E8EC', ALLOC_SUB='#A1A7B3', ALLOC_FAINT='#6B7280';
+const ALLOC_UP_BAR='#B85A54', ALLOC_UP_TEXT='#E07A70';
+const ALLOC_DN_BAR='#4E8F6D', ALLOC_DN_TEXT='#6DBA8F';
 const ALLOC_THEMES=[
-  {name:'出海QDII',color:'#5B8DEF',funds:[['嘉实全球',405855],['建信新兴C',327992],['长城新能源',147770],['建信新兴A',92511],['国富科技',64228]]},
-  {name:'IC+AI',color:'#9B7BEA',funds:[['东方AI',330594],['财通IC',310207]]},
-  {name:'资源',color:'#E3B04B',funds:[['嘉实资源',257455]]},
-  {name:'医药',color:'#3FBFA0',funds:[['永赢医药',42191],['港股创新药',20923],['创金医疗',16580]]},
-  {name:'现金',color:'#8B95A5',funds:[['余额宝',3948]]}
+  {name:'出海QDII',color:'#6B8CC7',funds:[['嘉实全球',405855],['建信新兴C',327992],['长城新能源',147770],['建信新兴A',92511],['国富科技',64228]]},
+  {name:'IC+AI',color:'#8A80C2',funds:[['东方AI',330594],['财通IC',310207]]},
+  {name:'资源',color:'#C2A46B',funds:[['嘉实资源',257455]]},
+  {name:'医药',color:'#6FA89A',funds:[['永赢医药',42191],['港股创新药',20923],['创金医疗',16580]]},
+  {name:'现金',color:'#7C8494',funds:[['余额宝',3948]]}
 ];
 function allocHexRgb(hex){
   const n=parseInt(hex.slice(1),16);
@@ -1358,27 +1373,24 @@ function allocShade(hex, count, index){
   if(count<=1||index<=0) return hex;
   const [r,g,b]=allocHexRgb(hex);
   const [h,s,l]=allocRgbToHsl(r,g,b);
-  const nl=Math.max(0.30, l-index*(0.32/Math.max(1,count-1)));
-  const [rr,gg,bb]=allocHslToRgb(h,s,nl);
+  const nl=Math.max(0.42, l-index*(0.16/Math.max(1,count-1)));
+  const ns=Math.max(0.22, Math.min(0.45, s));
+  const [rr,gg,bb]=allocHslToRgb(h,ns,nl);
   return allocRgbHex(rr,gg,bb);
-}
-function allocAlpha(hex, a){
-  const [r,g,b]=allocHexRgb(hex);
-  return 'rgba('+r+','+g+','+b+','+a+')';
 }
 function allocTooltip(extra){
   return Object.assign({
-    backgroundColor:'rgba(10,14,23,.88)',
-    titleColor:'#E6EAF0',
-    bodyColor:'#E6EAF0',
-    footerColor:'#C5CCD6',
-    borderColor:'rgba(255,255,255,.08)',
+    backgroundColor:ALLOC_CARD,
+    titleColor:ALLOC_INK,
+    bodyColor:ALLOC_INK,
+    footerColor:ALLOC_SUB,
+    borderColor:'#232833',
     borderWidth:1,
-    padding:12,
+    padding:10,
     cornerRadius:8,
-    titleFont:{size:14,family:ALLOC_FONT},
-    bodyFont:{size:14,family:ALLOC_FONT},
-    footerFont:{size:13,family:ALLOC_FONT},
+    titleFont:{size:12,family:ALLOC_FONT},
+    bodyFont:{size:12,family:ALLOC_FONT},
+    footerFont:{size:12,family:ALLOC_FONT},
     boxPadding:4
   }, extra||{});
 }
@@ -1392,39 +1404,74 @@ function initOverview(){
   const srt=fn.map((n,i)=>({n,v:fp[i]})).sort((a,b)=>b.v-a.v);
   const sNames=srt.map(o=>o.n),sVals=srt.map(o=>o.v);
   const barColors=sVals.map(v=>v>=0?ALLOC_UP_BAR:ALLOC_DN_BAR);
+  const allocNarrow=window.matchMedia('(max-width:900px)').matches;
+  const labelGutter=allocNarrow?6:58;
   const todayBarLabels={id:'todayBarLabels',afterDraw(chart){
-    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),xScale=chart.scales.x,area=chart.chartArea;
+    const ctx=chart.ctx,meta=chart.getDatasetMeta(0),area=chart.chartArea;
     if(!meta.data.length)return;
     ctx.save();
-    const zx=xScale.getPixelForValue(0);
-    ctx.strokeStyle='rgba(230,234,240,.4)';ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(zx,area.top);ctx.lineTo(zx,area.bottom);ctx.stroke();
-    ctx.font='14px '+ALLOC_FONT;
-    ctx.textAlign='left';ctx.textBaseline='middle';
+    ctx.font='12px '+ALLOC_FONT;
+    ctx.textBaseline='middle';
+    ctx.lineWidth=3;
+    ctx.strokeStyle=ALLOC_CARD;
+    ctx.lineJoin='round';
     meta.data.forEach((bar,i)=>{
       const v=chart.data.datasets[0].data[i];
+      const txt=(v>=0?'+':'')+v.toFixed(1)+'%';
+      const w=ctx.measureText(txt).width;
       ctx.fillStyle=v>=0?ALLOC_UP_TEXT:ALLOC_DN_TEXT;
-      ctx.fillText((v>=0?'+':'')+v.toFixed(1)+'%', area.right+10, bar.y);
+      let x, align;
+      if(v>=0){
+        const tip=Math.min(bar.x, area.right);
+        x=tip+8; align='left';
+        if(x+w>chart.width-4) x=Math.max(area.left+4, chart.width-4-w);
+      }else{
+        const tip=Math.max(bar.x, area.left);
+        const outside=tip-8;
+        if(outside-w>=area.left-labelGutter+2){ x=outside; align='right'; }
+        else { x=tip+8; align='left'; }
+      }
+      ctx.textAlign=align;
+      ctx.strokeText(txt, x, bar.y);
+      ctx.fillText(txt, x, bar.y);
     });
     ctx.restore();
   }};
   new Chart(el,{
     type:'bar',
-    data:{labels:sNames,datasets:[{data:sVals,backgroundColor:barColors,borderRadius:2,borderSkipped:false,barThickness:14}]},
+    data:{labels:sNames,datasets:[{data:sVals,backgroundColor:barColors,borderRadius:1,borderSkipped:false,barThickness:10}]},
     options:{
       indexAxis:'y',
       responsive:true,
       maintainAspectRatio:false,
-      color:'#8B95A5',
-      font:{family:ALLOC_FONT,size:13},
-      layout:{padding:{right:86,left:2,top:2,bottom:0}},
+      color:ALLOC_FAINT,
+      font:{family:ALLOC_FONT,size:12},
+      layout:{padding:{right:allocNarrow?52:72,left:2,top:0,bottom:0}},
       plugins:{
         legend:{display:false},
         tooltip:allocTooltip({callbacks:{label:function(ctx){return (ctx.parsed.x>=0?'+':'')+ctx.parsed.x.toFixed(2)+'%';}}})
       },
       scales:{
-        x:{ticks:{color:'#8B95A5',callback:function(v){return (v>0?'+':'')+v+'%';},font:{size:13,family:ALLOC_FONT}},grid:{color:'rgba(139,149,165,.16)'},border:{color:'rgba(139,149,165,.28)'}},
-        y:{grid:{display:false},border:{display:false},ticks:{color:'#C5CCD6',autoSkip:false,padding:6,font:{size:13,family:ALLOC_FONT}}}
+        x:{
+          min:-30,max:30,
+          ticks:{stepSize:10,color:ALLOC_FAINT,callback:function(v){return (v>0?'+':'')+v+'%';},font:{size:12,family:ALLOC_FONT}},
+          grid:{color:function(ctx){return ctx.tick.value===0?'rgba(161,167,179,.4)':'rgba(107,114,128,.18)';}},
+          border:{display:false}
+        },
+        y:{
+          grid:{display:false},border:{display:false},
+          ticks:{color:ALLOC_SUB,autoSkip:false,padding:labelGutter,font:{size:12,family:ALLOC_FONT}},
+          afterFit(scale){
+            // ticks.padding 用来给条尾负值留出横向空隙；Chart.js 会把它加进上下 padding，把行高挤矮。这里只留半个字高。
+            const pad=scale.options.ticks.padding||0;
+            scale.paddingTop=Math.max(6, scale.paddingTop-pad);
+            scale.paddingBottom=Math.max(6, scale.paddingBottom-pad);
+            if(scale._margins){
+              scale._margins.top=scale.paddingTop;
+              scale._margins.bottom=scale.paddingBottom;
+            }
+          }
+        }
       }
     },
     plugins:[todayBarLabels]
@@ -1610,7 +1657,7 @@ function initAlloc(){
   const sun=document.getElementById('allocSunburst');
   const trendEl=document.getElementById('allocTrend');
   if(!sun||!trendEl||Chart.getChart(sun))return;
-  // 基金市值与原先饼图相同（元）。内环按主题加总，外环同序，保证两环对齐。
+  // 基金市值与原先饼图相同（元）。外环是主题、内环是基金，两环同序对齐。数字不改。
   const allocTotal=ALLOC_THEMES.reduce((s,t)=>s+t.funds.reduce((a,f)=>a+f[1],0),0);
   const legend=document.getElementById('allocLegend');
   if(legend&&legend.dataset.ready!=='1'){
@@ -1652,42 +1699,57 @@ function initAlloc(){
       });
     });
   }
-  const outerLabels=[],outerVals=[],outerColors=[],innerLabels=[],innerVals=[],innerColors=[];
+  const fundLabels=[],fundVals=[],fundColors=[],groupLabels=[],groupVals=[],groupColors=[];
   ALLOC_THEMES.forEach(t=>{
     const sum=t.funds.reduce((a,f)=>a+f[1],0);
-    innerLabels.push(t.name);innerVals.push(sum);innerColors.push(t.color);
+    groupLabels.push(t.name);groupVals.push(sum);groupColors.push(t.color);
     t.funds.forEach((f,i)=>{
-      outerLabels.push(f[0]);outerVals.push(f[1]);outerColors.push(allocShade(t.color,t.funds.length,i));
+      fundLabels.push(f[0]);fundVals.push(f[1]);fundColors.push(allocShade(t.color,t.funds.length,i));
     });
   });
-  const ringBorder='#141A26';
+  // 外环组 6px、环间 4px、内环基金 24px。直径 220 时内孔 76，cutout = 76/110。
+  const ringBorder=ALLOC_CARD;
+  const ringArc={borderColor:ringBorder,borderWidth:1.5,borderAlign:'inner',hoverOffset:0,spacing:0};
   const allocCenter={id:'allocCenter',afterDraw(chart){
     const area=chart.chartArea; if(!area)return;
     const ctx=chart.ctx;
     const x=(area.left+area.right)/2, y=(area.top+area.bottom)/2;
+    const num=(allocTotal/10000).toFixed(1);
     ctx.save();
-    ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.fillStyle='#8B95A5';
+    ctx.textAlign='left';ctx.textBaseline='alphabetic';
+    ctx.font='500 22px '+ALLOC_FONT;
+    const numW=ctx.measureText(num).width;
     ctx.font='13px '+ALLOC_FONT;
-    ctx.fillText('总资产',x,y-12);
-    ctx.fillStyle='#E6EAF0';
-    ctx.font='600 16px '+ALLOC_FONT;
-    ctx.fillText((allocTotal/10000).toFixed(1)+'万',x,y+12);
+    const unitW=ctx.measureText('万').width;
+    const start=x-(numW+2+unitW)/2;
+    const base=y+12;
+    ctx.font='500 22px '+ALLOC_FONT;
+    ctx.fillStyle=ALLOC_INK;
+    ctx.fillText(num,start,base);
+    ctx.font='13px '+ALLOC_FONT;
+    ctx.fillStyle=ALLOC_SUB;
+    ctx.fillText('万',start+numW+2,base);
+    ctx.textAlign='center';
+    ctx.fillStyle=ALLOC_FAINT;
+    ctx.font='12px '+ALLOC_FONT;
+    ctx.fillText('总资产',x,base-26);
     ctx.restore();
   }};
   new Chart(sun,{
     type:'doughnut',
     data:{
       datasets:[
-        {label:'基金',data:outerVals,customLabels:outerLabels,backgroundColor:outerColors,borderColor:ringBorder,borderWidth:2,borderAlign:'inner',hoverOffset:6,weight:1.25},
-        {label:'主题',data:innerVals,customLabels:innerLabels,backgroundColor:innerColors,borderColor:ringBorder,borderWidth:2,borderAlign:'inner',hoverOffset:4,weight:1}
+        Object.assign({label:'主题',data:groupVals,customLabels:groupLabels,backgroundColor:groupColors,weight:6},ringArc),
+        {label:'gap',data:[allocTotal],customLabels:[''],backgroundColor:'rgba(0,0,0,0)',borderColor:'rgba(0,0,0,0)',borderWidth:0,hoverOffset:0,hoverBackgroundColor:'rgba(0,0,0,0)',weight:4},
+        Object.assign({label:'基金',data:fundVals,customLabels:fundLabels,backgroundColor:fundColors,weight:24},ringArc)
       ]
     },
     options:{
-      responsive:true,maintainAspectRatio:false,cutout:'52%',
+      responsive:true,maintainAspectRatio:false,cutout:'69.0909%',radius:'100%',spacing:0,
+      layout:{padding:0},
       plugins:{
         legend:{display:false},
-        tooltip:allocTooltip({callbacks:{
+        tooltip:allocTooltip({filter:function(item){return item.dataset.label!=='gap';},callbacks:{
           title(){return '';},
           label(ctx){
             const name=ctx.dataset.customLabels[ctx.dataIndex];
@@ -1726,8 +1788,8 @@ function initAlloc(){
   });
   const areaDs=(label,data,color,extra)=>Object.assign({
     label,data,stack:'alloc',
-    borderColor:color,backgroundColor:allocAlpha(color,.9),
-    borderWidth:1.5,fill:'stack',tension:0,pointRadius:3,pointHoverRadius:5,
+    borderColor:color,backgroundColor:color,
+    borderWidth:1.5,fill:'stack',tension:0,pointRadius:0,pointHoverRadius:3,
     pointBackgroundColor:color,pointBorderWidth:0
   },extra||{});
   new Chart(trendEl,{
@@ -1735,18 +1797,18 @@ function initAlloc(){
     data:{
       labels:allocDates,
       datasets:[
-        areaDs('国内基金',allocDomestic,'#9B7BEA',{fill:'origin'}),
-        areaDs('QDII',allocQDII,'#5B8DEF'),
-        areaDs('现金',allocCash,'#8B95A5'),
-        areaDs('未单列',allocGap,'#6B7684',{backgroundColor:'rgba(107,118,132,.45)',borderDash:[4,3],borderWidth:1})
+        areaDs('国内基金',allocDomestic,'#8A80C2',{fill:'origin'}),
+        areaDs('QDII',allocQDII,'#6B8CC7'),
+        areaDs('现金',allocCash,'#7C8494'),
+        areaDs('未单列',allocGap,'#4B5563')
       ]
     },
     options:{
       responsive:true,maintainAspectRatio:false,
-      color:'#8B95A5',
-      font:{family:ALLOC_FONT,size:13},
+      color:ALLOC_FAINT,
+      font:{family:ALLOC_FONT,size:12},
       plugins:{
-        legend:{position:'top',align:'end',labels:{usePointStyle:true,pointStyle:'circle',padding:12,color:'#C5CCD6',boxWidth:8,font:{size:13,family:ALLOC_FONT}}},
+        legend:{position:'top',align:'end',labels:{usePointStyle:false,padding:10,color:ALLOC_SUB,boxWidth:8,boxHeight:8,font:{size:12,family:ALLOC_FONT}}},
         tooltip:allocTooltip({callbacks:{
           label(ctx){
             const y=ctx.parsed.y;
@@ -1762,8 +1824,8 @@ function initAlloc(){
         }})
       },
       scales:{
-        y:{min:0,max:100,stacked:true,border:{display:false},grid:{color:'rgba(139,149,165,.14)'},ticks:{color:'#8B95A5',stepSize:20,font:{size:13,family:ALLOC_FONT},callback:v=>v+'%'}},
-        x:{stacked:true,grid:{display:false},border:{display:false},ticks:{color:'#8B95A5',maxRotation:0,autoSkip:true,font:{size:13,family:ALLOC_FONT}}}
+        y:{min:0,max:100,stacked:true,border:{display:false},grid:{color:'rgba(107,114,128,.18)'},ticks:{color:ALLOC_FAINT,stepSize:20,font:{size:12,family:ALLOC_FONT},callback:v=>v+'%'}},
+        x:{stacked:true,grid:{display:false},border:{display:false},ticks:{color:ALLOC_FAINT,maxRotation:0,autoSkip:true,font:{size:12,family:ALLOC_FONT}}}
       },
       interaction:{intersect:false,mode:'index'}
     }
@@ -1911,7 +1973,7 @@ applyHash();
 // to purge stale cached pages from the buggy cache-first strategy.
 // SW: 版本化注册 — sw.js 内 CACHE_VERSION 每次部署+1，旧缓存自动失效
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js?v=20261104-v79-alloc-ui').then(reg=>{
+  navigator.serviceWorker.register('sw.js?v=20261104-v80-alloc-ui').then(reg=>{
     reg.addEventListener('updatefound',()=>{
       const nw=reg.installing;
       nw&&nw.addEventListener('statechange',()=>{ if(nw.state==='activated') location.reload(); });
